@@ -1,0 +1,9 @@
+@import 'scss/base.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.relative-important{
+    position: relative !important;
+}
