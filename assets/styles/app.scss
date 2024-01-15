@@ -7,3 +7,6 @@
 .relative-important{
     position: relative !important;
 }
+.mandatory-scroll-snapping-y {
+    scroll-snap-type: y mandatory;
+  }

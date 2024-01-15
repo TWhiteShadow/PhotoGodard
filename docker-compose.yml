@@ -1,0 +1,40 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '3'
+
+services:
+  mariadb:
+    image: mariadb:10.6
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db-data:/var/lib/mysql
+    
+  symfony:
+    image: docker.io/bitnami/symfony:7.0
+    ports:
+      - '8002:8000'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - SYMFONY_DATABASE_HOST=mariadb
+      - SYMFONY_DATABASE_PORT_NUMBER=3307
+      - SYMFONY_DATABASE_USER=mariadbuser
+      - SYMFONY_DATABASE_NAME=PhotoGodard
+      - SYMFONY_DATABASE_PASSWORD=
+      - SYMFONY_PROJECT_SKELETON=symfony/skeleton
+    volumes:
+      - './:/app'
+    depends_on:
+      - mariadb
+      
+  node:
+    image: docker.io/node
+    volumes:
+      - './:/app'
+    working_dir: /app
+    command: bash -c "npm install && npm run watch" # install and run watch for npm (if it work)
+
+volumes:
+  db-data:
