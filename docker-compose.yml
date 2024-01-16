@@ -16,10 +16,10 @@ services:
     ports:
       - '8002:8000'
     environment:
-      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      # ALLOW_EMPTY_PAMariaDBSSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
       - SYMFONY_DATABASE_HOST=mariadb
-      - SYMFONY_DATABASE_PORT_NUMBER=3307
+      - SYMFONY_DATABASE_PORT_NUMBER=3306
       - SYMFONY_DATABASE_USER=mariadbuser
       - SYMFONY_DATABASE_NAME=PhotoGodard
       - SYMFONY_DATABASE_PASSWORD=
