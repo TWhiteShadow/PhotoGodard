@@ -4,66 +4,12 @@
 {% endblock %}
 
 {% block body %}
-
-<div class="snap-mandatory snap-y">
-<div class="snap-center shrink-0">
-    <img class="h-screen" src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-  </div>
-  <div class="snap-center shrink-0">
-    <img class="h-screen" src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-  </div>
-  <div class="snap-center shrink-0">
-    <img class="h-screen" src="https://images.unsplash.com/photo-1622890806166-111d7f6c7c97?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-  </div>
-  <div class="snap-center shrink-0">
-    <img class="h-screen" src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-  </div>
-  <div class="snap-center shrink-0">
-    <img class="h-screen" src="https://images.unsplash.com/photo-1575424909138-46b05e5919ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-  </div>
-  <div class="snap-center shrink-0">
-    <img class="h-screen" src="https://images.unsplash.com/photo-1559333086-b0a56225a93c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-  </div>
+<div class="snap-y snap-mandatory h-screen w-screen overflow-y-scroll">
+    <section id="section1" class="h-screen bg-gray-100 w-screen snap-start">Section 1</section>
+    <section id="section2" class="h-screen bg-gray-300 w-screen snap-start">Section 2</section>
+    <section id="section3" class="h-screen bg-gray-500 w-screen snap-start">Section 3</section>
+    <section id="section4" class="h-screen bg-gray-700 w-screen snap-start">Section 4</section>
+    <section id="section5" class="h-screen bg-gray-900 w-screen snap-start">Section 5</section>
 </div>
-
-
-<section id="section1" class="h-screen">Section 1</section>
-<section id="section2" class="h-screen">Section 2</section>
-<section id="section3" class="h-screen">Section 3</section>
-<section id="section4" class="h-screen">Section 4</section>
-<section id="section5" class="h-screen">Section 5</section>
-
-<script>
-    // Get all sections
-    const sections = document.querySelectorAll('section');
-
-    // Options for the Intersection Observer
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.01
-    };
-
-    // Callback function to be executed when a section comes into view
-    const handleIntersection = (entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Scroll to the target section
-                entry.target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    };
-
-    // Create an Intersection Observer with the callback function and options
-    const observer = new IntersectionObserver(handleIntersection, options);
-
-    // Observe each section
-    sections.forEach(section => {
-        observer.observe(section);
-    });
-</script>
-
 
 {% endblock %}
