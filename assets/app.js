@@ -7,3 +7,6 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
+
+var scene = document.getElementById('scene');
+var parallaxInstance = new Parallax(scene);

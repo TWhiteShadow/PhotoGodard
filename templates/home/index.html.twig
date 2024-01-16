@@ -5,11 +5,33 @@
 
 {% block body %}
 <div class="snap-y snap-mandatory h-screen w-screen overflow-y-scroll">
-    <section id="section1" class="h-screen bg-gray-100 w-screen snap-start">Section 1</section>
-    <section id="section2" class="h-screen bg-gray-300 w-screen snap-start">Section 2</section>
-    <section id="section3" class="h-screen bg-gray-500 w-screen snap-start">Section 3</section>
-    <section id="section4" class="h-screen bg-gray-700 w-screen snap-start">Section 4</section>
-    <section id="section5" class="h-screen bg-gray-900 w-screen snap-start">Section 5</section>
+	<section id="section1" class="h-screen bg-gray-100 w-screen snap-start flex ">
+		<div class="flex items-center justify-center w-[50%]">
+			<div id="scene">
+				<div class="absolute bottom-0 right-0 w-auto" data-depth="0.2">
+					<div class="relative" data-depth="1">
+						<img class="max-w-md" src="{{ asset('assets/images/image1.jpeg')}}">
+					</div>
+				</div>
+				<div class="relative " data-depth="1.5"><img class="max-w-sm"
+						src="{{ asset('assets/images/image2.jpeg')}}"></div>
+				<div class="relative top-50 left-50" data-depth="-1"><img class="max-w-sm"
+						src="{{ asset('assets/images/image3.jpeg')}}"></div>
+			</div>
+		</div>
+		<div class="flex flex-col items-center justify-center w-[50%] gap-3">
+			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light">
+				Emmanuel Godard
+			</h3>
+			<span class="text-sm uppercase tracking-[0.25rem] font-light">Creative photography</span>
+		</div>
+	</section>
+	<section id="section2" class="h-screen bg-gray-300 w-screen snap-start">Section 2</section>
+	<section id="section3" class="h-screen bg-gray-500 w-screen snap-start">Section 3</section>
+	<section id="section4" class="h-screen bg-gray-700 w-screen snap-start">Section 4</section>
+	<section id="section5" class="h-screen bg-gray-900 w-screen snap-start">Section 5</section>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 
 {% endblock %}
