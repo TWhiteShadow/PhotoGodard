@@ -9,30 +9,30 @@
 		<div class="flex items-center justify-center w-[50%]">
 			<div id="scene" class="h-full w-full">
 				<!-- Image top left -->
-				<div class="absolute top-[10%] left-[15%] bottom-auto right-auto w-auto z-10" data-depth="-0.5">
-					<div class="relative">
-						<img class="max-w-[10vw] max-h-[10vh]" src="{{ asset('assets/images/image3.jpeg')}}">
+				<div class="cardWrap absolute top-[10%] left-[15%] bottom-auto right-auto w-auto z-10" data-depth="-0.5">
+					<div class="card relative">
+						<img class="max-w-[10vw] max-h-[10vh] shadow-2xl" src="{{ asset('assets/images/image3.jpeg')}}">
 					</div>
 				</div>
 				<!-- Image center -->
-				<div class="absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.1">
-					<div class="relative">
-						<img class="max-w-[40vw] max-h-[40vh]" src="{{ asset('assets/images/image1.jpeg')}}">
+				<div class="cardWrap absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.1">
+					<div class="card relative">
+						<img class="max-w-[40vw] max-h-[40vh] shadow-2xl" src="{{ asset('assets/images/image1.jpeg')}}">
 					</div>
 				</div>
 				<!-- Image bottom left -->
-				<div class="absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth="-0.2">
-					<div class="relative">
-						<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset('assets/images/image2.jpeg')}}">
+				<div class="cardWrap absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth="-0.2">
+					<div class="card relative">
+						<img class="max-w-[20vw] max-h-[20vh] shadow-2xl" src="{{ asset('assets/images/image2.jpeg')}}">
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="flex flex-col items-center justify-center w-[50%] gap-3 z-20 ">
-			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-2xl shadow-white">
+			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
 				Emmanuel Godard
 			</h3>
-			<span class="text-sm uppercase tracking-[0.25rem] font-light">Creative photography</span>
+			<span class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm">Creative photography</span>
 		</div>
 	</section>
 	<section id="section2" class="h-screen bg-gray-300 w-screen snap-start">Section 2</section>
@@ -42,5 +42,42 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+
+<script>
+	// code for parallax of each image
+
+const wrapper = document.querySelectorAll(".cardWrap");
+
+
+wrapper.forEach(element => {
+
+    console.log(element);
+    let state = {
+        mouseX: 0,
+        mouseY: 0,
+        height: element.offsetHeight,
+        width: element.offsetWidth,
+    };
+
+    console.log(element.offsetHeight);
+
+    element.addEventListener("mousemove", ele => {
+        const card = element.querySelector(".card");
+        state.mouseX = ele.pageX - element.offsetLeft - state.width / 2;
+        state.mouseY = ele.pageY - element.offsetTop - state.height / 2;
+        
+        // parallax angle in card
+        const angleX = (state.mouseX / state.width) * 30;
+        const angleY = (state.mouseY / state.height) * -30;
+        card.style.transform = `rotateY(${angleX}deg) rotateX(${angleY}deg) `;
+        
+    });
+    
+    element.addEventListener("mouseout", () => {
+        const card = element.querySelector(".card");
+        card.style.transform = `rotateY(0deg) rotateX(0deg) `;
+    });
+});
+</script>
 
 {% endblock %}

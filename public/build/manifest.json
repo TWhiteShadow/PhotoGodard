@@ -1,5 +1,7 @@
 {
   "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
-  "build/runtime.js": "/build/runtime.js"
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors-node_modules_core-js_modules_es_array_concat_js-node_modules_core-js_modules_es_array-ffb95b.js": "/build/vendors-node_modules_core-js_modules_es_array_concat_js-node_modules_core-js_modules_es_array-ffb95b.js",
+  "build/vendors-node_modules_core-js_modules_es_array_concat_js-node_modules_core-js_modules_es_array-d39d54.js": "/build/vendors-node_modules_core-js_modules_es_array_concat_js-node_modules_core-js_modules_es_array-d39d54.js"
 }
