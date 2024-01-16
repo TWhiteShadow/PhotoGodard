@@ -7,20 +7,29 @@
 <div class="snap-y snap-mandatory h-screen w-screen overflow-y-scroll">
 	<section id="section1" class="h-screen bg-gray-100 w-screen snap-start flex ">
 		<div class="flex items-center justify-center w-[50%]">
-			<div id="scene">
-				<div class="absolute bottom-0 right-0 w-auto" data-depth="0.2">
-					<div class="relative" data-depth="1">
-						<img class="max-w-md" src="{{ asset('assets/images/image1.jpeg')}}">
+			<div id="scene" class="h-full w-full">
+				<!-- Image top left -->
+				<div class="absolute top-[10%] left-[15%] bottom-auto right-auto w-auto z-10" data-depth="-0.5">
+					<div class="relative">
+						<img class="max-w-[10vw] max-h-[10vh]" src="{{ asset('assets/images/image3.jpeg')}}">
 					</div>
 				</div>
-				<div class="relative " data-depth="1.5"><img class="max-w-sm"
-						src="{{ asset('assets/images/image2.jpeg')}}"></div>
-				<div class="relative top-50 left-50" data-depth="-1"><img class="max-w-sm"
-						src="{{ asset('assets/images/image3.jpeg')}}"></div>
+				<!-- Image center -->
+				<div class="absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.1">
+					<div class="relative">
+						<img class="max-w-[40vw] max-h-[40vh]" src="{{ asset('assets/images/image1.jpeg')}}">
+					</div>
+				</div>
+				<!-- Image bottom left -->
+				<div class="absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth="-0.2">
+					<div class="relative">
+						<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset('assets/images/image2.jpeg')}}">
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="flex flex-col items-center justify-center w-[50%] gap-3">
-			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light">
+		<div class="flex flex-col items-center justify-center w-[50%] gap-3 z-20 ">
+			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-2xl shadow-white">
 				Emmanuel Godard
 			</h3>
 			<span class="text-sm uppercase tracking-[0.25rem] font-light">Creative photography</span>
