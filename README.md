@@ -61,6 +61,14 @@ Accès au bash du conteneur symfony de docker
   php bin/console doctrine:fixtures:load -n
 ```
 
+Accès phpmyadmin
+
+```bash
+  127.0.0.1:8080
+```
+- ServerName :   #correspond au nom du container + port (mariadb:3306)
+
+
 Lancement de la compilation de sass sur terminal SSH
 ```bash
   npm run build
