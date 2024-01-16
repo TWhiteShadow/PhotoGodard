@@ -36,5 +36,13 @@ services:
     working_dir: /app
     command: bash -c "npm install && npm run watch" # install and run watch for npm (if it work)
 
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+
 volumes:
   db-data:
