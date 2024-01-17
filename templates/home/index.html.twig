@@ -4,46 +4,79 @@
 {% endblock %}
 
 {% block body %}
-<div class="snap-y snap-mandatory h-screen w-screen overflow-y-scroll">
-	<section id="section1" class="h-screen bg-gray-100 w-screen snap-start flex ">
-		<div class="flex items-center justify-center w-[50%]">
-			<div id="scene" class="h-full w-full">
-				<!-- Image top left -->
-				<div class="cardWrap absolute top-[10%] left-[15%] bottom-auto right-auto w-auto z-10" data-depth="-0.5">
-					<div class="card relative">
-						<img class="max-w-[10vw] max-h-[10vh] shadow-2xl" src="{{ asset('assets/images/image3.jpeg')}}">
+	<div
+		class="snap-y snap-mandatory h-screen w-screen overflow-y-scroll">
+		{# SECTION 1 #}
+		<section id="section1" class="h-screen bg-gray-100 w-screen snap-start flex ">
+			<div class="flex items-center justify-center w-[50%] z-0">
+				<div
+					id="scene" class="h-full w-full">
+					<!-- Image top left -->
+					<div class=" relative top-[10%] left-[15%] bottom-auto right-auto w-auto z-40" data-depth="-0.5">
+						<div class=" relative">
+							<img class="max-w-[10vw] max-h-[10vh] shadow-2xl" src="{{ asset('assets/images/image3.jpeg')}}">
+						</div>
 					</div>
-				</div>
-				<!-- Image center -->
-				<div class="cardWrap absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.1">
-					<div class="card relative">
-						<img class="max-w-[40vw] max-h-[40vh] shadow-2xl" src="{{ asset('assets/images/image1.jpeg')}}">
+					<!-- Image center -->
+					<div class=" absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.1">
+						<div class=" relative">
+							<img class="max-w-[40vw] max-h-[40vh] shadow-2xl" src="{{ asset('assets/images/image1.jpeg')}}">
+						</div>
 					</div>
-				</div>
-				<!-- Image bottom left -->
-				<div class="cardWrap absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth="-0.2">
-					<div class="card relative">
-						<img class="max-w-[20vw] max-h-[20vh] shadow-2xl" src="{{ asset('assets/images/image2.jpeg')}}">
+					<!-- Image bottom left -->
+					<div class=" absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth="-0.2">
+						<div class=" relative">
+							<img class="max-w-[20vw] max-h-[20vh] shadow-2xl" src="{{ asset('assets/images/image2.jpeg')}}">
+						</div>
 					</div>
 				</div>
 			</div>
+			<div class="flex flex-col items-center justify-center w-[50%] gap-3 z-20 ">
+				<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
+					Emmanuel Godard
+				</h3>
+				<h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm">Creative photography</h4>
+			</div>
+		</section>
+
+		{# SECTION 2 #}
+		<section id="section2" class="h-screen bg-gray-300 w-screen snap-start justify-evenly flex flex-col gap-5 items-center">
+			<h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm">Works</h4>
+			<div class="grid md:grid-cols-3 md:grid-rows-1 grid-cols-1 grid-rows-3 justify-evenly gap-[5vw] w-[80%] items-center">
+				<div class="cardWrap h-full w-full relative">
+					<img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}">
+				</div>
+				<div class="cardWrap h-full w-full relative">
+					<img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid2.jpg')}}">
+				</div>
+				<div class="cardWrap h-full w-full relative">
+					<img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid3.jpg')}}">
+				</div>
+			</div>
+			<div></div>
+		</section>
+
+		<section id="section3" class="h-screen bg-gray-500 w-screen snap-start">Section 3
+		<div id="app" class="container">
+			<card data-image="https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=">
+				<h1 slot="header">Canyons</h1>
+				<p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+			</card>
+			<card data-image="https://images.unsplash.com/photo-1479659929431-4342107adfc1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=">
+				<h1 slot="header">Beaches</h1>
+				<p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+			</card>
+			<card data-image="https://images.unsplash.com/photo-1479644025832-60dabb8be2a1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=">
+				<h1 slot="header">Trees</h1>
+				<p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+			</card>
 		</div>
-		<div class="flex flex-col items-center justify-center w-[50%] gap-3 z-20 ">
-			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-				Emmanuel Godard
-			</h3>
-			<span class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm">Creative photography</span>
-		</div>
-	</section>
-	<section id="section2" class="h-screen bg-gray-300 w-screen snap-start">Section 2</section>
-	<section id="section3" class="h-screen bg-gray-500 w-screen snap-start">Section 3</section>
-	<section id="section4" class="h-screen bg-gray-700 w-screen snap-start">Section 4</section>
-	<section id="section5" class="h-screen bg-gray-900 w-screen snap-start">Section 5</section>
-</div>
+        </section>
+		<section id="section4" class="h-screen bg-gray-700 w-screen snap-start">Section 4</section>
+		<section id="section5" class="h-screen bg-gray-900 w-screen snap-start">Section 5</section>
+	</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
 
-
-
-  
 {% endblock %}
