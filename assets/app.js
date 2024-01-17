@@ -13,80 +13,42 @@ var scene = document.getElementById('scene');
 var parallaxInstance = new Parallax(scene);
 
 
-Vue.config.devtools = true;
+const cards = document.querySelectorAll(".card");
+let bounds;
+function rotateToMouse(e, card) {
+  const mouseX = e.clientX;
+  const mouseY = e.clientY;
+  const leftX = mouseX - bounds.x;
+  const topY = mouseY - bounds.y;
+  const center = {
+    x: leftX - bounds.width / 2,
+    y: topY - bounds.height / 2,
+  };
+  const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
 
-Vue.component('card', {
-  template: `
-    <div class="card-wrap"
-      @mousemove="handleMouseMove"
-      @mouseenter="handleMouseEnter"
-      @mouseleave="handleMouseLeave"
-      ref="card">
-      <div class="card"
-        :style="cardStyle">
-        <div class="card-bg" :style="[cardBgTransform, cardBgImage]"></div>
-        <div class="card-info">
-          <slot name="header"></slot>
-          <slot name="content"></slot>
-        </div>
-      </div>
-    </div>`,
-  mounted() {
-    this.width = this.$refs.card.offsetWidth;
-    this.height = this.$refs.card.offsetHeight;
-  },
-  props: ['dataImage'],
-  data: () => ({
-    width: 0,
-    height: 0,
-    mouseX: 0,
-    mouseY: 0,
-    mouseLeaveDelay: null
-  }),
-  computed: {
-    mousePX() {
-      return this.mouseX / this.width;
-    },
-    mousePY() {
-      return this.mouseY / this.height;
-    },
-    cardStyle() {
-      const rX = this.mousePX * 30;
-      const rY = this.mousePY * -30;
-      return {
-        transform: `rotateY(${rX}deg) rotateX(${rY}deg)`
-      };
-    },
-    cardBgTransform() {
-      const tX = this.mousePX * -40;
-      const tY = this.mousePY * -40;
-      return {
-        transform: `translateX(${tX}px) translateY(${tY}px)`
-      }
-    },
-    cardBgImage() {
-      return {
-        backgroundImage: `url(${this.dataImage})`
-      }
-    }
-  },
-  methods: {
-    handleMouseMove(e) {
-      this.mouseX = e.pageX - this.$refs.card.offsetLeft - this.width/2;
-      this.mouseY = e.pageY - this.$refs.card.offsetTop - this.height/2;
-    },
-    handleMouseEnter() {
-      clearTimeout(this.mouseLeaveDelay);
-    },
-    handleMouseLeave() {
-      this.mouseLeaveDelay = setTimeout(()=>{
-        this.mouseX = 0;
-        this.mouseY = 0;
-      }, 1000);
-    }
-  }
+  card.style.transform = `
+    scale3d(1.07, 1.07, 1.07)
+    rotate3d(
+      ${center.y / 100},
+      ${-center.x / 100},
+      0,
+      ${Math.log(distance) * 2}deg
+    )
+  `;
+
+}
+
+
+cards.forEach((card) => {
+  card.addEventListener("mouseenter", (event) => {
+    bounds = card.getBoundingClientRect();
+    document.addEventListener("mousemove", (event) => {rotateToMouse(event, card)});
+  });
+
+  card.addEventListener("mouseleave", () => {
+    document.removeEventListener("mousemove", rotateToMouse);
+    card.style.transform = "";
+    card.style.background = "";
+  });
 });
 
-const app = new Vue({
-  el: '#app'
-});
