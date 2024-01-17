@@ -47,7 +47,7 @@ cards.forEach((card) => {
 
   card.addEventListener("mouseleave", () => {
     document.removeEventListener("mousemove", rotateToMouse);
-    card.style.transition = "transform 1s ease-in"; // Ajoute la transition CSS
+    card.style.transition = "transform 1s cubic-bezier(0.445, 0.05, 0.55, 0.95)"; // Ajoute la transition CSS
 
     // Revert à la position de base après la transition
     card.style.transform = "scale3d(1, 1, 1) rotate3d(0, 0, 0, 0deg)";
@@ -55,7 +55,7 @@ cards.forEach((card) => {
     // Supprime la transition après qu'elle soit terminée
     setTimeout(() => {
       card.style.transition = "";
-    }, 500);
+    }, 1000);
   });
 });
 
