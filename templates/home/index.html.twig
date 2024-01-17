@@ -43,41 +43,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 
-<script>
-	// code for parallax of each image
-
-const wrapper = document.querySelectorAll(".cardWrap");
 
 
-wrapper.forEach(element => {
-
-    console.log(element);
-    let state = {
-        mouseX: 0,
-        mouseY: 0,
-        height: element.offsetHeight,
-        width: element.offsetWidth,
-    };
-
-    console.log(element.offsetHeight);
-
-    element.addEventListener("mousemove", ele => {
-        const card = element.querySelector(".card");
-        state.mouseX = ele.pageX - element.offsetLeft - state.width / 2;
-        state.mouseY = ele.pageY - element.offsetTop - state.height / 2;
-        
-        // parallax angle in card
-        const angleX = (state.mouseX / state.width) * 30;
-        const angleY = (state.mouseY / state.height) * -30;
-        card.style.transform = `rotateY(${angleX}deg) rotateX(${angleY}deg) `;
-        
-    });
-    
-    element.addEventListener("mouseout", () => {
-        const card = element.querySelector(".card");
-        card.style.transform = `rotateY(0deg) rotateX(0deg) `;
-    });
-});
-</script>
-
+  
 {% endblock %}
