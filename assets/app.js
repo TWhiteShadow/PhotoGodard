@@ -32,7 +32,7 @@ function rotateToMouse(e, card) {
       ${center.y / 100},
       ${-center.x / 100},
       0,
-      ${Math.log(distance) * 2}deg
+      ${Math.log(distance) * 3}deg
     )
   `;
 
@@ -42,11 +42,13 @@ function rotateToMouse(e, card) {
 cards.forEach((card) => {
   card.addEventListener("mouseenter", (event) => {
     bounds = card.getBoundingClientRect();
-    document.addEventListener("mousemove", (event) => {rotateToMouse(event, card)});
+    card.addEventListener("mousemove", (event) => {
+      rotateToMouse(event, card);
+    });
   });
 
   card.addEventListener("mouseleave", () => {
-    document.removeEventListener("mousemove", rotateToMouse);
+    card.removeEventListener("mousemove", rotateToMouse);
     card.style.transform = "";
     card.style.background = "";
   });
