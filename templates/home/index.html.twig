@@ -43,14 +43,14 @@
 		<section id="section2" class="h-screen bg-gray-300 w-screen snap-start justify-evenly flex flex-col gap-5 items-center">
 			<h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm">Works</h4>
 			<div class="grid md:grid-cols-3 md:grid-rows-1 grid-cols-1 grid-rows-3 justify-evenly gap-[5vw] w-[80%] items-center">
-				<div class="cardWrap h-full w-full relative">
-					<img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}">
+				<div class="card h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid1.jpg')}}); background-size:cover;">
+					{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
 				</div>
-				<div class="cardWrap h-full w-full relative">
-					<img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid2.jpg')}}">
+				<div class="card h-full w-full relative">
+					<img class="object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid2.jpg')}}">
 				</div>
-				<div class="cardWrap h-full w-full relative">
-					<img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid3.jpg')}}">
+				<div class="card h-full w-full relative">
+					<img class="object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid3.jpg')}}">
 				</div>
 			</div>
 			<div></div>
