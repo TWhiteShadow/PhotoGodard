@@ -15,4 +15,12 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    #[Route('/jsp', name: 'jsp')]
+    public function jsp(): Response
+    {
+        return $this->render('home/jsp.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }
