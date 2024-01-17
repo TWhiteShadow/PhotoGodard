@@ -27,7 +27,6 @@ function rotateToMouse(e, card) {
   const distance = Math.sqrt(center.x ** 2 + center.y ** 2);
 
   card.style.transform = `
-    scale3d(1.07, 1.07, 1.07)
     rotate3d(
       ${center.y / 100},
       ${-center.x / 100},
@@ -35,7 +34,6 @@ function rotateToMouse(e, card) {
       ${Math.log(distance) * 3}deg
     )
   `;
-
 }
 
 
@@ -48,9 +46,16 @@ cards.forEach((card) => {
   });
 
   card.addEventListener("mouseleave", () => {
-    card.removeEventListener("mousemove", rotateToMouse);
-    card.style.transform = "";
-    card.style.background = "";
+    document.removeEventListener("mousemove", rotateToMouse);
+    card.style.transition = "transform 1s ease-in"; // Ajoute la transition CSS
+
+    // Revert à la position de base après la transition
+    card.style.transform = "scale3d(1, 1, 1) rotate3d(0, 0, 0, 0deg)";
+
+    // Supprime la transition après qu'elle soit terminée
+    setTimeout(() => {
+      card.style.transition = "";
+    }, 500);
   });
 });
 
