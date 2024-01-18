@@ -21,6 +21,8 @@ class Album
     #[ORM\Column(length: 512)]
     private ?string $password = null;
 
+    private ?array $passwordArray = null;
+
     #[ORM\ManyToMany(targetEntity: Photo::class, inversedBy: 'albums')]
     private Collection $photo;
 
@@ -54,6 +56,17 @@ class Album
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+    public function getPasswordArray():?array
+    {
+        return $this->passwordArray;
+    }
+    public function setPasswordArray(?array $passwordArray): static
+    {
+        $this->passwordArray = $passwordArray;
+        $this->password = $passwordArray['password'];
 
         return $this;
     }
