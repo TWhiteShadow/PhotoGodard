@@ -29,7 +29,7 @@ class PhotoCrudController extends AbstractCrudController
         return [
             IdField::new("id")->hideOnForm()->onlyWhenUpdating(),
             TextField::new('title'),
-            ChoiceField::new('albums')
+            AssociationField::new('albums')
             ->autocomplete()
             ->onlyOnForms(),
             TextField::new('imageFile')
