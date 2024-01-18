@@ -5,9 +5,9 @@
 
 {% block body %}
 	<div
-		class="snap-y snap-mandatory h-screen w-screen overflow-y-scroll">
-		{# SECTION 1 #}
-		<section id="section1" class="h-screen bg-gray-100 w-screen snap-start flex ">
+		class=" scroll-smooth snap-y snap-mandatory h-screen w-full overflow-y-scroll">
+		{# SECTION 1 FIRST PAGE #}
+		<section id="home" class="h-screen bg-gray-100 w-full snap-center flex ">
 			<div class="flex items-center justify-center w-[50%] z-0">
 				<div
 					id="scene" class="h-full w-full">
@@ -35,45 +35,104 @@
 				<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
 					Emmanuel Godard
 				</h3>
-				<h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm">Creative photography</h4>
+				<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Creative photography</h4>
 			</div>
 		</section>
 
-		{# SECTION 2 #}
-		<section id="section2" class="h-screen bg-gray-300 w-screen snap-start justify-evenly flex flex-col gap-5 items-center">
-			<h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm">Works</h4>
+
+		{# SECTION 2 ABOUT #}
+		<section id="about" class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">About</h4>
+			<div class="flex flex-col justify-center items-center gap-8">
+				<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Emmanuel Godard</h3>
+				<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
+					Emmanuel Godard, artiste français.
+															Je suis né en 1975 à Dieppe en Normandie. Je suis un passionné d’images et des émotions. Et j’ai cette capacité à sublimer l’instant par ma sensibilité au monde qui m’entoure.
+															La simplicité et la pureté de mes photographies vous plongera dans mon univers parfois irréel et poétique.
+															
+															Bienvenue dans mon monde .
+				</p>
+			</div>
+		</section>
+
+		{# SECTION 3 WORKS #}
+		<section id="works" class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">Works</h4>
 			<div class="grid md:grid-cols-3 md:grid-rows-1 grid-cols-1 h-96 grid-rows-3 justify-evenly gap-[5vw] w-[80%] items-center">
 				<div
 					class="card h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid1.jpg')}}); background-size:120%;">{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
 				</div>
 				<div
-					class="card  max-w-[25vw] max-h-[25vh] h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid1.jpg')}}); background-size:120%;">{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
+					class="card max-w-[25vw] max-h-[25vh] h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid2.jpg')}}); background-size:120%;">{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
 				</div>
 				<div
-					class="card h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid1.jpg')}}); background-size:120%;">{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
+					class="card h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid3.jpg')}}); background-size:120%;">{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
 				</div>
 			</div>
-			<div></div>
 		</section>
 
-		<section id="section3" class="h-screen bg-gray-100 w-screen snap-start justify-between flex flex-col gap-5 items-center">
-			<h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm w-screen text-center mt-[5%]">About</h4>
-			<div class="flex flex-col justify-center items-center">
+
+		{# SECTION 4 exhibitions #}
+		<section id="exhibitions" class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">exhibitions</h4>
+			<div class="flex flex-col justify-center items-center gap-8">
 				<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Emmanuel Godard</h3>
-				<p class="max-w-[53ch] text-justify text-lg font-light leading-[1.7] whitespace-pre-wrap">
-					I specialize in lifestyle and travel photography. I not only shoot in and around the streets of the city, but also in apartments, shops, parks – anywhere and everywhere my clients FEEL happy. Finding places that make people feel happy, as well as creating memories while we shoot. And that is what makes great photos!
-					                My work in photography is a natural extension of my desire to tell stories. I’ve always been a nostalgic and romantic person, and I love that my work allows me to express those traits in such a meaningful way.
+				<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
+					I specialize in lifestyle and travel photography. I not only shoot in and around the streets of the city, but also in apartments, shops, parks – anywhere and everywhere my clients FEEL happy. Finding places that make people feel happy, as well as creating memories while we shoot. And that is what makes great photos! My work in photography is a natural extension of my desire to tell stories. I’ve always been a nostalgic and romantic person, and I love that my work allows me to express those traits in such a meaningful way.
 				</p>
 			</div>
-			<h4></h4>
-
-
 		</section>
-		<section id="section4" class="h-screen bg-gray-300 w-screen snap-start">Section 4</section>
-		<section id="section5" class="h-screen bg-gray-100 w-screen snap-start">Section 5</section>
+
+		{# SECTION 5 Contacts #}
+		<section id="contacts" class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">Contacts</h4>
+			<div class="flex flex-col justify-center items-center gap-8">
+				<p class="max-w-[60ch] text-center text-lg font-light leading-[1.75] whitespace-pre-line">
+					Tell me about your story, your passion, your love.
+										And I'll be happy to get back to you and talk about our common project.
+										Let's connect here.
+				</p>
+				<a href="tel:emmanuel.godard83@orange.fr">
+					<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">+33 6 45 48 58 15</h3>
+				</a>
+				<p class="max-w-[60ch] text-center text-lg font-light leading-[1.75] whitespace-pre-line">4401 Waldeck Street Grapevine, Nashville, TX 76051</p>
+				<a href="mailto:emmanuel.godard83@orange.fr">
+					<h3 class=" text-3xl tracking-[0] text-[#333] font-light drop-shadow-sm">emmanuel.godard83@orange.fr</h3>
+				</a>
+			</div>
+		</section>
+	</div>
+
+	<div id="sidebar" class="absolute top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
+		<ul class="flex gap-5 flex-col">
+			<li>
+				<a href="#home" class="active">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#about" class="">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#works" class="">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#exhibitions" class="">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#contacts" class="">
+					<span></span>
+				</a>
+			</li>
+		</ul>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
 
 {% endblock %}
