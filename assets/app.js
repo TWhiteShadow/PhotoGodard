@@ -36,8 +36,8 @@ function rotateToMouse(e, card, img) {
       ${Math.log(distance) * 3}deg
     )
   `;
-  const depthX = `${50 - (mouseX - bounds.width) * 0.2}%`;
-  const depthY = `${50 - (mouseY - bounds.height) * 0.2}%`;
+  const depthX = `${(mouseX - bounds.width/2) * 0.2}%`;
+  const depthY = `${(mouseY - bounds.height/2) * 0.1}%`;
   console.log(`${depthX} ${depthY}`);
   card.style.backgroundPosition = `${depthX} ${depthY}`;
 }

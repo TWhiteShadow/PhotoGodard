@@ -42,44 +42,30 @@
 		{# SECTION 2 #}
 		<section id="section2" class="h-screen bg-gray-300 w-screen snap-start justify-evenly flex flex-col gap-5 items-center">
 			<h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm">Works</h4>
-			<div class="grid md:grid-cols-3 md:grid-rows-1 grid-cols-1 grid-rows-3 justify-evenly gap-[5vw] w-[80%] items-center">
-				<div class="card h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid1.jpg')}}); background-size:cover;">
-					{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
+			<div class="grid md:grid-cols-3 md:grid-rows-1 grid-cols-1 h-96 grid-rows-3 justify-evenly gap-[5vw] w-[80%] items-center">
+				<div
+					class="card h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid1.jpg')}}); background-size:120%;">{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
 				</div>
-				<div class="card h-full w-full relative">
-					<img class="object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid2.jpg')}}">
+				<div
+					class="card  max-w-[25vw] max-h-[25vh] h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid1.jpg')}}); background-size:120%;">{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
 				</div>
-				<div class="card h-full w-full relative">
-					<img class="object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid3.jpg')}}">
+				<div
+					class="card h-full w-full relative border-none" style="background-image:url({{ asset('assets/images/image-grid1.jpg')}}); background-size:120%;">{# <img class="card object-cover h-full w-full max-w-[25vw] max-h-[25vh] shadow-2xl" src="{{ asset('assets/images/image-grid1.jpg')}}"> #}
 				</div>
 			</div>
 			<div></div>
 		</section>
 
-		<section
-			id="section3" class="h-screen bg-gray-100 w-screen snap-start justify-evenly flex flex-col gap-5 items-center">
-			{# <div id="app" class="container">
-			                <card data-image="https://images.unsplash.com/photo-1479660656269-197ebb83b540?dpr=2&auto=compress,format&fit=crop&w=1199&h=798&q=80&cs=tinysrgb&crop=">
-			                    <h1 slot="header">Canyons</h1>
-			                    <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-			                </card>
-			                <card data-image="https://images.unsplash.com/photo-1479659929431-4342107adfc1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=">
-			                    <h1 slot="header">Beaches</h1>
-			                    <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-			                </card>
-			                <card data-image="https://images.unsplash.com/photo-1479644025832-60dabb8be2a1?dpr=2&auto=compress,format&fit=crop&w=1199&h=799&q=80&cs=tinysrgb&crop=">
-			                    <h1 slot="header">Trees</h1>
-			                    <p slot="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-			                </card>
-			            </div> #}
+		<section id="section3" class="h-screen bg-gray-100 w-screen snap-start justify-between flex flex-col gap-5 items-center">
+			<h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm w-screen text-center mt-[5%]">About</h4>
 			<div class="flex flex-col justify-center items-center">
-                <h4 class="text-sm uppercase tracking-[0.25rem] text-[#333] font-light drop-shadow-sm absolute w-screen text-center top-30 bottom-auto">About</h4>
 				<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Emmanuel Godard</h3>
 				<p class="max-w-[53ch] text-justify text-lg font-light leading-[1.7] whitespace-pre-wrap">
-                I specialize in lifestyle and travel photography. I not only shoot in and around the streets of the city, but also in apartments, shops, parks – anywhere and everywhere my clients FEEL happy. Finding places that make people feel happy, as well as creating memories while we shoot. And that is what makes great photos!
-                My work in photography is a natural extension of my desire to tell stories. I’ve always been a nostalgic and romantic person, and I love that my work allows me to express those traits in such a meaningful way.
+					I specialize in lifestyle and travel photography. I not only shoot in and around the streets of the city, but also in apartments, shops, parks – anywhere and everywhere my clients FEEL happy. Finding places that make people feel happy, as well as creating memories while we shoot. And that is what makes great photos!
+					                My work in photography is a natural extension of my desire to tell stories. I’ve always been a nostalgic and romantic person, and I love that my work allows me to express those traits in such a meaningful way.
 				</p>
 			</div>
+			<h4></h4>
 
 
 		</section>
