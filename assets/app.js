@@ -15,8 +15,6 @@ var parallaxInstance = new Parallax(scene);
 // import Atropos library
 import Atropos from "atropos";
 
-
-
 // Initialize
 document.querySelectorAll(".atropos-works").forEach((element) => {
   Atropos({
