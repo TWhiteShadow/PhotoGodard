@@ -55,6 +55,16 @@ h4 {
     background: black;
 }
 
+// ATROPOS (PARALLAX Section 1)
+.atropos-section-1 {
+    .atropos-scale:hover .atropos-inner {
+        img {
+            box-shadow: none !important;
+        }
+
+    }
+}
+
 // ATROPOS (PARALLAX CARDS)
 .atropos-works {
 
