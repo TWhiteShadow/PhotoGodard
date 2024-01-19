@@ -15,6 +15,12 @@ var parallaxInstance = new Parallax(scene);
 // import Atropos library
 import Atropos from "atropos";
 
+
+// Menu burger open function
+$(".menu").click(function () {
+  $(this).toggleClass("open");
+});
+
 // Initialize
 document.querySelectorAll(".atropos-works").forEach((element) => {
   Atropos({
