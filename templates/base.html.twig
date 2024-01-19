@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="overflow-hidden">
+<html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -17,6 +17,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     </head>
     <body>
+        
+        <link href="http://zikro.gr/dbg/html/fullPage/jquery.fullpage.css" rel="stylesheet" />
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+        <script src="http://zikro.gr/dbg/html/fullPage/jquery.fullpage.js"></script>  
         {% block body %}
         {% endblock %}
     </body>
