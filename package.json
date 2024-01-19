@@ -24,6 +24,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "atropos": "^2.0.2",
         "flowbite": "^2.2.1"
     }
 }

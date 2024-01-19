@@ -4,11 +4,9 @@
 Ajouter un Album
 {% endblock %}
 
-{% block body %}
-    {{parent()}}
-    
+{% block main %}
+   {{ parent() }}
 
-    
     <script>
         var btn = document.querySelector(".btn-generate-temp-password");
         var inputPass = document.querySelector(".text-generate-temp-password");
