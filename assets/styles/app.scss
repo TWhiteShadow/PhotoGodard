@@ -15,6 +15,11 @@
     font-family: 'Mulish', sans-serif;
 }
 
+.fp-enabled body {
+    overflow: auto !important;
+    height: auto !important;
+} 
+
 p {
     font-family: 'Merriweather', serif;
     color: #333;
@@ -24,6 +29,19 @@ h4 {
     transition: all 0.5s ease-in-out;
 }
 
+
+// Sections (to override fullpage.js
+
+.fp-tableCell{
+    display: flex !important;
+}
+
+.section-works .fp-tableCell, .section-albums .fp-tableCell, .section-contacts .fp-tableCell{
+    align-items: center;
+    justify-content: center;
+}
+
+// 
 
 .sidebar a {
     display: flex;
