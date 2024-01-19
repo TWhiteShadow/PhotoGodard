@@ -6,20 +6,18 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.scss';
+import "./styles/app.scss";
 
-// code for parallax left top right
-var scene = document.getElementById('scene');
+// // code for parallax left top right
+var scene = document.getElementById("scene");
 var parallaxInstance = new Parallax(scene);
 
-
-
 // import Atropos library
-import Atropos from 'atropos';
+import Atropos from "atropos";
 
 // Initialize
-document.querySelectorAll('.atropos-works').forEach((element) => {
-    Atropos({
+document.querySelectorAll(".atropos-works").forEach((element) => {
+  Atropos({
     el: element,
     activeOffset: 40,
     duration: 800,
@@ -28,15 +26,22 @@ document.querySelectorAll('.atropos-works').forEach((element) => {
     shadowScale: 1,
     shadowOffset: 80,
     // rest of parameters
-    });
+  });
 });
 
-// Initialize
-const myAtropos = Atropos({
-    el: '.my-atropos',
+document.querySelectorAll(".atropos-section-1").forEach((element) => {
+  Atropos({
+    el: element,
+    duration: 500,
+    shadow: false,
+    rotateXInvert: true,
+    rotateYInvert: true,
+    activeOffset: 40,
+    rotateXMax: 10,
+    rotateYMax: 10,
     // rest of parameters
   });
-
+});
 
 // SIDEBAR SCRIPT
 
@@ -44,25 +49,34 @@ const myAtropos = Atropos({
 const sections = document.querySelectorAll("section");
 const sidebarSpans = document.querySelectorAll("#sidebar span");
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            sidebarSpans.forEach(span => {
-                if (entry.target.id === span.parentElement.getAttribute('href').substring(1)) {
-                    span.parentElement.classList.add("active")
-                    history.pushState(null,null,span.parentElement.getAttribute('href'));
-                }else{
-                    span.parentElement.classList.remove("active")
-                }
-            });
-        } else {
-        }
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        sidebarSpans.forEach((span) => {
+          if (
+            entry.target.id ===
+            span.parentElement.getAttribute("href").substring(1)
+          ) {
+            span.parentElement.classList.add("active");
+            history.pushState(
+              null,
+              null,
+              span.parentElement.getAttribute("href")
+            );
+          } else {
+            span.parentElement.classList.remove("active");
+          }
+        });
+      } else {
+      }
     });
-},
-{
-    threshold: 0.9
-});
+  },
+  {
+    threshold: 0.9,
+  }
+);
 
-sections.forEach(element => {
-    observer.observe(element);
+sections.forEach((element) => {
+  observer.observe(element);
 });

@@ -7,6 +7,7 @@ namespace App\Controller\Admin;
 use App\Entity\Album;
 use App\Field\PassGenField;
 use App\Form\PasswordGeneratorType;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -33,11 +34,13 @@ class AlbumCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        
         return [
             IdField::new("id")->hideOnForm()->onlyWhenUpdating(),
             TextField::new('name'),
             TextField::new('password')->onlyOnIndex(),
-            PassGenField::new('passwordArray')->onlyOnForms(),
+            PassGenField::new('passwordArray')->onlyOnForms()
+            ->addCssClass('zdhhzdhjdhzdhzdhdz'),
         ];
     }
 }

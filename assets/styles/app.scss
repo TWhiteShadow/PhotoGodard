@@ -74,11 +74,7 @@ h4 {
         transition: all 0.8s ease;
     }
 
-    .atropos-rotate{
-    }
 
-
-}
     .atropos-scale:hover .atropos-inner {
         img {
             filter: blur(1px) brightness(0.5);
@@ -88,6 +84,8 @@ h4 {
             opacity: 1 !important;
         }
     }
+
+}
 
     // JS
 
