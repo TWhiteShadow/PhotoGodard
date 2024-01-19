@@ -41,7 +41,23 @@ h4 {
     justify-content: center;
 }
 
-// 
+// footer 
+
+footer{
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(243, 243, 245, 0) 0%, #f3f3f5 100%) !important;
+    p{
+        font-family: 'Mulish', sans-serif;
+        color: #333
+    }
+    svg, svg path{
+        transition: all 0.5s ease-in-out;
+    }
+    svg:hover, svg:hover path{
+        opacity: 0.7;
+    }
+}
+
 
 .sidebar a {
     display: flex;

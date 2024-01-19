@@ -80,3 +80,6 @@ const observer = new IntersectionObserver(
 sections.forEach((element) => {
   observer.observe(element);
 });
+
+
+document.getElementById('year').innerText = new Date().getFullYear();
