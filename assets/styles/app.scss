@@ -1,3 +1,6 @@
+// Parallax effet
+@import 'atropos/scss';
+
 @import 'scss/base.scss';
 
 @tailwind base;
@@ -15,6 +18,9 @@
 p {
     font-family: 'Merriweather', serif;
     color: #333;
+}
+h4{
+    transition: all 0.5s ease-in-out;
 }
 
 
@@ -48,6 +54,31 @@ p {
     background: black;
 }
 
+// ATROPOS (PARALLAX CARDS)
+.atropos-works {
+
+    .atropos-shadow{
+        background: #000000c4;
+    }
+
+    img{
+        transition: all 0.8s ease;
+    }
+    p{
+        font-family: 'Mulish', sans-serif;
+    }
+    div{
+        transition: all 0.8s ease;
+    }
+  }
+.atropos-scale:hover .atropos-inner{
+    img{
+        filter: blur(1px) brightness(0.5);
+    }
+    div{
+        opacity: 1 !important;
+    }
+}
 // JS
 
 $hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
