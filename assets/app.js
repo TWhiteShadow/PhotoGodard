@@ -14,6 +14,13 @@ var parallaxInstance = new Parallax(scene);
 
 // import Atropos library
 import Atropos from "atropos";
+import Fullpage from "fullpage.js";
+
+new Fullpage('#fullpage', {
+	//options here
+	autoScrolling:true,
+	scrollHorizontally: false,
+});
 
 // Initialize
 document.querySelectorAll(".atropos-works").forEach((element) => {

@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %} {% block title %}Emmanuel Godard - Photography {%
 endblock %} {% block body %}
-<div class="scroll-smooth snap-y snap-mandatory snap-always h-screen w-full overflow-y-scroll">
+<div class="scroll-smooth snap-y snap-mandatory snap-always h-screen w-full overflow-y-scroll" id="fullpage">
 	{# SECTION 1 FIRST PAGE #}
-	<section id="home" class="h-screen bg-gray-100 w-full snap-center flex">
+	<section id="home" class="section h-screen bg-gray-100 w-full snap-center flex">
 		<div class="flex items-center justify-center w-[60%] z-0">
 			<div id="scene" class="h-full w-full" data-pointer-events="true">
 				<!-- Image top left -->
@@ -76,7 +76,7 @@ endblock %} {% block body %}
 
 	{# SECTION 2 ABOUT #}
 	<section id="about"
-		class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+		class="section h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
 			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
 			About
@@ -105,7 +105,7 @@ endblock %} {% block body %}
 
 	{# SECTION 3 WORKS #}
 	<section id="works"
-		class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+		class="section h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
 			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
 			Works
@@ -194,7 +194,7 @@ endblock %} {% block body %}
 
 	{# SECTION 4 albums #}
 	<section id="albums"
-		class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+		class="section h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
 			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
 			albums
@@ -218,7 +218,7 @@ endblock %} {% block body %}
 
 	{# SECTION 5 Contacts #}
 	<section id="contacts"
-		class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+		class="section h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
 			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
 			Contacts
