@@ -4,203 +4,235 @@
 {% endblock %}
 
 {% block body %}
-	<div
-		class=" scroll-smooth snap-y snap-mandatory h-screen w-full overflow-y-scroll">
-		{# SECTION 1 FIRST PAGE #}
-		<section id="home" class="h-screen bg-gray-100 w-full snap-center flex ">
-			<div class="flex items-center justify-center w-[50%] z-0">
-				<div
-					id="scene" class="h-full w-full">
-					<!-- Image top left -->
-					<div class=" relative top-[10%] left-[15%] bottom-auto right-auto w-auto z-40" data-depth="-0.5">
-						<div class=" relative">
-							<img class="max-w-[10vw] max-h-[10vh] shadow-2xl" src="{{ asset('assets/images/image3.jpeg')}}">
-						</div>
+<div class=" scroll-smooth snap-y snap-mandatory h-screen w-full overflow-y-scroll">
+	{# SECTION 1 FIRST PAGE #}
+	<section id="home" class="h-screen bg-gray-100 w-full snap-center flex ">
+		<div class="flex items-center justify-center w-[50%] z-0">
+			<div id="scene" class="h-full w-full">
+				<!-- Image top left -->
+				<div class=" relative top-[10%] left-[15%] bottom-auto right-auto w-auto z-40" data-depth="-0.5">
+					<div class=" relative">
+						<img class="max-w-[10vw] max-h-[10vh] shadow-2xl" src="{{ asset('assets/images/image3.jpeg')}}">
 					</div>
-					<!-- Image center -->
-					<div class=" absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.1">
-						<div class=" relative">
-							<img class="max-w-[40vw] max-h-[40vh] shadow-2xl" src="{{ asset('assets/images/image1.jpeg')}}">
-						</div>
-					</div>
-					<!-- Image bottom left -->
-					<div class=" absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth="-0.2">
-						<div class=" relative">
-							<img class="max-w-[20vw] max-h-[20vh] shadow-2xl" src="{{ asset('assets/images/image2.jpeg')}}">
+				</div>
+				<!-- Image center -->
+				<div class=" absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.1">
+					<!-- main Atropos container (required), add your custom class here -->
+					<div class="atropos my-atropos">
+						<!-- scale container (required) -->
+						<div class="atropos-scale">
+							<!-- rotate container (required) -->
+							<div class="atropos-rotate">
+								<!-- inner container (required) -->
+								<div class="atropos-inner">
+									<!-- put your custom content here -->
+									<div class=" relative">
+										<img class="max-w-[40vw] max-h-[40vh] shadow-2xl"
+											src="{{ asset('assets/images/image1.jpeg')}}">
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+				<!-- Image bottom left -->
+				<div class=" absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth="-0.2">
+					<div class=" relative">
+						<img class="max-w-[20vw] max-h-[20vh] shadow-2xl" src="{{ asset('assets/images/image2.jpeg')}}">
+					</div>
+				</div>
 			</div>
-			<div class="flex flex-col items-center justify-center w-[50%] gap-3 z-20 ">
-				<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-					Emmanuel Godard
+		</div>
+		<div class="flex flex-col items-center justify-center w-[50%] gap-3 z-20 ">
+			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
+				Emmanuel Godard
+			</h3>
+			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Creative photography
+			</h4>
+		</div>
+	</section>
+
+
+	{# SECTION 2 ABOUT #}
+	<section id="about"
+		class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+		<h4
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
+			About</h4>
+		<div class="flex flex-row justify-evenly items-center w-full">
+			{# optional #}
+			<div class="flex flex-col justify-center items-center gap-8">
+				<img class="max-w-[30vw] max-h-[30vh] grayscale-[100%]" src="{{ asset('assets/images/godard.jpg') }}">
+			</div>
+			{# #}
+			<div class="flex flex-col justify-center items-center gap-8">
+				<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Emmanuel Godard
 				</h3>
-				<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Creative photography</h4>
-			</div>
-		</section>
-
-
-		{# SECTION 2 ABOUT #}
-		<section id="about" class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
-			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">About</h4>
-			<div
-				class="flex flex-row justify-evenly items-center w-full">
-				{# optional #}
-				<div class="flex flex-col justify-center items-center gap-8">
-					<img class="max-w-[30vw] max-h-[30vh] grayscale-[100%]" src="{{ asset('assets/images/godard.jpg') }}">
-				</div>
-				{#  #}
-				<div class="flex flex-col justify-center items-center gap-8">
-					<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Emmanuel Godard</h3>
-					<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
-						Emmanuel Godard, artiste français.
-																		Je suis né en 1975 à Dieppe en Normandie. Je suis un passionné d’images et des émotions. Et j’ai cette capacité à sublimer l’instant par ma sensibilité au monde qui m’entoure.
-																		La simplicité et la pureté de mes photographies vous plongera dans mon univers parfois irréel et poétique.
-																		
-																		Bienvenue dans mon monde .
-					</p>
-				</div>
-			</div>
-		</section>
-
-		{# SECTION 3 WORKS #}
-		<section id="works" class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
-			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">Works</h4>
-			<div class="grid md:grid-cols-3 md:grid-rows-1 grid-cols-1 h-96 grid-rows-3 justify-evenly gap-[5vw] w-[80%] items-center">
-				<div
-					class="atropos atropos-works">
-					<!-- scale container (required) -->
-					<a href="www.youtube.com" target="_blank">
-						<div
-							class="atropos-scale">
-							<!-- rotate container (required) -->
-							<div
-								class="atropos-rotate">
-								<!-- inner container (required) -->
-								<div
-									class="atropos-inner flex justify-center items-center">
-									<!-- put your custom content here -->
-									<img src=" {{ asset('assets/images/image-grid1.jpg') }}" data-atropos-offset="-5" class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]">
-									<div class="absolute top-[50%] translate-y-[-50%] opacity-0">
-										<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center" data-atropos-offset="5">Mariages</h4>
-										<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center" data-atropos-offset="5">123 photos</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div
-					class="atropos atropos-works">
-					<!-- scale container (required) -->
-					<a href="www.youtube.com" target="_blank">
-						<div
-							class="atropos-scale">
-							<!-- rotate container (required) -->
-							<div
-								class="atropos-rotate">
-								<!-- inner container (required) -->
-								<div
-									class="atropos-inner flex justify-center items-center">
-									<!-- put your custom content here -->
-									<img src=" {{ asset('assets/images/image-grid2.jpg') }}" data-atropos-offset="-5" class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]">
-									<div class="absolute top-[50%] translate-y-[-50%] opacity-0">
-										<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center" data-atropos-offset="5">Portraits</h4>
-										<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center" data-atropos-offset="5">123 photos</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div
-					class="atropos atropos-works">
-					<!-- scale container (required) -->
-					<a href="www.youtube.com" target="_blank">
-						<div
-							class="atropos-scale">
-							<!-- rotate container (required) -->
-							<div
-								class="atropos-rotate">
-								<!-- inner container (required) -->
-								<div
-									class="atropos-inner flex justify-center items-center">
-									<!-- put your custom content here -->
-									<img src=" {{ asset('assets/images/image-grid3.jpg') }}" data-atropos-offset="-5" class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]">
-									<div class="absolute top-[50%] translate-y-[-50%] opacity-0">
-										<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center" data-atropos-offset="5">Paysages</h4>
-										<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center" data-atropos-offset="5">123 photos</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-		</section>
-
-
-		{# SECTION 4 exhibitions #}
-		<section id="exhibitions" class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
-			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">exhibitions</h4>
-			<div class="flex flex-col justify-center items-center gap-8">
-				<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Emmanuel Godard</h3>
 				<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
-					I specialize in lifestyle and travel photography. I not only shoot in and around the streets of the city, but also in apartments, shops, parks – anywhere and everywhere my clients FEEL happy. Finding places that make people feel happy, as well as creating memories while we shoot. And that is what makes great photos! My work in photography is a natural extension of my desire to tell stories. I’ve always been a nostalgic and romantic person, and I love that my work allows me to express those traits in such a meaningful way.
+					Emmanuel Godard, artiste français.
+					Je suis né en 1975 à Dieppe en Normandie. Je suis un passionné d’images et des émotions. Et j’ai
+					cette capacité à sublimer l’instant par ma sensibilité au monde qui m’entoure.
+					La simplicité et la pureté de mes photographies vous plongera dans mon univers parfois irréel et
+					poétique.
+
+					Bienvenue dans mon monde .
 				</p>
 			</div>
-		</section>
+		</div>
+	</section>
 
-		{# SECTION 5 Contacts #}
-		<section id="contacts" class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
-			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">Contacts</h4>
-			<div class="flex flex-col justify-center items-center gap-8">
-				<p class="max-w-[60ch] text-center text-lg font-light leading-[1.75] whitespace-pre-line">
-					Tell me about your story, your passion, your love.
-																														And I'll be happy to get back to you and talk about our common project.
-																														Let's connect here.
-				</p>
-				<a href="tel:emmanuel.godard83@orange.fr">
-					<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">+33 6 45 48 58 15</h3>
-				</a>
-				<p class="max-w-[60ch] text-center text-lg font-light leading-[1.75] whitespace-pre-line">4401 Waldeck Street Grapevine, Nashville, TX 76051</p>
-				<a href="mailto:emmanuel.godard83@orange.fr">
-					<h3 class=" text-3xl tracking-[0] text-[#333] font-light drop-shadow-sm">emmanuel.godard83@orange.fr</h3>
+	{# SECTION 3 WORKS #}
+	<section id="works"
+		class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+		<h4
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
+			Works</h4>
+		<div class="flex flex-col md:flex-row justify-evenly h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
+			<div class="atropos atropos-works">
+				<!-- scale container (required) -->
+				<a href="www.youtube.com" target="_blank">
+					<div class="atropos-scale">
+						<!-- rotate container (required) -->
+						<div class="atropos-rotate">
+							<!-- inner container (required) -->
+							<div class="atropos-inner flex justify-center items-center">
+								<!-- put your custom content here -->
+								<img src=" {{ asset('assets/images/image-grid1.jpg') }}" data-atropos-offset="-5"
+									class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]">
+								<div class="absolute top-[50%] translate-y-[-50%] opacity-0">
+									<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center"
+										data-atropos-offset="5">Mariages</h4>
+									<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center"
+										data-atropos-offset="5">123 photos</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</a>
 			</div>
-		</section>
-	</div>
+			<div class="atropos atropos-works">
+				<!-- scale container (required) -->
+				<a href="www.youtube.com" target="_blank">
+					<div class="atropos-scale">
+						<!-- rotate container (required) -->
+						<div class="atropos-rotate">
+							<!-- inner container (required) -->
+							<div class="atropos-inner flex justify-center items-center">
+								<!-- put your custom content here -->
+								<img src=" {{ asset('assets/images/image-grid2.jpg') }}" data-atropos-offset="-5"
+									class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]">
+								<div class="absolute top-[50%] translate-y-[-50%] opacity-0">
+									<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center"
+										data-atropos-offset="5">Portraits</h4>
+									<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center"
+										data-atropos-offset="5">123 photos</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="atropos atropos-works">
+				<!-- scale container (required) -->
+				<a href="www.youtube.com" target="_blank">
+					<div class="atropos-scale">
+						<!-- rotate container (required) -->
+						<div class="atropos-rotate">
+							<!-- inner container (required) -->
+							<div class="atropos-inner flex justify-center items-center">
+								<!-- put your custom content here -->
+								<img src=" {{ asset('assets/images/image-grid3.jpg') }}" data-atropos-offset="-5"
+									class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]">
+								<div class="absolute top-[50%] translate-y-[-50%] opacity-0">
+									<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center"
+										data-atropos-offset="5">Paysages</h4>
+									<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center"
+										data-atropos-offset="5">123 photos</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</section>
 
-	<div id="sidebar" class="absolute top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
-		<ul class="flex gap-5 flex-col">
-			<li>
-				<a href="#home" class="active">
-					<span></span>
-				</a>
-			</li>
-			<li>
-				<a href="#about" class="">
-					<span></span>
-				</a>
-			</li>
-			<li>
-				<a href="#works" class="">
-					<span></span>
-				</a>
-			</li>
-			<li>
-				<a href="#exhibitions" class="">
-					<span></span>
-				</a>
-			</li>
-			<li>
-				<a href="#contacts" class="">
-					<span></span>
-				</a>
-			</li>
-		</ul>
-	</div>
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+	{# SECTION 4 exhibitions #}
+	<section id="exhibitions"
+		class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+		<h4
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
+			exhibitions</h4>
+		<div class="flex flex-col justify-center items-center gap-8">
+			<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">Emmanuel Godard</h3>
+			<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
+				I specialize in lifestyle and travel photography. I not only shoot in and around the streets of the
+				city, but also in apartments, shops, parks – anywhere and everywhere my clients FEEL happy. Finding
+				places that make people feel happy, as well as creating memories while we shoot. And that is what makes
+				great photos! My work in photography is a natural extension of my desire to tell stories. I’ve always
+				been a nostalgic and romantic person, and I love that my work allows me to express those traits in such
+				a meaningful way.
+			</p>
+		</div>
+	</section>
+
+	{# SECTION 5 Contacts #}
+	<section id="contacts"
+		class="h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
+		<h4
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
+			Contacts</h4>
+		<div class="flex flex-col justify-center items-center gap-8">
+			<p class="max-w-[60ch] text-center text-lg font-light leading-[1.75] whitespace-pre-line">
+				Tell me about your story, your passion, your love.
+				And I'll be happy to get back to you and talk about our common project.
+				Let's connect here.
+			</p>
+			<a href="tel:emmanuel.godard83@orange.fr">
+				<h3 class=" text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">+33 6 45 48 58
+					15</h3>
+			</a>
+			<p class="max-w-[60ch] text-center text-lg font-light leading-[1.75] whitespace-pre-line">4401 Waldeck
+				Street Grapevine, Nashville, TX 76051</p>
+			<a href="mailto:emmanuel.godard83@orange.fr">
+				<h3 class=" text-3xl tracking-[0] text-[#333] font-light drop-shadow-sm">emmanuel.godard83@orange.fr
+				</h3>
+			</a>
+		</div>
+	</section>
+</div>
+
+<div id="sidebar" class="absolute top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
+	<ul class="flex gap-5 flex-col">
+		<li>
+			<a href="#home" class="active">
+				<span></span>
+			</a>
+		</li>
+		<li>
+			<a href="#about" class="">
+				<span></span>
+			</a>
+		</li>
+		<li>
+			<a href="#works" class="">
+				<span></span>
+			</a>
+		</li>
+		<li>
+			<a href="#exhibitions" class="">
+				<span></span>
+			</a>
+		</li>
+		<li>
+			<a href="#contacts" class="">
+				<span></span>
+			</a>
+		</li>
+	</ul>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 
 {% endblock %}

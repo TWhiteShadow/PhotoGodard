@@ -31,6 +31,11 @@ document.querySelectorAll('.atropos-works').forEach((element) => {
     });
 });
 
+// Initialize
+const myAtropos = Atropos({
+    el: '.my-atropos',
+    // rest of parameters
+  });
 
 
 // SIDEBAR SCRIPT
