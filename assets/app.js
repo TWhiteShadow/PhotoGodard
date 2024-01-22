@@ -20,19 +20,20 @@ import Atropos from "atropos";
 $(".menu").click(function () {
   $(this).toggleClass("open");
   $(".overlay").toggleClass("showOverlay");
-  $('#fullpage').toggleClass("noScroll");
-  var autoScrollingStatus = $.fn.fullpage.getFullpageData().options.autoScrolling;
-  $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
+  spanMenuOverlayActiveChange();
 });
 
 $(document).keyup(function(e) {
-  if (e.key === "Escape" && $(".menu").hasClass("open")) {
-  $(".overlay").toggleClass("showOverlay");
-  $('#fullpage').toggleClass("noScroll");
-  $(".menu").toggleClass("open");
-  var autoScrollingStatus = $.fn.fullpage.getFullpageData().options.autoScrolling;
-  $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
-}});
+    if ((e.key === "Escape" || e.key === "Enter" ) && $(".menu").hasClass("open")) {
+    closeOverlay();}
+});
+
+function closeOverlay() {
+    if ( $(".menu").hasClass("open")) {
+        $(".overlay").toggleClass("showOverlay");
+        $(".menu").toggleClass("open");
+}};
+
 
 
 
@@ -100,6 +101,25 @@ const observer = new IntersectionObserver(
 
 sections.forEach((element) => {
   observer.observe(element);
+});
+
+
+function spanMenuOverlayActiveChange() {
+    var overlay = document.querySelector(".overlay");
+    var overlayMenuSpans = overlay.querySelectorAll("span");
+
+    overlayMenuSpans.forEach((span) => {
+        span.addEventListener("click", (event) => {closeOverlay();});
+        if (span.parentElement.getAttribute("href") === window.location.hash) {
+            span.classList.add("active");
+        } else {
+            span.classList.remove("active");
+        }
+    });
+};
+
+addEventListener("hashchange", (event) => {
+    spanMenuOverlayActiveChange();
 });
 
 
