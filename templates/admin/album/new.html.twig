@@ -1,34 +1,11 @@
-{% extends "@EasyAdmin/crud/new.html.twig" %}
+{% extends '/admin/dashboard.html.twig' %}
 
-{% block content_title %}
-Ajouter un Album
-{% endblock %}
+{% block title %}New Album{% endblock %}
 
-{% block main %}
-   {{ parent() }}
+{% block main_content %}
+    <h1>Create new Album</h1>
 
-    <script>
-        var btn = document.querySelector(".btn-generate-temp-password");
-        var inputPass = document.querySelector(".text-generate-temp-password");
+    {{ include('admin/album/_form.html.twig') }}
 
-        btn.addEventListener("click", function () {
-        var pass = generateRandomPassword();
-        inputPass.value = pass;
-        });
-
-        function generateRandomPassword() {
-        const length = 8;
-        const charset ="!?#@abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!?#@";
-
-        let password = "";
-
-        for (let i = 0; i < length; i++) {
-            const randomIndex = Math.floor(Math.random() * charset.length);
-            password += charset.charAt(randomIndex);
-        }
-
-        return password;
-        }
-
-    </script>
+    <a href="{{ path('app_admin_album_index') }}">back to list</a>
 {% endblock %}
