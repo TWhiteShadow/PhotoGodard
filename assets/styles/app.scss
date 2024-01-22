@@ -91,6 +91,11 @@ footer{
 
 // ATROPOS (PARALLAX Section 1)
 .atropos-section-1 {
+    .atropos-scale .atropos-inner{
+        img{
+            transition: all 0.8s ease;
+        }
+    }
     .atropos-scale:hover .atropos-inner {
         img {
             box-shadow: none !important;
