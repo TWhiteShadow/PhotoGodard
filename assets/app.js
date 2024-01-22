@@ -25,15 +25,14 @@ $(".menu").click(function () {
   $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
 });
 
-// tkt
-
-// $(document).keyup(function(e) {
-//   if (e.key === "Escape" && $(".menu").hasClass("open")) {
-//   $(".overlay").toggleClass("showOverlay");
-//   $('#fullpage').toggleClass("noScroll");
-//   var autoScrollingStatus = $.fn.fullpage.getFullpageData().options.autoScrolling;
-//   $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
-// }});
+$(document).keyup(function(e) {
+  if (e.key === "Escape" && $(".menu").hasClass("open")) {
+  $(".overlay").toggleClass("showOverlay");
+  $('#fullpage').toggleClass("noScroll");
+  $(".menu").toggleClass("open");
+  var autoScrollingStatus = $.fn.fullpage.getFullpageData().options.autoScrolling;
+  $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
+}});
 
 
 
