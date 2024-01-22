@@ -25,6 +25,8 @@ $(".menu").click(function () {
   $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
 });
 
+// tkt
+
 // $(document).keyup(function(e) {
 //   if (e.key === "Escape" && $(".menu").hasClass("open")) {
 //   $(".overlay").toggleClass("showOverlay");
