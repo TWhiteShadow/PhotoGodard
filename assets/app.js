@@ -19,7 +19,21 @@ import Atropos from "atropos";
 // Menu burger open function
 $(".menu").click(function () {
   $(this).toggleClass("open");
+  $(".overlay").toggleClass("showOverlay");
+  $('#fullpage').toggleClass("noScroll");
+  var autoScrollingStatus = $.fn.fullpage.getFullpageData().options.autoScrolling;
+  $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
 });
+
+// $(document).keyup(function(e) {
+//   if (e.key === "Escape" && $(".menu").hasClass("open")) {
+//   $(".overlay").toggleClass("showOverlay");
+//   $('#fullpage').toggleClass("noScroll");
+//   var autoScrollingStatus = $.fn.fullpage.getFullpageData().options.autoScrolling;
+//   $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
+// }});
+
+
 
 // Initialize
 document.querySelectorAll(".atropos-works").forEach((element) => {

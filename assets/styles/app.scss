@@ -58,7 +58,6 @@ footer{
     }
 }
 
-
 .sidebar a {
     display: flex;
     justify-content: center;
@@ -311,8 +310,12 @@ $light: #efefef;
     top: $top;
 }
 
+.noScroll{
+    transform: none !important;
+}
 
-.menuHamberger {
+.menuHamburger {
+    z-index: 1001;
     @include btn(0px, 100px);
 
     .icon-left {
@@ -376,4 +379,29 @@ $light: #efefef;
     &:hover {
         cursor: pointer;
     }
+}
+
+
+
+// OVERLAY
+
+.overlay {
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(243, 243, 245, 0.9);
+    // background: red;
+    z-index: 0;
+    transition: all 0.5s ease-in-out;
+    scale: 0;
+    box-shadow: rgb(243, 243, 245, 0.9) 0px 100px 360px 0px, rgb(243, 243, 245, 0.9) 0px 100px 100px 100px;
+}
+
+.showOverlay{
+    scale: 1;
+    opacity: 1;
+    z-index: 1000;
 }
