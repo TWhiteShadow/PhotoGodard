@@ -18,10 +18,10 @@ class AlbumType extends AbstractType
             ->add('password')
             ->add('photos', EntityType::class, [
                 'class' => Photo::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
-        ;
+                'choice_label' => 'filename',
+                'multiple' => true,
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

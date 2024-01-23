@@ -24,7 +24,8 @@ class Album
     private ?array $passwordArray = null;
 
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album')]
-    private Collection $photos;
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Collection $photos;
 
 
     public function __construct()
@@ -75,7 +76,7 @@ class Album
     /**
      * @return Collection<int, Photo>
      */
-    public function getPhotos(): Collection
+    public function getPhotos(): ?Collection
     {
         return $this->photos;
     }
