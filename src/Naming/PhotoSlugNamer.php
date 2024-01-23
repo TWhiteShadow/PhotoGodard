@@ -41,7 +41,6 @@ final class PhotoSlugNamer implements NamerInterface
         $slug = \sprintf('%s_%s.%s', $albumName === null ? $basename : $albumName, $num, $extension);
 
         // Check for uniqueness
-
         return $slug;
     }
 
