@@ -43,7 +43,7 @@ class Photo
     private ?Category $categories = null;
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
-    private ?Album $album;
+    private ?Album $album = null;
 
 
     public function getId(): ?int
