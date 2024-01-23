@@ -11,3 +11,6 @@ dsu-d:
 	else \
 		echo "Nothing has been updated. End of make."; \
 	fi
+
+cc:
+	docker compose exec symfony php bin/console cache:clear

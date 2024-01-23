@@ -55,7 +55,7 @@ class Category
     {
         if (!$this->photos->contains($photo)) {
             $this->photos->add($photo);
-            $photo->setCategories($this);
+            $photo->setCategory($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Category
     {
         if ($this->photos->removeElement($photo)) {
             // set the owning side to null (unless already changed)
-            if ($photo->getCategories() === $this) {
-                $photo->setCategories(null);
+            if ($photo->getCategory() === $this) {
+                $photo->setCategory(null);
             }
         }
 

@@ -22,8 +22,7 @@ class Photo
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-
-    #[Vich\UploadableField(mapping: 'photos', fileNameProperty: 'filename', size: 'filesize', )]
+    #[Vich\UploadableField(mapping: 'photos_categories', fileNameProperty: 'filename', size: 'filesize', )]
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 512)]
@@ -40,7 +39,7 @@ class Photo
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Category $categories = null;
+    private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: true)]
@@ -122,14 +121,14 @@ class Photo
         return $this;
     }
 
-    public function getCategories(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->categories;
+        return $this->category;
     }
 
-    public function setCategories(?Category $categories): static
+    public function setCategory(?Category $category): static
     {
-        $this->categories = $categories;
+        $this->category = $category;
 
         return $this;
     }
