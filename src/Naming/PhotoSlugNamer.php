@@ -41,12 +41,27 @@ final class PhotoSlugNamer implements NamerInterface
             // Check the files in the album directory
             $albumDir = $this->uploadDestinationAlbum . '/' . $albumName;
             $filesystem = new Filesystem();
-    
+
             if ($filesystem->exists($albumDir)) {
                 $files = scandir($albumDir);
-                $existingNums = array_map(fn ($file) => (int) pathinfo($file, PATHINFO_FILENAME), $files);
-                $num = sprintf('%05d', max($existingNums) + 1);
-    
+                $existingNums = [];
+
+                foreach ($files as $file) {
+                    if ($file !== '.' && $file !== '..'
+                    ) {
+                        // Ajout pour déboguer
+                        echo 'File in album directory: ' . $file . PHP_EOL;
+
+                        if (preg_match('/^' . $albumName . '_/', $file)) {
+                            $existingString = pathinfo($file, PATHINFO_FILENAME);
+                            $arrayString = explode("_", $existingString);
+                            $existingNums[] = end($arrayString);
+                        }
+                    }
+                }
+
+                $num = sprintf('%05d', $existingNums ? max($existingNums) + 1 : 1);
+
             } else {
                 // Le dossier n'existe pas, donc le numéro est 00001
                 $num = '00001';
@@ -58,6 +73,8 @@ final class PhotoSlugNamer implements NamerInterface
             // If $albumName is null, set $category based on the category name
             $category = strtoupper($slugify->slugify(strtoupper($this->getCategoryName($object)), "_"));
         }
+
+        
         
         
         $name = $albumName === "" || $albumName === null ? $category . "_" . $basename : $albumName;
