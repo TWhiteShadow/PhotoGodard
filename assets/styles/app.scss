@@ -32,9 +32,17 @@ h4 {
 
 // Sections (to override fullpage.js
 
-.fp-tableCell {
-    display: flex !important;
+.swiper{
+    h3,
+    h4{
+        text-shadow: 1px 1px 20px black, 0 0 10em black, 0 0 0.92em black;
+    }
 }
+// .section-home .fp-tableCell{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
 
 .section-works .fp-tableCell,
 .section-albums .fp-tableCell,
@@ -42,6 +50,16 @@ h4 {
     align-items: center;
     justify-content: center;
 }
+
+.fp-tableCell {
+    display: flex !important;
+    min-height: 100vh;
+    height: fit-content !important;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
 
 // footer 
 
@@ -457,5 +475,38 @@ $light: #efefef;
         transform: scaleX(1);
         text-indent: -0.5rem;
         direction: ltr;
+    }
+}
+
+// Swiper
+
+.swiper-pagination{
+    bottom: 10dvh !important;
+}
+
+.swiper-pagination-bullet{
+    background-color: gray;
+    width: 20px;
+    height: 20px;
+    margin: 0 15px!important;  
+}
+
+@media (max-width: 768px) {
+    .section-home .fp-tableCell {
+        flex-direction: column-reverse !important;
+    }
+    .fp-tableCell {
+        flex-direction: column!important;
+        height: auto !important;
+    }
+
+    .section-works div div{
+        justify-content: initial !important;
+    }
+    h4{
+        display: flex;
+        position: static !important;
+        justify-content: center;
+        margin: 30px 0;
     }
 }

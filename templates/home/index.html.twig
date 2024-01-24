@@ -5,7 +5,25 @@ endblock %}
 {% block body %}
 <div class="scroll-smooth w-full overflow-y-scroll" id="fullpage">
 	{# SECTION 1 FIRST PAGE #}
-	<section class="section bg-gray-100 w-full flex">
+
+	<section class="md:hidden swiper mySwiper">
+		<div class="flex items-center flex-col absolute top-[20%] translate-x-[-50%] left-[50%] gap-3 z-20 text-center text-white drop-shadow-xl">
+			<h3 class="text-3xl uppercase tracking-[0.5rem] font-light">
+				Emmanuel Godard
+			</h3>
+			<h4 class="text-md uppercase tracking-[0.5rem] font-light">
+				Creative photography
+			</h4>
+		</div>
+		<div class="swiper-wrapper h-screen w-screen object-cover">
+			<img src="{{ asset('assets/images/image2.jpeg') }}" class="swiper-slide h-screen w-screen object-cover" alt="">
+			<img src="{{ asset('assets/images/image1.jpeg') }}" class="swiper-slide h-screen w-screen object-cover" alt="">
+			<img src="{{ asset('assets/images/image3.jpeg') }}" class="swiper-slide h-screen w-screen object-cover" alt="">
+		  </div>
+		  <div class="swiper-pagination"></div>
+	</section>
+
+	<section class="hidden md:flex section section-home bg-gray-100 w-full md:flex-col flex-row">
 		<div class="flex h-full items-center justify-center w-[60%] z-0">
 			<div id="scene" class="h-full w-full" data-pointer-events="true">
 				<!-- Image top left -->
@@ -68,7 +86,7 @@ endblock %}
 				</div>
 			</div>
 		</div>
-		<div class="flex h-full flex-col items-center justify-center w-[40%] gap-3 z-20">
+		<div class="flex h-full flex-col items-center justify-center md:w-[40%] gap-3 z-20">
 			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
 				Emmanuel Godard
 			</h3>
@@ -77,15 +95,17 @@ endblock %}
 			</h4>
 		</div>
 	</section>
+	
+	
 
 	{# SECTION 2 ABOUT #}
 	<section
-		class="section h-full relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center px-10">
+		class="section section-about h-full relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center px-10">
 		<h4
-			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
 			About
 		</h4>
-		<div class="flex flex-col md:flex-row justify-evenly items-center w-full">
+		<div class="flex flex-col md:flex-row justify-evenly items-center w-full gap-20 md:gap-0">
 			{# optional #}
 			<div class="flex flex-col justify-center items-center gap-8">
 				<img class="max-w-[30vw] max-h-[30vh] grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out"
@@ -102,7 +122,7 @@ endblock %}
 					cette capacité à sublimer l’instant par ma sensibilité au monde qui
 					m’entoure. La simplicité et la pureté de mes photographies vous
 					plongera dans mon univers parfois irréel et poétique. Bienvenue
-					dans mon monde .
+					dans mon monde.
 				</p>
 			</div>
 		</div>
@@ -112,10 +132,10 @@ endblock %}
 	<section
 		class="section section-works h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
-			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
 			Works
 		</h4>
-		<div class="flex flex-col md:flex-row justify-evenly h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
+		<div class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
 			<div class="atropos atropos-works">
 				<!-- scale container (required) -->
 				<a href="www.youtube.com" target="_blank">
@@ -201,7 +221,7 @@ endblock %}
 	<section
 		class="section section-albums h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
-			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
 			albums
 		</h4>
 		<div class="flex flex-col justify-center items-center gap-8">
@@ -226,7 +246,7 @@ endblock %}
 		class="section section-contacts h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center"
 		data-fp-styles="null">
 		<h4
-			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center absolute top-[6%]">
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
 			Contacts
 		</h4>
 		<div class="flex flex-col justify-center items-center gap-8">
@@ -252,7 +272,7 @@ endblock %}
 </div>
 
 {# SideBar Menu #}
-<div class="absolute top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
+<div class="hidden md:block md:absolute top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
 	<ul class="flex gap-5 flex-col" id="sidebar">
 		<li data-menuanchor="home">
 			<a href="#home" class="active">
@@ -351,7 +371,7 @@ endblock %}
 </footer>
 
 {# Hamburger Menu Icon#}
-<div class="menu menuHamburger top-4 right-4 left-auto" data-menu="1">
+<div class="menu md:absolute fixed menuHamburger top-4 right-4 left-auto" data-menu="1">
 	<div class="icon-left"></div>
 	<div class="icon-right"></div>
 </div>
@@ -399,5 +419,6 @@ endblock %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 <script src="{{ asset('js/index.js') }}"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 {% endblock %}
