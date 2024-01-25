@@ -342,35 +342,6 @@ $light: #efefef;
     transform: none !important;
 }
 
-#touchDevice{
-    *{
-        background-color: red;
-    }
-    .section-home .fp-tableCell {
-        flex-direction: column-reverse !important;
-    }
-    .fp-tableCell {
-        flex-direction: column!important;
-        height: auto !important;
-    }
-
-    .section-works div div{
-        justify-content: initial !important;
-    }
-    h4{
-        display: flex;
-        position: static !important;
-        justify-content: center;
-        margin: 30px 0;
-        color: red !important;
-    }
-
-    // footer
-    .hide{
-        transform: translateY(100%) !important;
-    }
-}
-
 .menuHamburger {
     z-index: 1001;
     @include btn(0px, 100px);
