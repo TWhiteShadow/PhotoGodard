@@ -27,6 +27,7 @@ class PhotoController extends AbstractController
     {
         $photo = new Photo();
         $form = $this->createForm(PhotoType::class, $photo);
+        // dd($request);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -17,6 +17,12 @@
             </tr>
         </tbody>
     </table>
+    {% set categoryFolder = category.getName()|upper %}
+    {% for photo in photos %}
+        <img src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}'/>
+
+    {% endfor %}
+
 
     <a href="{{ path('app_admin_category_index') }}">back to list</a>
 

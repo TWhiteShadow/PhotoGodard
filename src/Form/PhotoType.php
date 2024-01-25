@@ -19,18 +19,19 @@ class PhotoType extends AbstractType
             ->add('title')
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Photo',
+                // "multiple" => false,
             ])
             ->add('album', EntityType::class, [
                 'class' => Album::class,
-            'choice_label' => 'name',
-            'required' => false,
+                'choice_label' => 'name',
+                'required' => false,
             ])
-            
-            ->add('categories', EntityType::class, [
+
+            ->add('category', EntityType::class, [
                 'class' => Category::class,
-'choice_label' => 'name',
-            ])
-        ;
+                'choice_label' => 'name',
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

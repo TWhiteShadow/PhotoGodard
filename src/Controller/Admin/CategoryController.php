@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\Photo;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +31,27 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
+            // dd($uploadedFiles);
             $entityManager->persist($category);
+            foreach ($uploadedFiles as $uploadedFile) {
+
+                $imageFileArray = $uploadedFile->getImageFileArray();
+                foreach ($imageFileArray as $imageFile) {
+                    $photo = new Photo();
+
+                    $file = $imageFile; // Notez l'indice [0] pour obtenir le premier fichier
+                    $photo->setImageFile($file);
+                    $photo->setCreatedAt(new \DateTimeImmutable);
+                    $photo->setUpdatedAt(new \DateTimeImmutable);
+
+                    // Ajouter la photo à l'album
+                    $category->addPhoto($photo);
+                    $entityManager->persist($photo);
+                }
+            }
+
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
@@ -45,8 +66,10 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'app_admin_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
+        $photos = $category->getPhotos();
         return $this->render('admin/category/show.html.twig', [
             'category' => $category,
+            'photos'   => $photos
         ]);
     }
 
@@ -61,10 +84,11 @@ class CategoryController extends AbstractController
 
             return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        $photos = $category->getPhotos();
         return $this->render('admin/category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
+            'photos' => $photos
         ]);
     }
 

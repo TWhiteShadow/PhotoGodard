@@ -19,11 +19,10 @@ class Photo
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
-
-    #[Vich\UploadableField(mapping: 'photos', fileNameProperty: 'filename', size: 'filesize', )]
+    #[Vich\UploadableField(mapping: 'photos_categories', fileNameProperty: 'filename', size: 'filesize', )]
     private ?File $imageFile = null;
 
     #[ORM\Column(length: 512)]
@@ -31,6 +30,8 @@ class Photo
 
     #[ORM\Column(length: 30)]
     private ?int $filesize = null;
+
+    private ?array $imageFileArray = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -40,7 +41,7 @@ class Photo
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: true)]
-    private ?Category $categories = null;
+    private ?Category $category = null;
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: true)]
@@ -74,6 +75,16 @@ class Photo
         return $this->imageFile;
     }
 
+    public function setImageFileArray(?array $imagefilearray = null): void
+    {
+        $this->imageFileArray = $imagefilearray;
+    }
+
+    public function getImageFileArray(): ?Array
+    {
+        return $this->imageFileArray;
+    }
+
     public function getFilename(): ?string
     {
         return $this->filename;
@@ -82,7 +93,7 @@ class Photo
     public function setFilename(string $filename): static
     {
         $this->filename = $filename;
-
+        $this->title = pathinfo($filename, PATHINFO_FILENAME);
         return $this;
     }
 
@@ -122,14 +133,14 @@ class Photo
         return $this;
     }
 
-    public function getCategories(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->categories;
+        return $this->category;
     }
 
-    public function setCategories(?Category $categories): static
+    public function setCategory(?Category $category): static
     {
-        $this->categories = $categories;
+        $this->category = $category;
 
         return $this;
     }
