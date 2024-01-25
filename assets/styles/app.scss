@@ -517,8 +517,9 @@ $light: #efefef;
         transform: translateY(100%) !important;
     }
 
-    .atropos-inner div{
+    .atropos-text{
+        background-color: red;
         left: 50%;
-        --tw-translate-x: -50%;
+        transform: translateX(-50%);
     }
 }
