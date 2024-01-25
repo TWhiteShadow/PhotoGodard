@@ -1,12 +1,12 @@
 $(document).ready(function () {
-	var isPhoneDevice = "ontouchstart" in document.documentElement; 
-	if(isPhoneDevice){
-		document.getQuerySelector("#fullpage").id = "touchDevice";
-		//mobile
-		alert('Phone device detected');
-	}
-		else{
-			alert('No touch device detected');
+	// var isPhoneDevice = "ontouchstart" in document.documentElement; 
+	// if(isPhoneDevice){
+	// 	document.getQuerySelector("#fullpage").id = "touchDevice";
+	// 	//mobile
+	// 	alert('Phone device detected');
+	// }
+	// 	else{
+			alert('Loading fullpage');
 		$('#fullpage').fullpage({
 			responsiveWidth: 768,
 			licenceKey: 'YWx2YXJvdHJpZ28uY29tX01mU2MyTnliMnhzU0c5eWFYcHZiblJoYkd4NVNRcg==',
@@ -24,7 +24,7 @@ $(document).ready(function () {
 				}
 			}
 		});
-	}
+	// }
 
 	var swiper = new Swiper(".mySwiper", {
 		pagination: {
