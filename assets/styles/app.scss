@@ -407,6 +407,25 @@ $light: #efefef;
     &:hover {
         cursor: pointer;
     }
+
+    // box-shadow: rgba(255, 255, 255, 0.429) 0px 22px 70px 4px;
+    background-color: #f3f4f68d;
+    width: 60px;
+    height: 60px;
+    width: 100px;
+    height: 100px;
+    .icon-left {
+    top: 30px;
+    left: auto;
+    top: 50%;
+    right: 50%;
+    }
+    .icon-right {
+    top: 30px;
+    left: 30px;
+    top: 50%;
+    left: 50%;
+    }
 }
 
 
@@ -525,7 +544,7 @@ $light: #efefef;
         transform: translateX(-50%);
     }
 
-    .atropos-scale .atropos-inner {
+    .section-works .atropos-scale .atropos-inner {
         img {
             filter: blur(1px) brightness(0.6);
         }
