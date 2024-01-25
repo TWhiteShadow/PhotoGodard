@@ -484,10 +484,13 @@ $light: #efefef;
 
 .swiper-pagination{
     bottom: 5dvh !important;
+    span{
+        filter: drop-shadow(2px 2px 10px rgb(0, 0, 0));
+    }
 }
 
 .swiper-pagination-bullet{
-    background-color: gray;
+    background-color: white;
     width: 20px;
     height: 20px;
     margin: 0 15px!important;  
@@ -518,8 +521,17 @@ $light: #efefef;
     }
 
     .atropos-text{
-        background-color: red;
         left: 50%;
         transform: translateX(-50%);
+    }
+
+    .atropos-scale .atropos-inner {
+        img {
+            filter: blur(1px) brightness(0.6);
+        }
+
+        div {
+            opacity: 1 !important;
+        }
     }
 }
