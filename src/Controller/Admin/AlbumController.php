@@ -94,25 +94,25 @@ class AlbumController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_album_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_admin_album_delete', methods: ['POST'])]
     public function delete(Request $request, Album $album, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$album->getId(), $request->request->get('_token'))) {
 
-            $photos = $album->getPhotos();
-            foreach ($photos as $photo) {
-                if ($photo) {
-                    if (!$photo->getCategory()) {
-                        $entityManager->remove($photo);
-                    } else {
-                        $photo->setAlbum(null);
-                    }
-                }
-            }
+            // $photos = $album->getPhotos();
+            // foreach ($photos as $photo) {
+            //     if ($photo) {
+            //         if (!$photo->getCategory()) {
+            //             $entityManager->remove($photo);
+            //         } else {
+            //             $album->removePhoto($photo);
+            //         }
+            //     }
+            // }
             $entityManager->remove($album);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_admin_album_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_album_index');
     }
 }

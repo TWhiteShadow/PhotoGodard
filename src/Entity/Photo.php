@@ -90,7 +90,7 @@ class Photo
         return $this->filename;
     }
 
-    public function setFilename(string $filename): static
+    public function setFilename(?string $filename): static
     {
         $this->filename = $filename;
         $this->title = pathinfo($filename, PATHINFO_FILENAME);
@@ -102,7 +102,7 @@ class Photo
         return $this->filesize;
     }
 
-    public function setFilesize(int $filesize): static
+    public function setFilesize(?int $filesize): static
     {
         $this->filesize = $filesize;
 

@@ -31,3 +31,7 @@ public/build/
 public/build/manifest.json
 public/build/app.js
 public/build/app.css
+
+
+public/photos/
+storage/

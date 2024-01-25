@@ -40,8 +40,7 @@ class CategoryController extends AbstractController
                 foreach ($imageFileArray as $imageFile) {
                     $photo = new Photo();
 
-                    $file = $imageFile; // Notez l'indice [0] pour obtenir le premier fichier
-                    $photo->setImageFile($file);
+                    $photo->setImageFile($imageFile);
                     $photo->setCreatedAt(new \DateTimeImmutable);
                     $photo->setUpdatedAt(new \DateTimeImmutable);
 
@@ -92,7 +91,7 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_category_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_admin_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
@@ -100,6 +99,6 @@ class CategoryController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_category_index');
     }
 }
