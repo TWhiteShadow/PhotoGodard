@@ -51,7 +51,6 @@ if (touchScreen) {
       shadowScale: 1,
       shadowOffset: 80,
       // rest of parameters
-      alwaysActive: true,
     });
   });
 } else {

@@ -10,11 +10,6 @@ $(document).ready(function () {
 		loopBottom: true,
 		fitToSection: true,
 		fitToSectionDelay: 600,
-		afterResponsive: function(isResponsive) {
-			if (isResponsive) {
-				console.log("I'm in responsive mode");
-			}
-		}
 	});
 
 	var swiper = new Swiper(".mySwiper", {
