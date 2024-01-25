@@ -347,15 +347,15 @@ $light: #efefef;
     @include btn(0px, 100px);
 
     .icon-left {
-        @include icon(8px, 30px);
+        @include icon(4px, 30px);
         left: 0px;
 
         &:before {
-            @include icon-before(8px, 30px, -20px);
+            @include icon-before(4px, 30px, -20px);
         }
 
         &:after {
-            @include icon-after(8px, 30px, 20px);
+            @include icon-after(4px, 30px, 20px);
         }
 
         &:hover {
@@ -364,15 +364,15 @@ $light: #efefef;
     }
 
     .icon-right {
-        @include icon(8px, 30px);
+        @include icon(4px, 30px);
         left: 30px;
 
         &:before {
-            @include icon-before(8px, 30px, -20px);
+            @include icon-before(4px, 30px, -20px);
         }
 
         &:after {
-            @include icon-after(8px, 30px, 20px);
+            @include icon-after(4px, 30px, 20px);
         }
     }
 
