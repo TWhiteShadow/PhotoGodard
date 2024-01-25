@@ -40,8 +40,7 @@ class CategoryController extends AbstractController
                 foreach ($imageFileArray as $imageFile) {
                     $photo = new Photo();
 
-                    $file = $imageFile; // Notez l'indice [0] pour obtenir le premier fichier
-                    $photo->setImageFile($file);
+                    $photo->setImageFile($imageFile);
                     $photo->setCreatedAt(new \DateTimeImmutable);
                     $photo->setUpdatedAt(new \DateTimeImmutable);
 

@@ -26,7 +26,7 @@ class Album
 
     private ?array $passwordArray = null;
 
-    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album')]
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade:['remove'])]
     #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private ?Collection $photos;
 
