@@ -24,6 +24,5 @@ $(document).ready(function () {
 		},
 		edgeSwipeDetection: true,
 		loop: true,
-
 	});
 });

@@ -516,4 +516,9 @@ $light: #efefef;
     .hide{
         transform: translateY(100%) !important;
     }
+
+    .atropos-inner div{
+        left: 50%;
+        --tw-translate-x: -50%;
+    }
 }

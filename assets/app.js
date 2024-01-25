@@ -35,21 +35,25 @@ function closeOverlay() {
 }};
 
 
-
-
-// Initialize
-document.querySelectorAll(".atropos-works").forEach((element) => {
-  Atropos({
-    el: element,
-    activeOffset: 40,
-    duration: 800,
-    // shadow
-    shadow: true,
-    shadowScale: 1,
-    shadowOffset: 80,
-    // rest of parameters
+if(('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0) || (navigator.maxTouchPoints > 0)) {
+  //this is a touch device you can any action here 
+}else {
+  //it's not a touch device another code here
+  // Initialize
+  document.querySelectorAll(".atropos-works").forEach((element) => {
+    Atropos({
+      el: element,
+      activeOffset: 40,
+      duration: 800,
+      // shadow
+      shadow: true,
+      shadowScale: 1,
+      shadowOffset: 80,
+      // rest of parameters
+    });
   });
-});
+}
+
 
 document.querySelectorAll(".atropos-section-1").forEach((element) => {
   Atropos({
