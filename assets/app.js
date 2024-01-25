@@ -35,6 +35,9 @@ function closeOverlay() {
 }};
 
 
+if ('ontouchstart' in window) {
+  var touchSceen = true;
+}
 // Initialize
 document.querySelectorAll(".atropos-works").forEach((element) => {
   Atropos({
@@ -46,6 +49,9 @@ document.querySelectorAll(".atropos-works").forEach((element) => {
     shadowScale: 1,
     shadowOffset: 80,
     // rest of parameters
+    if(touchSceen) {
+      this.alwaysActive = true;
+    }
   });
 });
 
