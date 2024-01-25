@@ -125,23 +125,6 @@ addEventListener("hashchange", (event) => {
 
 document.getElementById('year').innerText = new Date().getFullYear();
 
-
-function myFunction(x) {
-  if (x.matches) { // If media query matches
-  } else {
-  }
-}
-
-// Create a MediaQueryList object
-var x = window.matchMedia("(max-width: 768px)")
-
-// Call listener function at run time
-myFunction(x);
-
-// Attach listener function on state changes
-x.addEventListener("change", function() {
-  myFunction(x);
-}); 
 document.addEventListener("scroll", function() {
   var scrollY = window.scrollY;
   if (scrollY > 20) {

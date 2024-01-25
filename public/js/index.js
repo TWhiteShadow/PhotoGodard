@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	var isPhoneDevice = "ontouchstart" in document.documentElement; 
 	if(isPhoneDevice){
+		document.getQuerySelector("#fullpage").id = "touchDevice";
 		//mobile
 	}
 		else{
