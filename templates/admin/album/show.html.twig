@@ -21,6 +21,14 @@
             </tr>
         </tbody>
     </table>
+    {% set albumFolder = album.getUniqId()|upper %}
+    {% for photo in photos %}
+        {% if photo.title !=  "" %}
+            <img src='{{path("app_file", {"title": photo.title} )}}'/>
+        {% endif %}
+
+    {% endfor %}
+
 
     <a href="{{ path('app_admin_album_index') }}">back to list</a>
 

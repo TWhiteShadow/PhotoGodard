@@ -67,8 +67,10 @@ class AlbumController extends AbstractController
     #[Route('/{id}', name: 'app_admin_album_show', methods: ['GET'])]
     public function show(Album $album): Response
     {
+        $photos = $album->getPhotos();
         return $this->render('admin/album/show.html.twig', [
             'album' => $album,
+            'photos' => $photos,
         ]);
     }
 

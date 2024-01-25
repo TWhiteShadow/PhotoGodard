@@ -66,8 +66,10 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'app_admin_category_show', methods: ['GET'])]
     public function show(Category $category): Response
     {
+        $photos = $category->getPhotos();
         return $this->render('admin/category/show.html.twig', [
             'category' => $category,
+            'photos'   => $photos
         ]);
     }
 
@@ -82,10 +84,11 @@ class CategoryController extends AbstractController
 
             return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        $photos = $category->getPhotos();
         return $this->render('admin/category/edit.html.twig', [
             'category' => $category,
             'form' => $form,
+            'photos' => $photos
         ]);
     }
 

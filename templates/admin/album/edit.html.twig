@@ -4,20 +4,13 @@
 
 {% block main_content %}
     <h1>Edit Album</h1>
-    {{dump(photos)}}
 
     {% for photo in photos %}
-    {% set albumFolder = album.getUniqId()|upper %}
-    {% set name = albumFolder ~ "/" ~ photo.filename %}
-
-
-    {# {% include ('@private_images/' ~ albumFolder ~ '/' ~ photo.filename) %}
-    {% include ('@private_images/' ~ albumFolder ~ '/' ~ photo.filename) %} #}
-    {% if photo.title !=  "" %}
-        <img src='{{path("app_file", {"title": photo.title} )}}'/>
-    {% endif %}
-
-
+        {% set albumFolder = album.getUniqId()|upper %}
+        {% set name = albumFolder ~ "/" ~ photo.filename %}
+        {% if photo.title !=  "" %}
+            <img src='{{path("app_file", {"title": photo.title} )}}'/>
+        {% endif %}
 
     {% endfor %}
 

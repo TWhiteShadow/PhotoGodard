@@ -4,6 +4,12 @@
 
 {% block main_content %}
     <h1>Edit Category</h1>
+    {% set categoryFolder = category.getName()|upper %}
+    {% for photo in photos %}
+        <img src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}'/>
+
+    {% endfor %}
+
 
     {{ include('admin/category/_form.html.twig', {'button_label': 'Update'}) }}
 
