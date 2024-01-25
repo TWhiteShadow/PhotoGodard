@@ -13,17 +13,10 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 class FileController extends AbstractController
 {
 
-    #[Route('/file/{name}')]
-    public function getFile(string $name, PhotoRepository $photoRepository): BinaryFileResponse
-    {
-        $photo = $photoRepository->findOneBy(['filename' => $name]);
-
-        return $this->file($photo->getFilename());
-    }
-    #[Route('/exemple/{title}', 'app_exemple')]
+    #[Route('/file/{title}', 'app_file')]
     public function example(string $title, PhotoRepository $photoRepository): Response
     {
-        
+
         // Obtenez le chemin absolu vers le répertoire des images privées
         $privateImagesDir = $this->getParameter('kernel.project_dir') . '/storage/images/private';
         $photo = $photoRepository->findOneBy(['title' => $title]);
