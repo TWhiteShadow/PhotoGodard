@@ -64,6 +64,7 @@ h4 {
 // footer 
 
 footer {
+    transition: transform 0.5s ease-in-out;
     height: 100px;
     background: linear-gradient(to bottom, rgba(243, 243, 245, 0) 0%, #f3f3f5 100%) !important;
 
@@ -481,7 +482,7 @@ $light: #efefef;
 // Swiper
 
 .swiper-pagination{
-    bottom: 10dvh !important;
+    bottom: 5svh !important;
 }
 
 .swiper-pagination-bullet{
@@ -508,5 +509,10 @@ $light: #efefef;
         position: static !important;
         justify-content: center;
         margin: 30px 0;
+    }
+
+    // footer
+    .hide{
+        transform: translateY(100%) !important;
     }
 }
