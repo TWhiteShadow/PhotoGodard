@@ -3,8 +3,10 @@ $(document).ready(function () {
 	if(isPhoneDevice){
 		document.getQuerySelector("#fullpage").id = "touchDevice";
 		//mobile
+		alert('Phone device detected');
 	}
 		else{
+			alert('No touch device detected');
 		$('#fullpage').fullpage({
 			responsiveWidth: 768,
 			licenceKey: 'YWx2YXJvdHJpZ28uY29tX01mU2MyTnliMnhzU0c5eWFYcHZiblJoYkd4NVNRcg==',
