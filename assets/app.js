@@ -34,26 +34,41 @@ function closeOverlay() {
         $(".menu").toggleClass("open");
 }};
 
-
+var touchScreen = false;
 if ('ontouchstart' in window) {
-  var touchSceen = true;
+  var touchScreen = true;
 }
-// Initialize
-document.querySelectorAll(".atropos-works").forEach((element) => {
-  Atropos({
-    el: element,
-    activeOffset: 40,
-    duration: 800,
-    // shadow
-    shadow: true,
-    shadowScale: 1,
-    shadowOffset: 80,
-    // rest of parameters
-    if(touchSceen) {
-      this.alwaysActive = true;
-    }
+
+if (touchScreen) {
+  // Initialize
+  document.querySelectorAll(".atropos-works").forEach((element) => {
+    Atropos({
+      el: element,
+      activeOffset: 40,
+      duration: 800,
+      // shadow
+      shadow: true,
+      shadowScale: 1,
+      shadowOffset: 80,
+      // rest of parameters
+      alwaysActive: true,
+    });
   });
-});
+} else {
+  // Initialize
+  document.querySelectorAll(".atropos-works").forEach((element) => {
+    Atropos({
+      el: element,
+      activeOffset: 40,
+      duration: 800,
+      // shadow
+      shadow: true,
+      shadowScale: 1,
+      shadowOffset: 80,
+      // rest of parameters
+    });
+  });
+}
 
 
 document.querySelectorAll(".atropos-section-1").forEach((element) => {
