@@ -2,7 +2,7 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     form_themes: ['tailwind_2_layout.html.twig']
     paths:
-        '%kernel.project_dir%/storage/images/private': 'private_images'
+        '%kernel.project_dir%/storage/images/private': private_images
 when@test:
     twig:
         strict_variables: true

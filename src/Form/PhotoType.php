@@ -19,6 +19,7 @@ class PhotoType extends AbstractType
             ->add('title')
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Photo',
+                // "multiple" => false,
             ])
             ->add('album', EntityType::class, [
                 'class' => Album::class,

@@ -15,6 +15,9 @@ class Album
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length:125)]
+    private ?string $uniqId = null;
+
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -24,7 +27,7 @@ class Album
     private ?array $passwordArray = null;
 
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private ?Collection $photos;
 
 
@@ -36,6 +39,17 @@ class Album
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUniqId() : ?string
+    {
+        return $this->uniqId;
+    }
+
+    public function setUniqId() : static
+    {
+        $this->uniqId = uniqid();
+        return $this;
     }
 
     public function getName(): ?string

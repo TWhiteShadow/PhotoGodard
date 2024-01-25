@@ -17,17 +17,12 @@ class AlbumType extends AbstractType
         $builder
             ->add('name')
             ->add('password')
-            // ->add('photos', EntityType::class, [
-            //     'class' => Photo::class,
-            //     'choice_label' => 'filename',
-            //     'multiple' => true,
-            //     'required' => false,
-            // ])
             ->add('newPhotos', CollectionType::class, [
                 'label' => false,
-                'entry_type' => AlbumPhotoType::class,
+                'entry_type' => MultiplePhotoType::class,
                 'allow_add' => true,
                 'mapped' => false, // This field is not mapped to the entity
+                'by_reference' => false,
                 'prototype' => true,
                 'entry_options' => array(
                     'label' => false,

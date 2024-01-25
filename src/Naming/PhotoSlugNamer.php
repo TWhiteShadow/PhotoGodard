@@ -24,7 +24,7 @@ final class PhotoSlugNamer implements NamerInterface
         $slugify->addRule("-", "_");
 
         // Get the album name from the object
-        $albumName = strtoupper($slugify->slugify(strtoupper($this->getAlbumName($object)), "_"));
+        $albumName = strtoupper($slugify->slugify(strtoupper($this->getAlbumUniqId($object)), "_"));
 
         // Initialize $category to an empty string
         $category = '';
@@ -72,6 +72,34 @@ final class PhotoSlugNamer implements NamerInterface
         
             // If $albumName is null, set $category based on the category name
             $category = strtoupper($slugify->slugify(strtoupper($this->getCategoryName($object)), "_"));
+
+            $categoryDir = $this->uploadDestinationCategory . '/' . $category;
+            $filesystem = new Filesystem();
+
+            if ($filesystem->exists($categoryDir)) {
+                $files = scandir($categoryDir);
+                $existingNums = [];
+
+                foreach ($files as $file) {
+                    if (
+                        $file !== '.' && $file !== '..'
+                    ) {
+                        // Ajout pour déboguer
+                        echo 'File in category directory: ' . $file . PHP_EOL;
+
+                        if (preg_match('/^' . $albumName . '_/', $file)) {
+                            $existingString = pathinfo($file, PATHINFO_FILENAME);
+                            $arrayString = explode("_", $existingString);
+                            $existingNums[] = end($arrayString);
+                        }
+                    }
+                }
+
+                $num = uniqid();
+            } else {
+                // Le dossier n'existe pas, donc le numéro est 00001
+                $num = uniqid();
+            }
         }
 
         
@@ -88,6 +116,14 @@ final class PhotoSlugNamer implements NamerInterface
     {
         if ($object->getAlbum() !== null) {
             return $object->getAlbum()->getName();
+        }
+        return null;
+    }
+
+    private function getAlbumUniqId(Photo $object): ?string
+    {
+        if ($object->getAlbum() !== null) {
+            return $object->getAlbum()->getUniqId();
         }
         return null;
     }

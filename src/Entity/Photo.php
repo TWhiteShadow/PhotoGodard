@@ -19,7 +19,7 @@ class Photo
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
     #[Vich\UploadableField(mapping: 'photos_categories', fileNameProperty: 'filename', size: 'filesize', )]
@@ -30,6 +30,8 @@ class Photo
 
     #[ORM\Column(length: 30)]
     private ?int $filesize = null;
+
+    private ?array $imageFileArray = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -73,6 +75,16 @@ class Photo
         return $this->imageFile;
     }
 
+    public function setImageFileArray(?array $imagefilearray = null): void
+    {
+        $this->imageFileArray = $imagefilearray;
+    }
+
+    public function getImageFileArray(): ?Array
+    {
+        return $this->imageFileArray;
+    }
+
     public function getFilename(): ?string
     {
         return $this->filename;
@@ -81,7 +93,7 @@ class Photo
     public function setFilename(string $filename): static
     {
         $this->filename = $filename;
-
+        $this->title = pathinfo($filename, PATHINFO_FILENAME);
         return $this;
     }
 
