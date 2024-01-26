@@ -14,3 +14,8 @@ dsu-d:
 
 cc:
 	docker compose exec symfony php bin/console cache:clear
+
+gp:
+	git pull && \
+	bin/console c:cl && \
+	npm run build

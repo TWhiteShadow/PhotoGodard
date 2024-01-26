@@ -41,18 +41,7 @@ if ('ontouchstart' in window) {
 
 if (touchScreen) {
   // Initialize
-  document.querySelectorAll(".atropos-works").forEach((element) => {
-    Atropos({
-      el: element,
-      activeOffset: 40,
-      duration: 800,
-      // shadow
-      shadow: true,
-      shadowScale: 1,
-      shadowOffset: 80,
-      // rest of parameters
-    });
-  });
+  
 } else {
   // Initialize
   document.querySelectorAll(".atropos-works").forEach((element) => {
