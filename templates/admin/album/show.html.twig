@@ -30,9 +30,9 @@
     {% endfor %}
 
 
-    <a href="{{ path('app_admin_album_index') }}">back to list</a>
+    <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>
 
-    <a href="{{ path('app_admin_album_edit', {'id': album.id}) }}">edit</a>
+    <a href="{{ path('app_admin_album_edit', {'id': album.id}) }}" class="edit-button">Modifier</a>
 
     {{ include('admin/album/_delete_form.html.twig') }}
 {% endblock %}

@@ -21,6 +21,7 @@ class CategoryType extends AbstractType
                 'mapped' => false, // This field is not mapped to the entity
                 'by_reference' => false,
                 'prototype' => true,
+                'required' => false,
                 'entry_options' => array(
                     'label' => false,
                     // ...

@@ -36,19 +36,20 @@ class AlbumController extends AbstractController
             $album->setUniqId();
             $entityManager->persist($album);
             foreach($uploadedFiles as $uploadedFile){
-
-                $imageFileArray = $uploadedFile->getImageFileArray();
-                foreach ($imageFileArray as $imageFile) {
-                    $photo = new Photo();
-    
-                    $file = $imageFile; // Notez l'indice [0] pour obtenir le premier fichier
-                    $photo->setImageFile($file);
-                    $photo->setCreatedAt(new \DateTimeImmutable);
-                    $photo->setUpdatedAt(new \DateTimeImmutable);
-    
-                    // Ajouter la photo à l'album
-                    $album->addPhoto($photo);
-                    $entityManager->persist($photo);
+                if(!empty($uploadedFile)){
+                    $imageFileArray = $uploadedFile->getImageFileArray();
+                    foreach ($imageFileArray as $imageFile) {
+                        $photo = new Photo();
+        
+                        $file = $imageFile; // Notez l'indice [0] pour obtenir le premier fichier
+                        $photo->setImageFile($file);
+                        $photo->setCreatedAt(new \DateTimeImmutable);
+                        $photo->setUpdatedAt(new \DateTimeImmutable);
+        
+                        // Ajouter la photo à l'album
+                        $album->addPhoto($photo);
+                        $entityManager->persist($photo);
+                    }
                 }
             }
 
@@ -81,7 +82,26 @@ class AlbumController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
+            // dd($uploadedFiles);
+            $album->setUniqId();
+            foreach($uploadedFiles as $uploadedFile){
+                if(!empty($uploadedFile)){
+                    $imageFileArray = $uploadedFile->getImageFileArray();
+                    foreach ($imageFileArray as $imageFile) {
+                        $photo = new Photo();
+        
+                        $file = $imageFile; // Notez l'indice [0] pour obtenir le premier fichier
+                        $photo->setImageFile($file);
+                        $photo->setCreatedAt(new \DateTimeImmutable);
+                        $photo->setUpdatedAt(new \DateTimeImmutable);
+        
+                        // Ajouter la photo à l'album
+                        $album->addPhoto($photo);
+                        $entityManager->persist($photo);
+                    }
+                }
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin_album_index', [], Response::HTTP_SEE_OTHER);
