@@ -26,6 +26,7 @@
     "dependencies": {
         "atropos": "^2.0.2",
         "flowbite": "^2.2.1",
-        "fullpage.js": "^4.0.20"
+        "fullpage.js": "^4.0.20",
+        "swiper": "^11.0.5"
     }
 }

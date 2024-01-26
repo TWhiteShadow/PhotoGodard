@@ -20,35 +20,55 @@ import Atropos from "atropos";
 $(".menu").click(function () {
   $(this).toggleClass("open");
   $(".overlay").toggleClass("showOverlay");
-  $('#fullpage').toggleClass("noScroll");
-  var autoScrollingStatus = $.fn.fullpage.getFullpageData().options.autoScrolling;
-  $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
+  spanMenuOverlayActiveChange();
 });
 
 $(document).keyup(function(e) {
-  if (e.key === "Escape" && $(".menu").hasClass("open")) {
-  $(".overlay").toggleClass("showOverlay");
-  $('#fullpage').toggleClass("noScroll");
-  $(".menu").toggleClass("open");
-  var autoScrollingStatus = $.fn.fullpage.getFullpageData().options.autoScrolling;
-  $.fn.fullpage.setAutoScrolling(!autoScrollingStatus);
-}});
-
-
-
-// Initialize
-document.querySelectorAll(".atropos-works").forEach((element) => {
-  Atropos({
-    el: element,
-    activeOffset: 40,
-    duration: 800,
-    // shadow
-    shadow: true,
-    shadowScale: 1,
-    shadowOffset: 80,
-    // rest of parameters
-  });
+    if ((e.key === "Escape" || e.key === "Enter" ) && $(".menu").hasClass("open")) {
+    closeOverlay();}
 });
+
+function closeOverlay() {
+    if ( $(".menu").hasClass("open")) {
+        $(".overlay").toggleClass("showOverlay");
+        $(".menu").toggleClass("open");
+}};
+
+var touchScreen = false;
+if ('ontouchstart' in window) {
+  var touchScreen = true;
+}
+
+if (touchScreen) {
+  // Initialize
+  document.querySelectorAll(".atropos-works").forEach((element) => {
+    Atropos({
+      el: element,
+      activeOffset: 40,
+      duration: 800,
+      // shadow
+      shadow: true,
+      shadowScale: 1,
+      shadowOffset: 80,
+      // rest of parameters
+    });
+  });
+} else {
+  // Initialize
+  document.querySelectorAll(".atropos-works").forEach((element) => {
+    Atropos({
+      el: element,
+      activeOffset: 40,
+      duration: 800,
+      // shadow
+      shadow: true,
+      shadowScale: 1,
+      shadowOffset: 80,
+      // rest of parameters
+    });
+  });
+}
+
 
 document.querySelectorAll(".atropos-section-1").forEach((element) => {
   Atropos({
@@ -103,4 +123,33 @@ sections.forEach((element) => {
 });
 
 
+function spanMenuOverlayActiveChange() {
+    var overlay = document.querySelector(".overlay");
+    var overlayMenuSpans = overlay.querySelectorAll("span");
+
+    overlayMenuSpans.forEach((span) => {
+        span.addEventListener("click", (event) => {closeOverlay();});
+        if (span.parentElement.getAttribute("href") === window.location.hash) {
+            span.classList.add("active");
+        } else {
+            span.classList.remove("active");
+        }
+    });
+};
+
+addEventListener("hashchange", (event) => {
+    spanMenuOverlayActiveChange();
+});
+
+
 document.getElementById('year').innerText = new Date().getFullYear();
+
+document.addEventListener("scroll", function() {
+  var scrollY = window.scrollY;
+  if (scrollY > 20) {
+    document.querySelector("footer").classList.remove("hide");
+  }else{
+    document.querySelector("footer").classList.add("hide");
+  }
+});
+
