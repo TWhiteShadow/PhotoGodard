@@ -9,7 +9,7 @@
         {% set albumFolder = album.getUniqId()|upper %}
         {% set name = albumFolder ~ "/" ~ photo.filename %}
         {% if photo.title !=  "" %}
-            <img src='{{path("app_file", {"title": photo.title} )}}'/>
+            <img src='{{path("app_file", {"title": photo.title} ) }}'/>
         {% endif %}
 
     {% endfor %}
@@ -18,7 +18,22 @@
     {{ include('admin/album/_form.html.twig', {'button_label': 'Update'}) }}
 
 
-    <a href="{{ path('app_admin_album_index') }}">back to list</a>
+    <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>
 
     {{ include('admin/album/_delete_form.html.twig') }}
+
+    <script>
+	var newPhotosPrototype = document.querySelector('#album_newPhotos').dataset.prototype;
+
+    // Remplacer __name__ par un nom unique
+    var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
+    var newPhotosPrototypeModified = newPhotosPrototype.replace(/__name__/g, uniqueId);
+
+    var tempDiv = document.createElement('div');
+    tempDiv.innerHTML = newPhotosPrototypeModified;
+
+    var newPhotoPrototypeElement = tempDiv.firstChild;
+
+    document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
+</script>
 {% endblock %}

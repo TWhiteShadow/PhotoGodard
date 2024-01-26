@@ -14,7 +14,7 @@
 	<div class="flex flex-col h-full justify-between px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
 		<div>
 			{# Logo Branding Div #}
-			<a href="#" class="flex items-center px-2 mb-5">
+			<a href="{{ path('app_admin') }}" class="flex items-center px-2 mb-5">
 				{# <img src="{{ asset('images/logo_st_vincent_propre.png') }}" class="h-6 me-3 sm:h-7" alt="MathIndex Logo"/> #}
 				<div class="grid">
 					<span class="self-center text-xl font-semibold whitespace-nowrap text-cse dark:text-white">Dashboard</span>
@@ -26,48 +26,30 @@
 			<ul class="space-y-2 font-medium relative h-full max-h-fit">
 
 				<li>
-					<a href="" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+					<a href="{{ path('app_admin') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 						<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="22" width="24" viewbox="0 0 576 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185V64c0-17.7-14.3-32-32-32H448c-17.7 0-32 14.3-32 32v36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1h32v69.7c-.1 .9-.1 1.8-.1 2.8V472c0 22.1 17.9 40 40 40h16c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2H160h24c22.1 0 40-17.9 40-40V448 384c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v64 24c0 22.1 17.9 40 40 40h24 32.5c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3 .1h16c22.1 0 40-17.9 40-40V455.8c.3-2.6 .5-5.3 .5-8.1l-.7-160.2h32z"/></svg>
 						<span class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Accueil</span>
 					</a>
 				</li>
 				<li>
 					<a href="{{ path('app_admin_photo_index') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-						<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewbox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+						<i class="fa-solid fa-image"></i>
 						<span class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Photos</span>
-					</a>
-				</li>
-				<li>
-					<a href="{{ path('app_admin_album_index') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-
-						<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewbox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
-						<span class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Albums</span>
 					</a>
 				</li>
 				<li>
 					<a href="{{ path('app_admin_category_index') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
 
-						<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewbox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+						<i class="fa-solid fa-icons"></i>
 						<span class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Categories</span>
 					</a>
 				</li>
-
-				{% if app.user is defined and app.user is not null %}
-					{% if 'ROLE_ADMIN' in app.user.roles or 'ROLE_STUDENT' in app.user.roles or 'ROLE_TEACHER' in app.user.roles %}
-						<li>
-							<a href="" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-								<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewbox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
-								<span class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Mes Exercices</span>
-							</a>
-						</li>
-						<li>
-							<a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-								<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewbox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
-								<span class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Soumettre</span>
-							</a>
-						</li>
-					{% endif %}
-				{% endif %}
+				<li>
+					<a href="{{ path('app_admin_album_index') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+						<i class="fa-solid fa-user-lock"></i>
+						<span class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Albums</span>
+					</a>
+				</li>
 			</ul>
 
 		</div>
