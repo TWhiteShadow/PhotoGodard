@@ -15,6 +15,9 @@ class Album
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length:125)]
+    private ?string $uniqId = null;
+
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -23,17 +26,30 @@ class Album
 
     private ?array $passwordArray = null;
 
-    #[ORM\ManyToMany(targetEntity: Photo::class, inversedBy: 'albums')]
-    private Collection $photo;
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade:['remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
+    private ?Collection $photos;
+
 
     public function __construct()
     {
-        $this->photo = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUniqId() : ?string
+    {
+        return $this->uniqId;
+    }
+
+    public function setUniqId() : static
+    {
+        $this->uniqId = uniqid();
+        return $this;
     }
 
     public function getName(): ?string
@@ -74,15 +90,16 @@ class Album
     /**
      * @return Collection<int, Photo>
      */
-    public function getPhoto(): Collection
+    public function getPhotos(): ?Collection
     {
-        return $this->photo;
+        return $this->photos;
     }
 
     public function addPhoto(Photo $photo): static
     {
-        if (!$this->photo->contains($photo)) {
-            $this->photo->add($photo);
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+            $photo->setAlbum($this);
         }
 
         return $this;
@@ -90,7 +107,9 @@ class Album
 
     public function removePhoto(Photo $photo): static
     {
-        $this->photo->removeElement($photo);
+        if ($this->photos->removeElement($photo)) {
+            $photo->setAlbum(null);
+        }
 
         return $this;
     }

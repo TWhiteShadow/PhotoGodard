@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.password) }}
+
+    {# Boucle sur les photos existantes #}
+    {# {% for photoForm in form.photos %}
+        {{ form_row(photoForm.title) }}
+        {{ form_row(photoForm.imageFile) }}
+    {% endfor %} #}
+
+    {# Nouvelles photos avec l'option "allow_add" #}
+    <div class="newPhotosContainer">
+        {{ form_row(form.newPhotos) }}
+    </div>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
