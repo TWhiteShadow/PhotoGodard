@@ -84,9 +84,6 @@ final class PhotoSlugNamer implements NamerInterface
                     if (
                         $file !== '.' && $file !== '..'
                     ) {
-                        // Ajout pour déboguer
-                        echo 'File in category directory: ' . $file . PHP_EOL;
-
                         if (preg_match('/^' . $albumName . '_/', $file)) {
                             $existingString = pathinfo($file, PATHINFO_FILENAME);
                             $arrayString = explode("_", $existingString);
