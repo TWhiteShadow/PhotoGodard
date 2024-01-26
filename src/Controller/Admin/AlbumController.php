@@ -83,8 +83,6 @@ class AlbumController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
-            // dd($uploadedFiles);
-            $album->setUniqId();
             foreach($uploadedFiles as $uploadedFile){
                 if(!empty($uploadedFile)){
                     $imageFileArray = $uploadedFile->getImageFileArray();
