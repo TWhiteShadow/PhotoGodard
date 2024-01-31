@@ -71,7 +71,7 @@ final class PhotoSlugNamer implements NamerInterface
         elseif($albumName === "" || $albumName === null){
         
             // If $albumName is null, set $category based on the category name
-            $category = strtoupper($slugify->slugify(strtoupper($this->getCategoryName($object)), "_"));
+            $category = strtoupper($slugify->slugify(strtoupper($this->getCategoryUniqId($object)), "_"));
 
             $categoryDir = $this->uploadDestinationCategory . '/' . $category;
             $filesystem = new Filesystem();
@@ -129,6 +129,14 @@ final class PhotoSlugNamer implements NamerInterface
     {
         if ($object->getCategory() !== null) {
             return $object->getCategory()->getName();
+        }
+        return null;
+    }
+
+    private function getCategoryUniqId(Photo $object): ?string
+    {
+        if ($object->getCategory() !== null) {
+            return $object->getCategory()->getUniqId();
         }
         return null;
     }

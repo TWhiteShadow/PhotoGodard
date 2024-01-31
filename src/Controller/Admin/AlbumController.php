@@ -7,7 +7,10 @@ use App\Entity\Photo;
 use App\Form\AlbumType;
 use App\Repository\AlbumRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -112,21 +115,28 @@ class AlbumController extends AbstractController
         ]);
     }
 
+    private function removeDir(string $dir): void
+    {
+        $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator(
+            $it,
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+        foreach ($files as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getPathname());
+            } else {
+                unlink($file->getPathname());
+            }
+        }
+        rmdir($dir);
+    }
+
     #[Route('/{id}/delete', name: 'app_admin_album_delete', methods: ['POST'])]
-    public function delete(Request $request, Album $album, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Album $album, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): Response
     {
         if ($this->isCsrfTokenValid('delete'.$album->getId(), $request->request->get('_token'))) {
-
-            // $photos = $album->getPhotos();
-            // foreach ($photos as $photo) {
-            //     if ($photo) {
-            //         if (!$photo->getCategory()) {
-            //             $entityManager->remove($photo);
-            //         } else {
-            //             $album->removePhoto($photo);
-            //         }
-            //     }
-            // }
+            $this->removeDir($parameterBag->get("kernel.project_dir") . "/storage/images/private/" . strtoupper($album->getUniqId()));
             $entityManager->remove($album);
             $entityManager->flush();
         }

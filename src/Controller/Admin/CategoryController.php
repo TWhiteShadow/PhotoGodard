@@ -7,7 +7,10 @@ use App\Entity\Photo;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,8 +35,8 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
+            $category->setUniqId();
             $entityManager->persist($category);
-            // dd($uploadedFiles);
             foreach ($uploadedFiles as $uploadedFile) {
                 if (!empty($uploadedFile)){
                     $imageFileArray = $uploadedFile->getImageFileArray();
@@ -110,10 +113,28 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    private function removeDir(string $dir): void
+    {
+        $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator(
+            $it,
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+        foreach ($files as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getPathname());
+            } else {
+                unlink($file->getPathname());
+            }
+        }
+        rmdir($dir);
+    }
+
     #[Route('/{id}/delete', name: 'app_admin_category_delete', methods: ['POST'])]
-    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+            $this->removeDir($parameterBag->get("kernel.project_dir")."/public/photos/public/" . strtoupper($category->getUniqId()) );
             $entityManager->remove($category);
             $entityManager->flush();
         }

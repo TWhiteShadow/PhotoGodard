@@ -15,6 +15,10 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
+
+    #[ORM\Column(length: 125)]
+    private ?string $uniqId = null;
+
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -29,6 +33,17 @@ class Category
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUniqId(): ?string
+    {
+        return $this->uniqId;
+    }
+
+    public function setUniqId(): static
+    {
+        $this->uniqId = uniqid();
+        return $this;
     }
 
     public function getName(): ?string

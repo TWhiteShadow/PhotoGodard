@@ -2,8 +2,7 @@
 {{ form_row(form.name) }}
 
 
-{% set categoryFolder = category.getName()|upper %}
-
+{% set categoryFolder = category.getUniqId()|upper %}
 
 {% if photos | default %}
 <div class="grid grid-cols-3 md:grid-cols-5 gap-4">
