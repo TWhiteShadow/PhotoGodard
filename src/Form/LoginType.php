@@ -19,20 +19,20 @@ class LoginType extends AbstractType
                 'label' => 'Email',
                 'attr' => [
                     'placeholder' => 'Saisissez votre adresse email',
-                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+                    'class' => 'input-field focus:outline-none focus:shadow-none',
                 ],
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'attr' => [
                     'placeholder' => 'Saisissez votre mot de passe',
-                    'class' => 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+                    'class' => 'input-field focus:outline-none focus:shadow-none',
                 ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Connexion',
                 'attr' => [
-                    'class' => 'flex text-md items-center gap-2 bg-gray-200 hover:bg-gray-300 p-4 rounded-lg',
+                    'class' => 'button1',
                 ],
             ]);
     }
@@ -42,5 +42,10 @@ class LoginType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'form'; // Add this method to specify the form name
     }
 }

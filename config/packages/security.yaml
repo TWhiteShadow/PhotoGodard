@@ -21,8 +21,8 @@ security:
                 # "app_login" is the name of the route created previously
                 login_path: app_login
                 check_path: app_login
-                username_parameter: "login[email]"
-                password_parameter: "login[password]"
+                username_parameter: "form[email]"
+                password_parameter: "form[password]"
             logout:
                 path: app_logout
 
