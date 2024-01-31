@@ -16,6 +16,65 @@ var parallaxInstance = new Parallax(scene);
 import Atropos from "atropos";
 
 
+// // code for scroll to top on devices who have a width <= 768px 
+function smoothScrollTo(target, duration) {
+  const targetElement = document.querySelector(target);
+  if (!targetElement) return;
+
+  const start = window.scrollY;
+  const startTime = performance.now();
+
+  function scrollAnimation(currentTime) {
+    const elapsedTime = currentTime - startTime;
+    const progress = Math.min(elapsedTime / duration, 1);
+
+    window.scrollTo(
+      0,
+      start + (targetElement.getBoundingClientRect().top - start) * progress
+    );
+
+    if (progress < 1) {
+      requestAnimationFrame(scrollAnimation);
+    }
+  }
+
+  requestAnimationFrame(scrollAnimation);
+}
+window.addEventListener("resize", (event) => {
+  var width = window.innerWidth;
+  console.log(width);
+  if (width <= 768) {
+    document.getElementsByClassName("homeSectionMobile")[0].id = "home";
+    document
+      .querySelector("#menuBurgerHomeHref")
+      .addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetElementId = this.getAttribute("href");
+            $("html, body").addClass("scroll-smooth")
+            smoothScrollTo(targetElementId, 1000);
+      });
+  } else {
+    document.getElementsByClassName("homeSectionMobile")[0].id = "";
+  }
+});
+document.addEventListener("DOMContentLoaded", (e) => { 
+    var width = window.innerWidth;
+    if (width <= 768) {
+      document.getElementsByClassName("homeSectionMobile")[0].id = "home";
+      document
+        .querySelector("#menuBurgerHomeHref")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetElementId = this.getAttribute("href");
+          $("html, body").addClass("scroll-smooth");
+          smoothScrollTo(targetElementId, 1000);
+        });
+    } else {
+      document.getElementsByClassName("homeSectionMobile")[0].id = "";
+    }
+});
+
+
 // Menu burger open function
 $(".menu").click(function () {
   $(this).toggleClass("open");
