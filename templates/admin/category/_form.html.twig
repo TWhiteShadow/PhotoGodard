@@ -1,10 +1,24 @@
 {{ form_start(form) }}
-    {{ form_row(form.name) }}
-
-    <div class="newPhotosContainer">
-        {{ form_row(form.newPhotos) }}
-    </div>
+{{ form_row(form.name) }}
 
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{% set categoryFolder = category.getName()|upper %}
+
+
+{% if photos | default %}
+<div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+	{% for photo in photos %}
+		<div>
+			<img class="h-full max-w-full rounded-lg object-cover" src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}'/>
+		</div>
+	{% endfor %}
+</div>
+{% endif %}
+
+<div class="newPhotosContainer">
+	{{ form_row(form.newPhotos) }}
+</div>
+
+<button class="btn create-button">{{ button_label|default('Sauvegarder') }}</button>
+
 {{ form_end(form) }}

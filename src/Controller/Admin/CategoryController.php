@@ -32,28 +32,29 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
-            // dd($uploadedFiles);
             $entityManager->persist($category);
+            // dd($uploadedFiles);
             foreach ($uploadedFiles as $uploadedFile) {
-
-                $imageFileArray = $uploadedFile->getImageFileArray();
-                foreach ($imageFileArray as $imageFile) {
-                    $photo = new Photo();
-
-                    $photo->setImageFile($imageFile);
-                    $photo->setCreatedAt(new \DateTimeImmutable);
-                    $photo->setUpdatedAt(new \DateTimeImmutable);
-
-                    // Ajouter la photo à l'album
-                    $category->addPhoto($photo);
-                    $entityManager->persist($photo);
+                if (!empty($uploadedFile)){
+                    $imageFileArray = $uploadedFile->getImageFileArray();
+                    foreach ($imageFileArray as $imageFile) {
+                        $photo = new Photo();
+    
+                        $photo->setImageFile($imageFile);
+                        $photo->setCreatedAt(new \DateTimeImmutable);
+                        $photo->setUpdatedAt(new \DateTimeImmutable);
+    
+                        // Ajouter la photo à l'album
+                        $category->addPhoto($photo);
+                        $entityManager->persist($photo);
+                    }
                 }
             }
 
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_category_show', [ 'id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/category/new.html.twig', [
@@ -79,9 +80,27 @@ class CategoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
+            foreach ($uploadedFiles as $uploadedFile) {
+                if (!empty($uploadedFile)){
+                    $imageFileArray = $uploadedFile->getImageFileArray();
+                    foreach ($imageFileArray as $imageFile) {
+                        $photo = new Photo();
+    
+                        $photo->setImageFile($imageFile);
+                        $photo->setCreatedAt(new \DateTimeImmutable);
+                        $photo->setUpdatedAt(new \DateTimeImmutable);
+    
+                        // Ajouter la photo à l'album
+                        $category->addPhoto($photo);
+                        $entityManager->persist($photo);
+                    }
+                }
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_category_show', [ 'id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
         $photos = $category->getPhotos();
         return $this->render('admin/category/edit.html.twig', [

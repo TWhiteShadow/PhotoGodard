@@ -27,17 +27,17 @@
                 <td>{{ photo.createdAt ? photo.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ photo.updatedAt ? photo.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_admin_photo_show', {'id': photo.id}) }}">show</a>
-                    <a href="{{ path('app_admin_photo_edit', {'id': photo.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_photo_show', {'id': photo.id}) }}" class="show-button">Voir</a>
+                    <a href="{{ path('app_admin_photo_edit', {'id': photo.id}) }}" class="edit-button">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucune donnée trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_photo_new') }}">Create new</a>
+    <a href="{{ path('app_admin_photo_new') }}" class="create-button">Create new</a>
 {% endblock %}

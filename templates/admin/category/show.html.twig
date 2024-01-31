@@ -1,32 +1,39 @@
 {% extends '/admin/dashboard.html.twig' %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Category
+{% endblock %}
 
 {% block main_content %}
-    <h1>Category</h1>
+	<h1>Category</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
-        </tbody>
-    </table>
-    {% set categoryFolder = category.getName()|upper %}
-    {% for photo in photos %}
-        <img src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}'/>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ category.id }}</td>
+			</tr>
+			<tr>
+				<th>Name</th>
+				<td>{{ category.name }}</td>
+			</tr>
+		</tbody>
+	</table>
+	{% set categoryFolder = category.getName()|upper %}
+	<div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+		{% for photo in photos %}
+			<div>
+				<img class="h-full max-w-full rounded-lg object-cover" src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}'/>
+			</div>
+		{% endfor %}
+	</div>
 
-    {% endfor %}
+	<div class="actionButtons flex flex-row my-6">
 
+		<a href="{{ path('app_admin_category_index') }}" class="back-button">Revenir en arrière</a>
 
-    <a href="{{ path('app_admin_category_index') }}">back to list</a>
+		<a href="{{ path('app_admin_category_edit', {'id': category.id}) }}" class="edit-button">Modifier</a>
 
-    <a href="{{ path('app_admin_category_edit', {'id': category.id}) }}">edit</a>
+		{{ include('admin/category/_delete_form.html.twig') }}
 
-    {{ include('admin/category/_delete_form.html.twig') }}
-{% endblock %}
+    </div>
+	{% endblock %}

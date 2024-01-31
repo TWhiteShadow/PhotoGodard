@@ -1,19 +1,38 @@
 {% extends '/admin/dashboard.html.twig' %}
 
-{% block title %}Edit Category{% endblock %}
+{% block title %}Edit Category
+{% endblock %}
 
 {% block main_content %}
-    <h1>Edit Category</h1>
-    {% set categoryFolder = category.getName()|upper %}
-    {% for photo in photos %}
-        <img src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}'/>
+	<h1>Edit Category</h1>
 
-    {% endfor %}
+	{% set categoryFolder = category.getName()|upper %}
 
 
-    {{ include('admin/category/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('admin/category/_form.html.twig') }}
 
-    <a href="{{ path('app_admin_category_index') }}">back to list</a>
 
-    {{ include('admin/category/_delete_form.html.twig') }}
+    {# bottom bar of action buttons #}
+	<div class="actionButtons flex flex-row my-6">
+		<a href="{{ path('app_admin_category_index') }}" class="back-button">Revenir en arrière</a>
+
+		{{ include('admin/category/_delete_form.html.twig') }}
+	</div>
+
+
+
+	<script>
+		var newPhotosPrototype = document.querySelector('#category_newPhotos').dataset.prototype;
+
+        // Remplacer __name__ par un nom unique
+        var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
+        var newPhotosPrototypeModified = newPhotosPrototype.replace(/__name__/g, uniqueId);
+
+        var tempDiv = document.createElement('div');
+        tempDiv.innerHTML = newPhotosPrototypeModified;
+
+        var newPhotoPrototypeElement = tempDiv.firstChild;
+
+        document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
+	</script>
 {% endblock %}

@@ -17,21 +17,21 @@
         <tbody>
         {% for album in albums %}
             <tr>
-                <td>{{ album.id }}</td>
-                <td>{{ album.name }}</td>
-                <td>{{ album.password }}</td>
+                <td data-title="Id">{{ album.id }}</td>
+                <td data-title="Name">{{ album.name }}</td>
+                <td data-title="Mot de passe">{{ album.password }}</td>
                 <td>
-                    <a href="{{ path('app_admin_album_show', {'id': album.id}) }}">show</a>
-                    <a href="{{ path('app_admin_album_edit', {'id': album.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_album_show', {'id': album.id}) }}" class="show-button">Voir</a>
+                    <a href="{{ path('app_admin_album_edit', {'id': album.id}) }}" class="edit-button">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucune donnée trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_album_new') }}">Create new</a>
+    <a href="{{ path('app_admin_album_new') }}"  class="create-button">Create new</a>
 {% endblock %}
