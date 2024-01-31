@@ -65,7 +65,7 @@ class VichUploaderListener
             }else{
                 $slugify = new Slugify();
                 $slugify->addRule("-", "_");
-                $categoryName = strtoupper($slugify->slugify($object->getCategory()->getName()));
+                $categoryName = strtoupper($slugify->slugify($object->getCategory()->getUniqId()));
                 $filesystem = new Filesystem();
                 if (!$filesystem->exists($uploadDir . '/' . $categoryName)) {
                     $filesystem->mkdir($uploadDir . '/' . $categoryName);

@@ -18,7 +18,8 @@
 			</tr>
 		</tbody>
 	</table>
-	{% set categoryFolder = category.getName()|upper %}
+	{% set categoryFolder = category.getUniqId()|upper %}
+
 	<div class="grid grid-cols-3 md:grid-cols-5 gap-4">
 		{% for photo in photos %}
 			<div>
