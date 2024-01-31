@@ -56,7 +56,7 @@ class AlbumController extends AbstractController
             
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_album_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_album_show', [ 'id' => $album->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/album/new.html.twig', [
@@ -102,7 +102,7 @@ class AlbumController extends AbstractController
             }
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_album_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_album_show', [ 'id' => $album->getId()], Response::HTTP_SEE_OTHER);
         }
         $photos = $album->getPhotos();
         return $this->render('admin/album/edit.html.twig', [

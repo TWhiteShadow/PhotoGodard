@@ -5,22 +5,18 @@
 {% block main_content %}
     <h1>Edit Album</h1>
 
-    {% for photo in photos %}
         {% set albumFolder = album.getUniqId()|upper %}
-        {% set name = albumFolder ~ "/" ~ photo.filename %}
-        {% if photo.title !=  "" %}
-            <img src='{{path("app_file", {"title": photo.title} ) }}'/>
-        {% endif %}
-
-    {% endfor %}
+    
 
 
     {{ include('admin/album/_form.html.twig', {'button_label': 'Update'}) }}
 
 
-    <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>
 
-    {{ include('admin/album/_delete_form.html.twig') }}
+	<div class="actionButtons flex flex-row my-6">
+        <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>
+        {{ include('admin/album/_delete_form.html.twig') }}
+    </div>
 
     <script>
 	var newPhotosPrototype = document.querySelector('#album_newPhotos').dataset.prototype;

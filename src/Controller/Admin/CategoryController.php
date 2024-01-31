@@ -54,7 +54,7 @@ class CategoryController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_category_show', [ 'id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/category/new.html.twig', [
@@ -100,7 +100,7 @@ class CategoryController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_category_show', [ 'id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
         $photos = $category->getPhotos();
         return $this->render('admin/category/edit.html.twig', [
