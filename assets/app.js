@@ -15,8 +15,6 @@ var parallaxInstance = new Parallax(scene);
 // import Atropos library
 import Atropos from "atropos";
 
-
-
 // // code for scroll to top on devices who have a width <= 768px 
 function smoothScrollTo(target, duration) {
   const targetElement = document.querySelector(target);
@@ -43,7 +41,6 @@ function smoothScrollTo(target, duration) {
 }
 window.addEventListener("resize", (event) => {
   var width = window.innerWidth;
-  console.log(width);
   if (width <= 768) {
     document.getElementsByClassName("homeSectionMobile")[0].id = "home";
     document

@@ -602,7 +602,8 @@ $light: #efefef;
     transition: .4s ease-in-out;
 }
 
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
     outline: none;
 }
 
@@ -680,4 +681,90 @@ textarea:focus, input:focus{
 .button1:hover {
     background-color: black;
     color: white;
+}
+
+
+// SPINNER
+.spinner{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: all 0.5s ease-in-out;
+    &.hide{
+        opacity: 0;
+    }
+}
+
+.spinner svg {
+    width: 3.25em;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    -webkit-animation: rotate4 2s linear infinite;
+    animation: rotate4 2s linear infinite;
+}
+
+.spinner svg circle {
+    fill: none;
+    stroke: gray;
+    stroke-width: 2;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    -webkit-animation: dash4 1.5s ease-in-out infinite;
+    animation: dash4 1.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotate4 {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate4 {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes dash4 {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dashoffset: -125px;
+    }
+}
+
+@keyframes dash4 {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dashoffset: -125px;
+    }
 }
