@@ -1,0 +1,27 @@
+<div
+	class="atropos atropos-works h-[400px] md:h-auto swiper-slide">
+	<!-- scale container (required) -->
+	<a href="{{ path("app_category_show" , {id : card_id }) }}" target="_blank">
+		<div
+			class="atropos-scale">
+			<!-- rotate container (required) -->
+			<div
+				class="atropos-rotate">
+				<!-- inner container (required) -->
+				<div
+					class="atropos-inner flex justify-center items-center">
+					<!-- put your custom content here -->
+					<img src="{{ card_img_path }}" data-atropos-offset="-5" class="grayscale object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]"/>
+					<div class="absolute atropos-text opacity-0">
+						<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center" data-atropos-offset="5">
+							{{ card_name}}
+						</h4>
+						<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center" data-atropos-offset="5">
+							{{ card_photo_count }} photos
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</a>
+</div>

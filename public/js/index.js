@@ -5,7 +5,6 @@ $(document).ready(function () {
 		menu: "#sidebar",
 		anchors: ['home', "about", "works", "albums", "contacts"],
 		scrollingSpeed: 1000,
-		dragAndMove: true,
 		loopTop: false,
 		loopBottom: true,
 		fitToSection: true,
