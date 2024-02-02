@@ -33,4 +33,4 @@ public/build/app.js
 public/build/app.css
 
 public/photos/
-storage/
+storage/images/private/*
