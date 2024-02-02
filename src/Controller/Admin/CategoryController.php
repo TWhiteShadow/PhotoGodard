@@ -134,7 +134,9 @@ class CategoryController extends AbstractController
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
-            $this->removeDir($parameterBag->get("kernel.project_dir")."/public/photos/public/" . strtoupper($category->getUniqId()) );
+            if(count($category->getPhotos()) > 0){
+                $this->removeDir($parameterBag->get("kernel.project_dir")."/public/photos/public/" . strtoupper($category->getUniqId()) );
+            }
             $entityManager->remove($category);
             $entityManager->flush();
         }

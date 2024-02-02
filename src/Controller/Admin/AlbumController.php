@@ -136,7 +136,9 @@ class AlbumController extends AbstractController
     public function delete(Request $request, Album $album, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): Response
     {
         if ($this->isCsrfTokenValid('delete'.$album->getId(), $request->request->get('_token'))) {
-            $this->removeDir($parameterBag->get("kernel.project_dir") . "/storage/images/private/" . strtoupper($album->getUniqId()));
+            if (count($album->getPhotos()) > 0) {
+                $this->removeDir($parameterBag->get("kernel.project_dir") . "/storage/images/private/" . strtoupper($album->getUniqId()));
+            }
             $entityManager->remove($album);
             $entityManager->flush();
         }
