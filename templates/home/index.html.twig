@@ -139,93 +139,34 @@ endblock %}
 		</section>
 
 		{# SECTION 3 WORKS #}
+	
 		<section class="section section-works md:h-screen h-auto min-height-screen pb-[5vh] md:pb-0 relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] pb-8">
 				Works
 			</h4>
-			<div class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
-				<div
-					class="atropos atropos-works">
-					<!-- scale container (required) -->
-					<a href="www.youtube.com" target="_blank">
-						<div
-							class="atropos-scale">
-							<!-- rotate container (required) -->
-							<div
-								class="atropos-rotate">
-								<!-- inner container (required) -->
-								<div
-									class="atropos-inner flex justify-center items-center">
-									<!-- put your custom content here -->
-									<img src=" {{ asset('assets/images/image-grid1.jpg') }}" data-atropos-offset="-5" class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]"/>
-									<div class="absolute atropos-text opacity-0">
-										<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center" data-atropos-offset="5">
-											Mariages
-										</h4>
-										<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center" data-atropos-offset="5">
-											123 photos
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div
-					class="atropos atropos-works">
-					<!-- scale container (required) -->
-					<a href="www.youtube.com" target="_blank">
-						<div
-							class="atropos-scale">
-							<!-- rotate container (required) -->
-							<div
-								class="atropos-rotate">
-								<!-- inner container (required) -->
-								<div
-									class="atropos-inner flex justify-center items-center">
-									<!-- put your custom content here -->
-									<img src=" {{ asset('assets/images/image-grid2.jpg') }}" data-atropos-offset="-5" class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]"/>
-									<div class="absolute atropos-text opacity-0">
-										<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center" data-atropos-offset="5">
-											Portraits
-										</h4>
-										<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center" data-atropos-offset="5">
-											123 photos
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div
-					class="atropos atropos-works">
-					<!-- scale container (required) -->
-					<a href="www.youtube.com" target="_blank">
-						<div
-							class="atropos-scale">
-							<!-- rotate container (required) -->
-							<div
-								class="atropos-rotate">
-								<!-- inner container (required) -->
-								<div
-									class="atropos-inner flex justify-center items-center">
-									<!-- put your custom content here -->
-									<img src=" {{ asset('assets/images/image-grid3.jpg') }}" data-atropos-offset="-5" class="object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]"/>
-									<div class="absolute atropos-text opacity-0">
-										<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center" data-atropos-offset="5">
-											Paysages
-										</h4>
-										<p class="text-sm tracking-[0.1rem] text-white font-light drop-shadow-sm w-full text-center" data-atropos-offset="5">
-											123 photos
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</a>
-				</div>
+			{# <div class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch"> #}
+			<!-- Slider main container -->
+			<div class="swiper2 relative overflow-hidden h-[80%] md:h-[55%] py-20 w-screen md:w-[80%] gap-[3vw] items-stretch">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+			{% if categories|length > 0 %}
+				{% for i in range(0, categories|length - 1) %}
+					{% include "/home/_atropos-card.html.twig" with {
+						'card_id' : categories[i].getId(),
+						'card_img_path' : asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~ random(categories[i].getPhotos()).getFilename() ),
+						'card_name' : categories[i].getName(),
+						'card_photo_count' : categories[i].getPhotos()|length } %}
+				{% endfor %}
+			{% else %}
+				<div class="swiper-slide h-[400px] md:h-auto text-center flex justify-center items-center"><p>Aucune categorie n'a encore été ajoutée</p></div>
+			{% endif %}
 			</div>
+			<!-- If we need navigation buttons -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+
+			</div>
+
 		</section>
 
 		{# SECTION 4 albums #}
@@ -420,6 +361,7 @@ endblock %}
 		</p>
 	</div>
 </footer>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 <script src="{{ asset('js/index.js') }}"></script>

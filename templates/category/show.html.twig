@@ -1,71 +1,100 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CategoryController!{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+<script src="https://npmcdn.com/isotope-fit-columns@1/fit-columns.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
+  integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
+  integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block javascriptsBody %}{% endblock %}
 
 {% block body %}
-
-
-
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
-    {% for i in range(0 ,(photos|length)- 1 , 3) %}
-        {{ i}}
-        <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="{{ asset('photos/public/photo.l')}}" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-        </div>
-    </div>
+<div class="flex flex-col justify-center w-full">
+  <div class="myGrid max-w-[90%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
+    {% set photos = photos|reverse %}
+    {% for i in range(0 ,(photos|length)- 1 , 1) %}
+    <a class="grid-item magnific-img w-[100%] sm:w-[50%] md:w-1/3 lg:w-1/4 xl:w-1/5 min-w-[80%] sm:min-w-[40%] md:min-w-[20%] p-2"
+      href="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename() )}}">
+      <img class="h-auto w-auto rounded-lg object-cover"
+        src="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename() )}}" alt="">
+    </a>
     {% endfor %}
-    <div class="grid gap-4">
-        <div>
-
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-        </div>
-    </div>
-    <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
-        </div>
-    </div>
-    <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
-        </div>
-    </div>
-    <div class="grid gap-4">
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
-        </div>
-        <div>
-            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="">
-        </div>
-    </div>
+  </div>
 </div>
 
+<script>
+  $(window).load(function () {
+    document.querySelector("html").classList.remove("md:overflow-hidden");
+    // init Isotope
+    var $grid = $('.myGrid').isotope({
+      itemSelector: '.grid-item',
+      masonry: {
+        columnWidth: 0
+      },
+      getSortData: {
+        name: '.name',
+        symbol: '.symbol',
+        number: '.number parseInt',
+        category: '[data-category]',
+        weight: function (itemElem) {
+          var weight = $(itemElem).find('.weight').text();
+          return parseFloat(weight.replace(/[\(\)]/g, ''));
+        }
+      }
+    });
+
+    $('.img-gallery-magnific').magnificPopup({
+      delegate: 'a', // child items selector, by clicking on it popup will open
+      type: 'image',
+      gallery: {
+        enabled: true,
+        preload: [0, 2]
+      },
+
+      zoom: {
+        enabled: true,
+
+        duration: 300, // duration of the effect, in milliseconds
+        easing: 'ease-in-out', // CSS transition easing function
+      },
+      retina: {
+        ratio: 1,
+        // Increase this number to enable retina image support.
+        // Image in popup will be scaled down by this number.
+        // Option can also be a function which should return a number (in case you support multiple ratios). For example:
+        // ratio: function() { return window.devicePixelRatio === 1.5 ? 1.5 : 2  }
+
+
+        replaceSrc: function (item, ratio) {
+          return item.src.replace(/\.\w+$/, function (m) {
+            return '@2x' + m;
+          });
+        } // function that changes image source
+      }
+
+    });
+    $.extend(true, $.magnificPopup.defaults, {
+      tClose: 'Fermer (Esc)', // Alt text on close button
+      tLoading: 'Chargement...', // Text that is displayed during loading. Can contain %curr% and %total% keys
+      gallery: {
+        tPrev: 'Précédent (flèche gauche)', // Alt text on left arrow
+        tNext: 'Suivant (flèche droite)', // Alt text on right arrow
+        tCounter: '%curr% sur %total%' // Markup for "1 of 7" counter
+      },
+      image: {
+        tError: '<a href="%url%">L\'image</a> n\'a pas pu être chargée.', // Error message when image n\'a pas pu être chargée.'
+      },
+      ajax: {
+        tError: '<a href="%url%">Le contenu</a> n\'a pas pu être chargé.', // Error message when ajax request failed
+      }
+    });
+  });
+</script>
 {% endblock %}
