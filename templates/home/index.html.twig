@@ -145,22 +145,28 @@ endblock %}
 				Works
 			</h4>
 			{# <div class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch"> #}
-			<div class="grid grid-cols-1 lg:grid-cols-3 justify-evenly min-h-fit h-[80%] md:h-[50%] w-[80%] gap-[3vw] items-stretch grid-rows-1">
-			
-				{% for i in range(0, 2) %}
+			<!-- Slider main container -->
+			<div class="swiper2 relative overflow-hidden h-[80%] md:h-[55%] py-20 w-screen md:w-[80%] gap-[3vw] items-stretch">
+			<!-- Additional required wrapper -->
+			<div class="swiper-wrapper">
+			{% if categories|length > 0 %}
+				{% for i in range(0, categories|length - 1) %}
 					{% include "/home/_atropos-card.html.twig" with {
 						'card_id' : categories[i].getId(),
 						'card_img_path' : asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~ random(categories[i].getPhotos()).getFilename() ),
 						'card_name' : categories[i].getName(),
 						'card_photo_count' : categories[i].getPhotos()|length } %}
 				{% endfor %}
+			{% else %}
+				<div class="swiper-slide h-[400px] md:h-auto text-center">Aucune categorie n'a encore été ajoutée</div>
+			{% endif %}
+			</div>
+			<!-- If we need navigation buttons -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+
 			</div>
 
-			<div class="text-md flex justify-center uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[80%] pb-8 mt-12 md:mt-0">
-				<a href="{{ path('app_category')}}" class="see-more-button border-2 border-slate-200 p-4 rounded-3xl text-center">
-					Voir Plus
-				</a>
-			</div>
 		</section>
 
 		{# SECTION 4 albums #}
@@ -355,6 +361,7 @@ endblock %}
 		</p>
 	</div>
 </footer>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 <script src="{{ asset('js/index.js') }}"></script>

@@ -39,8 +39,29 @@ function smoothScrollTo(target, duration) {
 
   requestAnimationFrame(scrollAnimation);
 }
+if (window.localStorage.getItem('previousHash') !== undefined) {
+  document.querySelector('#fullpage').classList.remove('scroll-smooth');
+  window.location.hash = window.localStorage.getItem('previousHash');
+  document.querySelector('#fullpage').classList.add('scroll-smooth');
+
+}
+var previousWidth = 999999999;
 window.addEventListener("resize", (event) => {
+  
   var width = window.innerWidth;
+  if (width < previousWidth && width < 768) {
+    previousWidth = width;
+  }
+  if(width > previousWidth && width >= 768 ){
+    var hash = window.location.hash
+    if (hash != '#home') {
+      var defaultUrl = window.location.toString();
+      var url = defaultUrl.split("/#")[0];
+      window.localStorage.setItem('previousHash', hash);
+      window.location = url;
+    }
+    previousWidth = 999999999;
+  }
   if (width <= 768) {
     document.getElementsByClassName("homeSectionMobile")[0].id = "home";
     document

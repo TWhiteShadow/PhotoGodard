@@ -19,4 +19,22 @@ $(document).ready(function () {
 		edgeSwipeDetection: true,
 		loop: true,
 	});
+
+	const swiper8888 = new Swiper('.swiper2', {
+		// Optional parameters
+		direction: 'horizontal',
+		loop: true,
+		slidesPerView: window.innerWidth < 768 ? 1.4 : 2,
+		centeredSlides: true,
+		spaceBetween: 30,
+		grabCursor: true,
+		keyboard: true,
+	  
+		// Navigation arrows
+		navigation: {
+		  nextEl: '.swiper-button-next',
+		  prevEl: '.swiper-button-prev',
+		},
+	  });
+	  
 });
