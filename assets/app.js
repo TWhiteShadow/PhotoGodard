@@ -39,10 +39,11 @@ function smoothScrollTo(target, duration) {
 
   requestAnimationFrame(scrollAnimation);
 }
-if (window.localStorage.getItem('previousHash') !== undefined) {
+if (window.localStorage.getItem('previousHash') !== undefined && window.localStorage.getItem('previousHash') !== null) {
   document.querySelector('#fullpage').classList.remove('scroll-smooth');
   window.location.hash = window.localStorage.getItem('previousHash');
   document.querySelector('#fullpage').classList.add('scroll-smooth');
+  window.localStorage.removeItem("previousHash");
 
 }
 var previousWidth = 999999999;
