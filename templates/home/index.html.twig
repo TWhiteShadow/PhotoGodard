@@ -155,12 +155,13 @@
 				<div class="swiper-wrapper">
 					{% if categories|length > 0 %}
 					{% for i in range(0, categories|length - 1) %}
+						{% set cardImgPath = categories[i].getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') :  asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~ random(categories[i].getPhotos()).getFilename() ) %}
 					{% include "/home/_atropos-card.html.twig" with {
-					'card_id' : categories[i].getId(),
-					'card_img_path' : asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~
-					random(categories[i].getPhotos()).getFilename() ),
-					'card_name' : categories[i].getName(),
-					'card_photo_count' : categories[i].getPhotos()|length } %}
+						'card_id' : categories[i].getId(),
+						'card_img_path' : cardImgPath,
+						'card_name' : categories[i].getName(),
+						'card_photo_count' : categories[i].getPhotos()|length
+					} %}
 					{% endfor %}
 					{% else %}
 					<div class="swiper-slide h-[400px] md:h-auto text-center flex justify-center items-center">
