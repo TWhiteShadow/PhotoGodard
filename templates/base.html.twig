@@ -1,9 +1,44 @@
 <!DOCTYPE html>
-<html class="overflow-scroll md:overflow-hidden" lang="fr">
+<html class="overflow-scroll md:overflow-hidden" lang="fr" prefix="og: https://ogp.me/ns#">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
+        <meta name="description" content="Emmanuel Godard, artiste français né en 1975 à Dieppe en Normandie. Passionné d’images et d’émotions, je sublime l’instant par ma sensibilité au monde qui m’entoure. Découvrez la simplicité et la pureté de mes photographies, plongez dans mon univers irréel et poétique. Bienvenue dans le monde d'Emmanuel Godard.">
+        <meta name="keywords" content="Emmanuel Godard, Emmanuel, Godard, photographe, photo, images, mariages, portraits, paysages, artiste français, photographie, émotions, univers poétique">
+        <meta name="author" content="rtoursel.lyceestvincent.fr et frozier.lyceestvincent.fr">
+        <meta property="og:title" content="Emmanuel Godard Photographie - Bienvenue dans mon monde.">
+        <meta property="og:description" content="Emmanuel Godard, artiste français né en 1975 à Dieppe en Normandie. Passionné d’images et d’émotions, je sublime l’instant par ma sensibilité au monde qui m’entoure. Découvrez la simplicité et la pureté de mes photographies, plongez dans mon univers irréel et poétique. Bienvenue dans le monde d'Emmanuel Godard.">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="eg-photographie.fr">
+        <meta property="og:image" content="{{ asset('assets/images/godard.ico') }}">
+        <meta property="og:site_name" content="Emmanuel Godard Photographie - Bienvenue dans mon monde.">
+        <meta property="og:locale" content="fr_FR">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <title>{% block title %}Emmanuel Godard Photographie - Bienvenue dans mon monde.{% endblock %}</title>
+
+        <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "Person",
+            "name": "Emmanuel Godard",
+            "birthDate": "1975-01-01",
+            "birthPlace": {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Dieppe",
+                    "addressRegion": "Normandie"
+                }
+            },
+            "description": "Artiste français passionné d’images et d’émotions, sublimant l’instant par sa sensibilité au monde qui l’entoure.",
+            "url": "https://eg-photographie.fr",
+            "image": "{{ asset('assets/images/godard.ico') }}",
+            "sameAs": [
+                "https://www.instagram.com/emmanuelgodardphotography/",
+                "https://www.etsy.com/fr/shop/EMMANUELGODARDPHOTO"
+                // Ajoutez d'autres liens vers vos comptes de médias sociaux si nécessaire
+            ]
+        }
+        </script>
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" >
