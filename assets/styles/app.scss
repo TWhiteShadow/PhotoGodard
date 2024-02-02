@@ -828,7 +828,7 @@ input:focus {
     .swiper-button-next,
     .swiper-button-prev{
             height: 100%;
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgb(243, 244, 246) 70%);
+            background: linear-gradient(90deg, rgba(243, 244, 246, 0) 0%, rgb(243, 244, 246) 70%);
             width: 100px;
             right: 0;
             top: 30px;
@@ -843,7 +843,7 @@ input:focus {
     }
     .swiper-button-prev{
         left: 0;
-        background: linear-gradient(90deg, rgb(243, 244, 246) 30%, rgba(0, 0, 0, 0) 100%);
+        background: linear-gradient(90deg, rgb(243, 244, 246) 30%, rgba(243, 244, 246, 0) 100%);
         &::after{
             position: absolute;
             right: auto;
