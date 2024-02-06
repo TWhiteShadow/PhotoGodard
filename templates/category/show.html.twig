@@ -32,6 +32,8 @@
 <script>
   $(window).load(function () {
     document.querySelector("html").classList.remove("md:overflow-hidden");
+    document.querySelector("html").classList.remove("overflow-scroll");
+
     // init Isotope
     var $grid = $('.myGrid').isotope({
       itemSelector: '.grid-item',
