@@ -20,10 +20,10 @@
   <div class="myGrid max-w-[90%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
     {% set photos = photos|reverse %}
     {% for i in range(0 ,(photos|length)- 1 , 1) %}
-    <a class="grid-item magnific-img w-[100%] sm:w-[50%] md:w-1/3 lg:w-1/4 xl:w-1/5 min-w-[80%] sm:min-w-[40%] md:min-w-[20%] p-2"
-      href="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename() )}}">
+    <a class="grid-item magnific-img w-[100%] sm:w-[50%] md:w-1/3 min-w-[80%] sm:min-w-[40%] md:min-w-[20%] p-2"
+      href="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename()) | imagine_filter('my_watermark_filter')}}">
       <img class="h-auto w-auto rounded-lg object-cover" width="200" height="100"
-        src="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename() )}}" alt="{{ category.getName() ~ '-photo n°' ~ (i + 1) }}">
+        src="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename()) | imagine_filter('thumbnail_web_path')}}" alt="{{ category.getName() ~ '-photo n°' ~ (i + 1) }}">
     </a>
     {% endfor %}
   </div>

@@ -16,11 +16,11 @@
 			</h4>
 		</div>
 		<div class="swiper-wrapper h-[100svh] w-screen object-cover">
-			<img src="{{ asset('assets/images/image2.jpeg') }}" class="swiper-slide h-screen w-screen object-cover"
+			<img src="{{ asset('assets/images/image2.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover"
 				alt="photo-carousel-1" width="1080" height="1920">
-			<img src="{{ asset('assets/images/image1.jpeg') }}" class="swiper-slide h-screen w-screen object-cover"
+			<img src="{{ asset('assets/images/image1.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover"
 				alt="photo-carousel-2" width="1080" height="1920">
-			<img src="{{ asset('assets/images/image3.jpeg') }}" class="swiper-slide h-screen w-screen object-cover"
+			<img src="{{ asset('assets/images/image3.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover"
 				alt="photo-carousel-3" width="1080" height="1920">
 		</div>
 		<div class="swiper-pagination"></div>
@@ -41,7 +41,7 @@
 									<!-- put your custom content here -->
 									<div class="relative">
 										<img class="max-w-[15vw] max-h-[15vh] shadow-2xl"
-											src="{{ asset('assets/images/image3.jpeg') }}" data-atropos-offset="-5"
+											src="{{ asset('assets/images/image3.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-5"
 											alt="photos présentation 3" width="150" height="150">
 									</div>
 								</div>
@@ -62,7 +62,7 @@
 									<!-- put your custom content here -->
 									<div class="relative">
 										<img class="max-w-[40vw] max-h-[40vh] shadow-2xl"
-											src="{{ asset('assets/images/image1.jpeg') }}" data-atropos-offset="-2"
+											src="{{ asset('assets/images/image1.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-2"
 											alt="photos présentation 1" width="500" height="400">
 
 									</div>
@@ -83,7 +83,7 @@
 									<!-- put your custom content here -->
 									<div class="relative">
 										<img class="max-w-[20vw] max-h-[20vh] shadow-2xl"
-											src="{{ asset('assets/images/image2.jpeg') }}" data-atropos-offset="-2.5"
+											src="{{ asset('assets/images/image2.jpeg') | imagine_filter('webp') }}" data-atropos-offset="-2.5"
 											alt="photos présentation 2" width="250" height="150">
 									</div>
 								</div>
@@ -118,7 +118,7 @@
 			{# optional #}
 			<div class="flex flex-col justify-center items-center gap-8">
 				<img class="max-w-[30vw] max-h-[30vh] grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out"
-					src="{{ asset('assets/images/godard.jpg') }}" alt="photo Emmanuel Godard" width="293.09" height="293.09">
+					src="{{ asset('assets/images/godard.jpg') | imagine_filter('webp')}}" alt="photo Emmanuel Godard" width="293.09" height="293.09">
 			</div>
 			{# #}
 			<div class="flex flex-col justify-center items-center gap-8">
@@ -158,7 +158,7 @@
 						{% set cardImgPath = categories[i].getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') :  asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~ random(categories[i].getPhotos()).getFilename() ) %}
 					{% include "/home/_atropos-card.html.twig" with {
 						'card_id' : categories[i].getId(),
-						'card_img_path' : cardImgPath,
+						'card_img_path' : cardImgPath  | imagine_filter('webp'),
 						'card_name' : categories[i].getName(),
 						'card_photo_count' : categories[i].getPhotos()|length
 					} %}
@@ -388,5 +388,4 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 <script src="{{ asset('js/index.js') }}"></script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 {% endblock %}

@@ -8,7 +8,7 @@
         <meta property="og:title" content="Emmanuel Godard Photographie - Bienvenue dans mon monde.">
         <meta property="og:description" content="Passionné d’images et d’émotions, je sublime l’instant par ma sensibilité au monde qui m’entoure. Bienvenue dans mon monde.">
         <meta property="og:url" content="eg-photographie.fr">
-        <meta property="og:image" content="{{ asset('assets/images/godard.ico') }}">
+        <meta property="og:image" content="https://eg-photographie.fr/assets/images/godard.ico">
         <meta property="og:site_name" content="Emmanuel Godard Photographie - Bienvenue dans mon monde.">
         <meta property="og:locale" content="fr_FR">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5">
@@ -39,9 +39,6 @@
         }
         </script>
 
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" >
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" >
-
 
         <link rel="icon" href="{{ asset('assets/images/godard.ico') }}">
         {{ encore_entry_link_tags('app') }}
@@ -53,9 +50,12 @@
         {% endblock %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
     </head>
-    <body>
+    <body class="bg-[#f3f4f6]">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" >
         {% block javascriptsBody %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" integrity="sha512-/AilQf/shuEGfh8c3DoIqcIqHZCKpiImSyt+fxIKJphHiNa6QMPb6AbDly6rkjmGr/5OZd35JtvVkbEKnCZO+A==" crossorigin="anonymous" referrerpolicy="no-referrer" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" media="screen and (min-width: 768px)"  integrity="sha512-/AilQf/shuEGfh8c3DoIqcIqHZCKpiImSyt+fxIKJphHiNa6QMPb6AbDly6rkjmGr/5OZd35JtvVkbEKnCZO+A==" crossorigin="anonymous" referrerpolicy="no-referrer" >
         <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js" integrity="sha512-XOpdFagEEv9XMxN/2EdvFL/PfGtFDjX+AkRznsFHDtdC05YWdkMnz5JZUfrbnEabOQaMc7YNTl2xPbOu3J858Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -74,6 +74,10 @@
     <script>
 
     $(window).load(function(){
+        document.querySelectorAll("img").forEach(element => {
+            element.removeAttribute("width");
+            element.removeAttribute("height");
+        });
         // close spinner0
         document.querySelector('.spinner').classList.toggle('hide');
         setTimeout(() => {
