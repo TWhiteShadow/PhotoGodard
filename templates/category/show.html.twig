@@ -13,25 +13,12 @@
   crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
-{% block javascriptsBody %}{% endblock %}
-
-{% block body %}
-<div class="flex flex-col justify-center w-full">
-  <div class="myGrid max-w-[90%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
-    {% set photos = photos|reverse %}
-    {% for i in range(0 ,(photos|length)- 1 , 1) %}
-    <a class="grid-item magnific-img w-[100%] sm:w-[50%] md:w-1/3 lg:w-1/4 xl:w-1/5 min-w-[80%] sm:min-w-[40%] md:min-w-[20%] p-2"
-      href="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename() )}}">
-      <img class="h-auto w-auto rounded-lg object-cover"
-        src="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename() )}}" alt="">
-    </a>
-    {% endfor %}
-  </div>
-</div>
-
+{% block javascriptsBody %}
 <script>
   $(window).load(function () {
     document.querySelector("html").classList.remove("md:overflow-hidden");
+    document.querySelector("html").classList.remove("overflow-scroll");
+
     // init Isotope
     var $grid = $('.myGrid').isotope({
       itemSelector: '.grid-item',
@@ -57,6 +44,7 @@
         enabled: true,
         preload: [0, 2]
       },
+      fixedContentPos: true,
 
       zoom: {
         enabled: true,
@@ -77,8 +65,40 @@
             return '@2x' + m;
           });
         } // function that changes image source
-      }
+      },
+      callbacks: {
+        open: function () {
+          let startX;
+          const swipeArea = document.querySelector('.mfp-content');
+          swipeArea.addEventListener('touchstart', handleTouchStart, false);
+          swipeArea.addEventListener('touchmove', handleTouchMove, false);
 
+          function handleTouchStart(event) {
+            startX = event.touches[0].clientX;
+          }
+
+          function handleTouchMove(event) {
+            if (!startX) return;
+
+            const currentX = event.touches[0].clientX;
+            const deltaX = currentX - startX;
+
+            if (Math.abs(deltaX) > 50) { // Adjust the threshold as needed
+              if (deltaX > 0) { // Swipe right
+                document.querySelector('.mfp-arrow-left').click();
+              } else { // Swipe left
+                document.querySelector('.mfp-arrow-right').click();
+              }
+
+              // Reset startX to null after detecting the swipe
+              startX = null;
+
+              // Prevent default touchmove behavior (scrolling)
+              event.preventDefault();
+            }
+          }
+        }
+      }
     });
     $.extend(true, $.magnificPopup.defaults, {
       tClose: 'Fermer (Esc)', // Alt text on close button
@@ -97,4 +117,22 @@
     });
   });
 </script>
+{% endblock %}
+
+
+{% block body %}
+<div class="flex flex-col justify-center w-full">
+  <div class="myGrid max-w-[90%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
+    {% set photos = photos|reverse %}
+    {% for i in range(0 ,(photos|length)- 1 , 1) %}
+    <a class="grid-item magnific-img w-[100%] sm:w-[50%] md:w-1/3 min-w-[80%] sm:min-w-[40%] md:min-w-[20%] p-2"
+      href="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename()) | imagine_filter('my_watermark_filter')}}">
+      <img class="h-auto w-auto rounded-lg object-cover" width="200" height="100"
+        src="{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photos[i].getFilename()) | imagine_filter('thumbnail_web_path')}}"
+        alt="{{ category.getName() ~ '-photo n°' ~ (i + 1) }}">
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}

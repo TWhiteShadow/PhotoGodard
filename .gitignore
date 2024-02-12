@@ -32,5 +32,9 @@ public/build/manifest.json
 public/build/app.js
 public/build/app.css
 
+public/media
 public/photos/
 storage/images/private/*
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

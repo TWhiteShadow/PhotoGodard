@@ -9,3 +9,6 @@ controllers:
 file_controller:
     path: /file/{name}
     controller: App\Controller\FileController::getFile
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.yaml"

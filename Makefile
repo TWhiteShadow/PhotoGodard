@@ -16,6 +16,8 @@ cc:
 	docker compose exec symfony php bin/console cache:clear
 
 gp:
+	git reset --hard origin/develop && \
 	git pull && \
 	bin/console c:cl && \
-	npm run build
+	npm run build && \
+	cd .. && chmod -R 777 PhotoGodard
