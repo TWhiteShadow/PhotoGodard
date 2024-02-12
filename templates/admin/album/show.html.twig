@@ -53,7 +53,7 @@
                         return cb.checked;
                     });
                     checkedCheckboxes.forEach(function(otherCheckbox) {
-                        if (otherCheckbox !== checkbox) {
+                     0000000000000000000000   if (otherCheckbox !== checkbox) {
                             otherCheckbox.checked = false;
                         }
                     });
@@ -67,7 +67,10 @@
                     $.ajax({
                         url: '/admin/album/' + parent_id + '/update/favorite', // Replace with your actual route
                         type: 'POST',
-                        data: dataToSend
+                        data: dataToSend,
+                        error: function( response){
+                            alert('Erreur! ' + response.responseText);
+                        }
                     });
                 });
             });

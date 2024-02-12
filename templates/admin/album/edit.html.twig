@@ -68,7 +68,10 @@
                 $.ajax({
                     url: '/admin/album/' + parent_id + '/update/favorite', // Replace with your actual route
                     type: 'POST',
-                    data: dataToSend
+                    data: dataToSend,
+                    error: function( response){
+                        alert('Erreur! ' + response.responseText);
+                    }
                 });
             });
         });

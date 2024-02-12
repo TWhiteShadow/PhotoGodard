@@ -154,6 +154,15 @@ class AlbumController extends AbstractController
         // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
         if ($photoId !== null) {
             $photo = $entityManager->getRepository(Photo::class)->find($photoId);
+            if ($photo !== null) {
+                if (($photo->getAlbum() === null) || ($photo->getAlbum()->getId() !== $album->getId())) {
+                    // Si la photo n'appartient pas à l'album, retourner une erreur
+                    return new Response('La photo spécifiée n\'appartient pas à cet album', Response::HTTP_BAD_REQUEST);
+                }
+            } else {
+                // Si la photo n'existe pas, retourner une erreur
+                return new Response('La photo spécifiée n\'existe pas', Response::HTTP_BAD_REQUEST);
+            }
         }
 
         // Définir la photo favorite de l'album

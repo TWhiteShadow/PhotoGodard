@@ -154,8 +154,17 @@ class CategoryController extends AbstractController
         // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
         if ($photoId !== null) {
             $photo = $entityManager->getRepository(Photo::class)->find($photoId);
+            if ($photo !== null) {
+                if (($photo->getCategory() === null) || ($photo->getCategory()->getId() !== $category->getId())) {
+                    // Si la photo n'appartient pas à la catégorie, retourner une erreur
+                    return new Response('La photo spécifiée n\'appartient pas à cette catégorie', Response::HTTP_BAD_REQUEST);
+                }
+            } else {
+                // Si la photo n'existe pas, retourner une erreur
+                return new Response('La photo spécifiée n\'existe pas', Response::HTTP_BAD_REQUEST);
+            }
         }
-        
+
         $category->setFavoritePhoto($photo);
         $entityManager->flush();
 
