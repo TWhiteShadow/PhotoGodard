@@ -46,19 +46,22 @@ Initialisation du projet
   docker compose up
 ```
 
-Accès au bash du conteneur symfony de docker
+Accès au bash du conteneur php de docker
 
 ```bash
-  docker compose exec symfony bash
+  docker compose exec php bash
 ```
 ```bash
   composer install
   
-  php bin/console doctrine:database:create
+  bin/console doctrine:database:create
 
-  php bin/console doctrine:schema:update --force
+  bin/console doctrine:schema:update --force
 
-  php bin/console doctrine:fixtures:load -n
+  bin/console doctrine:fixtures:load -n
+
+  bin/console liip:imagine:cache:resolve assets/images/image1.jpg 
+
 ```
 
 Accès phpmyadmin
