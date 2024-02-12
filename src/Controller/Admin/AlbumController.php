@@ -145,4 +145,23 @@ class AlbumController extends AbstractController
 
         return $this->redirectToRoute('app_admin_album_index');
     }
+    #[Route('/{id}/update/favorite', name: 'app_admin_album_update_favorite', methods: ['POST'])]
+    public function update_favorite_photo(Request $request, Album $album, EntityManagerInterface $entityManager)
+    {
+        $photoId = $request->request->get('photoId');
+        $photo = null;
+
+        // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
+        if ($photoId !== null) {
+            $photo = $entityManager->getRepository(Photo::class)->find($photoId);
+        }
+
+        // Définir la photo favorite de l'album
+        $album->setFavoritePhoto($photo);
+        $entityManager->flush();
+
+        // Retourner une réponse avec l'identifiant de la photo
+        return new Response($photoId);
+    }
+
 }

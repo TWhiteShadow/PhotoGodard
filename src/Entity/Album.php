@@ -26,6 +26,10 @@ class Album
 
     private ?array $passwordArray = null;
 
+    #[ORM\ManyToOne(targetEntity: Photo::class)]
+    #[ORM\JoinColumn(name: 'favorite_photo_id', referencedColumnName: 'id', nullable: true)]
+    private ?Photo $favoritePhoto = null;
+
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade:['remove'])]
     #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
     private ?Collection $photos;
@@ -75,6 +79,7 @@ class Album
 
         return $this;
     }
+
     public function getPasswordArray():?array
     {
         return $this->passwordArray;
@@ -83,6 +88,17 @@ class Album
     {
         $this->passwordArray = $passwordArray;
         $this->password = $passwordArray['password'];
+
+        return $this;
+    }
+
+    public function getFavoritePhoto():?Photo
+    {
+        return $this->favoritePhoto; 
+    }
+    public function setFavoritePhoto(?Photo $favoritePhoto): static
+    {
+        $this->favoritePhoto = $favoritePhoto;
 
         return $this;
     }

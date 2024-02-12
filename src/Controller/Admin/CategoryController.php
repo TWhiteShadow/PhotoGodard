@@ -143,4 +143,23 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('app_admin_category_index');
     }
+
+    #[Route('/{id}/update/favorite', name: 'app_admin_category_update_favorite', methods: ['POST'])]
+    public function update_favorite_photo(Request $request, Category $category, EntityManagerInterface $entityManager)
+    {
+        
+        $photoId = $request->request->get('photoId');
+        $photo = null;
+
+        // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
+        if ($photoId !== null) {
+            $photo = $entityManager->getRepository(Photo::class)->find($photoId);
+        }
+        
+        $category->setFavoritePhoto($photo);
+        $entityManager->flush();
+
+        // Return a response with the photoId
+        return new Response($photoId);
+    }
 }
