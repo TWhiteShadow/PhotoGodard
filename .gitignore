@@ -35,3 +35,6 @@ public/build/app.css
 public/media
 public/photos/
 storage/images/private/*
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
