@@ -130,10 +130,9 @@ function filterAlbums() {
 	console.log("noMatch before condition : " + noMatch.toString());
 	if (noMatch) {
 		console.log("no match");
-		for (i = 0; i < div.length; i++) {
-			div[i].style.display = "";
-		}
-		swiperAlbum.update();
+		document.getElementsByClassName("sliderOverlay")[0].style.opacity = 1;
+	}else{
+		document.getElementsByClassName("sliderOverlay")[0].style.opacity = 0;
 	}
 	numOfSlides.forEach(function (element) {
 		if (element.style.display != "none") {

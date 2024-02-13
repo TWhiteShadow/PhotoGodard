@@ -199,6 +199,7 @@
 			#}
 			<!-- Slider main container -->
 			<div class="h-[80vh] md:h-[80%] md:w-[80%] z-10 relative overflow-hidden w-screen ">
+				<div class="absolute sliderOverlay w-full h-[calc(100%-6rem)] z-30 mt-12 flex justify-center items-center"><h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center">Aucun album trouvé</h4></div>
 				<div
 					class="swiper3 z-10 relative overflow-hidden h-full py-20 w-full gap-[3vw] items-stretch">
 					<!-- Additional required wrapper -->
@@ -218,7 +219,7 @@
 						{% endfor %}
 						{% else %}
 						<div class="swiper-slide h-[400px] md:h-auto text-center flex justify-center items-center">
-							<p>Aucune album n'a encore été ajoutée</p>
+							<p>Aucun album n'a encore été ajouté</p>
 						</div>
 						{% endif %}
 					</div>
