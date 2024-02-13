@@ -4,7 +4,6 @@
 {% block body %}
 <div class="scroll-smooth w-full overflow-y-scroll" id="fullpage">
 	{# SECTION 1 FIRST PAGE #}
-
 	<section class="md:hidden swiper mySwiper homeSectionMobile">
 		<div
 			class="flex items-center sm:items-start flex-col absolute top-[20%] translate-x-[-50%] left-[50%] gap-3 z-20 text-center text-white drop-shadow-xl">
@@ -145,12 +144,13 @@
 			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] pb-8">
 			Works
 		</h4>
+
 		{# <div
 			class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
 			#}
 			<!-- Slider main container -->
 			<div
-				class="swiper2 relative overflow-hidden h-[80%] md:h-[55%] py-20 w-screen md:w-[80%] gap-[3vw] items-stretch">
+				class="swiper2 relative overflow-hidden h-[80%] py-20 w-screen md:w-[80%] gap-[3vw] items-stretch">
 				<!-- Additional required wrapper -->
 				<div class="swiper-wrapper">
 					{% if categories|length > 0 %}
@@ -160,7 +160,7 @@
 						'card_id' : categories[i].getId(),
 						'card_img_path' : cardImgPath  | imagine_filter('webp'),
 						'card_name' : categories[i].getName(),
-						'card_photo_count' : categories[i].getPhotos()|length
+						'card_photo_count' : categories[i].getPhotos()|length|trans ~ " photos" 
 					} %}
 					{% endfor %}
 					{% else %}
@@ -179,26 +179,55 @@
 
 	{# SECTION 4 albums #}
 	<section
-		class="section section-albums h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center pb-[5vh] md:pb-0">
+		class="section section-works md:h-screen h-auto min-height-screen pb-[5vh] md:pb-0 relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
-			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
-			albums
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] pb-8">
+			Albums
 		</h4>
-		<div class="flex flex-col justify-center items-center gap-8">
-			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-				Emmanuel Godard
-			</h3>
-			<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
-				I specialize in lifestyle and travel photography. I not only shoot in
-				and around the streets of the city, but also in apartments, shops, parks
-				– anywhere and everywhere my clients FEEL happy. Finding places that
-				make people feel happy, as well as creating memories while we shoot. And
-				that is what makes great photos! My work in photography is a natural
-				extension of my desire to tell stories. I’ve always been a nostalgic and
-				romantic person, and I love that my work allows me to express those
-				traits in such a meaningful way.
-			</p>
+		<div class="group z-20 md:absolute top-[10%] pb-8">
+		<svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
+			<g>
+			<path
+				d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+			></path>
+			</g>
+		</svg>
+		<input id="filterAlbumsInput" class="input" type="search" placeholder="Cherchez" onkeyup="filterAlbums()"/>
 		</div>
+		{# <div
+			class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
+			#}
+			<!-- Slider main container -->
+			<div class="h-[80vh] md:h-[80%] md:w-[80%] z-10 relative overflow-hidden w-screen ">
+				<div
+					class="swiper3 z-10 relative overflow-hidden h-full py-20 w-full gap-[3vw] items-stretch">
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper" id="albumSwipperWrapper">
+						{% if albums|length > 0 %}
+						{% for i in range(0, albums|length - 1) %}
+						{# <pre>
+							{{ dump(albums[i]) }}
+						</pre> #}
+							{% set cardImgPath = albums[i].getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') : path("app_file", {"title": random(albums[i].getPhotos()).getTitle()} ) %}
+						{% include "/home/_atropos-card.html.twig" with {
+							'card_id' : albums[i].getId(),
+							'card_img_path' : cardImgPath,
+							'card_name' : albums[i].getName(),
+							'card_photo_count' : "",
+						} %}
+						{% endfor %}
+						{% else %}
+						<div class="swiper-slide h-[400px] md:h-auto text-center flex justify-center items-center">
+							<p>Aucune album n'a encore été ajoutée</p>
+						</div>
+						{% endif %}
+					</div>
+					<!-- If we need navigation buttons -->
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+				</div>
+			</div>
+
 	</section>
 
 	{# SECTION 5 Contacts #}
