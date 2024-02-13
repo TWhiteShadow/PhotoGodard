@@ -137,6 +137,7 @@ class CategoryController extends AbstractController
             if(count($category->getPhotos()) > 0){
                 $this->removeDir($parameterBag->get("kernel.project_dir")."/public/photos/public/" . strtoupper($category->getUniqId()) );
             }
+            $category->setFavoritePhoto(null);
             $entityManager->remove($category);
             $entityManager->flush();
         }
@@ -159,9 +160,6 @@ class CategoryController extends AbstractController
                     // Si la photo n'appartient pas à la catégorie, retourner une erreur
                     return new Response('La photo spécifiée n\'appartient pas à cette catégorie', Response::HTTP_BAD_REQUEST);
                 }
-            } else {
-                // Si la photo n'existe pas, retourner une erreur
-                return new Response('La photo spécifiée n\'existe pas', Response::HTTP_BAD_REQUEST);
             }
         }
 

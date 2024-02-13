@@ -1,80 +1,159 @@
-{% extends '/admin/dashboard.html.twig' %}
+{% extends '/admin/dashboard.html.twig' %} {% block title %}Edit Album {%
+endblock %} {% block main_content %}
+<h1>Edit Album</h1>
 
-{% block title %}Edit Album{% endblock %}
+{% set albumFolder = album.getUniqId()|upper %}
 
-{% block main_content %}
-    <h1>Edit Album</h1>
+{{ include("admin/album/_form.html.twig", { button_label: "Update" }) }}
 
-        {% set albumFolder = album.getUniqId()|upper %}
-    
+<div class="actionButtons flex flex-row my-6">
+  <a href="{{ path('app_admin_album_index') }}" class="back-button"
+    >Revenir en arrière</a
+  >
+  {{ include("admin/album/_delete_form.html.twig") }}
+</div>
 
+<script>
+  var newPhotosPrototype =
+    document.querySelector("#album_newPhotos").dataset.prototype;
 
-    {{ include('admin/album/_form.html.twig', {'button_label': 'Update'}) }}
+  // Remplacer __name__ par un nom unique
+  var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
+  var newPhotosPrototypeModified = newPhotosPrototype.replace(
+    /__name__/g,
+    uniqueId
+  );
 
+  var tempDiv = document.createElement("div");
+  tempDiv.innerHTML = newPhotosPrototypeModified;
 
+  var newPhotoPrototypeElement = tempDiv.firstChild;
 
-	<div class="actionButtons flex flex-row my-6">
-        <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>
-        {{ include('admin/album/_delete_form.html.twig') }}
-    </div>
+  document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
 
-    <script>
-	var newPhotosPrototype = document.querySelector('#album_newPhotos').dataset.prototype;
-
-    // Remplacer __name__ par un nom unique
-    var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
-    var newPhotosPrototypeModified = newPhotosPrototype.replace(/__name__/g, uniqueId);
-
-    var tempDiv = document.createElement('div');
-    tempDiv.innerHTML = newPhotosPrototypeModified;
-
-    var newPhotoPrototypeElement = tempDiv.firstChild;
-
-    document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
-
-    document.querySelector(".btn-generate-pass").addEventListener("click", function(){
-        var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                var passwordLength = 12;
-                var password = "";
-        for (var i = 0; i <= passwordLength; i++) {
-            var randomNumber = Math.floor(Math.random() * chars.length);
-            password += chars.substring(randomNumber, randomNumber +1);
-        }
-        document.getElementById("album_password").value = password;
+  document.querySelector(".btn-generate-pass").addEventListener("click", function () {
+      var chars =
+        "0123456789abcdefghijklmnopqrstuvwxyz!@#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      var passwordLength = 12;
+      var password = "";
+      for (var i = 0; i <= passwordLength; i++) {
+        var randomNumber = Math.floor(Math.random() * chars.length);
+        password += chars.substring(randomNumber, randomNumber + 1);
+      }
+      document.getElementById("album_password").value = password;
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const checkboxes = document.querySelectorAll('.favorite-picture');
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.photoToDelete').forEach((checkbox) => {checkbox.checked = false})
 
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                parent_id = checkbox.dataset.parentId;
-                photo_id = checkbox.dataset.photoId;
+        const checkboxes = document.querySelectorAll(".favorite-picture");
 
-                checkedCheckboxes = Array.from(checkboxes).filter(function(cb) {
-                    return cb.checked;
-                });
-                checkedCheckboxes.forEach(function(otherCheckbox) {
-                    if (otherCheckbox !== checkbox) {
-                        otherCheckbox.checked = false;
-                    }
-                });
-                // Determine the value to send in the AJAX request
-                const dataToSend = {
-                    photoId: this.checked ? photo_id : null // Send photo_id if checked, otherwise send null
-                };
+        checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", function () {
+            parent_id = checkbox.dataset.parentId;
+            photo_id = checkbox.dataset.photoId;
 
-                // Send an AJAX request to update favorite picture
-                $.ajax({
-                    url: '/admin/album/' + parent_id + '/update/favorite', // Replace with your actual route
-                    type: 'POST',
-                    data: dataToSend,
-                    error: function( response){
-                        alert('Erreur! ' + response.responseText);
-                    }
-                });
+            checkedCheckboxes = Array.from(checkboxes).filter(function (cb) {
+            return cb.checked;
+            });
+            checkedCheckboxes.forEach(function (otherCheckbox) {
+            if (otherCheckbox !== checkbox) {
+                otherCheckbox.checked = false;
+            }
+            });
+            // Determine the value to send in the AJAX request
+            const dataToSend = {
+            photoId: this.checked ? photo_id : null, // Send photo_id if checked, otherwise send null
+            };
+
+            // Send an AJAX request to update favorite picture
+            $.ajax({
+            url: "/admin/album/" + parent_id + "/update/favorite", // Replace with your actual route
+            type: "POST",
+            data: dataToSend,
+            error: function (response) {
+                alert("Erreur! " + response.responseText);
+            },
             });
         });
+        });
+
+        const photoToDeleteCheckboxes = document.querySelectorAll(".photoToDelete");
+
+        // Add change event listener to each checkbox
+        photoToDeleteCheckboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                const checkedCheckboxes = Array.from(photoToDeleteCheckboxes).filter(function (cb) {
+                    return cb.checked;
+                });
+                
+                if (checkedCheckboxes.length > 0) {
+                    // Show all checkboxes containers
+                    document.querySelectorAll(".photoToDeleleContainer").forEach(function (label) {
+                        label.classList.add("showAllCheckboxes");
+                        label.parentElement.classList.add("cursor-pointer");
+                    });
+                    document.querySelector('.deleteSelection').classList.add("flex");
+                }
+            });
+        });
+
+        // Event delegation for click event on photo containers
+        document.querySelector('.photoGallery').addEventListener('click', function(event) {
+            const container = event.target.closest('.photoContainer');
+            if (!container) return; // If clicked outside photo container, return
+            
+            const photoToDeleteCheckbox = container.querySelector(".photoToDelete");
+            if (photoToDeleteCheckbox) {
+                photoToDeleteCheckbox.checked = !photoToDeleteCheckbox.checked;
+            }
+        });
+
+        document.querySelector('.deleteSelection').addEventListener('click', function() {
+            // Find all checkboxes with the name "photoToDelete[]"
+            const checkboxes = document.querySelectorAll('.photoToDelete');
+            // Check if any checkboxes exist
+            if (checkboxes.length > 0) {
+                let photoToDeleteValue = [];
+                // Iterate over the checkboxes
+                checkboxes.forEach(function(checkbox) {
+                    if (checkbox.checked) { // Check if checkbox is checked
+                        photoToDeleteValue.push(parseInt(checkbox.getAttribute('data-photo-id'))); // Get data-photo-id attribute value
+                    }
+                });
+                // Display the values (you can replace this with your desired action)
+                console.log("Values of photoToDelete[]:", photoToDeleteValue);
+                deletePhotos(photoToDeleteValue)
+            } else {
+                console.log("Associated checkboxes not found");
+            }
+        });
     });
+
+    function deletePhotos(photoIds) {
+        // Effectuer une requête AJAX POST vers la route de suppression des photos
+        fetch('/photos/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ photo_ids: photoIds })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.message); // Afficher le message de réussite de la suppression
+            // Actualiser ou recharger la page, ou effectuer d'autres actions après la suppression
+            window.location.reload(true);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    }
 </script>
 {% endblock %}
