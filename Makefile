@@ -21,3 +21,7 @@ gp:
 	bin/console c:cl && \
 	npm run build && \
 	cd .. && chmod -R 777 PhotoGodard
+
+
+dcu:
+	docker compose up --build --force-recreate
