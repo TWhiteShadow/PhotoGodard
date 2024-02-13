@@ -455,7 +455,7 @@ $background-color_2: var(--clr);
 		}
 	}
   position: absolute;
-  top: 0;
+  top: 5px;
   left: 5px;
 	display: block;
 	cursor: pointer;
@@ -472,7 +472,7 @@ $background-color_2: var(--clr);
   }
 	.checkmark {
 		&:after {
-			top: 0.25em;
+			top: 0.125em;
 			width: 0.25em;
 			height: 0.5em;
 			border: solid #E0E0E2;
@@ -492,8 +492,8 @@ $background-color_2: var(--clr);
   text-align: center;
 	top: 0;
 	left: 0;
-	height: 24px;
-	width: 24px;
+	height: 20px;
+	width: 20px;
 	background-color: $background-color_1;
 	border-radius: 50%;
 	-webkit-transition: 300ms;
