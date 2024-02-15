@@ -217,7 +217,7 @@
 			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
 				Contacts
 			</h4>
-			<div class="flex flex-col justify-center items-center gap-8 px-5">
+			<div class="flex flex-col justify-center items-center gap-8 px-5 z-10 drop-shadow-2xl">
 				<p class="text-clamp max-w-[60ch] text-center font-light leading-[1.75] whitespace-pre-line">
 					Tell me about your story, your passion, your love. And I'll be happy to
 									get back to you and talk about our common project. Let's connect here.
@@ -237,6 +237,80 @@
 						emmanuel.godard83@orange.fr
 					</h3>
 				</a>
+			</div>
+			<div class="md:flex hidden absolute h-full w-full items-center justify-center z-0 overflow-hidden">
+				<div
+					id="sceneContact" class="h-full w-full" data-pointer-events="true">
+					<!-- Image top right -->
+					<div class="relative top-[25%] left-[85%] bottom-auto right-auto w-fit z-40 drop-shadow-2xl opacity-90" data-depth="-0.36">
+						<div
+							class="atropos atropos-section-1">
+							<!-- scale container (required) -->
+							<div
+								class="atropos-scale">
+								<!-- rotate container (required) -->
+								<div
+									class="atropos-rotate">
+									<!-- inner container (required) -->
+									<div
+										class="atropos-inner">
+										<!-- put your custom content here -->
+										<div class="relative">
+											<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset('assets/images/image3.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-5" alt="photos présentation 3" width="150" height="150" loading="lazy">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Image bottom right -->
+					<div
+						class="absolute top-[65%] right-auto bottom-auto left-[75%] w-auto drop-shadow-2xl opacity-50" data-depth="0.2">
+						<!-- main Atropos container (required), add your custom class here -->
+						<div
+							class="atropos atropos-section-1">
+							<!-- scale container (required) -->
+							<div
+								class="atropos-scale">
+								<!-- rotate container (required) -->
+								<div
+									class="atropos-rotate">
+									<!-- inner container (required) -->
+									<div
+										class="atropos-inner">
+										<!-- put your custom content here -->
+										<div class="relative">
+											<img class="max-w-[30vw] max-h-[30vh] " src="{{ asset('assets/images/image1.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-2" alt="photos présentation 1" width="500" height="400" loading="lazy">
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Image bottom left -->
+					<div class=" absolute top-[70%] right-[80%] bottom-auto left-auto w-auto z-10 drop-shadow-2xl opacity-90" data-depth=" -0.2">
+						<div
+							class=" atropos atropos-section-1">
+							<!-- scale container (required) -->
+							<div
+								class="atropos-scale">
+								<!-- rotate container (required) -->
+								<div
+									class="atropos-rotate">
+									<!-- inner container (required) -->
+									<div
+										class="atropos-inner">
+										<!-- put your custom content here -->
+										<div class="relative">
+											<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset('assets/images/image2.jpeg') | imagine_filter('webp') }}" data-atropos-offset="-2.5" alt="photos présentation 2" width="250" height="150" loading="lazy">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	</div>
@@ -396,6 +470,8 @@
 		</div>
 	</footer>
 
+<canvas>
+</canvas>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 	<script type="module" src="{{ asset('js/index.js') }}"></script>
