@@ -32,6 +32,7 @@ p {
 
 h4 {
     transition: all 0.5s ease-in-out;
+    margin: 0 !important;
 }
 
 
@@ -907,6 +908,10 @@ input:focus {
             right: auto;
             left: 30%;
         }
+    }
+    .swiper-button-disabled{
+        z-index: 20 !important;
+        pointer-events: all !important;
     }
 }
 

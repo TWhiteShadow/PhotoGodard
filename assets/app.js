@@ -15,6 +15,13 @@ var parallaxInstance = new Parallax(scene);
 // import Atropos library
 import Atropos from "atropos";
 
+
+var touchScreen = false;
+if ('ontouchstart' in window) {
+  var touchScreen = true;
+}
+var homeDivDisplay = document.querySelector(".homeSectionMobile").currentStyle ? document.querySelector(".homeSectionMobile").currentStyle.display : getComputedStyle(document.querySelector(".homeSectionMobile"), null).display;
+
 // // code for scroll to top on devices who have a width <= 768px 
 function smoothScrollTo(target, duration) {
   const targetElement = document.querySelector(target);
@@ -47,6 +54,7 @@ if (window.localStorage.getItem('previousHash') !== undefined && window.localSto
 
 }
 var previousWidth = 999999999;
+
 window.addEventListener("resize", (event) => {
   
   var width = window.innerWidth;
@@ -64,15 +72,17 @@ window.addEventListener("resize", (event) => {
     previousWidth = 999999999;
   }
   if (width <= 768) {
+    if(homeDivDisplay == "block") {
     document.getElementsByClassName("homeSectionMobile")[0].id = "home";
     document
-      .querySelector("#menuBurgerHomeHref")
-      .addEventListener("click", function (e) {
-            e.preventDefault();
-            const targetElementId = this.getAttribute("href");
+    .querySelector("#menuBurgerHomeHref")
+    .addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetElementId = this.getAttribute("href");
             $("html, body").addClass("scroll-smooth")
             smoothScrollTo(targetElementId, 1000);
       });
+    };
   } else {
     document.getElementsByClassName("homeSectionMobile")[0].id = "";
   }
@@ -80,6 +90,7 @@ window.addEventListener("resize", (event) => {
 document.addEventListener("DOMContentLoaded", (e) => { 
     var width = window.innerWidth;
     if (width <= 768) {
+      if(homeDivDisplay == "block") {
       document.getElementsByClassName("homeSectionMobile")[0].id = "home";
       document
         .querySelector("#menuBurgerHomeHref")
@@ -89,6 +100,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
           $("html, body").addClass("scroll-smooth");
           smoothScrollTo(targetElementId, 1000);
         });
+      };
     } else {
       document.getElementsByClassName("homeSectionMobile")[0].id = "";
     }
@@ -115,11 +127,6 @@ function closeOverlay() {
 }};
 
 window.atroposInit = function atroposInit() {
-  var touchScreen = false;
-  if ('ontouchstart' in window) {
-    var touchScreen = true;
-  }
-
   if (touchScreen) {
     // Initialize
     var allAtroposScales = document.querySelectorAll(".atropos-scale");

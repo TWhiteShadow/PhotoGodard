@@ -79,6 +79,20 @@ const swiperAlbum = new Swiper('.swiper3', {
 			}
 			console.log(this.params.loop);
 		},
+		update: function () {
+			let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
+			console.log(numOfSlides.length);
+			if (numOfSlides.length == 1) {
+				this.params.grid.rows = 1;
+				numOfSlides[0].classList.add("heightImportant");
+			}else{
+                numOfSlides.forEach((e) => e.classList.remove("heightImportant"));
+				if (window.innerWidth >= 768) {
+					this.params.grid.rows = 2;
+				}
+			}
+			console.log(this.params.grid.rows);
+		},
 	},
 	breakpoints: {
 		768: {
@@ -116,7 +130,7 @@ function filterAlbums() {
 				return response.text();
 			} else {
 				document.querySelector(".sliderOverlay").style.opacity = 1;
-				document.querySelector(".sliderOverlay").style.zIndex = 20;
+				document.querySelector(".sliderOverlay").style.zIndex = 30;
 				return "";
 			}
 			return response.text(); // Parse response as text
@@ -126,6 +140,7 @@ function filterAlbums() {
 				wrapper.innerHTML = html; // Set the HTML content to the wrapper
 				atroposInit();
 				swiperAlbum.update(); // Update swiper after setting HTML
+				swiperAlbum.update(); // IMPORTANT: removes height and fixes row
 			}
 		})
 		.catch(error => {
@@ -138,7 +153,7 @@ let typingTimer;
 let typeInterval = 500; // 500 milliseconds
 var input = document.getElementById("filterAlbumsInput");
 
-input.addEventListener('keyup', () => {
+input.addEventListener('input', () => {
 	clearTimeout(typingTimer);
 	typingTimer = setTimeout(filterAlbums, typeInterval); // Pass the function reference, not invocation
 });
