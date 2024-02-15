@@ -26,8 +26,8 @@ class Album
 
     private ?array $passwordArray = null;
 
-    #[ORM\ManyToOne(targetEntity: Photo::class)]
-    #[ORM\JoinColumn(name: 'favorite_photo_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: Photo::class, cascade: ['remove'])]
+    #[ORM\JoinColumn(name: 'favorite_photo_id', referencedColumnName: 'id', onDelete: 'SET NULL', nullable: true)]
     private ?Photo $favoritePhoto = null;
 
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade:['remove'])]

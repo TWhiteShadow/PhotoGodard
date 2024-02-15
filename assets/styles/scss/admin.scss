@@ -386,4 +386,122 @@ h1{
 	}
 }
 
+$background-color_1: #ccc;
+$background-color_2: var(--clr);
+
+/* Hide the default checkbox */
+/* Create a custom checkbox */
+/* When the checkbox is checked, add a blue background */
+/* Create the checkmark/indicator (hidden when not checked) */
+/* Show the checkmark when checked */
+/* Style the checkmark/indicator */
+@-webkit-keyframes pulse {
+	0% {
+		-webkit-box-shadow: 0 0 0 #0B6E4F90;
+		box-shadow: 0 0 0 #0B6E4F90;
+		rotate: 20deg;
+	}
+	50% {
+		rotate: -20deg;
+	}
+	75% {
+		-webkit-box-shadow: 0 0 0 10px #0B6E4F60;
+		box-shadow: 0 0 0 10px #0B6E4F60;
+	}
+	100% {
+		-webkit-box-shadow: 0 0 0 13px #0B6E4F30;
+		box-shadow: 0 0 0 13px #0B6E4F30;
+		rotate: 0;
+	}
+}
+@keyframes pulse {
+	0% {
+		-webkit-box-shadow: 0 0 0 #0B6E4F90;
+		box-shadow: 0 0 0 #0B6E4F90;
+		rotate: 20deg;
+	}
+	50% {
+		rotate: -20deg;
+	}
+	75% {
+		-webkit-box-shadow: 0 0 0 10px #0B6E4F60;
+		box-shadow: 0 0 0 10px #0B6E4F60;
+	}
+	100% {
+		-webkit-box-shadow: 0 0 0 13px #0B6E4F30;
+		box-shadow: 0 0 0 13px #0B6E4F30;
+		rotate: 0;
+	}
+}
+.photoToDeleleContainer {
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+		&:checked {
+			~ {
+				.checkmark {
+					background-color: $background-color_2;
+					border-radius: .5rem;
+					-webkit-animation: pulse 500ms ease-in-out;
+					animation: pulse 500ms ease-in-out;
+					&:after {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+  position: absolute;
+  top: 5px;
+  left: 5px;
+	display: block;
+	cursor: pointer;
+	font-size: 1.5rem;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  opacity: 0;
+  transition: all .3s ease-in;
+  &:has(input:checked){opacity: 1;}
+  &.showAllCheckboxes{
+    opacity: 1;
+  }
+	.checkmark {
+		&:after {
+			top: 0.125em;
+			width: 0.25em;
+			height: 0.5em;
+			border: solid #E0E0E2;
+			border-width: 0 0.15em 0.15em 0;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+	}
+}
+.checkmark {
+	--clr: #0B6E4F;
+	position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+	top: 0;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	background-color: $background-color_1;
+	border-radius: 50%;
+	-webkit-transition: 300ms;
+	transition: 300ms;
+	&:after {
+		content: "";
+		position: absolute;
+		display: none;
+	}
+}
 
