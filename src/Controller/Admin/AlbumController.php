@@ -137,12 +137,42 @@ class AlbumController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$album->getId(), $request->request->get('_token'))) {
             if (count($album->getPhotos()) > 0) {
+                if ($album->getFavoritePhoto() !== null) {
+                    $album->setFavoritePhoto(null);
+                }
                 $this->removeDir($parameterBag->get("kernel.project_dir") . "/storage/images/private/" . strtoupper($album->getUniqId()));
             }
+            $album->setFavoritePhoto(null);
             $entityManager->remove($album);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_admin_album_index');
     }
+
+    #[Route('/{id}/update/favorite', name: 'app_admin_album_update_favorite', methods: ['POST'])]
+    public function update_favorite_photo(Request $request, Album $album, EntityManagerInterface $entityManager)
+    {
+        $photoId = $request->request->get('photoId');
+        $photo = null;
+
+        // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
+        if ($photoId !== null) {
+            $photo = $entityManager->getRepository(Photo::class)->find($photoId);
+            if ($photo !== null) {
+                if (($photo->getAlbum() === null) || ($photo->getAlbum()->getId() !== $album->getId())) {
+                    // Si la photo n'appartient pas à l'album, retourner une erreur
+                    return new Response('La photo spécifiée n\'appartient pas à cet album', Response::HTTP_BAD_REQUEST);
+                }
+            } 
+        }
+
+        // Définir la photo favorite de l'album
+        $album->setFavoritePhoto($photo);
+        $entityManager->flush();
+
+        // Retourner une réponse avec l'identifiant de la photo
+        return new Response($photoId);
+    }
+
 }

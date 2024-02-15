@@ -22,6 +22,10 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\ManyToOne(targetEntity: Photo::class, cascade: ['remove'])]
+    #[ORM\JoinColumn(name: 'favorite_photo_id', referencedColumnName: 'id', onDelete: 'SET NULL', nullable: true)]
+    private ?Photo $favoritePhoto = null;
+
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Photo::class, cascade:['remove'])]
     private Collection $photos;
 
@@ -54,6 +58,17 @@ class Category
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFavoritePhoto():?Photo
+    {
+        return $this->favoritePhoto; 
+    }
+    public function setFavoritePhoto(?Photo $favoritePhoto): static
+    {
+        $this->favoritePhoto = $favoritePhoto;
 
         return $this;
     }

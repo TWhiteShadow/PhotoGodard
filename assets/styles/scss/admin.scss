@@ -212,3 +212,296 @@ h1{
       padding-right:15px
     }
   }
+
+
+
+/* actions */
+@-webkit-keyframes bookmark {
+	50% {
+		-webkit-transform: scaleY(0.6);
+		transform: scaleY(0.6);
+	}
+	100% {
+		-webkit-transform: scaleY(1);
+		transform: scaleY(1);
+	}
+}
+@keyframes bookmark {
+	50% {
+		-webkit-transform: scaleY(0.6);
+		transform: scaleY(0.6);
+	}
+	100% {
+		-webkit-transform: scaleY(1);
+		transform: scaleY(1);
+	}
+}
+@-webkit-keyframes circle {
+	from {
+		width: 0;
+		height: 0;
+		opacity: 0;
+	}
+	90% {
+		width: var(--icon-circle-size);
+		height: var(--icon-circle-size);
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+@keyframes circle {
+	from {
+		width: 0;
+		height: 0;
+		opacity: 0;
+	}
+	90% {
+		width: var(--icon-circle-size);
+		height: var(--icon-circle-size);
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+@-webkit-keyframes circles {
+	from {
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	}
+	40% {
+		opacity: 1;
+	}
+	to {
+		-webkit-transform: scale(0.8);
+		transform: scale(0.8);
+		opacity: 0;
+	}
+}
+@keyframes circles {
+	from {
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	}
+	40% {
+		opacity: 1;
+	}
+	to {
+		-webkit-transform: scale(0.8);
+		transform: scale(0.8);
+		opacity: 0;
+	}
+}
+.ui-bookmark {
+	--icon-size: 24px;
+	--icon-secondary-color: rgb(77, 77, 77);
+	--icon-hover-color: rgb(97, 97, 97);
+	--icon-primary-color: gold;
+	--icon-circle-border: 1px solid var(--icon-primary-color);
+	--icon-circle-size: 35px;
+	--icon-anmt-duration: 0.3s;
+  position: absolute;
+  top: 0;
+  right: 5px;
+  opacity: 0;
+  transition: all .3s ease-in;
+  &:has(input:checked){opacity: 1;}
+	input {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		display: none;
+		&:checked {
+			+ {
+				.bookmark {
+					&::after {
+						-webkit-animation: circles var(--icon-anmt-duration) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+						animation: circles var(--icon-anmt-duration) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+						-webkit-animation-delay: var(--icon-anmt-duration);
+						animation-delay: var(--icon-anmt-duration);
+					}
+					fill: var(--icon-primary-color);
+					-webkit-animation: bookmark var(--icon-anmt-duration) forwards;
+					animation: bookmark var(--icon-anmt-duration) forwards;
+					-webkit-transition-delay: 0.3s;
+					transition-delay: 0.3s;
+					&::before {
+						-webkit-animation: circle var(--icon-anmt-duration) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+						animation: circle var(--icon-anmt-duration) cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+						-webkit-animation-delay: var(--icon-anmt-duration);
+						animation-delay: var(--icon-anmt-duration);
+					}
+				}
+			}
+		}
+	}
+	.bookmark {
+		width: var(--icon-size);
+		height: auto;
+		fill: var(--icon-secondary-color);
+		cursor: pointer;
+		-webkit-transition: 0.2s;
+		transition: 0.2s;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		position: relative;
+		-webkit-transform-origin: top;
+		-ms-transform-origin: top;
+		transform-origin: top;
+	}
+	&:hover {
+		.bookmark {
+			fill: var(--icon-hover-color);
+		}
+	}
+}
+.bookmark {
+	&::after {
+		content: "";
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		-webkit-box-shadow: 0 30px 0 -4px var(--icon-primary-color), 30px 0 0 -4px var(--icon-primary-color), 0 -30px 0 -4px var(--icon-primary-color), -30px 0 0 -4px var(--icon-primary-color), -22px 22px 0 -4px var(--icon-primary-color), -22px -22px 0 -4px var(--icon-primary-color), 22px -22px 0 -4px var(--icon-primary-color), 22px 22px 0 -4px var(--icon-primary-color);
+		box-shadow: 0 30px 0 -4px var(--icon-primary-color), 30px 0 0 -4px var(--icon-primary-color), 0 -30px 0 -4px var(--icon-primary-color), -30px 0 0 -4px var(--icon-primary-color), -22px 22px 0 -4px var(--icon-primary-color), -22px -22px 0 -4px var(--icon-primary-color), 22px -22px 0 -4px var(--icon-primary-color), 22px 22px 0 -4px var(--icon-primary-color);
+		border-radius: 50%;
+		-webkit-transform: scale(0);
+		-ms-transform: scale(0);
+		transform: scale(0);
+	}
+	&::before {
+		content: "";
+		position: absolute;
+		border-radius: 50%;
+		border: var(--icon-circle-border);
+		opacity: 0;
+	}
+}
+
+$background-color_1: #ccc;
+$background-color_2: var(--clr);
+
+/* Hide the default checkbox */
+/* Create a custom checkbox */
+/* When the checkbox is checked, add a blue background */
+/* Create the checkmark/indicator (hidden when not checked) */
+/* Show the checkmark when checked */
+/* Style the checkmark/indicator */
+@-webkit-keyframes pulse {
+	0% {
+		-webkit-box-shadow: 0 0 0 #0B6E4F90;
+		box-shadow: 0 0 0 #0B6E4F90;
+		rotate: 20deg;
+	}
+	50% {
+		rotate: -20deg;
+	}
+	75% {
+		-webkit-box-shadow: 0 0 0 10px #0B6E4F60;
+		box-shadow: 0 0 0 10px #0B6E4F60;
+	}
+	100% {
+		-webkit-box-shadow: 0 0 0 13px #0B6E4F30;
+		box-shadow: 0 0 0 13px #0B6E4F30;
+		rotate: 0;
+	}
+}
+@keyframes pulse {
+	0% {
+		-webkit-box-shadow: 0 0 0 #0B6E4F90;
+		box-shadow: 0 0 0 #0B6E4F90;
+		rotate: 20deg;
+	}
+	50% {
+		rotate: -20deg;
+	}
+	75% {
+		-webkit-box-shadow: 0 0 0 10px #0B6E4F60;
+		box-shadow: 0 0 0 10px #0B6E4F60;
+	}
+	100% {
+		-webkit-box-shadow: 0 0 0 13px #0B6E4F30;
+		box-shadow: 0 0 0 13px #0B6E4F30;
+		rotate: 0;
+	}
+}
+.photoToDeleleContainer {
+	input {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+		&:checked {
+			~ {
+				.checkmark {
+					background-color: $background-color_2;
+					border-radius: .5rem;
+					-webkit-animation: pulse 500ms ease-in-out;
+					animation: pulse 500ms ease-in-out;
+					&:after {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+  position: absolute;
+  top: 5px;
+  left: 5px;
+	display: block;
+	cursor: pointer;
+	font-size: 1.5rem;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  opacity: 0;
+  transition: all .3s ease-in;
+  &:has(input:checked){opacity: 1;}
+  &.showAllCheckboxes{
+    opacity: 1;
+  }
+	.checkmark {
+		&:after {
+			top: 0.125em;
+			width: 0.25em;
+			height: 0.5em;
+			border: solid #E0E0E2;
+			border-width: 0 0.15em 0.15em 0;
+			-webkit-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+	}
+}
+.checkmark {
+	--clr: #0B6E4F;
+	position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+	top: 0;
+	left: 0;
+	height: 20px;
+	width: 20px;
+	background-color: $background-color_1;
+	border-radius: 50%;
+	-webkit-transition: 300ms;
+	transition: 300ms;
+	&:after {
+		content: "";
+		position: absolute;
+		display: none;
+	}
+}
+

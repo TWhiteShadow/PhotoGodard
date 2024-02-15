@@ -137,10 +137,36 @@ class CategoryController extends AbstractController
             if(count($category->getPhotos()) > 0){
                 $this->removeDir($parameterBag->get("kernel.project_dir")."/public/photos/public/" . strtoupper($category->getUniqId()) );
             }
+            $category->setFavoritePhoto(null);
             $entityManager->remove($category);
             $entityManager->flush();
         }
 
         return $this->redirectToRoute('app_admin_category_index');
+    }
+
+    #[Route('/{id}/update/favorite', name: 'app_admin_category_update_favorite', methods: ['POST'])]
+    public function update_favorite_photo(Request $request, Category $category, EntityManagerInterface $entityManager)
+    {
+        
+        $photoId = $request->request->get('photoId');
+        $photo = null;
+
+        // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
+        if ($photoId !== null) {
+            $photo = $entityManager->getRepository(Photo::class)->find($photoId);
+            if ($photo !== null) {
+                if (($photo->getCategory() === null) || ($photo->getCategory()->getId() !== $category->getId())) {
+                    // Si la photo n'appartient pas à la catégorie, retourner une erreur
+                    return new Response('La photo spécifiée n\'appartient pas à cette catégorie', Response::HTTP_BAD_REQUEST);
+                }
+            }
+        }
+
+        $category->setFavoritePhoto($photo);
+        $entityManager->flush();
+
+        // Return a response with the photoId
+        return new Response($photoId);
     }
 }

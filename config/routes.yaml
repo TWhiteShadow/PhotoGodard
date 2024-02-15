@@ -12,3 +12,8 @@ file_controller:
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+
+app_admin_delete_photos:
+    path: /photos/delete
+    controller: App\Controller\Admin\PhotoController::deletePhotos
+    methods: [POST]
