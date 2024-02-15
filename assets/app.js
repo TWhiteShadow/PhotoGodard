@@ -114,30 +114,35 @@ function closeOverlay() {
         $(".menu").toggleClass("open");
 }};
 
-var touchScreen = false;
-if ('ontouchstart' in window) {
-  var touchScreen = true;
-}
+window.atroposInit = function atroposInit() {
+  var touchScreen = false;
+  if ('ontouchstart' in window) {
+    var touchScreen = true;
+  }
 
-if (touchScreen) {
-  // Initialize
-  
-} else {
-  // Initialize
-  document.querySelectorAll(".atropos-works").forEach((element) => {
-    Atropos({
-      el: element,
-      activeOffset: 40,
-      duration: 800,
-      // shadow
-      shadow: true,
-      shadowScale: 1,
-      shadowOffset: 80,
-      // rest of parameters
+  if (touchScreen) {
+    // Initialize
+    var allAtroposScales = document.querySelectorAll(".atropos-scale");
+    allAtroposScales.forEach((element) => {
+      element.classList.add("activeHover");
     });
-  });
+  } else {
+    // Initialize
+    document.querySelectorAll(".atropos-works").forEach((element) => {
+      Atropos({
+        el: element,
+        activeOffset: 40,
+        duration: 800,
+        // shadow
+        shadow: true,
+        shadowScale: 1,
+        shadowOffset: 80,
+        // rest of parameters
+      });
+    });
+  }
 }
-
+atroposInit();
 
 document.querySelectorAll(".atropos-section-1").forEach((element) => {
   Atropos({

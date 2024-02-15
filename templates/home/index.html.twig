@@ -16,11 +16,11 @@
 		</div>
 		<div class="swiper-wrapper h-[100svh] w-screen object-cover">
 			<img src="{{ asset('assets/images/image2.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover"
-				alt="photo-carousel-1" width="1080" height="1920">
+				alt="photo-carousel-1" width="1080" height="1920" loading="lazy" >
 			<img src="{{ asset('assets/images/image1.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover"
-				alt="photo-carousel-2" width="1080" height="1920">
+				alt="photo-carousel-2" width="1080" height="1920" loading="lazy" >
 			<img src="{{ asset('assets/images/image3.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover"
-				alt="photo-carousel-3" width="1080" height="1920">
+				alt="photo-carousel-3" width="1080" height="1920" loading="lazy" >
 		</div>
 		<div class="swiper-pagination"></div>
 	</section>
@@ -29,7 +29,7 @@
 		<div class="flex h-full items-center justify-center w-[60%] z-0">
 			<div id="scene" class="h-full w-full" data-pointer-events="true">
 				<!-- Image top left -->
-				<div class="relative top-[10%] left-[15%] bottom-auto right-auto w-fit z-40" data-depth="-0.36">
+				<div class="relative top-[10%] left-[15%] bottom-auto right-auto w-fit z-40 drop-shadow-2xl" data-depth="-0.36">
 					<div class="atropos atropos-section-1">
 						<!-- scale container (required) -->
 						<div class="atropos-scale">
@@ -39,9 +39,9 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[15vw] max-h-[15vh] shadow-2xl"
+										<img class="max-w-[15vw] max-h-[15vh]"
 											src="{{ asset('assets/images/image3.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-5"
-											alt="photos présentation 3" width="150" height="150">
+											alt="photos présentation 3" width="150" height="150"  loading="lazy" >
 									</div>
 								</div>
 							</div>
@@ -49,7 +49,7 @@
 					</div>
 				</div>
 				<!-- Image center -->
-				<div class="absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.2">
+				<div class="absolute top-1/4 left-1/4 bottom-auto right-auto w-auto drop-shadow-2xl" data-depth="0.2">
 					<!-- main Atropos container (required), add your custom class here -->
 					<div class="atropos atropos-section-1">
 						<!-- scale container (required) -->
@@ -60,9 +60,9 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[40vw] max-h-[40vh] shadow-2xl"
+										<img class="max-w-[40vw] max-h-[40vh] "
 											src="{{ asset('assets/images/image1.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-2"
-											alt="photos présentation 1" width="500" height="400">
+											alt="photos présentation 1" width="500" height="400" loading="lazy" >
 
 									</div>
 								</div>
@@ -71,7 +71,7 @@
 					</div>
 				</div>
 				<!-- Image bottom left -->
-				<div class=" absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth=" -0.2">
+				<div class=" absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10 drop-shadow-2xl" data-depth=" -0.2">
 					<div class=" atropos atropos-section-1">
 						<!-- scale container (required) -->
 						<div class="atropos-scale">
@@ -81,9 +81,9 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[20vw] max-h-[20vh] shadow-2xl"
+										<img class="max-w-[20vw] max-h-[20vh]"
 											src="{{ asset('assets/images/image2.jpeg') | imagine_filter('webp') }}" data-atropos-offset="-2.5"
-											alt="photos présentation 2" width="250" height="150">
+											alt="photos présentation 2" width="250" height="150" loading="lazy" >
 									</div>
 								</div>
 							</div>
@@ -157,6 +157,7 @@
 					{% for i in range(0, categories|length - 1) %}
 						{% set cardImgPath = categories[i].getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') :  asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~ random(categories[i].getPhotos()).getFilename() ) %}
 					{% include "/home/_atropos-card.html.twig" with {
+							'card_controller' : "category",
 						'card_id' : categories[i].getId(),
 						'card_img_path' : cardImgPath  | imagine_filter('webp'),
 						'card_name' : categories[i].getName(),
@@ -184,7 +185,7 @@
 			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] pb-8">
 			Albums
 		</h4>
-		<div class="group z-20 md:absolute top-[10%] pb-8">
+		<div class="group z-20 md:absolute top-[10%] md:pb-8">
 		<svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
 			<g>
 			<path
@@ -192,36 +193,19 @@
 			></path>
 			</g>
 		</svg>
-		<input id="filterAlbumsInput" class="input" type="search" placeholder="Cherchez" onkeyup="filterAlbums()"/>
+		<input id="filterAlbumsInput" class="input" type="search" placeholder="Cherchez"/>
 		</div>
 		{# <div
 			class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
 			#}
 			<!-- Slider main container -->
 			<div class="h-[80vh] md:h-[80%] md:w-[80%] z-10 relative overflow-hidden w-screen ">
-				<div class="absolute sliderOverlay w-full h-[calc(100%-6rem)] z-30 mt-12 flex justify-center items-center"><h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center">Aucun album trouvé</h4></div>
+				<div class="absolute sliderOverlay w-full h-[calc(100%-6rem)] mt-12 flex justify-center items-center"><h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center">Aucun album trouvé</h4></div>
 				<div
-					class="swiper3 z-10 relative overflow-hidden h-full py-20 w-full gap-[3vw] items-stretch">
+					class="swiper3 z-10 relative overflow-hidden h-[71%] md:h-full py-20 w-full gap-[3vw] items-stretch">
 					<!-- Additional required wrapper -->
-					<div class="swiper-wrapper" id="albumSwipperWrapper">
-						{% if albums|length > 0 %}
-						{% for i in range(0, albums|length - 1) %}
-						{# <pre>
-							{{ dump(albums[i]) }}
-						</pre> #}
-							{% set cardImgPath = albums[i].getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') : path("app_file", {"title": random(albums[i].getPhotos()).getTitle()} ) %}
-						{% include "/home/_atropos-card.html.twig" with {
-							'card_id' : albums[i].getId(),
-							'card_img_path' : cardImgPath,
-							'card_name' : albums[i].getName(),
-							'card_photo_count' : "",
-						} %}
-						{% endfor %}
-						{% else %}
-						<div class="swiper-slide h-[400px] md:h-auto text-center flex justify-center items-center">
-							<p>Aucun album n'a encore été ajouté</p>
-						</div>
-						{% endif %}
+					<div class="swiper-wrapper h-full w-full" id="albumSwipperWrapper">
+					    {% include "home/_atropos-cards.html.twig" %}
 					</div>
 					<!-- If we need navigation buttons -->
 					<div class="swiper-button-prev"></div>
@@ -417,5 +401,5 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
-<script src="{{ asset('js/index.js') }}"></script>
+<script type="module" src="{{ asset('js/index.js') }}"></script>
 {% endblock %}

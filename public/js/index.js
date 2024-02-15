@@ -1,4 +1,3 @@
-
 $('#fullpage').fullpage({
 	responsiveWidth: 768,
 	licenceKey: 'YWx2YXJvdHJpZ28uY29tX01mU2MyTnliMnhzU0c5eWFYcHZiblJoYkd4NVNRcg==',
@@ -12,6 +11,7 @@ $('#fullpage').fullpage({
 });
 
 var swiper = new Swiper(".mySwiper", {
+	speed: 700,
 	pagination: {
 		el: ".swiper-pagination",
 		clickable: true,
@@ -30,6 +30,7 @@ const swiper8888 = new Swiper('.swiper2', {
 	grabCursor: true,
 	keyboard: true,
 	observer: true,
+	speed: 700,
 
 	// Navigation arrows
 	navigation: {
@@ -48,6 +49,7 @@ const swiper8888 = new Swiper('.swiper2', {
 		},
 	}
 });
+
 const swiperAlbum = new Swiper('.swiper3', {
 	// Optional parameters
 	direction: 'horizontal',
@@ -58,23 +60,29 @@ const swiperAlbum = new Swiper('.swiper3', {
 	grabCursor: true,
 	keyboard: true,
 	observer: true,
-	speed: 1000,
+	speed: 700,
 	slidesPerGroup: 1,
 	grid: {
-		rows: 2,
+		rows: 1,
 	},
+	loopAddBlankSlides: true,
+	loopAdditionalSlides: 1,
 	on: {
 		beforeInit: function () {
-			let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide").length;
-			if (numOfSlides > 8) {
+			let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
+			if (numOfSlides.length > 8) {
 				this.params.loop = true;
+			}
+			if (numOfSlides.length == 1) {
+				this.params.grid.rows = 1;
+				numOfSlides[0].classList.add("heightImportant");
 			}
 			console.log(this.params.loop);
 		},
 	},
 	breakpoints: {
 		768: {
-			centeredSlides: false,
+			// centeredSlides: false,
 			slidesPerView: 2.5,
 			grid: {
 				rows: 2,
@@ -94,66 +102,43 @@ window.addEventListener('resize', function () {
 		swiperAlbum.update();
 	}
 });
-
-
 function filterAlbums() {
-	let numOfSlides = document.querySelector(".swiper3").querySelectorAll(".swiper-slide");
-	let numOfSlidesVisible = [];
 	var input = document.getElementById("filterAlbumsInput");
-	var wrapper, div, i, txtValue;
+	var wrapper;
 	var filter = input.value.toUpperCase();
-	let noMatch = true;
 	wrapper = document.getElementById("albumSwipperWrapper");
-	div = wrapper.getElementsByClassName("swiper-slide");
-	
-	console.log("Initial no match : " + noMatch.toString());
-	for (i = 0; i < div.length; i++) {
-		h4 = div[i].getElementsByTagName("h4")[0];
-		if (h4) {
-			txtValue = h4.textContent || h4.innerText;
-			if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				console.log("found match");
-				noMatch = false;
-				div[i].style.display = ""; // Show the div if it matches the filter
-			} else {
-				div[i].style.display = "none"; // Hide the div if it doesn't match the filter
-			}
-		} else {
-			if (!input.value) {
-				div[i].style.display = "";
-			} else {
-				div[i].style.display = "none";
-			}
-		}
-	}
 
-	console.log("noMatch before condition : " + noMatch.toString());
-	if (noMatch) {
-		console.log("no match");
-		document.getElementsByClassName("sliderOverlay")[0].style.opacity = 1;
-	}else{
-		document.getElementsByClassName("sliderOverlay")[0].style.opacity = 0;
-	}
-	numOfSlides.forEach(function (element) {
-		if (element.style.display != "none") {
-			numOfSlidesVisible.push(element);
-		}
-	});
-
-	if ((numOfSlidesVisible.length == 1 && numOfSlidesVisible[0].style.height != "100%")) {
-		swiperAlbum.params.grid.rows = 1;
-		swiperAlbum.params.centeredSlides = true;
-		numOfSlidesVisible[0].classList.add("heightImportant");
-		console.log("ONLY 1")
-	} else {
-		numOfSlidesVisible.forEach(function (element) {
-			element.classList.remove("heightImportant");
+	fetch("/findAlbumByName?value=" + filter.trim(), {})
+		.then(response => {
+			if (response.ok) {
+				document.querySelector(".sliderOverlay").style.opacity = 0;
+				document.querySelector(".sliderOverlay").style.zIndex = 0;
+				return response.text();
+			} else {
+				document.querySelector(".sliderOverlay").style.opacity = 1;
+				document.querySelector(".sliderOverlay").style.zIndex = 20;
+				return "";
+			}
+			return response.text(); // Parse response as text
+		})
+		.then(html => {
+			if (html != "") {
+				wrapper.innerHTML = html; // Set the HTML content to the wrapper
+				atroposInit();
+				swiperAlbum.update(); // Update swiper after setting HTML
+			}
+		})
+		.catch(error => {
+			console.error('Error fetching albums:', error);
 		});
-		swiperAlbum.params.loop = true;
-		if(window.innerWidth > 768) {
-			swiperAlbum.params.centeredSlides = false;
-			swiperAlbum.params.grid.rows = 2;
-		}
-	}
-	swiperAlbum.update();
 }
+
+// A little delay
+let typingTimer;
+let typeInterval = 500; // 500 milliseconds
+var input = document.getElementById("filterAlbumsInput");
+
+input.addEventListener('keyup', () => {
+	clearTimeout(typingTimer);
+	typingTimer = setTimeout(filterAlbums, typeInterval); // Pass the function reference, not invocation
+});
