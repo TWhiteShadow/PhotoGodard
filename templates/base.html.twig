@@ -1,88 +1,82 @@
 <!DOCTYPE html>
 <html class="overflow-scroll md:overflow-hidden" lang="fr" prefix="og: https://ogp.me/ns#">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="description" content="Passionné d’images et d’émotions, je sublime l’instant par ma sensibilité au monde qui m’entoure. Bienvenue dans mon monde.">
-        <meta name="keywords" content="Emmanuel Godard, Emmanuel, Godard, photographe, photo, images, mariages, portraits, paysages, artiste français, photographie, émotions, univers poétique">
-        <meta name="author" content="rtoursel.lyceestvincent.fr et frozier.lyceestvincent.fr">
-        <meta property="og:title" content="Emmanuel Godard Photographie - Bienvenue dans mon monde.">
-        <meta property="og:description" content="Passionné d’images et d’émotions, je sublime l’instant par ma sensibilité au monde qui m’entoure. Bienvenue dans mon monde.">
-        <meta property="og:url" content="eg-photographie.fr">
-        <meta property="og:image" content="https://eg-photographie.fr/assets/images/godard.ico">
-        <meta property="og:site_name" content="Emmanuel Godard Photographie - Bienvenue dans mon monde.">
-        <meta property="og:locale" content="fr_FR">
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5">
-        <title>{% block title %}Emmanuel Godard Photographie - Bienvenue dans mon monde.{% endblock %}</title>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="Passionné d’images et d’émotions, je sublime l’instant par ma sensibilité au monde qui m’entoure. Bienvenue dans mon monde.">
+		<meta name="keywords" content="Emmanuel Godard, Emmanuel, Godard, photographe, photo, images, mariages, portraits, paysages, artiste français, photographie, émotions, univers poétique">
+		<meta name="author" content="rtoursel.lyceestvincent.fr et frozier.lyceestvincent.fr">
+		<meta property="og:title" content="Emmanuel Godard Photographie - Bienvenue dans mon monde.">
+		<meta property="og:description" content="Passionné d’images et d’émotions, je sublime l’instant par ma sensibilité au monde qui m’entoure. Bienvenue dans mon monde.">
+		<meta property="og:url" content="eg-photographie.fr">
+		<meta property="og:image" content="https://eg-photographie.fr/assets/images/godard.ico">
+		<meta property="og:site_name" content="Emmanuel Godard Photographie - Bienvenue dans mon monde.">
+		<meta property="og:locale" content="fr_FR">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5">
+		<title>{% block title %}Emmanuel Godard Photographie - Bienvenue dans mon monde.{% endblock %}</title>
 
-        <script type="application/ld+json">
-        {
-            "@context": "http://schema.org",
-            "@type": "Person",
-            "name": "Emmanuel Godard",
-            "birthDate": "1975-01-01",
-            "birthPlace": {
-                "@type": "Place",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressLocality": "Dieppe",
-                    "addressRegion": "Normandie"
-                }
-            },
-            "description": "Artiste français passionné d’images et d’émotions, sublimant l’instant par sa sensibilité au monde qui l’entoure.",
-            "url": "https://eg-photographie.fr",
-            "image": "{{ asset('assets/images/godard.ico') }}",
-            "sameAs": [
-                "https://www.instagram.com/emmanuelgodardphotography/",
-                "https://www.etsy.com/fr/shop/EMMANUELGODARDPHOTO"
-                // Ajoutez d'autres liens vers vos comptes de médias sociaux si nécessaire
-            ]
-        }
-        </script>
-
-
-        <link rel="icon" href="{{ asset('assets/images/godard.ico') }}">
-        {{ encore_entry_link_tags('app') }}
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body class="bg-[#f3f4f6]">
-
-        {# <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" > #}
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" >
-        {% block javascriptsBody %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" media="screen and (min-width: 768px)"  integrity="sha512-/AilQf/shuEGfh8c3DoIqcIqHZCKpiImSyt+fxIKJphHiNa6QMPb6AbDly6rkjmGr/5OZd35JtvVkbEKnCZO+A==" crossorigin="anonymous" referrerpolicy="no-referrer" >
-        <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js" integrity="sha512-XOpdFagEEv9XMxN/2EdvFL/PfGtFDjX+AkRznsFHDtdC05YWdkMnz5JZUfrbnEabOQaMc7YNTl2xPbOu3J858Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        {% endblock %}
-        {% block body %}
-        {% endblock %}
+		<script type="application/ld+json">
+			{
+			            "@context": "http://schema.org",
+			            "@type": "Person",
+			            "name": "Emmanuel Godard",
+			            "birthDate": "1975-01-01",
+			            "birthPlace": {
+			                "@type": "Place",
+			                "address": {
+			                    "@type": "PostalAddress",
+			                    "addressLocality": "Dieppe",
+			                    "addressRegion": "Normandie"
+			                }
+			            },
+			            "description": "Artiste français passionné d’images et d’émotions, sublimant l’instant par sa sensibilité au monde qui l’entoure.",
+			            "url": "https://eg-photographie.fr",
+			            "image": "{{ asset('assets/images/godard.ico') }}",
+			            "sameAs": [
+			                "https://www.instagram.com/emmanuelgodardphotography/",
+			                "https://www.etsy.com/fr/shop/EMMANUELGODARDPHOTO"
+			                // Ajoutez d'autres liens vers vos comptes de médias sociaux si nécessaire
+			            ]
+			        }
+		</script>
 
 
-    {# SPINNER #}
-    <div class="spinner">
-        <svg viewBox="25 25 50 50">
-            <circle r="20" cy="50" cx="50"></circle>
-        </svg>
-    </div>
+		<link rel="icon" href="{{ asset('assets/images/godard.ico') }}">
+		{{ encore_entry_link_tags('app') }}
+		{% block stylesheets %}{% endblock %}
 
-    <script>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body class="bg-[#f3f4f6]">
+		<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 
-    $(window).load(function(){
-        document.querySelectorAll("img").forEach(element => {
+		{# SPINNER #}
+		<div class="spinner">
+			<svg viewbox="25 25 50 50">
+				<circle r="20" cy="50" cx="50"></circle>
+			</svg>
+		</div>
+		<script>
+			$(window).load(function () {
+            document.querySelectorAll("img").forEach(element => {
             element.removeAttribute("width");
             element.removeAttribute("height");
-        });
-        // close spinner0
-        document.querySelector('.spinner').classList.toggle('hide');
-        setTimeout(() => {
+            });
+            // close spinner0
+            document.querySelector('.spinner').classList.toggle('hide');
+            setTimeout(() => {
             document.querySelector('.spinner').remove();
-        }, 250);
-    });
-    </script>
-    </body>
+            }, 250);
+            });
+		</script>
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+		{% block javascriptsBody %}
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js" integrity="sha512-XOpdFagEEv9XMxN/2EdvFL/PfGtFDjX+AkRznsFHDtdC05YWdkMnz5JZUfrbnEabOQaMc7YNTl2xPbOu3J858Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" media="screen and (min-width: 768px)" integrity="sha512-/AilQf/shuEGfh8c3DoIqcIqHZCKpiImSyt+fxIKJphHiNa6QMPb6AbDly6rkjmGr/5OZd35JtvVkbEKnCZO+A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+			<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		{% endblock %}
+		{% block body %}{% endblock %}
+	</body>
 </html>
