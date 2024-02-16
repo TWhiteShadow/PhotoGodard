@@ -21,7 +21,7 @@ canvas{
     width: 100vw;
     position: absolute;
     top: 0;
-    opacity: 0.4;
+    opacity: 0.3;
     pointer-events: none;
 }
 
@@ -586,13 +586,13 @@ $light: #efefef;
 }
 
 .swiper-pagination-bullet {
-    background-color: white;
-    width: 20px;
-    height: 20px;
+    background-color: white !important;
+    width: 20px !important;
+    height: 20px !important;
     margin: 0 15px !important;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .section-home .fp-tableCell {
         flex-direction: column-reverse !important;
     }
