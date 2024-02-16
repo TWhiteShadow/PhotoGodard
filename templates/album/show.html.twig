@@ -80,6 +80,40 @@
             } // function that changes image source
             },
 
+        },
+        callbacks: {
+            open: function () {
+            let startX;
+            const swipeArea = document.querySelector('.mfp-content');
+            swipeArea.addEventListener('touchstart', handleTouchStart, false);
+            swipeArea.addEventListener('touchmove', handleTouchMove, false);
+
+            function handleTouchStart(event) {
+                startX = event.touches[0].clientX;
+            }
+
+            function handleTouchMove(event) {
+                if (!startX) return;
+
+                const currentX = event.touches[0].clientX;
+                const deltaX = currentX - startX;
+
+                if (Math.abs(deltaX) > 50) { // Adjust the threshold as needed
+                if (deltaX > 0) { // Swipe right
+                    document.querySelector('.mfp-arrow-left').click();
+                } else { // Swipe left
+                    document.querySelector('.mfp-arrow-right').click();
+                }
+
+                // Reset startX to null after detecting the swipe
+                startX = null;
+
+                // Prevent default touchmove behavior (scrolling)
+                event.preventDefault();
+                }
+            }
+            }
+        }
         });
         $.extend(true, $.magnificPopup.defaults, {
             tClose: 'Fermer (Esc)', // Alt text on close button
