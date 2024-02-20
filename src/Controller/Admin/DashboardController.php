@@ -15,22 +15,23 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
+        $diskFreeSpace = disk_free_space("/");
+        $diskTotalSpace = disk_total_space("/");
 
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
+        // Convert bytes to gigabytes
+        $diskFreeSpaceGB = $diskFreeSpace / (1024 * 1024 * 1024);
+        $diskTotalSpaceGB = $diskTotalSpace / (1024 * 1024 * 1024);
 
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirect('...');
-        // }
+        $availableDiskSpace = ($diskFreeSpaceGB / $diskTotalSpaceGB)*100;
+        $usedDiskSpace = (($diskTotalSpaceGB - $availableDiskSpace)/ $diskTotalSpaceGB) * 100;
 
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        return $this->render('admin/dashboard.html.twig');
+        return $this->render('admin/dashboard.html.twig', [
+            'diskFreeSpace' => round($diskFreeSpaceGB, 2),
+            'diskTotalSpace' => round($diskTotalSpaceGB,2),
+            'availableDiskSpace' => round($availableDiskSpace, 2),
+            'usedDiskSpace' => round($usedDiskSpace, 2),
+        ]);
     }
+
 
 }

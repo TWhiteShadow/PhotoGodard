@@ -6,7 +6,7 @@
 
 {% if photos | default %}
 <div class="w-full flex justify-end">
-	<span class="deleteSelection" style="display:none">Supprimer la selection</span>
+	<span class="deleteSelection delete-button" style="display:none">Supprimer la selection</span>
 </div>
 <div class="photoGallery grid grid-cols-3 md:grid-cols-5 gap-4">
 	{% for photo in photos %}

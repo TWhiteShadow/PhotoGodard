@@ -4,7 +4,7 @@ endblock %} {% block main_content %}
 
 {% set albumFolder = album.getUniqId()|upper %}
 
-{{ include("admin/album/_form.html.twig", { button_label: "Update" }) }}
+{{ include("admin/album/_form.html.twig", { button_label: "Mettre à jour" }) }}
 
 <div class="actionButtons flex flex-row my-6">
   <a href="{{ path('app_admin_album_index') }}" class="back-button"

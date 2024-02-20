@@ -16,23 +16,23 @@ h1{
 
 
 .create-button{
-  @apply focus:outline-none text-white bg-green-500 hover:bg-green-400 focus:ring-1 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800;
+  @apply h-fit focus:outline-none text-white bg-green-500 hover:bg-green-400 focus:ring-1 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800;
 }
 
 .back-button{
-  @apply text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700;
+  @apply h-fit text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700;
 }
 
 .edit-button{
-  @apply focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:focus:ring-yellow-900;
+  @apply h-fit focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:focus:ring-yellow-900;
 }
 
 .show-button{
-  @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
+  @apply h-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800;
 }
 
 .delete-button{
-  @apply focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
+  @apply h-fit focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
 }
 
 // TABLES
@@ -505,3 +505,67 @@ $background-color_2: var(--clr);
 	}
 }
 
+summary {
+	border: 1px solid transparent;
+	outline: none;
+	padding: 1rem;
+	display: block;
+	background: lightgray;
+	border-radius: 1rem;
+	color: black;
+	font-weight: bold;
+	padding-left: 2.2rem;
+	position: relative;
+	cursor: pointer;
+  }
+  .content{
+	padding: 25px;
+  }
+  details {
+	box-sizing: border-box;
+	margin-top: 5px;
+	background: white;
+	border-radius: 1rem;
+	border: 1px gray solid;
+	margin: 25px 0;
+  }
+  details summary::-webkit-details-marker {
+	display:none;
+  }
+  details[open] > summary:before {
+	transform: rotate(90deg);
+  }
+  summary:before {
+	content: '';
+	border-width: .4rem;
+	border-style: solid;
+	border-color: transparent transparent transparent #000;
+	position: absolute;
+	top: 1.4rem;
+	left: 1rem;
+	transform: rotate(0);
+	transform-origin: .2rem 50%;
+	transition: .25s transform ease;
+  }
+  summary::marker{
+	content: "";
+  }
+  
+//  Padding for forms
+
+form{
+	margin-bottom: 30px !important;
+}
+
+// FORM inputs
+
+input[type="file"]{
+	cursor: pointer;
+	transition: 0.5s ease-in-out;
+	border: 1px solid gray;
+  border-radius: 5px;
+
+  &:hover{
+	background-color: #cbcbcb;
+  }
+}
