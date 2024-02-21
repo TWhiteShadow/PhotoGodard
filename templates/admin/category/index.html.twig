@@ -9,18 +9,20 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+                <th>Nom</th>
+                <th>Photos</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for category in categories %}
             <tr>
                 <td data-title="Id">{{ category.id }}</td>
-                <td data-title="Name">{{ category.name }}</td>
-                <td>
-                    <a href="{{ path('app_admin_category_show', {'id': category.id}) }}" class="show-button">Voir</a>
-                    <a href="{{ path('app_admin_category_edit', {'id': category.id}) }}" class="edit-button">Modifier</a>
+                <td data-title="Nom">{{ category.name }}</td>
+                <td data-title="Photos">{{ category.photos|length }}</td>
+                <td data-title="Actions" class="flex flex-wrap items-center py-2">
+                    <a href="{{ path('app_admin_category_show', {'id': category.id}) }}" class="mb-0 show-button ">Voir</a>
+                    <a href="{{ path('app_admin_category_edit', {'id': category.id}) }}" class="mb-0 edit-button ">Modifier</a>
                 </td>
             </tr>
         {% else %}

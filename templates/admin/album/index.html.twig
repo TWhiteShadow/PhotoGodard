@@ -10,19 +10,21 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Password</th>
-                <th>actions</th>
+                <th>Mot de passe</th>
+                <th>Photos</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for album in albums %}
             <tr>
                 <td data-title="Id">{{ album.id }}</td>
-                <td data-title="Name">{{ album.name }}</td>
+                <td data-title="Nom">{{ album.name }}</td>
                 <td data-title="Mot de passe">{{ album.password }}</td>
-                <td>
-                    <a href="{{ path('app_admin_album_show', {'id': album.id}) }}" class="show-button">Voir</a>
-                    <a href="{{ path('app_admin_album_edit', {'id': album.id}) }}" class="edit-button">Modifier</a>
+                <td data-title="Photos">{{album.photos|length}}</td>
+                <td data-title="Actions" class="flex flex-wrap items-center py-2">
+                    <a href="{{ path('app_admin_album_show', {'id': album.id}) }}" class="mb-0 show-button">Voir</a>
+                    <a href="{{ path('app_admin_album_edit', {'id': album.id}) }}" class="mb-0 edit-button">Modifier</a>
                 </td>
             </tr>
         {% else %}

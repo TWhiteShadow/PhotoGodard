@@ -123,7 +123,8 @@ class HomepageController extends AbstractController
     
                             // Delete previous image, if it exists
                             $getterMethod = 'get' . ucfirst($fieldName);
-                            $previousImagePath = $homepage->$getterMethod();
+                            $previousImagePath = $defaultHomepage->$getterMethod();
+                            // var_dump($this->getParameter('kernel.project_dir'). '/public'. $previousImagePath);die;
                             if ($previousImagePath && file_exists($this->getParameter('kernel.project_dir') . '/public' . $previousImagePath)) {
                                 unlink($this->getParameter('kernel.project_dir') . '/public' . $previousImagePath);
                             }

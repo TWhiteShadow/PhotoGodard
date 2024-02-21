@@ -166,12 +166,69 @@
 		<div class="md:bg-gray-100 dark:bg-gray-800 md:px-8 md:py-14 h-full">
 			{% block main_content %}
 				{# First Square #}
-				<div class="flex items-center justify-center h-24 rounded dark:bg-gray-800">
-				{{ diskFreeSpace }}
-				{{ diskTotalSpace }}
-				{{ availableDiskSpace }}
-				{{ usedDiskSpace }}
+				<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+				<div class="h-full w-full flex">
+					<div class="h-fit w-fit flex flex-col justify-center items-center">
+						<h2 class="text-xl font-bold">{{ diskTotalSpace - diskFreeSpace }}GB utilisé sur {{ diskTotalSpace }}GB</h2>
+						<canvas id="myChart"></canvas>
+					</div>
+					<div class="content">
+
+						<div class="statisticCard">
+							<div class="title">
+								<span>
+									<i class="fa-solid fa-user-lock"></i>
+								</span>
+								<p class="title-text">
+									Albums
+								</p>
+							</div>
+							<div class="data">
+								<p>
+									{{numberOfAlbums}} 
+								</p>
+							</div>
+						</div>
+
+					</div>
 				</div>
+				<script>
+					const ctx = document.getElementById('myChart');
+					var usedDiskSpace = {{ usedDiskSpace }};
+					var availableDiskSpace = {{ availableDiskSpace }};
+					new Chart(ctx, {
+						type: 'pie',
+						data: {
+							labels: ['Espace Disque utilisé', 'Espace Disque disponible',],
+							datasets: [{
+								label: 'utilisation : %',
+								data: [usedDiskSpace, availableDiskSpace],
+								borderWidth: 1,
+  								backgroundColor: ["lightblue", "lightgray"], 
+							}]
+						},
+						options: {
+							 plugins: {
+								legend: true,
+								tooltip: true,
+							},
+							scales: {
+								x: [{
+									grid: {
+										display: false,
+									}
+								}],
+								y: [{
+									grid: {
+										display: false,
+									}
+								}]
+							}
+						}
+					});
+					
+				</script>
+				
 			{% endblock %}
 		</div>
 	</div>
