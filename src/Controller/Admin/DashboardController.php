@@ -34,9 +34,14 @@ class DashboardController extends AbstractController
 
         $allAlbums = $albumRepository->findAll();
         $numberOfAlbums = count($allAlbums);
-        $numberOfAlbumPhotos = 0;
+        $numberOfPhotos = 0;
+
         foreach ($allAlbums as $album) {
-            $numberOfAlbumPhotos += count($album->getPhotos());
+            $numberOfPhotos += count($album->getPhotos());
+        }
+
+        foreach ($allCategories as $category) {
+            $numberOfPhotos += count($category->getPhotos());
         }
 
 
@@ -47,6 +52,8 @@ class DashboardController extends AbstractController
             'availableDiskSpace' => round($availableDiskSpace, 2),
             'usedDiskSpace' => round($usedDiskSpace, 2),
             'numberOfAlbums' => $numberOfAlbums,
+            'numberOfCategories' => $numberOfCategories,
+            'numberOfPhotos' => $numberOfPhotos,
         ]);
     }
 

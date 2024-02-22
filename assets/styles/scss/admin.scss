@@ -506,12 +506,17 @@ $background-color_2: var(--clr);
 	}
 }
 
+input, textarea{
+	border: 1px lightgray solid !important;
+	border-radius: 10px !important;
+}
+
 summary {
 	border: 1px solid transparent;
 	outline: none;
 	padding: 1rem;
 	display: block;
-	background: lightgray;
+	background: white;
 	border-radius: 1rem;
 	color: black;
 	font-weight: bold;
@@ -527,7 +532,7 @@ summary {
 	margin-top: 5px;
 	background: white;
 	border-radius: 1rem;
-	border: 1px gray solid;
+	border: 1px lightgray solid;
 	margin: 25px 0;
   }
   details summary::-webkit-details-marker {
@@ -569,10 +574,6 @@ input[type="file"]{
   &:hover{
 	background-color: #cbcbcb;
   }
-}
-
-canvas{
-	height: 50vh !important;
 }
 
 .statisticCard {
@@ -652,10 +653,4 @@ canvas{
 	text-align: center;
 	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
-}
-
-textarea{
-	width: 100%;
-    
-	resize: vertical;
 }

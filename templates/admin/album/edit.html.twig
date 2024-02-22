@@ -1,6 +1,6 @@
-{% extends '/admin/dashboard.html.twig' %} {% block title %}Edit Album {%
+{% extends '/admin/dashboard.html.twig' %} {% block title %}Modifier l'Album {%
 endblock %} {% block main_content %}
-<h1>Edit Album</h1>
+<h1>Modifier l'Album</h1>
 
 {% set albumFolder = album.getUniqId()|upper %}
 
@@ -27,6 +27,7 @@ endblock %} {% block main_content %}
   var tempDiv = document.createElement("div");
   tempDiv.innerHTML = newPhotosPrototypeModified;
 
+  var buttonClicked = false;
   var newPhotoPrototypeElement = tempDiv.firstChild;
 
   document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
@@ -84,6 +85,7 @@ endblock %} {% block main_content %}
         // Add change event listener to each checkbox
         photoToDeleteCheckboxes.forEach(function (checkbox) {
             checkbox.addEventListener("change", function () {
+                buttonClicked = true;
                 const checkedCheckboxes = Array.from(photoToDeleteCheckboxes).filter(function (cb) {
                     return cb.checked;
                 });
@@ -101,12 +103,14 @@ endblock %} {% block main_content %}
 
         // Event delegation for click event on photo containers
         document.querySelector('.photoGallery').addEventListener('click', function(event) {
-            const container = event.target.closest('.photoContainer');
-            if (!container) return; // If clicked outside photo container, return
-            
-            const photoToDeleteCheckbox = container.querySelector(".photoToDelete");
-            if (photoToDeleteCheckbox) {
-                photoToDeleteCheckbox.checked = !photoToDeleteCheckbox.checked;
+            if (buttonClicked) {
+                const container = event.target.closest('.photoContainer');
+                if (!container) return; // If clicked outside photo container, return
+                
+                const photoToDeleteCheckbox = container.querySelector(".photoToDelete");
+                if (photoToDeleteCheckbox) {
+                    photoToDeleteCheckbox.checked = !photoToDeleteCheckbox.checked;
+                }
             }
         });
 
