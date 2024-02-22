@@ -14,7 +14,7 @@ class HomepageFixtures extends Fixture
     {
         $Homepage = new Homepage();
 
-        $Homepage->setPhotoTopLeft('/assets/images/image3.jpg'); 
+        $Homepage->setPhotoTopLeft('/assets/images/image3.jpeg'); 
         $Homepage->setPhotoMiddle('/assets/images/image1.jpg'); 
         $Homepage->setPhotoBottom('/assets/images/image2.jpg'); 
 
@@ -30,7 +30,7 @@ class HomepageFixtures extends Fixture
         $Homepage->setContactLocation("13 rue de Victor Hugo, Paris, France");
         $Homepage->setContactEmail("emmanuel.godard83@orange.fr");
 
-        $Homepage->setContactPhotoTopRight('/assets/images/image3.jpg');
+        $Homepage->setContactPhotoTopRight('/assets/images/image3.jpeg');
         $Homepage->setContactPhotoBottomRight('/assets/images/image1.jpg');
         $Homepage->setContactPhotoBottomLeft('/assets/images/image2.jpg');
 
