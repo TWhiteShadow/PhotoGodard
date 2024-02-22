@@ -27,6 +27,7 @@ dcu:
 	docker compose up --build --force-recreate -d
 
 install: 
+	sudo chmod -R 777 * && \
 	docker compose down && \
 	make dcu && \
 	docker compose exec php composer install && \
