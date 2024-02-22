@@ -13,8 +13,7 @@ services:
     
     
   php:
-    build:
-     dockerfile: Docker/php/Dockerfile
+    build: Docker/php
     volumes:
       # - ./Docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./:/app
@@ -24,8 +23,7 @@ services:
       - mariadb
     
   nginx:
-    build: 
-      dockerfile: Docker/nginx/Dockerfile
+    build: Docker/nginx
     volumes:
       # - ./Docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./:/app

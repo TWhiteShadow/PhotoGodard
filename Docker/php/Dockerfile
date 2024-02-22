@@ -1,4 +1,7 @@
 FROM php:fpm
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
 RUN apt-get update && \
     apt update && \
     apt install default-mysql-client -y && \
@@ -14,4 +17,4 @@ RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg --with-w
 RUN cd /usr/src/php/ext/gd && make
 RUN docker-php-ext-install gd
 
-COPY /Docker/php/uploads.ini /usr/local/etc/php/conf.d/
+COPY uploads.ini /usr/local/etc/php/conf.d/
