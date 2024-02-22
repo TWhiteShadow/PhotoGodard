@@ -3,21 +3,17 @@
 {% endblock %}
 {% block body %}
 	<div
-		class="scroll-smooth w-full overflow-y-scroll" id="fullpage">
+		class="scroll-smooth w-full" id="fullpage">
 		{# SECTION 1 FIRST PAGE #}
 		<section class="md:hidden swiper mySwiper homeSectionMobile">
 			<div class="flex items-center sm:items-start flex-col absolute top-[20%] translate-x-[-50%] left-[50%] gap-3 z-20 text-center text-white drop-shadow-xl">
-				<h1 class="text-3xl uppercase tracking-[0.5rem] font-light">
-					Emmanuel Godard
-				</h1>
-				<h4 class="text-md uppercase tracking-[0.5rem] font-light">
-					Creative photography
-				</h4>
+				<h1 class="text-3xl uppercase tracking-[0.5rem] font-light">{{homepage.title}}</h1>
+				<h4 class="text-md uppercase tracking-[0.5rem] font-light">{{homepage.subtitle}}</h4>
 			</div>
 			<div class="swiper-wrapper h-[100svh] w-screen object-cover">
-				<img src="{{ asset('assets/images/image2.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-1" width="1080" height="1920" loading="lazy">
-				<img src="{{ asset('assets/images/image1.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-2" width="1080" height="1920" loading="lazy">
-				<img src="{{ asset('assets/images/image3.jpeg') | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-3" width="1080" height="1920" loading="lazy">
+				<img src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-3" width="1080" height="1920">
+				<img src="{{ asset(homepage.photoMiddle) | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-2" width="1080" height="1920">
+				<img src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp') }}" class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-1" width="1080" height="1920">
 			</div>
 			<div class="swiper-pagination"></div>
 		</section>
@@ -41,7 +37,7 @@
 										class="atropos-inner">
 										<!-- put your custom content here -->
 										<div class="relative">
-											<img class="max-w-[15vw] max-h-[15vh]" src="{{ asset('assets/images/image3.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-5" alt="photos présentation 3" width="150" height="150" loading="lazy">
+											<img class="max-w-[15vw] max-h-[15vh]" src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp')}}" data-atropos-offset="-5" alt="photos présentation 3" width="150" height="150" loading="lazy">
 										</div>
 									</div>
 								</div>
@@ -65,7 +61,7 @@
 										class="atropos-inner">
 										<!-- put your custom content here -->
 										<div class="relative">
-											<img class="max-w-[40vw] max-h-[40vh] " src="{{ asset('assets/images/image1.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-2" alt="photos présentation 1" width="500" height="400" loading="lazy">
+											<img class="max-w-[40vw] max-h-[40vh] " src="{{ asset(homepage.photoMiddle) | imagine_filter('webp')}}" data-atropos-offset="-2" alt="photos présentation 1" width="500" height="400" loading="lazy">
 
 										</div>
 									</div>
@@ -88,7 +84,7 @@
 										class="atropos-inner">
 										<!-- put your custom content here -->
 										<div class="relative">
-											<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset('assets/images/image2.jpeg') | imagine_filter('webp') }}" data-atropos-offset="-2.5" alt="photos présentation 2" width="250" height="150" loading="lazy">
+											<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}" data-atropos-offset="-2.5" alt="photos présentation 2" width="250" height="150" loading="lazy">
 										</div>
 									</div>
 								</div>
@@ -98,12 +94,8 @@
 				</div>
 			</div>
 			<div class="flex h-full flex-col items-center sm:items-start justify-center md:w-[40%] gap-3 z-20">
-				<h3 class="text-3xl lg:text-2xl xl:text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-					Emmanuel Godard
-				</h3>
-				<h4 class="text-md md:text-[0.7rem] xl:text-base uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-					Creative photography
-				</h4>
+				<h3 class="text-3xl lg:text-2xl xl:text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">{{homepage.title}}</h3>
+				<h4 class="text-md md:text-[0.7rem] xl:text-base uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">{{homepage.subtitle}}</h4>
 			</div>
 		</section>
 
@@ -118,21 +110,12 @@
 				class="flex flex-col md:flex-row justify-evenly items-center w-full h-full gap-10 flex-wrap">
 				{# optional #}
 				<div class="flex flex-col justify-center items-center md:gap-8">
-					<img class="max-w-[50vw] max-h-[30vh] grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out" src="{{ asset('assets/images/godard.jpg') | imagine_filter('webp')}}" alt="photo Emmanuel Godard" width="293.09" height="293.09">
+					<img class="max-w-[50vw] max-h-[30vh] grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out" src="{{ asset(homepage.pfp) | imagine_filter('webp')}}" alt="photo Emmanuel Godard" width="293.09" height="293.09">
 				</div>
 				{# #}
 				<div class="flex flex-col justify-center items-center md:gap-8">
-					<h3 class="text-clamp-xl text-center uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-						Emmanuel Godard
-					</h3>
-					<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
-						Emmanuel Godard, artiste français. Je suis né en 1975 à Dieppe en
-											Normandie. Je suis un passionné d’images et des émotions. Et j’ai
-											cette capacité à sublimer l’instant par ma sensibilité au monde qui
-											m’entoure. La simplicité et la pureté de mes photographies vous
-											plongera dans mon univers parfois irréel et poétique. Bienvenue
-											dans mon monde.
-					</p>
+					<h3 class="text-clamp-xl text-center uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">{{homepage.descriptionTitle}}</h3>
+					<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">{{homepage.descriptionText}}</p>
 				</div>
 			</div>
 		</section>
@@ -218,24 +201,15 @@
 				Contacts
 			</h4>
 			<div class="flex flex-col justify-center items-center gap-8 px-5 z-10 drop-shadow-2xl">
-				<p class="text-clamp max-w-[60ch] text-center font-light leading-[1.75] whitespace-pre-line">
-					Tell me about your story, your passion, your love. And I'll be happy to
-									get back to you and talk about our common project. Let's connect here.
-				</p>
-				<a href="tel:+330645485815" class="text-center">
-					<h3 class="text-clamp-xl uppercase tracking-[0.25rem] sm:tracking-[0.5rem] font-light drop-shadow-sm">
-						+33 6 45 48 58 15
-					</h3>
+				<p class="text-clamp max-w-[60ch] text-center font-light leading-[1.75] whitespace-pre-line">{{homepage.contactDescription}}</p>
+				<a href="tel:{{homepage.contactNumber}}" class="text-center">
+					<h3 class="text-clamp-xl uppercase tracking-[0.25rem] sm:tracking-[0.5rem] font-light drop-shadow-sm">{{homepage.contactNumber}}</h3>
 				</a>
-				<a href="https://www.google.com/maps/search/4401+Waldeck+Street+Grapevine,+Nashville,+TX+76051" target="_blank" class="text-center">
-					<p class="text-clamp max-w-[60ch] text-center text-[#333] font-light leading-[1.75] whitespace-pre-line">
-						4401 Waldeck Street Grapevine, Nashville, TX 76051
-					</p>
+				<a href="https://www.google.com/maps/search/{{homepage.contactLocation}}" target="_blank" class="text-center">
+					<p class="text-clamp max-w-[60ch] text-center text-[#333] font-light leading-[1.75] whitespace-pre-line">{{homepage.contactLocation}}</p>
 				</a>
-				<a href="mailto:emmanuel.godard83@orange.fr">
-					<h3 class=" tracking-[0] text-[#333] font-light drop-shadow-sm text-clamp-xl">
-						emmanuel.godard83@orange.fr
-					</h3>
+				<a href="mailto:{{homepage.contactEmail}}">
+					<h3 class=" tracking-[0] text-[#333] font-light drop-shadow-sm text-clamp-xl">{{homepage.contactEmail}}</h3>
 				</a>
 			</div>
 			<div class="md:flex hidden absolute h-full w-full items-center justify-center z-0 overflow-hidden">
@@ -256,7 +230,7 @@
 										class="atropos-inner">
 										<!-- put your custom content here -->
 										<div class="relative">
-											<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset('assets/images/image3.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-5" alt="photos présentation 3" width="150" height="150" loading="lazy">
+											<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset(homepage.contactPhotoTopRight) | imagine_filter('webp')}}" data-atropos-offset="-5" alt="photos présentation 3" width="150" height="150" loading="lazy">
 										</div>
 									</div>
 								</div>
@@ -280,7 +254,7 @@
 										class="atropos-inner">
 										<!-- put your custom content here -->
 										<div class="relative">
-											<img class="max-w-[30vw] max-h-[30vh] " src="{{ asset('assets/images/image1.jpeg') | imagine_filter('webp')}}" data-atropos-offset="-2" alt="photos présentation 1" width="500" height="400" loading="lazy">
+											<img class="max-w-[30vw] max-h-[30vh] " src="{{ asset(homepage.contactPhotoBottomRight) | imagine_filter('webp')}}" data-atropos-offset="-2" alt="photos présentation 1" width="500" height="400" loading="lazy">
 
 										</div>
 									</div>
@@ -303,7 +277,7 @@
 										class="atropos-inner">
 										<!-- put your custom content here -->
 										<div class="relative">
-											<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset('assets/images/image2.jpeg') | imagine_filter('webp') }}" data-atropos-offset="-2.5" alt="photos présentation 2" width="250" height="150" loading="lazy">
+											<img class="max-w-[20vw] max-h-[20vh]" src="{{ asset(homepage.contactPhotoBottomLeft) | imagine_filter('webp') }}" data-atropos-offset="-2.5" alt="photos présentation 2" width="250" height="150" loading="lazy">
 										</div>
 									</div>
 								</div>
@@ -469,10 +443,6 @@
 			</p>
 		</div>
 	</footer>
-
-<canvas>
-</canvas>
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 	<script type="module" src="{{ asset('js/index.js') }}"></script>
 {% endblock %}
