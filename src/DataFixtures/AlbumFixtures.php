@@ -5,11 +5,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Album;
-use App\Entity\Photo;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class AlbumFixtures extends Fixture
@@ -43,7 +41,7 @@ class AlbumFixtures extends Fixture
 
         foreach (self::ALBUM_NAMES as $albumName) {
             $album = new Album();
-            $album->setName($albumName . ' ' . $this->getRandomName());
+            $album->setName($albumName.' '.$this->getRandomName());
             $album->setUniqId();
             $album->setPassword('your_password_here'); // Set your desired password
 
@@ -56,6 +54,7 @@ class AlbumFixtures extends Fixture
     private function getRandomName(): string
     {
         $names = ['Claudette', 'Pascal', 'Sophie', 'Antoine', 'Emma', 'Lucas', 'Chloé', 'Louis', 'Camille', 'Arthur', 'Manon', 'Hugo', 'Léa'];
+
         return $names[array_rand($names)];
     }
 }

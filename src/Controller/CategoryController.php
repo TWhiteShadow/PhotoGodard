@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\CategoryRepository;
-use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,15 +21,18 @@ class CategoryController extends AbstractController
             $photos = array_merge($photos, $photosA);
         }
         shuffle($photos);
+
         return $this->render('category/index.html.twig', [
             'categories' => $categories,
             'photos' => $photos,
         ]);
     }
+
     #[Route('/category/{id}', name: 'app_category_show')]
     public function show(Category $category): Response
     {
         $photos = $category->getPhotos();
+
         return $this->render('category/show.html.twig', [
             'controller_name' => 'CategoryController',
             'category' => $category,

@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\EventListener;
 
 use Cocur\Slugify\Slugify;
 use Symfony\Component\Filesystem\Filesystem;
 use Vich\UploaderBundle\Event\Event;
-use Vich\UploaderBundle\Mapping\PropertyMapping;
 
 class VichUploaderListener
 {
@@ -28,65 +26,63 @@ class VichUploaderListener
         if ($object instanceof \App\Entity\Photo) {
             $uploadMapping = $object->getAlbum() ? 'album' : 'category';
 
-            $uploadDir = $uploadMapping === 'album' ? $this->uploadDestinationAlbum : $this->uploadDestinationCategory;
+            $uploadDir = 'album' === $uploadMapping ? $this->uploadDestinationAlbum : $this->uploadDestinationCategory;
 
             // Vérifiez si le dossier de l'album existe, sinon le créez
-            if($object->getAlbum()){
+            if ($object->getAlbum()) {
                 $slugify = new Slugify();
-                $slugify->addRule("-", "_");
+                $slugify->addRule('-', '_');
                 $albumName = strtoupper($slugify->slugify($object->getAlbum()->getUniqId()));
                 $filesystem = new Filesystem();
-                if (!$filesystem->exists($uploadDir. '/'. $albumName)) {
-                    $filesystem->mkdir($uploadDir. '/'. $albumName);
+                if (!$filesystem->exists($uploadDir.'/'.$albumName)) {
+                    $filesystem->mkdir($uploadDir.'/'.$albumName);
                 }
-                $uploadDir = $uploadDir . '/' . $albumName;
-
+                $uploadDir = $uploadDir.'/'.$albumName;
 
                 $mappingConfig = [
-                    "uri_prefix" => "/private/album/photos",
+                    'uri_prefix' => '/private/album/photos',
                     'upload_destination' => $uploadDir,
-                    "namer" => [
-                        "service" => "App\Naming\PhotoSlugNamer.photos_categories",
-                        "options" => []
+                    'namer' => [
+                        'service' => "App\Naming\PhotoSlugNamer.photos_categories",
+                        'options' => [],
                     ],
-                    "directory_namer" => [
-                        "service" => null,
-                        "options" => null
+                    'directory_namer' => [
+                        'service' => null,
+                        'options' => null,
                     ],
-                    "delete_on_remove" => true,
-                    "delete_on_update" => true,
-                    "inject_on_load" => false,
-                    "db_driver" => "orm",
+                    'delete_on_remove' => true,
+                    'delete_on_update' => true,
+                    'inject_on_load' => false,
+                    'db_driver' => 'orm',
                 ];
 
                 // Utilisez le tableau dans la méthode setMapping
                 $mapping->setMapping($mappingConfig);
-
-            }else{
+            } else {
                 $slugify = new Slugify();
-                $slugify->addRule("-", "_");
+                $slugify->addRule('-', '_');
                 $categoryName = strtoupper($slugify->slugify($object->getCategory()->getUniqId()));
                 $filesystem = new Filesystem();
-                if (!$filesystem->exists($uploadDir . '/' . $categoryName)) {
-                    $filesystem->mkdir($uploadDir . '/' . $categoryName);
+                if (!$filesystem->exists($uploadDir.'/'.$categoryName)) {
+                    $filesystem->mkdir($uploadDir.'/'.$categoryName);
                 }
-                $uploadDir = $uploadDir . '/' . $categoryName;
+                $uploadDir = $uploadDir.'/'.$categoryName;
 
                 $mappingConfig = [
-                    "uri_prefix" => "/categorie/photos",
+                    'uri_prefix' => '/categorie/photos',
                     'upload_destination' => $uploadDir,
-                    "namer" => [
-                        "service" => "App\Naming\PhotoSlugNamer.photos_categories",
-                        "options" => []
+                    'namer' => [
+                        'service' => "App\Naming\PhotoSlugNamer.photos_categories",
+                        'options' => [],
                     ],
-                    "directory_namer" => [
-                        "service" => null,
-                        "options" => null
+                    'directory_namer' => [
+                        'service' => null,
+                        'options' => null,
                     ],
-                    "delete_on_remove" => true,
-                    "delete_on_update" => true,
-                    "inject_on_load" => false,
-                    "db_driver" => "orm",
+                    'delete_on_remove' => true,
+                    'delete_on_update' => true,
+                    'inject_on_load' => false,
+                    'db_driver' => 'orm',
                 ];
 
                 // Utilisez le tableau dans la méthode setMapping
@@ -94,7 +90,6 @@ class VichUploaderListener
             }
 
             // Créez un tableau avec la clé 'upload_destination'
-            
         }
         // dd($object, $mapping);
     }

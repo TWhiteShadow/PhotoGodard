@@ -21,27 +21,26 @@ class AlbumRepository extends ServiceEntityRepository
         parent::__construct($registry, Album::class);
     }
 
-   /**
-    * @return Album[] Returns an array of Album objects
-    */
+    /**
+     * @return Album[] Returns an array of Album objects
+     */
     public function findByName($value): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.name LIKE :val')
-            ->setParameter('val', '%' . trim($value) . '%')
+            ->setParameter('val', '%'.trim($value).'%')
             ->orderBy('a.id', 'DESC')
             ->getQuery()
             ->getResult();
     }
-    
 
-//    public function findOneBySomeField($value): ?Album
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Album
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

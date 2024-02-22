@@ -33,8 +33,8 @@ class PhotoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $photo->setCreatedAt(new \DateTimeImmutable);
-            $photo->setUpdatedAt(new \DateTimeImmutable);
+            $photo->setCreatedAt(new \DateTimeImmutable());
+            $photo->setUpdatedAt(new \DateTimeImmutable());
             $entityManager->persist($photo);
             $entityManager->flush();
 
@@ -84,14 +84,14 @@ class PhotoController extends AbstractController
         return $this->redirectToRoute('app_admin_photo_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route("/photos/delete", name:"app_admin_delete_photos", methods: ["POST"])]
+    #[Route('/photos/delete', name: 'app_admin_delete_photos', methods: ['POST'])]
     public function deletePhotos(Request $request, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
         // Récupérez les ID des photos à supprimer
         $photoIds = $data['photo_ids'] ?? [];
-        
+
         // Supprimez les photos correspondantes
         foreach ($photoIds as $photoId) {
             $photo = $entityManager->getRepository(Photo::class)->find($photoId);
@@ -106,13 +106,13 @@ class PhotoController extends AbstractController
                     $album->removePhoto($photo);
                     // Enregistrez les modifications dans l'entité de l'album
                     $entityManager->persist($album);
-                    try{
-                        unlink($parameterBag->get("kernel.project_dir") . "/storage/images/private/" . strtoupper($album->getUniqId()) . "/" . $photo->getFilename());
-                    }catch (\Exception $e){
+                    try {
+                        unlink($parameterBag->get('kernel.project_dir').'/storage/images/private/'.strtoupper($album->getUniqId()).'/'.$photo->getFilename());
+                    } catch (\Exception $e) {
                         continue;
                     }
                 }
-                
+
                 // Si la photo est associée à une catégorie
                 if ($category = $photo->getCategory()) {
                     // Supprimer la référence à la photo dans la catégorie
@@ -123,13 +123,13 @@ class PhotoController extends AbstractController
                     $category->removePhoto($photo);
                     // Enregistrez les modifications dans l'entité de la catégorie
                     $entityManager->persist($category);
-                    try{
-                        unlink($parameterBag->get("kernel.project_dir")."/public/photos/public/" . strtoupper($category->getUniqId()). "/". $photo->getFilename());
-                    }catch (\Exception $e){
+                    try {
+                        unlink($parameterBag->get('kernel.project_dir').'/public/photos/public/'.strtoupper($category->getUniqId()).'/'.$photo->getFilename());
+                    } catch (\Exception $e) {
                         continue;
                     }
                 }
-                
+
                 // Supprimer la photo
                 $entityManager->remove($photo);
             }
@@ -140,7 +140,4 @@ class PhotoController extends AbstractController
         // Réponse JSON pour indiquer le succès de l'opération
         return new JsonResponse(['message' => 'Photos deleted successfully']);
     }
-
-
-
 }

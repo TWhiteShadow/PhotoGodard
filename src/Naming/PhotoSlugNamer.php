@@ -21,25 +21,23 @@ final class PhotoSlugNamer implements NamerInterface
     public function name(object $object, PropertyMapping $mapping): string
     {
         $slugify = new Slugify();
-        $slugify->addRule("-", "_");
+        $slugify->addRule('-', '_');
 
         // Get the album name from the object
-        $albumName = strtoupper($slugify->slugify(strtoupper($this->getAlbumUniqId($object)), "_"));
+        $albumName = strtoupper($slugify->slugify(strtoupper($this->getAlbumUniqId($object)), '_'));
 
         // Initialize $category to an empty string
         $category = '';
 
-
         $file = $mapping->getFile($object);
         $originalName = $file->getClientOriginalName();
         $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-        $basename = $slugify->slugify(substr(pathinfo($originalName, PATHINFO_FILENAME), 0, 240), "_");
+        $basename = $slugify->slugify(substr(pathinfo($originalName, PATHINFO_FILENAME), 0, 240), '_');
         $basename = strtolower($this->transliterator->transliterate($basename));
 
-        if($albumName !== "" && $albumName !== null){  // La photo a un album associé
-           
+        if ('' !== $albumName && null !== $albumName) {  // La photo a un album associé
             // Check the files in the album directory
-            $albumDir = $this->uploadDestinationAlbum . '/' . $albumName;
+            $albumDir = $this->uploadDestinationAlbum.'/'.$albumName;
             $filesystem = new Filesystem();
 
             if ($filesystem->exists($albumDir)) {
@@ -47,33 +45,28 @@ final class PhotoSlugNamer implements NamerInterface
                 $existingNums = [];
 
                 foreach ($files as $file) {
-                    if ($file !== '.' && $file !== '..'
+                    if ('.' !== $file && '..' !== $file
                     ) {
                         // Ajout pour déboguer
-                        
 
-                        if (preg_match('/^' . $albumName . '_/', $file)) {
+                        if (preg_match('/^'.$albumName.'_/', $file)) {
                             $existingString = pathinfo($file, PATHINFO_FILENAME);
-                            $arrayString = explode("_", $existingString);
+                            $arrayString = explode('_', $existingString);
                             $existingNums[] = end($arrayString);
                         }
                     }
                 }
 
                 $num = sprintf('%05d', $existingNums ? max($existingNums) + 1 : 1);
-
             } else {
                 // Le dossier n'existe pas, donc le numéro est 00001
                 $num = '00001';
             }
-    
-        }
-        elseif($albumName === "" || $albumName === null){
-        
+        } elseif ('' === $albumName || null === $albumName) {
             // If $albumName is null, set $category based on the category name
-            $category = strtoupper($slugify->slugify(strtoupper($this->getCategoryUniqId($object)), "_"));
+            $category = strtoupper($slugify->slugify(strtoupper($this->getCategoryUniqId($object)), '_'));
 
-            $categoryDir = $this->uploadDestinationCategory . '/' . $category;
+            $categoryDir = $this->uploadDestinationCategory.'/'.$category;
             $filesystem = new Filesystem();
 
             if ($filesystem->exists($categoryDir)) {
@@ -82,11 +75,11 @@ final class PhotoSlugNamer implements NamerInterface
 
                 foreach ($files as $file) {
                     if (
-                        $file !== '.' && $file !== '..'
+                        '.' !== $file && '..' !== $file
                     ) {
-                        if (preg_match('/^' . $albumName . '_/', $file)) {
+                        if (preg_match('/^'.$albumName.'_/', $file)) {
                             $existingString = pathinfo($file, PATHINFO_FILENAME);
-                            $arrayString = explode("_", $existingString);
+                            $arrayString = explode('_', $existingString);
                             $existingNums[] = end($arrayString);
                         }
                     }
@@ -99,10 +92,7 @@ final class PhotoSlugNamer implements NamerInterface
             }
         }
 
-        
-        
-        
-        $name = $albumName === "" || $albumName === null ? $category . "_" . $basename : $albumName;
+        $name = '' === $albumName || null === $albumName ? $category.'_'.$basename : $albumName;
         // Combine name, num and extension
         $slug = sprintf('%s_%s.%s', $name, $num, $extension);
 
@@ -111,33 +101,37 @@ final class PhotoSlugNamer implements NamerInterface
 
     private function getAlbumName(Photo $object): ?string
     {
-        if ($object->getAlbum() !== null) {
+        if (null !== $object->getAlbum()) {
             return $object->getAlbum()->getName();
         }
+
         return null;
     }
 
     private function getAlbumUniqId(Photo $object): ?string
     {
-        if ($object->getAlbum() !== null) {
+        if (null !== $object->getAlbum()) {
             return $object->getAlbum()->getUniqId();
         }
+
         return null;
     }
 
     private function getCategoryName(Photo $object): ?string
     {
-        if ($object->getCategory() !== null) {
+        if (null !== $object->getCategory()) {
             return $object->getCategory()->getName();
         }
+
         return null;
     }
 
     private function getCategoryUniqId(Photo $object): ?string
     {
-        if ($object->getCategory() !== null) {
+        if (null !== $object->getCategory()) {
             return $object->getCategory()->getUniqId();
         }
+
         return null;
     }
 }

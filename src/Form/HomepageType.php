@@ -24,7 +24,7 @@ class HomepageType extends AbstractType
             ->add('descriptionText', TextareaType::class, ['label' => 'Texte de description', 'attr' => ['placeholder' => 'ex: Artiste français passionné de ...', 'rows' => 5]])
             ->add('contactDescription', TextareaType::class, ['label' => 'Texte de contact', 'attr' => ['placeholder' => 'ex: Vous pouvez me contacter...', 'rows' => 5]])
             ->add('contactNumber', null, ['label' => 'Numéro de téléphone', 'attr' => ['placeholder' => 'ex: +33 6 12 34 56 78']])
-            ->add('contactLocation', null, ['label'=> 'Localisation professionnelle', 'attr' => ['placeholder' => 'ex: 13 rue du ...']])
+            ->add('contactLocation', null, ['label' => 'Localisation professionnelle', 'attr' => ['placeholder' => 'ex: 13 rue du ...']])
             ->add('contactEmail', null, ['label' => 'Email de contact', 'attr' => ['placeholder' => 'ex: emmanuel.godard83@orange.fr']])
             ->add('contactPhotoTopRight', FileType::class, ['data_class' => null, 'label' => 'Contact Photo En-haut Droit'])
             ->add('contactPhotoBottomRight', FileType::class, ['data_class' => null, 'label' => 'Contact Photo En-bas Droit'])

@@ -3,15 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\PhotoRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
 #[Vich\Uploadable]
-
 class Photo
 {
     #[ORM\Id]
@@ -47,7 +44,6 @@ class Photo
     #[ORM\JoinColumn(nullable: true)]
     private ?Album $album = null;
 
-
     public function getId(): ?int
     {
         return $this->id;
@@ -80,7 +76,7 @@ class Photo
         $this->imageFileArray = $imagefilearray;
     }
 
-    public function getImageFileArray(): ?Array
+    public function getImageFileArray(): ?array
     {
         return $this->imageFileArray;
     }
@@ -94,6 +90,7 @@ class Photo
     {
         $this->filename = $filename;
         $this->title = pathinfo($filename, PATHINFO_FILENAME);
+
         return $this;
     }
 
@@ -145,9 +142,6 @@ class Photo
         return $this;
     }
 
-    /**
-     * @return Album
-     */
     public function getAlbum(): ?Album
     {
         return $this->album;

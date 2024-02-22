@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AlbumController extends AbstractController
@@ -18,16 +17,17 @@ class AlbumController extends AbstractController
     public function show(Album $album, AuthenticationUtils $authenticationUtils, Request $request, UserPasswordHasherInterface $passwordEncoder): Response
     {
         $session = $request->getSession();
-        if((!empty($session->get('ROLE_ALBUM_ACCESS')) && $session->get('ROLE_ALBUM_ACCESS') == $album->getUniqId()."-ACCESS") || !empty($this->getUser()) && in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
+        if ((!empty($session->get('ROLE_ALBUM_ACCESS')) && $session->get('ROLE_ALBUM_ACCESS') == $album->getUniqId().'-ACCESS') || !empty($this->getUser()) && in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             $photos = $album->getPhotos();
+
             // $session->remove('ROLE_ALBUM_ACCESS');
-                return $this->render('album/show.html.twig', [
-                    'controller_name' => 'AlbumController',
-                    'album' => $album,
-                    'photos' => $photos,
-                    'session' => $session,
-                    'title' => $album->getName(),
-                ]);
+            return $this->render('album/show.html.twig', [
+                'controller_name' => 'AlbumController',
+                'album' => $album,
+                'photos' => $photos,
+                'session' => $session,
+                'title' => $album->getName(),
+            ]);
         }
         // Get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -47,10 +47,10 @@ class AlbumController extends AbstractController
                 // You can handle the login logic here
                 // For example, you can redirect to a different page
                 // return $this->redirectToRoute('app_album_dashboard');
-                $session->set('ROLE_ALBUM_ACCESS', $album->getUniqId() . "-ACCESS");
-                
-                
+                $session->set('ROLE_ALBUM_ACCESS', $album->getUniqId().'-ACCESS');
+
                 $photos = $album->getPhotos();
+
                 return $this->render('album/show.html.twig', [
                     'controller_name' => 'AlbumController',
                     'album' => $album,
@@ -69,12 +69,12 @@ class AlbumController extends AbstractController
         // ]);
 
         $favoritePhoto = $album->getFavoritePhoto();
+
         return $this->render('login/album.html.twig', [
             'form' => $albumLoginForm->createView(),
             'error' => $error,
             'favoritePhoto' => $favoritePhoto,
             'title' => $album->getName(),
         ]);
-        
     }
 }

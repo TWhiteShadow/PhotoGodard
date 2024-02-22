@@ -5,11 +5,9 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Photo;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 class CategoryFixtures extends Fixture
@@ -41,5 +39,4 @@ class CategoryFixtures extends Fixture
 
         $manager->flush();
     }
-
 }
