@@ -704,7 +704,7 @@ $light: #efefef;
 
     .input-field {
         background: none;
-        border: none;
+        border: none !important;
         outline: none;
         width: 100%;
         color: #d3d3d3;
