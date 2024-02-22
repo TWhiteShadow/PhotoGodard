@@ -19,6 +19,9 @@ class AlbumController extends AbstractController
         $session = $request->getSession();
         if ((!empty($session->get('ROLE_ALBUM_ACCESS')) && $session->get('ROLE_ALBUM_ACCESS') == $album->getUniqId().'-ACCESS') || !empty($this->getUser()) && in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             $photos = $album->getPhotos();
+            if(count($photos) == 0) {
+                return $this->redirectToRoute('app_home');
+            }
 
             // $session->remove('ROLE_ALBUM_ACCESS');
             return $this->render('album/show.html.twig', [

@@ -135,18 +135,23 @@
 				class="swiper2 relative overflow-hidden h-[80%] py-20 w-screen md:w-[80%] gap-[3vw] items-stretch">
 				<!-- Additional required wrapper -->
 				<div class="swiper-wrapper">
+					{% set validCategorie = false %}
 					{% if categories|length > 0 %}
-						{% for i in range(0, categories|length - 1) %}
-							{% set cardImgPath = categories[i].getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') :  ( categories[i].getFavoritePhoto() is not null ? asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~ categories[i].getFavoritePhoto().getFilename()) : asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~ (categories[i].getPhotos()|last).getFilename()) ) %}
-							{% include "/home/_atropos-card.html.twig" with {
-							'card_controller' : "category",
-						'card_id' : categories[i].getId(),
-						'card_img_path' : cardImgPath  | imagine_filter('webp'),
-						'card_name' : categories[i].getName(),
-						'card_photo_count' : categories[i].getPhotos()|length|trans ~ " photos" 
-					} %}
+						{% for categorie in categories %}
+							{% if categorie.getPhotos()|length > 0 %}
+								{% set validCategorie = true %}
+								{% set cardImgPath = ( categorie.getFavoritePhoto() is not null ? asset( 'photos/public/' ~ categorie.getUniqId()|upper ~ '/' ~ categorie.getFavoritePhoto().getFilename()) : asset( 'photos/public/' ~ categorie.getUniqId()|upper ~ '/' ~ (categorie.getPhotos()|last).getFilename()) ) %}
+								{% include "/home/_atropos-card.html.twig" with {
+									'card_controller' : "category",
+									'card_id' : categorie.getId(),
+									'card_img_path' : cardImgPath  | imagine_filter('webp'),
+									'card_name' : categorie.getName(),
+									'card_photo_count' : categorie.getPhotos()|length|trans ~ " photos" 
+								} %}
+							{% endif %}
 						{% endfor %}
-					{% else %}
+					{% endif %}
+					{% if validCategorie == false %}
 						<div class="swiper-slide h-[400px] md:h-auto text-center flex justify-center items-center">
 							<p>Aucune categorie n'a encore été ajoutée</p>
 						</div>

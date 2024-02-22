@@ -1,14 +1,14 @@
 {% set albumWithPhoto = 0 %}
 {% if albums|length > 0 %}
 	{% for i in range(0, albums|length - 1) %}
-		{% if albums[i].getPhotos() is not empty %}
+		{% if album.getPhotos() is not empty %}
 			{% set albumWithPhoto = 1 %}
-			{% set cardImgPath = albums[i].getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') : ( albums[i].getFavoritePhoto() is not null ? path("app_file", {"title": albums[i].getFavoritePhoto().getTitle()} ) : asset( 'assets/images/missing-image.png') ) %}
+			{% set cardImgPath = album.getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') : ( album.getFavoritePhoto() is not null ? path("app_file", {"title": album.getFavoritePhoto().getTitle()} ) : asset( 'assets/images/missing-image.png') ) %}
 			{% include "/home/_atropos-card.html.twig" with {
 				'card_controller' : "album",
-				'card_id' : albums[i].getId(),
+				'card_id' : album.getId(),
 				'card_img_path' : cardImgPath,
-				'card_name' : albums[i].getName(),
+				'card_name' : album.getName(),
 				'card_photo_count' : "",
 				} %}
 			{% else %}
