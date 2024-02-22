@@ -7,5 +7,22 @@
 
     {{ include('admin/category/_form.html.twig') }}
 
-    <a href="{{ path('app_admin_category_index') }}">back to list</a>
+    <a href="{{ path('app_admin_category_index') }}" class="back-button">Revenir en arrière</a>
+
+
+<script>
+	var newPhotosPrototype = document.querySelector('#category_newPhotos').dataset.prototype;
+
+    // Remplacer __name__ par un nom unique
+    var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
+    var newPhotosPrototypeModified = newPhotosPrototype.replace(/__name__/g, uniqueId);
+
+    var tempDiv = document.createElement('div');
+    tempDiv.innerHTML = newPhotosPrototypeModified;
+
+    var newPhotoPrototypeElement = tempDiv.firstChild;
+
+    document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
+</script>
+
 {% endblock %}

@@ -15,10 +15,18 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
+
+    #[ORM\Column(length: 125)]
+    private ?string $uniqId = null;
+
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Photo::class)]
+    #[ORM\ManyToOne(targetEntity: Photo::class, cascade: ['remove'])]
+    #[ORM\JoinColumn(name: 'favorite_photo_id', referencedColumnName: 'id', onDelete: 'SET NULL', nullable: true)]
+    private ?Photo $favoritePhoto = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Photo::class, cascade:['remove'])]
     private Collection $photos;
 
     public function __construct()
@@ -31,6 +39,17 @@ class Category
         return $this->id;
     }
 
+    public function getUniqId(): ?string
+    {
+        return $this->uniqId;
+    }
+
+    public function setUniqId(): static
+    {
+        $this->uniqId = uniqid();
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -39,6 +58,17 @@ class Category
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFavoritePhoto():?Photo
+    {
+        return $this->favoritePhoto; 
+    }
+    public function setFavoritePhoto(?Photo $favoritePhoto): static
+    {
+        $this->favoritePhoto = $favoritePhoto;
 
         return $this;
     }
@@ -55,7 +85,7 @@ class Category
     {
         if (!$this->photos->contains($photo)) {
             $this->photos->add($photo);
-            $photo->setCategories($this);
+            $photo->setCategory($this);
         }
 
         return $this;
@@ -65,8 +95,8 @@ class Category
     {
         if ($this->photos->removeElement($photo)) {
             // set the owning side to null (unless already changed)
-            if ($photo->getCategories() === $this) {
-                $photo->setCategories(null);
+            if ($photo->getCategory() === $this) {
+                $photo->setCategory(null);
             }
         }
 

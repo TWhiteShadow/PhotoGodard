@@ -3,3 +3,17 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+
+# config/routes.yaml
+file_controller:
+    path: /file/{name}
+    controller: App\Controller\FileController::getFile
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+
+app_admin_delete_photos:
+    path: /photos/delete
+    controller: App\Controller\Admin\PhotoController::deletePhotos
+    methods: [POST]

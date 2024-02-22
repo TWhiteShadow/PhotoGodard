@@ -15,6 +15,9 @@ class Album
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length:125)]
+    private ?string $uniqId = null;
+
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -23,8 +26,13 @@ class Album
 
     private ?array $passwordArray = null;
 
-    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album')]
-    private Collection $photos;
+    #[ORM\ManyToOne(targetEntity: Photo::class, cascade: ['remove'])]
+    #[ORM\JoinColumn(name: 'favorite_photo_id', referencedColumnName: 'id', onDelete: 'SET NULL', nullable: true)]
+    private ?Photo $favoritePhoto = null;
+
+    #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade:['remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: "CASCADE")]
+    private ?Collection $photos;
 
 
     public function __construct()
@@ -35,6 +43,17 @@ class Album
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUniqId() : ?string
+    {
+        return $this->uniqId;
+    }
+
+    public function setUniqId() : static
+    {
+        $this->uniqId = uniqid();
+        return $this;
     }
 
     public function getName(): ?string
@@ -60,6 +79,7 @@ class Album
 
         return $this;
     }
+
     public function getPasswordArray():?array
     {
         return $this->passwordArray;
@@ -72,10 +92,21 @@ class Album
         return $this;
     }
 
+    public function getFavoritePhoto():?Photo
+    {
+        return $this->favoritePhoto; 
+    }
+    public function setFavoritePhoto(?Photo $favoritePhoto): static
+    {
+        $this->favoritePhoto = $favoritePhoto;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Photo>
      */
-    public function getPhotos(): Collection
+    public function getPhotos(): ?Collection
     {
         return $this->photos;
     }

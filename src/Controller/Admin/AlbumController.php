@@ -3,10 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Album;
+use App\Entity\Photo;
 use App\Form\AlbumType;
 use App\Repository\AlbumRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,12 +32,34 @@ class AlbumController extends AbstractController
         $album = new Album();
         $form = $this->createForm(AlbumType::class, $album);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
+            // dd($uploadedFiles);
+            $album->setUniqId();
             $entityManager->persist($album);
+            foreach($uploadedFiles as $uploadedFile){
+                if(!empty($uploadedFile)){
+                    $imageFileArray = $uploadedFile->getImageFileArray();
+                    foreach ($imageFileArray as $imageFile) {
+                        $photo = new Photo();
+        
+                        $file = $imageFile; // Notez l'indice [0] pour obtenir le premier fichier
+                        $photo->setImageFile($file);
+                        $photo->setCreatedAt(new \DateTimeImmutable);
+                        $photo->setUpdatedAt(new \DateTimeImmutable);
+        
+                        // Ajouter la photo à l'album
+                        $album->addPhoto($photo);
+                        $entityManager->persist($photo);
+                    }
+                }
+            }
+
+            
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_album_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_album_show', [ 'id' => $album->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/album/new.html.twig', [
@@ -45,8 +71,10 @@ class AlbumController extends AbstractController
     #[Route('/{id}', name: 'app_admin_album_show', methods: ['GET'])]
     public function show(Album $album): Response
     {
+        $photos = $album->getPhotos();
         return $this->render('admin/album/show.html.twig', [
             'album' => $album,
+            'photos' => $photos,
         ]);
     }
 
@@ -57,25 +85,94 @@ class AlbumController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
+            foreach($uploadedFiles as $uploadedFile){
+                if(!empty($uploadedFile)){
+                    $imageFileArray = $uploadedFile->getImageFileArray();
+                    foreach ($imageFileArray as $imageFile) {
+                        $photo = new Photo();
+        
+                        $file = $imageFile; // Notez l'indice [0] pour obtenir le premier fichier
+                        $photo->setImageFile($file);
+                        $photo->setCreatedAt(new \DateTimeImmutable);
+                        $photo->setUpdatedAt(new \DateTimeImmutable);
+        
+                        // Ajouter la photo à l'album
+                        $album->addPhoto($photo);
+                        $entityManager->persist($photo);
+                    }
+                }
+            }
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_album_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_admin_album_show', [ 'id' => $album->getId()], Response::HTTP_SEE_OTHER);
         }
-
+        $photos = $album->getPhotos();
         return $this->render('admin/album/edit.html.twig', [
             'album' => $album,
+            'photos' => $photos,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_album_delete', methods: ['POST'])]
-    public function delete(Request $request, Album $album, EntityManagerInterface $entityManager): Response
+    private function removeDir(string $dir): void
+    {
+        $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+        $files = new RecursiveIteratorIterator(
+            $it,
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+        foreach ($files as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getPathname());
+            } else {
+                unlink($file->getPathname());
+            }
+        }
+        rmdir($dir);
+    }
+
+    #[Route('/{id}/delete', name: 'app_admin_album_delete', methods: ['POST'])]
+    public function delete(Request $request, Album $album, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): Response
     {
         if ($this->isCsrfTokenValid('delete'.$album->getId(), $request->request->get('_token'))) {
+            if (count($album->getPhotos()) > 0) {
+                if ($album->getFavoritePhoto() !== null) {
+                    $album->setFavoritePhoto(null);
+                }
+                $this->removeDir($parameterBag->get("kernel.project_dir") . "/storage/images/private/" . strtoupper($album->getUniqId()));
+            }
+            $album->setFavoritePhoto(null);
             $entityManager->remove($album);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_admin_album_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_album_index');
     }
+
+    #[Route('/{id}/update/favorite', name: 'app_admin_album_update_favorite', methods: ['POST'])]
+    public function update_favorite_photo(Request $request, Album $album, EntityManagerInterface $entityManager)
+    {
+        $photoId = $request->request->get('photoId');
+        $photo = null;
+
+        // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
+        if ($photoId !== null) {
+            $photo = $entityManager->getRepository(Photo::class)->find($photoId);
+            if ($photo !== null) {
+                if (($photo->getAlbum() === null) || ($photo->getAlbum()->getId() !== $album->getId())) {
+                    // Si la photo n'appartient pas à l'album, retourner une erreur
+                    return new Response('La photo spécifiée n\'appartient pas à cet album', Response::HTTP_BAD_REQUEST);
+                }
+            } 
+        }
+
+        // Définir la photo favorite de l'album
+        $album->setFavoritePhoto($photo);
+        $entityManager->flush();
+
+        // Retourner une réponse avec l'identifiant de la photo
+        return new Response($photoId);
+    }
+
 }

@@ -26,6 +26,10 @@
     "dependencies": {
         "atropos": "^2.0.2",
         "flowbite": "^2.2.1",
-        "fullpage.js": "^4.0.20"
+        "fullpage.js": "^4.0.20",
+        "isotope-fit-columns": "^1.1.4",
+        "isotope-layout": "^3.0.6",
+        "jquery-bridget": "^3.0.1",
+        "swiper": "^11.0.5"
     }
 }

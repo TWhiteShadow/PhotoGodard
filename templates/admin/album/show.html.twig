@@ -21,10 +21,61 @@
             </tr>
         </tbody>
     </table>
+    {% set albumFolder = album.getUniqId()|upper %}
+	<div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+    {% for photo in photos %}
+        {% if photo.title !=  "" %}
+            <div class="relative group">
+                <img class="h-full max-w-full rounded-lg object-cover" src='{{path("app_file", {"title": photo.title} )}}' alt="{{photo.title}}"/>
+                {% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : album.getId(), 'favorite_photo' : album.getFavoritePhoto() is null ? null : album.getFavoritePhoto().getId()} %}
+            </div>
+        {% endif %}
 
-    <a href="{{ path('app_admin_album_index') }}">back to list</a>
+    {% endfor %}
+    </div>
 
-    <a href="{{ path('app_admin_album_edit', {'id': album.id}) }}">edit</a>
+	<div class="actionButtons flex flex-row my-6">
+        <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>
+        <a href="{{ path('app_admin_album_edit', {'id': album.id}) }}" class="edit-button">Modifier</a>
+        {{ include('admin/album/_delete_form.html.twig') }}
+    </div>
 
-    {{ include('admin/album/_delete_form.html.twig') }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.favorite-picture');
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    const parent_id = checkbox.dataset.parentId;
+                    const photo_id = checkbox.dataset.photoId;
+
+                    checkedCheckboxes = Array.from(checkboxes).filter(function(cb) {
+                        return cb.checked;
+                    });
+                    checkedCheckboxes.forEach(function(otherCheckbox) {
+                        if (otherCheckbox !== checkbox) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+
+                    // Determine the value to send in the AJAX request
+                    const dataToSend = {
+                        photoId: this.checked ? photo_id : null // Send photo_id if checked, otherwise send null
+                    };
+
+                    // Send an AJAX request to update favorite picture
+                    $.ajax({
+                        url: '/admin/album/' + parent_id + '/update/favorite', // Replace with your actual route
+                        type: 'POST',
+                        data: dataToSend,
+                        error: function( response){
+                            alert('Erreur! ' + response.responseText);
+                        }
+                    });
+                });
+            });
+        });
+
+    </script>
+
 {% endblock %}
