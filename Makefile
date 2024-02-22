@@ -24,4 +24,13 @@ gp:
 
 
 dcu:
-	docker compose up --build --force-recreate
+	docker compose up --build --force-recreate -d
+
+install: 
+	docker compose down && \
+	make dcu && \
+	docker compose exec php composer install && \
+	docker compose exec php bin/console d:d:c --if-not-exists && \
+	make dsu-f && \
+	docker compose exec php bin/console d:f:l -n && \
+	docker compose exec php bin/console liip:imagine:cache:resolve assets/images/image1.jpg

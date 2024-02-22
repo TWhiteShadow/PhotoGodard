@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Repository\AlbumRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\HomepageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,15 +14,17 @@ use Twig\Environment;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(CategoryRepository $categoryRepository, AlbumRepository $albumRepository,): Response
+    public function index(CategoryRepository $categoryRepository, AlbumRepository $albumRepository, HomepageRepository $homepageRepository): Response
     {
         $categories = $categoryRepository->findAll();
-        $albums = $albumRepository->findBy([], ["id" => 'DESC']);
+        $albums = $albumRepository->findBy([], ['id' => 'DESC']);
+        $homepage = $homepageRepository->findAll()[0];
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'categories' => $categories,
             'albums' => $albums,
+            'homepage' => $homepage,
         ]);
     }
 
@@ -43,5 +45,4 @@ class HomeController extends AbstractController
         // Return the rendered HTML as response
         return new Response($html);
     }
-
 }

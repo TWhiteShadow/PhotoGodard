@@ -1,10 +1,10 @@
 {% extends '/admin/dashboard.html.twig' %}
 
-{% block title %}Edit Category
+{% block title %}Modifier la Catégorie
 {% endblock %}
 
 {% block main_content %}
-	<h1>Edit Category</h1>
+	<h1>Modifier la Catégorie</h1>
 
 	{{ include('admin/category/_form.html.twig') }}
 
@@ -27,6 +27,8 @@
 
         var tempDiv = document.createElement('div');
         tempDiv.innerHTML = newPhotosPrototypeModified;
+
+        var buttonClicked = false;
 
         var newPhotoPrototypeElement = tempDiv.firstChild;
 
@@ -68,6 +70,7 @@
         // Add change event listener to each checkbox
         photoToDeleteCheckboxes.forEach(function (checkbox) {
             checkbox.addEventListener("change", function () {
+                buttonClicked = true;
                 const checkedCheckboxes = Array.from(photoToDeleteCheckboxes).filter(function (cb) {
                     return cb.checked;
                 });
@@ -83,16 +86,19 @@
             });
         });
 
-        // Event delegation for click event on photo containers
-        document.querySelector('.photoGallery').addEventListener('click', function(event) {
-            const container = event.target.closest('.photoContainer');
-            if (!container) return; // If clicked outside photo container, return
-            
-            const photoToDeleteCheckbox = container.querySelector(".photoToDelete");
-            if (photoToDeleteCheckbox) {
-                photoToDeleteCheckbox.checked = !photoToDeleteCheckbox.checked;
-            }
-        });
+                    // Event delegation for click event on photo containers
+                document.querySelector('.photoGallery').addEventListener('click', function(event) {    
+                    if(buttonClicked){
+                        console.log("photo clicked");
+                        const container = event.target.closest('.photoContainer');
+                        if (!container) return; // If clicked outside photo container, return
+                        
+                        const photoToDeleteCheckbox = container.querySelector(".photoToDelete");
+                        if (photoToDeleteCheckbox) {
+                            photoToDeleteCheckbox.checked = !photoToDeleteCheckbox.checked;
+                        }
+                    }
+                });
 
         document.querySelector('.deleteSelection').addEventListener('click', function() {
             // Find all checkboxes with the name "photoToDelete[]"

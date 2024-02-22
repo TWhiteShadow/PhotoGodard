@@ -2,7 +2,6 @@
 
 namespace App\Form;
 
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,10 +14,10 @@ class PasswordGeneratorType extends AbstractType
     {
         $builder
             ->add('Button', ButtonType::class, [
-                'label' => "Générer un mot de passe",
+                'label' => 'Générer un mot de passe',
                 'attr' => [
-                    "class" =>"btn btn-primary btn-sm btn-generate-temp-password"
-                ]
+                    'class' => 'btn btn-primary btn-sm btn-generate-temp-password',
+                ],
             ])
             ->add('password', TextType::class, [
                 'label' => false,

@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Album;
-use App\Entity\Photo;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,12 +23,11 @@ class AlbumType extends AbstractType
                 'by_reference' => false,
                 'prototype' => true,
                 'required' => false,
-                'entry_options' => array(
+                'entry_options' => [
                     'label' => false,
                     // ...
-                ),
+                ],
             ]);
-                
     }
 
     public function configureOptions(OptionsResolver $resolver): void
