@@ -52,5 +52,13 @@ services:
     environment:
       - PMA_ARBITRARY=1
 
+  # dcru phpqa php-cs-fixer fix --config=".php-cs-fixer.php"
+  # dcru phpqa phpstan analyse --level=max src
+  phpqa:
+    image: jakzal/phpqa
+    working_dir: /project
+    volumes:
+      - .:/project
+
 volumes:
   db-data:

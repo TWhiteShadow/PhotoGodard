@@ -22,10 +22,10 @@ class CategoryType extends AbstractType
                 'by_reference' => false,
                 'prototype' => true,
                 'required' => false,
-                'entry_options' => array(
+                'entry_options' => [
                     'label' => false,
                     // ...
-                ),
+                ],
             ]);
     }
 

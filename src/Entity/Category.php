@@ -15,7 +15,6 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\Column(length: 125)]
     private ?string $uniqId = null;
 
@@ -26,7 +25,7 @@ class Category
     #[ORM\JoinColumn(name: 'favorite_photo_id', referencedColumnName: 'id', onDelete: 'SET NULL', nullable: true)]
     private ?Photo $favoritePhoto = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Photo::class, cascade:['remove'])]
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Photo::class, cascade: ['remove'])]
     private Collection $photos;
 
     public function __construct()
@@ -47,6 +46,7 @@ class Category
     public function setUniqId(): static
     {
         $this->uniqId = uniqid();
+
         return $this;
     }
 
@@ -62,10 +62,11 @@ class Category
         return $this;
     }
 
-    public function getFavoritePhoto():?Photo
+    public function getFavoritePhoto(): ?Photo
     {
-        return $this->favoritePhoto; 
+        return $this->favoritePhoto;
     }
+
     public function setFavoritePhoto(?Photo $favoritePhoto): static
     {
         $this->favoritePhoto = $favoritePhoto;
