@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt install default-mysql-client -y && \
     docker-php-ext-install pdo_mysql
 
-RUN apt-get update -y && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev libwebp-dev
+RUN apt-get install -y git libpng-dev libjpeg-dev libfreetype6-dev libwebp-dev
 
 # RUN docker-php-ext-install gd
 
