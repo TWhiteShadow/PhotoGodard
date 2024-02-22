@@ -121,6 +121,9 @@
 
 
 {% block body %}
+
+{% include "_navbar.html.twig" %}
+
 <div class="flex flex-col justify-center w-full">
   <div class="myGrid max-w-[90%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
     {% set photos = photos|reverse %}
@@ -134,5 +137,7 @@
     {% endfor %}
   </div>
 </div>
+
+<script type="text/javascript" src="{{ asset('js/navbar.js') }}"></script>
 
 {% endblock %}
