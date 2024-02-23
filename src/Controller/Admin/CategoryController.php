@@ -9,6 +9,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -130,11 +131,11 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_admin_category_delete', methods: ['POST'])]
-    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): Response
+    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag, Filesystem $filesystem): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             if (count($category->getPhotos()) > 0) {
-                $this->removeDir($parameterBag->get('kernel.project_dir').'/public/photos/public/'.strtoupper($category->getUniqId()));
+                $filesystem->remove($parameterBag->get('kernel.project_dir').'/public/photos/public/'.strtoupper($category->getUniqId()));
             }
             $category->setFavoritePhoto(null);
             $entityManager->remove($category);
