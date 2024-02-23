@@ -32,9 +32,10 @@ class CategoryController extends AbstractController
     public function show(Category $category): Response
     {
         $photos = $category->getPhotos();
-        if(count($photos) == 0) {
+        if (empty($photos)) {
             return $this->redirectToRoute('app_home');
         }
+
         return $this->render('category/show.html.twig', [
             'controller_name' => 'CategoryController',
             'category' => $category,

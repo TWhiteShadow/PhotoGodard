@@ -13,6 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Album|null findOneBy(array $criteria, array $orderBy = null)
  * @method Album[]    findAll()
  * @method Album[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * 
  */
 class AlbumRepository extends ServiceEntityRepository
 {
@@ -24,7 +25,7 @@ class AlbumRepository extends ServiceEntityRepository
     /**
      * @return Album[] Returns an array of Album objects
      */
-    public function findByName($value): array
+    public function findByName(string $value): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.name LIKE :val')
