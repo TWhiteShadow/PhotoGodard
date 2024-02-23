@@ -41,3 +41,5 @@ export default class SidebarObserver {
 
 
 }
+var sidebarObserver = new SidebarObserver();
+sidebarObserver.init();

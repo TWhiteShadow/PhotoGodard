@@ -12,20 +12,11 @@ var parallaxInstanceContact = new Parallax(sceneContact);
 
 // Gestion MenuScrollResponsive
 import MenuScrollTo from "./js/MenuScrollTo";
-var menuScrollTo = new MenuScrollTo();
-menuScrollTo.init();
-
-
 // Gestion MenuOverlay
 import MenuBurger from "./js/MenuBurger";
-var menuBurger = new MenuBurger();
-menuBurger.init();
-
-
 // SIDEBAR SCRIPT
 import SidebarObserver from "./js/SidebarObserver";
-var sidebarObserver = new SidebarObserver();
-sidebarObserver.init();
+
 
 // import Atropos library
 import Atropos from "atropos";

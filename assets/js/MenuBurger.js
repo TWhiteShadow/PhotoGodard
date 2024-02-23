@@ -58,3 +58,5 @@ export default class MenuBurger  {
         this.handleHashChange();
     }
 }
+var menuBurger = new MenuBurger();
+menuBurger.init();

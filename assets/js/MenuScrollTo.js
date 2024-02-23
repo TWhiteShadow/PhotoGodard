@@ -105,3 +105,6 @@ export default class MenuScrollTo  {
     }
 
 }
+
+var menuScrollTo = new MenuScrollTo();
+menuScrollTo.init();
