@@ -24,117 +24,36 @@ var touchScreen = false;
 if ('ontouchstart' in window) {
     var touchScreen = true;
 }
-var homeDivDisplay = document.querySelector(".homeSectionMobile").currentStyle ? document.querySelector(".homeSectionMobile").currentStyle.display : getComputedStyle(document.querySelector(".homeSectionMobile"), null).display;
 
-// // code for scroll to top on devices who have a width <= 768px 
-// function smoothScrollTo(target, duration) {
-//     const targetElement = document.querySelector(target);
-//     if (!targetElement) return;
-
-//     const start = window.scrollY;
-//     const startTime = performance.now();
-
-//     function scrollAnimation(currentTime) {
-//         const elapsedTime = currentTime - startTime;
-//         const progress = Math.min(elapsedTime / duration, 1);
-
-//         window.scrollTo(
-//             0,
-//             start + (targetElement.getBoundingClientRect().top - start) * progress
-//         );
-
-//         if (progress < 1) {
-//             requestAnimationFrame(scrollAnimation);
-//         }
-//     }
-
-//     requestAnimationFrame(scrollAnimation);
-// }
-// if (window.localStorage.getItem('previousHash') !== undefined && window.localStorage.getItem('previousHash') !== null) {
-//     document.querySelector('#fullpage').classList.remove('scroll-smooth');
-//     window.location.hash = window.localStorage.getItem('previousHash');
-//     document.querySelector('#fullpage').classList.add('scroll-smooth');
-//     window.localStorage.removeItem("previousHash");
-
-// }
-// var previousWidth = 999999999;
-
-// window.addEventListener("resize", (event) => {
-
-//     var width = window.innerWidth;
-//     if (width < previousWidth && width < 768) {
-//         previousWidth = width;
-//     }
-//     if (width > previousWidth && width >= 768) {
-//         var hash = window.location.hash
-//         if (hash != '#home') {
-//             var defaultUrl = window.location.toString();
-//             var url = defaultUrl.split("/#")[0];
-//             window.localStorage.setItem('previousHash', hash);
-//             window.location = url;
-//         }
-//         previousWidth = 999999999;
-//     }
-//     if (width <= 768) {
-//         if (homeDivDisplay == "block") {
-//             document.getElementsByClassName("homeSectionMobile")[0].id = "home";
-//             document
-//                 .querySelector("#menuBurgerHomeHref")
-//                 .addEventListener("click", function (e) {
-//                     e.preventDefault();
-//                     const targetElementId = this.getAttribute("href");
-//                     $("html, body").addClass("scroll-smooth")
-//                     smoothScrollTo(targetElementId, 1000);
-//                 });
-//         };
-//     } else {
-//         document.getElementsByClassName("homeSectionMobile")[0].id = "";
-//     }
-// });
-
-// // FIX a href error on mobile devices (<= 768)
-// document.addEventListener("DOMContentLoaded", (e) => {
-//     var width = window.innerWidth;
-//     if (width <= 768) {
-//         if (homeDivDisplay == "block") {
-//             document.getElementsByClassName("homeSectionMobile")[0].id = "home";
-//             document
-//                 .querySelector("#menuBurgerHomeHref")
-//                 .addEventListener("click", function (e) {
-//                     e.preventDefault();
-//                     const targetElementId = this.getAttribute("href");
-//                     $("html, body").addClass("scroll-smooth");
-//                     smoothScrollTo(targetElementId, 1000);
-//                 });
-//         };
-//     } else {
-//         document.getElementsByClassName("homeSectionMobile")[0].id = "";
-//     }
-// });
 import MenuScrollTo from "./js/MenuScrollTo";
 var menuScrollTo = new MenuScrollTo();
 menuScrollTo.init();
 
 
-// Menu burger open function
-$(".menu").click(function () {
-    $(this).toggleClass("open");
-    $(".overlay").toggleClass("showOverlay");
-    spanMenuOverlayActiveChange();
-});
+// // Menu burger open function
+// $(".menu").click(function () {
+//     $(this).toggleClass("open");
+//     $(".overlay").toggleClass("showOverlay");
+//     spanMenuOverlayActiveChange();
+// });
 
-$(document).keyup(function (e) {
-    if ((e.key === "Escape" || e.key === "Enter") && $(".menu").hasClass("open")) {
-        closeOverlay();
-    }
-});
+// $(document).keyup(function (e) {
+//     if ((e.key === "Escape" || e.key === "Enter") && $(".menu").hasClass("open")) {
+//         closeOverlay();
+//     }
+// });
 
-function closeOverlay() {
-    if ($(".menu").hasClass("open")) {
-        $(".overlay").toggleClass("showOverlay");
-        $(".menu").toggleClass("open");
-    }
-};
+// function closeOverlay() {
+//     if ($(".menu").hasClass("open")) {
+//         $(".overlay").toggleClass("showOverlay");
+//         $(".menu").toggleClass("open");
+//     }
+// };
+
+import MenuBurger from "./js/MenuBurger";
+var menuBurger = new MenuBurger();
+menuBurger.init();
+
 
 window.atroposInit = function atroposInit() {
     if (touchScreen) {
@@ -214,23 +133,23 @@ sections.forEach((element) => {
 });
 
 
-function spanMenuOverlayActiveChange() {
-    var overlay = document.querySelector(".overlay");
-    var overlayMenuSpans = overlay.querySelectorAll("span");
+// function spanMenuOverlayActiveChange() {
+//     var overlay = document.querySelector(".overlay");
+//     var overlayMenuSpans = overlay.querySelectorAll("span");
 
-    overlayMenuSpans.forEach((span) => {
-        span.addEventListener("click", (event) => { closeOverlay(); });
-        if (span.parentElement.getAttribute("href") === window.location.hash) {
-            span.classList.add("active");
-        } else {
-            span.classList.remove("active");
-        }
-    });
-};
+//     overlayMenuSpans.forEach((span) => {
+//         span.addEventListener("click", (event) => { closeOverlay(); });
+//         if (span.parentElement.getAttribute("href") === window.location.hash) {
+//             span.classList.add("active");
+//         } else {
+//             span.classList.remove("active");
+//         }
+//     });
+// };
 
-addEventListener("hashchange", (event) => {
-    spanMenuOverlayActiveChange();
-});
+// addEventListener("hashchange", (event) => {
+//     spanMenuOverlayActiveChange();
+// });
 
 
 document.getElementById('year').innerText = new Date().getFullYear();
