@@ -24,6 +24,8 @@ gp:
 
 
 dcu:
+	docker stop $$(docker ps -a -q) && \
+	docker compose down && \
 	docker compose up --build --force-recreate -d
 
 install: 
