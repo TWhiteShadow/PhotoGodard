@@ -32,7 +32,7 @@ class CategoryController extends AbstractController
     public function show(Category $category): Response
     {
         $photos = $category->getPhotos();
-        if (0 == count($photos)) {
+        if (empty($photos)) {
             return $this->redirectToRoute('app_home');
         }
 

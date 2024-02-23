@@ -1,4 +1,4 @@
-export default class SidebarObserver { 
+class SidebarObserver { 
 
     init(){
         // Using an observer to detect when the user scrolls the page and which sections is being seen
@@ -39,7 +39,6 @@ export default class SidebarObserver {
 
     }
 
-
 }
-var sidebarObserver = new SidebarObserver();
-sidebarObserver.init();
+
+document.querySelector("#sidebar") && new SidebarObserver().init();

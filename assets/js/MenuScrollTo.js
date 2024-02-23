@@ -1,4 +1,13 @@
-export default class MenuScrollTo  {
+function debounce(func, timeout = 250){
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}
+
+
+class MenuScrollTo  {
 
     constructor() {
         if (window.localStorage.getItem('previousHash') !== undefined && window.localStorage.getItem('previousHash') !== null) {
@@ -18,8 +27,8 @@ export default class MenuScrollTo  {
         const targetElement = document.querySelector(target);
         if (!targetElement) return;
     
-        const start = window.scrollY;
-        const startTime = performance.now();
+        let start = window.scrollY;
+        let startTime = performance.now();
     
         function scrollAnimation(currentTime) {
             const elapsedTime = currentTime - startTime;
@@ -40,33 +49,36 @@ export default class MenuScrollTo  {
    
     handleResize(){
         const self = this;
+
+        const debounceScroll = debounce(function (e) {
+            e.preventDefault();
+            const targetElementId = this.getAttribute("href");
+            $("html, body").addClass("scroll-smooth")
+            self.smoothScrollTo(targetElementId, 1000);
+        },150);
+
         window.addEventListener("resize", (event) => {
         
-            var width = window.innerWidth;
+            const width = window.innerWidth;
             if (width < self.previousWidth && width < 768) {
                 self.previousWidth = width;
             }
             if (width > self.previousWidth && width >= 768) {
-                var hash = window.location.hash
+                const hash = window.location.hash
                 if (hash != '#home') {
-                    var defaultUrl = window.location.toString();
-                    var url = defaultUrl.split("/#")[0];
+                    const defaultUrl = window.location.toString();
+                    const url = defaultUrl.split("/#")[0];
                     window.localStorage.setItem('previousHash', hash);
                     window.location = url;
                 }
-                self.previousWidth = 999999999;
+                self.previousWidth = width;
             }
             if (width <= 768) {
                 if (self.homeDivDisplay == "block") {
                     document.getElementsByClassName("homeSectionMobile")[0].id = "home";
                     document
                         .querySelector("#menuBurgerHomeHref")
-                        .addEventListener("click", function (e) {
-                            e.preventDefault();
-                            const targetElementId = this.getAttribute("href");
-                            $("html, body").addClass("scroll-smooth")
-                            self.smoothScrollTo(targetElementId, 1000);
-                        });
+                        .addEventListener("click", debounceScroll);
                 };
             } else {
                 document.getElementsByClassName("homeSectionMobile")[0].id = "";
@@ -79,7 +91,7 @@ export default class MenuScrollTo  {
         const self = this;
         // FIX a href error on mobile devices (<= 768)
         document.addEventListener("DOMContentLoaded", (e) => {
-            var width = window.innerWidth;
+            const width = window.innerWidth;
             if (width <= 768) {
                 if (this.homeDivDisplay == "block") {
                     document.getElementsByClassName("homeSectionMobile")[0].id = "home";
@@ -105,6 +117,4 @@ export default class MenuScrollTo  {
     }
 
 }
-
-var menuScrollTo = new MenuScrollTo();
-menuScrollTo.init();
+document.querySelector(".homeSectionMobile") ? new MenuScrollTo().init() : null;

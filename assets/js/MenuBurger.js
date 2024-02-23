@@ -1,4 +1,11 @@
-export default class MenuBurger  {
+class MenuBurger  {
+
+    constructor() {
+        const overlayMenuSpans = document.querySelector(".overlay").querySelectorAll("span");
+        overlayMenuSpans.forEach((span) => {
+            span.addEventListener("click", (event) => { this.closeOverlay(); })
+        });
+    }
 
     closeOverlay() {
         if( document.querySelector(".menu").classList.contains("open") ){
@@ -7,13 +14,11 @@ export default class MenuBurger  {
         }
     };
 
-    spanMenuOverlayActiveChange() {
-        const self = this;
-        var overlay = document.querySelector(".overlay");
-        var overlayMenuSpans = overlay.querySelectorAll("span");
+    spanMenuOverlayActiveChange(){
+        const overlay = document.querySelector(".overlay");
+        const overlayMenuSpans = overlay.querySelectorAll("span");
     
         overlayMenuSpans.forEach((span) => {
-            span.addEventListener("click", (event) => { self.closeOverlay(); });
             if (span.parentElement.getAttribute("href") === window.location.hash) {
                 span.classList.add("active");
             } else {
@@ -23,24 +28,22 @@ export default class MenuBurger  {
     };
     
     openMenuEvent(){
-        const self = this;
-        document.querySelector(".menu").addEventListener("click", function(e) {
-            this.classList.toggle("open");
+        document.querySelector(".menu").addEventListener("click", (e) => {
+            e.currentTarget.classList.toggle("open");
             
-            var overlayElement = document.querySelector(".overlay");
+            let overlayElement = document.querySelector(".overlay");
             
             overlayElement.classList.toggle("showOverlay");
             
-            self.spanMenuOverlayActiveChange();
+            this.spanMenuOverlayActiveChange();
         });
 
     }
 
     handleKeyUpToClose(){ 
-        const self = this;
-        document.addEventListener("keyup", function(e) {
+        document.addEventListener("keyup", (e) => {
             if ((e.key === "Escape" || e.key === "Enter") && document.querySelector(".menu").classList.contains("open")) {
-                self.closeOverlay();
+                this.closeOverlay();
             }
         });
 
@@ -58,5 +61,4 @@ export default class MenuBurger  {
         this.handleHashChange();
     }
 }
-var menuBurger = new MenuBurger();
-menuBurger.init();
+document.querySelector(".menu") && new MenuBurger().init();

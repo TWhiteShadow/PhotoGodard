@@ -19,7 +19,7 @@ class AlbumController extends AbstractController
         $session = $request->getSession();
         if ((!empty($session->get('ROLE_ALBUM_ACCESS')) && $session->get('ROLE_ALBUM_ACCESS') == $album->getUniqId().'-ACCESS') || !empty($this->getUser()) && in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             $photos = $album->getPhotos();
-            if (0 == count($photos)) {
+            if (empty($photos)) {
                 return $this->redirectToRoute('app_home');
             }
 
