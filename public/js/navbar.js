@@ -7,4 +7,15 @@ window.onscroll = function() {
       document.getElementById("navbar").style.setProperty('top', '-100px', 'important');
     }
     prevScrollpos = currentScrollPos;
-  } 
+} 
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    console.log(anchor)
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});

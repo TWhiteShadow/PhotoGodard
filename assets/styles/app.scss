@@ -645,7 +645,10 @@ $light: #efefef;
 .text-clamp-xl {
     font-size: clamp(1.2rem, 2.5vw, 2rem) !important;
 }
+.text-clamp-7xl{
+    font-size: clamp(2.5rem, 8vw , 4.5rem) !important;
 
+}
 
 // LOGIN FORM
 
@@ -1115,4 +1118,24 @@ $light: #efefef;
     opacity: 0;
     transition: all 0.3s ease-in;
     z-index: 0;
+}
+
+
+
+.imagePreviewContainer{
+	min-height: 500px;
+	background: transparent;
+	transition: height 400ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 0.5s ease-out 0.2s !important;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.imagePreview{
+    background-blend-mode: saturation;
+    background-image: linear-gradient(black, black), url("https://www.photoglob.fr/wp-content/uploads/2017/09/photo-afrique-coucher-de-soleil.jpeg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

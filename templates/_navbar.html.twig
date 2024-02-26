@@ -2,10 +2,10 @@
 
 
 
-<nav id="navbar" class="dark:bg-gray-900 transition-all fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+<nav id="navbar" class="dark:bg-gray-900 h-[69px] transition-all fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">
+      <img src="{{ asset('assets/images/logo.svg') }}" class="h-8" alt="Flowbite Logo"> 
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
   </a>
   <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -37,6 +37,10 @@
 </nav>
 {# END NAVBAR #}
 <div class="imagePreviewContainer h-[70vh] w-full justify-center items-center">
-  <h1>Mariages</h1>
-  <a href=""></a>
-</div>
+    <div class="h-full pt-[69px] imagePreview flex justify-center items-center relative text-center" alt="Mariages" >
+        <h1 class="text-clamp-7xl uppercase font-bold text-white drop-shadow-xl">Mariages</h1>
+        <a href="#content" class="absolute bottom-6" >
+            <img src="{{ asset('assets/images/down_chevron.svg') }}" alt="chevron vers le bas" class="h-[30px] w-[30px]" height="30" width="30" srcset="{{ asset('assets/images/down_chevron.svg') }}" />
+ </a>
+    </div>
+</div>  

@@ -73,7 +73,7 @@ class AlbumController extends AbstractController
 
         $favoritePhoto = $album->getFavoritePhoto();
 
-        return $this->render('login/album.html.twig', [
+        return $this->render('album/login.html.twig', [
             'form' => $albumLoginForm->createView(),
             'error' => $error,
             'favoritePhoto' => $favoritePhoto,
