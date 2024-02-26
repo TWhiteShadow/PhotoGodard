@@ -19,21 +19,16 @@ class AlbumLoginType extends AbstractType
                 'label' => 'Identifiant',
                 'attr' => [
                     'placeholder' => 'Saisissez votre identifiant d\'album',
-                    'class' => 'input-field focus:outline-none focus:shadow-none',
                 ],
             ])
             ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
                 'attr' => [
                     'placeholder' => 'Saisissez votre mot de passe',
-                    'class' => 'input-field focus:outline-none focus:shadow-none',
                 ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Connexion',
-                'attr' => [
-                    'class' => 'button1',
-                ],
             ]);
     }
 

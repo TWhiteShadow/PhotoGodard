@@ -826,7 +826,7 @@ $light: #efefef;
 
     .input-field {
         background: none;
-        border: none;
+        border: none !important;
         outline: none;
         width: 100%;
         color: #171717; /* Original color */
