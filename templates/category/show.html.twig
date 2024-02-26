@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 
-
 {% block javascripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
@@ -13,6 +12,8 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
+       
+{% block spinnerscript %}{% endblock %}
 {% block javascriptsBody %}
 <script>
     $(window).load(function () {
@@ -144,5 +145,31 @@
 
 <script type="text/javascript" src="{{ asset('js/navbar.js') }}"></script>
 
+<script> 
+    var images = document.querySelectorAll( "img" );
+    var total = images.length;
+    var counter = 0;
+    images.forEach((image) => {
+        image.addEventListener( "load", () => {
+            counter++;
+
+            document.querySelector('#spinner-text').innerHTML = `${counter} images chargées sur ${total}...`;
+            image.classList.add( "loaded" );
+        });
+    });
+    window.addEventListener('load', function() {
+        
+        document.querySelectorAll("img").forEach(function(element) {
+            element.removeAttribute("width");
+            element.removeAttribute("height");
+        });
+        // close spinner0
+        document.querySelector('.spinner').classList.toggle('hideSpinner');
+        setTimeout(function() {
+            document.querySelector('.spinner').remove();
+        }, 500);
+    });
+    
+</script>
 
 {% endblock %}

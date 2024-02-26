@@ -55,9 +55,11 @@
             <svg viewBox="25 25 50 50">
                 <circle r="20" cy="50" cx="50"></circle>
             </svg>
+            <p id="spinner-text">Chargement...</p>
         </div>
-
+        {% block spinnerscript %}
         <script>
+            
             window.addEventListener('load', function() {
                 document.querySelectorAll("img").forEach(function(element) {
                     element.removeAttribute("width");
@@ -70,7 +72,7 @@
                 }, 500);
             });
         </script>
-
+        {% endblock %}
         {# <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" > #}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" >
         {% block javascriptsBody %}
