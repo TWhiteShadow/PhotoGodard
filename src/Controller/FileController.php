@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Photo;
 use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,13 +14,12 @@ use function PHPUnit\Framework\throwException;
 
 class FileController extends AbstractController
 {
-    #[Route('/file/{id}', 'app_file')]
-    public function getFile(int $id, PhotoRepository $photoRepository, Session $session): Response
+    #[Route('/file/{photo}', 'app_file')]
+    public function getFile(Photo $photo, Session $session): Response
     {
-        $photo = $photoRepository->find($id);
         $favoritePhoto = false; 
         if (empty($photo)) {
-            throw $this->createNotFoundException('No photo found for id '.$id);
+            throw $this->createNotFoundException('No photo found');
         }
 
         if($photo->getAlbum() === null){
