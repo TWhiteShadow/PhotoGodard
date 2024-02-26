@@ -16,6 +16,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
+{% block spinnerscript %}{% endblock %}
 {% block javascriptsBody %}{% endblock %}
 
 {% block body %}
@@ -138,5 +139,32 @@
             }
         });
     });
+</script>
+<script> 
+    var images = document.querySelectorAll( "img" );
+    var total = images.length;
+    var counter = 0;
+    images.forEach((image) => {
+        image.addEventListener( "load", () => {
+            counter++;
+
+            document.querySelector('#spinner-text').innerHTML = `${counter} images chargées sur ${total}...`;
+            image.classList.add( "loaded" );
+            console.log(`Image n°${counter} loaded / ${total}` )
+        });
+    });
+    window.addEventListener('load', function() {
+        
+        document.querySelectorAll("img").forEach(function(element) {
+            element.removeAttribute("width");
+            element.removeAttribute("height");
+        });
+        // close spinner0
+        document.querySelector('.spinner').classList.toggle('hideSpinner');
+        setTimeout(function() {
+            document.querySelector('.spinner').remove();
+        }, 500);
+    });
+    
 </script>
 {% endblock %}

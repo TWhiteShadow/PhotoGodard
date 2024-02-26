@@ -879,6 +879,7 @@ $light: #efefef;
     background-color: rgb(255, 255, 255);
     z-index: 1000;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     opacity: 1;
@@ -896,18 +897,20 @@ $light: #efefef;
     transform-origin: center;
     -webkit-animation: rotate4 2s linear infinite;
     animation: rotate4 2s linear infinite;
+
+    & circle {
+        fill: none;
+        stroke: gray;
+        stroke-width: 2;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        -webkit-animation: dash4 1.5s ease-in-out infinite;
+        animation: dash4 1.5s ease-in-out infinite;
+    }
 }
 
-.spinner svg circle {
-    fill: none;
-    stroke: gray;
-    stroke-width: 2;
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-    stroke-linecap: round;
-    -webkit-animation: dash4 1.5s ease-in-out infinite;
-    animation: dash4 1.5s ease-in-out infinite;
-}
+
 
 @-webkit-keyframes rotate4 {
     100% {
