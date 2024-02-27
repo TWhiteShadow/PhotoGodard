@@ -1,6 +1,17 @@
+@import 'scss/spinner.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	font-family: 'Mulish', sans-serif;
+}
 h1{
   font-size: 30px !important;
 }
+
+
 
 // BUTTONS
 
@@ -71,7 +82,6 @@ h1{
     width:100%;
     margin:20px auto;
     position:relative;
-    border: 3px solid gray;;
 	table-layout: fixed;
   }
   table * {

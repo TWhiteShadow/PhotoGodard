@@ -9,38 +9,19 @@
 
         <link rel="icon" href="{{ asset('assets/images/godard.ico') }}">
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
         {% endblock %}
+            {{ encore_entry_link_tags('admin') }}
 
+            {{ encore_entry_script_tags('admin') }}
         {% block javascripts %}
         {% endblock %}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
         <script src="https://kit.fontawesome.com/460200155f.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-white">
+        {% include "_spinner.html.twig" %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.js" integrity="sha512-G74j2JVU7kYK7lEM17+WI0sgxWPGIob8SW93Z/YA+A0VNckeZDKHgyQbkT2uq59CBi/v/gE7bXbLdkpi5QZ9FQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        {% block body %}
-        {% endblock %}
-
-        {# SPINNER #}
-        <div class="spinner">
-            <svg viewBox="25 25 50 50">
-                <circle r="20" cy="50" cx="50"></circle>
-            </svg>
-            <p>Chargement...</p>
-        </div>
-
-        <script>
-
-        $(window).load(function(){
-            // close spinner0
-            document.querySelector('.spinner').classList.toggle('hide');
-            document.querySelector("html").classList.remove("overflow-hidden");
-            setTimeout(() => {
-                document.querySelector('.spinner').remove();
-            }, 250);
-        });
-        </script>
-        <script src="{{ asset('js/admin.js') }}"></script>
+            {% block body %}
+            {% endblock %}
     </body>
 </html>
