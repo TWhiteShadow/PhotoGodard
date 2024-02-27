@@ -31,6 +31,7 @@
                 href="{{ path("app_file", {"photo": photo.id} )}}">
                 <img class="h-auto w-auto rounded-lg object-cover" width="200" height="100" src="{{ path("app_file",
                     {"photo": photo.id} ) }}" alt="{{ album.getName() ~ '-photo n°' ~ (i + 1) }}">
+
             </a>
         {% endfor %}
         {% endif %}
