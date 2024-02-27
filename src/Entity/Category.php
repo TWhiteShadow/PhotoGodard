@@ -6,7 +6,6 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -46,7 +45,7 @@ class Category
 
     public function setUniqId(): static
     {
-        $this->uniqId = bin2hex(Uuid::uuid4()->getBytes());
+        $this->uniqId = uniqid();
 
         return $this;
     }

@@ -6,7 +6,6 @@ use App\Repository\AlbumRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Uuid;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
 class Album
@@ -52,7 +51,7 @@ class Album
 
     public function setUniqId(): static
     {
-        $this->uniqId = bin2hex(Uuid::uuid4()->getBytes());
+        $this->uniqId = uniqid();
 
         return $this;
     }
