@@ -75,7 +75,7 @@ h4 {
 // navbar
 
 #navbar{
-    background-color: rgba(255, 255, 255, 0.19) !important;
+    background-color: rgba(0, 0, 0, 0.20) !important;
     -webkit-backdrop-filter: blur(8px);
 }
 
@@ -1138,10 +1138,37 @@ $light: #efefef;
 }
 .imagePreview{
     background-blend-mode: saturation;
-    background-image: linear-gradient(black, black), url("https://www.photoglob.fr/wp-content/uploads/2017/09/photo-afrique-coucher-de-soleil.jpeg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+
+.underlineEffect {
+    position: relative;
+    text-decoration: none;
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        border-radius: 4px;
+        background-color: #ffffff;
+        bottom: -2px;
+        left: 0;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform .3s ease-in-out;
+        
+    }
+    &:hover::before {
+        transform-origin: left;
+        transform: scaleX(1) !important;
+    }
+}
+
+#content{
+    background-color: #f3f4f6;
+    position: relative;
+}
