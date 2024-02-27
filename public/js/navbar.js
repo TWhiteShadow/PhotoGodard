@@ -1,7 +1,11 @@
 var prevScrollpos = window.scrollY;
 let isScrollingToTop = false;
+    document.querySelector('.imagePreview').style.setProperty('transform', 'translateY(' + prevScrollpos/2 + 'px)');
 window.onscroll = function() {
     var currentScrollPos = window.scrollY;
+
+    document.querySelector('.imagePreview').style.setProperty('transform', 'translateY(' + currentScrollPos/2 + 'px)');
+
     if (prevScrollpos > currentScrollPos) {
         isScrollingToTop = true;
         document.getElementById("navbar").style.setProperty('top', '0px', 'important');
@@ -11,11 +15,11 @@ window.onscroll = function() {
             child.classList.add("transition-all", "duration-300", "opacity-0");
         });
     }
-    prevScrollpos = currentScrollPos;
+    prevScrollpos = currentScrollPos
 } 
 // Options pour l'observer
 const options = {
-    threshold: 0.2 // seuil de visibilité
+    threshold: 0.9 // seuil de visibilité
 };
 
 // Fonction de callback pour l'observer
