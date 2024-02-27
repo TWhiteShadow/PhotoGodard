@@ -6,6 +6,8 @@ use App\Entity\Photo;
 use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FileController extends AbstractController
@@ -41,7 +43,6 @@ class FileController extends AbstractController
 
         // Obtenez le chemin absolu vers le répertoire des images privées
         $privateImagesDir = $this->getParameter('kernel.project_dir').'/storage/images/private';
-        $photo = $photoRepository->findOneBy(['title' => $title]);
         $album = strtoupper($photo->getAlbum()->getUniqId());
 
         // Concaténez le chemin du fichier spécifique que vous souhaitez charger
