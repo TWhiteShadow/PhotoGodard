@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
 {
-    #[Route('/ADMIN')]
     #[Route('/admin', name: 'app_admin')]
     public function index(AlbumRepository $albumRepository, CategoryRepository $categoryRepository): Response
     {
