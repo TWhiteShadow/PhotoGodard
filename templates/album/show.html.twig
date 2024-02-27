@@ -23,7 +23,7 @@
 
 {% include "_navbar.html.twig" with {
     "navbar_image_title": album.getName(),
-    "navbar_image_path": path('app_file', {'id' : album.getFavoritePhoto() ? album.getFavoritePhoto().getId() : album.getPhotos()|last .getId() } ),
+    "navbar_image_path": path('app_file', {'photo' : album.getFavoritePhoto() ? album.getFavoritePhoto().getId() : album.getPhotos()|last .getId() } ),
 }%}
 
 <div id="content" class="flex flex-col justify-center w-full pt-6">
