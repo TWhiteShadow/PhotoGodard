@@ -3,7 +3,7 @@
 	{% for album in albums %}
 		{% if album.getPhotos() is not empty %}
 			{% set albumWithPhoto = 1 %}
-			{% set cardImgPath = album.getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') : ( album.getFavoritePhoto() is not null ? path("app_file", {"title": album.getFavoritePhoto().getTitle()} ) : asset( 'assets/images/missing-image.png') ) %}
+			{% set cardImgPath = album.getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') : ( album.getFavoritePhoto() is not null ? path("app_file", {"photo": album.getFavoritePhoto().getId()} ) : asset( 'assets/images/missing-image.png') ) %}
 			{% include "/home/_atropos-card.html.twig" with {
 				'card_controller' : "album",
 				'card_id' : album.getId(),

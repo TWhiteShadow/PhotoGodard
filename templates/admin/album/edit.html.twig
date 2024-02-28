@@ -1,5 +1,17 @@
-{% extends '/admin/dashboard.html.twig' %} {% block title %}Modifier l'Album {%
-endblock %} {% block main_content %}
+{% extends '/admin/dashboard.html.twig' %} {% block title %}Modifier l'Album {% endblock %}
+
+{% block javascriptsBody %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+<script src="https://npmcdn.com/isotope-fit-columns@1/fit-columns.js"></script>
+{% endblock %}
+
+{% block main_content %}
 <h1>Modifier l'Album</h1>
 
 {% set albumFolder = album.getUniqId()|upper %}
@@ -14,37 +26,6 @@ endblock %} {% block main_content %}
 </div>
 
 <script>
-  var newPhotosPrototype =
-    document.querySelector("#album_newPhotos").dataset.prototype;
-
-  // Remplacer __name__ par un nom unique
-  var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
-  var newPhotosPrototypeModified = newPhotosPrototype.replace(
-    /__name__/g,
-    uniqueId
-  );
-
-  var tempDiv = document.createElement("div");
-  tempDiv.innerHTML = newPhotosPrototypeModified;
-
-  var buttonClicked = false;
-  var newPhotoPrototypeElement = tempDiv.firstChild;
-
-  document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
-
-  document.querySelector(".btn-generate-pass").addEventListener("click", function () {
-      var chars =
-        "0123456789abcdefghijklmnopqrstuvwxyz!@#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      var passwordLength = 12;
-      var password = "";
-      for (var i = 0; i <= passwordLength; i++) {
-        var randomNumber = Math.floor(Math.random() * chars.length);
-        password += chars.substring(randomNumber, randomNumber + 1);
-      }
-      document.getElementById("album_password").value = password;
-    });
-
-    
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('.photoToDelete').forEach((checkbox) => {checkbox.checked = false})
 

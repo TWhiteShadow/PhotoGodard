@@ -9,6 +9,7 @@ use App\Repository\AlbumRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -114,32 +115,15 @@ class AlbumController extends AbstractController
         ]);
     }
 
-    private function removeDir(string $dir): void
-    {
-        $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
-        $files = new \RecursiveIteratorIterator(
-            $it,
-            \RecursiveIteratorIterator::CHILD_FIRST
-        );
-        foreach ($files as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getPathname());
-            } else {
-                unlink($file->getPathname());
-            }
-        }
-        rmdir($dir);
-    }
-
     #[Route('/{id}/delete', name: 'app_admin_album_delete', methods: ['POST'])]
-    public function delete(Request $request, Album $album, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): Response
+    public function delete(Request $request, Album $album, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag, Filesystem $filesystem): Response
     {
         if ($this->isCsrfTokenValid('delete'.$album->getId(), $request->request->get('_token'))) {
             if (count($album->getPhotos()) > 0) {
                 if (null !== $album->getFavoritePhoto()) {
                     $album->setFavoritePhoto(null);
                 }
-                $this->removeDir($parameterBag->get('kernel.project_dir').'/storage/images/private/'.strtoupper($album->getUniqId()));
+                $filesystem->remove($parameterBag->get('kernel.project_dir').'/storage/images/private/'.strtoupper($album->getUniqId()));
             }
             $album->setFavoritePhoto(null);
             $entityManager->remove($album);

@@ -9,14 +9,6 @@
 
 <div class="actionButtons flex flex-row my-6">
     <a class="back-button" href="{{ path('app_admin_homepage_index') }}">Revenir en arrière</a>
-
-    </div>
-    <script>
-        document.querySelectorAll('.inputPhoto').forEach(function(e) {
-            e.addEventListener('change', function(x) { 
-                document.querySelector("."+x.target.dataset.img).src = URL.createObjectURL(e.files[0]);
-            });
-        });
-    </script>
+</div>
 
 {% endblock %}

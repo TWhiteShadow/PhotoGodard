@@ -1,6 +1,17 @@
+@import 'scss/spinner.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	font-family: 'Mulish', sans-serif;
+}
 h1{
   font-size: 30px !important;
 }
+
+
 
 // BUTTONS
 
@@ -34,6 +45,16 @@ h1{
 .delete-button{
   @apply h-fit focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900;
 }
+
+
+.isotopeGridStyle{
+	@apply relative w-full my-0 mx-auto justify-center;
+}
+
+.isotopeGridItemStyle{
+	@apply w-[50%] md:w-[230px] p-2;
+}
+
 
 // TABLES
 
@@ -71,7 +92,6 @@ h1{
     width:100%;
     margin:20px auto;
     position:relative;
-    border: 3px solid gray;;
 	table-layout: fixed;
   }
   table * {
@@ -297,17 +317,18 @@ h1{
 }
 .ui-bookmark {
 	--icon-size: 24px;
-	--icon-secondary-color: rgb(77, 77, 77);
+	--icon-secondary-color: #aaa;
 	--icon-hover-color: rgb(97, 97, 97);
 	--icon-primary-color: gold;
 	--icon-circle-border: 1px solid var(--icon-primary-color);
 	--icon-circle-size: 35px;
 	--icon-anmt-duration: 0.3s;
   position: absolute;
-  top: 0;
-  right: 5px;
+  top: 0.5rem;
+  right: calc(5px + 0.5rem);
   opacity: 0;
   transition: all .3s ease-in;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 1));
   &:has(input:checked){opacity: 1;}
 	input {
 		-webkit-appearance: none;
@@ -387,7 +408,7 @@ h1{
 	}
 }
 
-$background-color_1: #ccc;
+$background-color_1: #aaa;
 $background-color_2: var(--clr);
 
 /* Hide the default checkbox */
@@ -491,8 +512,8 @@ $background-color_2: var(--clr);
   justify-content: center;
   align-items: center;
   text-align: center;
-	top: 0;
-	left: 0;
+	top: 0.5rem;
+	left: 0.5rem;
 	height: 20px;
 	width: 20px;
 	background-color: $background-color_1;
@@ -503,6 +524,9 @@ $background-color_2: var(--clr);
 		content: "";
 		position: absolute;
 		display: none;
+	}
+	&:hover{
+		filter:brightness(0.8);
 	}
 }
 

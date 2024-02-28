@@ -24,7 +24,7 @@ class AlbumRepository extends ServiceEntityRepository
     /**
      * @return Album[] Returns an array of Album objects
      */
-    public function findByName($value): array
+    public function findByName(string $value): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.name LIKE :val')
