@@ -5,7 +5,7 @@ if ('ontouchstart' in window) {
     touchScreen = true;
 }
 
-function atroposInit() {
+export default function atroposInit() {
     if (touchScreen) {
         // Initialize
         const allAtroposScales = document.querySelectorAll(".atropos-scale");
