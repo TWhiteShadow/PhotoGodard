@@ -522,15 +522,6 @@
 						slidesPerView: 2,
 					}
 				},
-
-				on: {
-					init: function () {
-						console.log('swiper init');
-					},
-					update: function () {
-						console.log('swiper update');
-					},
-				}
 			});
 		}
 
@@ -562,11 +553,9 @@
 							this.params.grid.rows = 1;
 							numOfSlides[0].classList.add("heightImportant");
 						}
-						console.log(this.params.loop);
 					},
 					update: function () {
 						let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
-						console.log(numOfSlides.length);
 						if (numOfSlides.length == 1) {
 							this.params.grid.rows = 1;
 							numOfSlides[0].classList.add("heightImportant");
@@ -576,7 +565,6 @@
 								this.params.grid.rows = 2;
 							}
 						}
-						console.log(this.params.grid.rows);
 					},
 				},
 				breakpoints: {
@@ -597,7 +585,6 @@
 
 			window.addEventListener('resize', function () {
 				if (window.innerWidth < 768) {
-					console.log(this.window.innerWidth);
 					swiperAlbum.update();
 				}
 			});
