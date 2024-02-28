@@ -3,11 +3,16 @@ import "./styles/app.scss";
 
 // Import Components
 import './js/Spinner.js';
+
+import "./js/Parallax.js";
+import "./js/Atropos.js";
+import './js/Fullpage.js';
+import './js/SwipersInit.js';
 import "./js/MenuScrollTo";
 import "./js/MenuBurger";
 import "./js/SidebarObserver";
-import "./js/Atropos.js";
 import "./js/Footer.js";
-import "./js/Parallax.js";
 import "./js/Navbar.js";
 import './js/Login.js';
+import './js/Isotope.js';
+import './js/MagnificPopup.js';

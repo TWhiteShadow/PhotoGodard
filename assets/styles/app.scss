@@ -14,6 +14,9 @@
 * {
     font-family: 'Mulish', sans-serif;
 }
+*:focus:not(.focus-visible) {
+    outline: none;
+  }
 
 body {
     background-color: #f3f4f6;
@@ -949,6 +952,7 @@ $light: #efefef;
         right: 0;
         top: 30px;
         color: black;
+        -webkit-transform: translate3d(0,0,0);
     }
 
     .swiper-button-next {
@@ -1065,7 +1069,6 @@ $light: #efefef;
 
 .imagePreview {
     background-blend-mode: saturation;
-    background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

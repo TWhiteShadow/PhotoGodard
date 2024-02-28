@@ -18,6 +18,8 @@ class Accordion {
         this.isExpanding = false;
         // Detect user clicks on the summary element
         this.summary.addEventListener('click', (e) => this.onClick(e));
+
+        this.updatePictureOnChange(el);
     }
 
     onClick(e) {
@@ -111,6 +113,17 @@ class Accordion {
         this.isExpanding = false;
         // Remove the overflow hidden and the fixed height
         this.el.style.height = this.el.style.overflow = '';
+    }
+
+    updatePictureOnChange(el){
+        $(window).load(function () {
+            console.log("OUI");
+            el.querySelectorAll('.inputPhoto').forEach(function(e) {
+                e.addEventListener('change', function(x) { 
+                    el.querySelector("."+x.target.dataset.img).src = URL.createObjectURL(e.files[0]);
+                });
+            });
+        });
     }
 }
 (document.querySelector('details')) && (

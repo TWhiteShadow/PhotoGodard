@@ -20,8 +20,11 @@
     </head>
     <body class="bg-white">
         {% include "_spinner.html.twig" %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.js" integrity="sha512-G74j2JVU7kYK7lEM17+WI0sgxWPGIob8SW93Z/YA+A0VNckeZDKHgyQbkT2uq59CBi/v/gE7bXbLdkpi5QZ9FQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {% block javascriptsBody %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.js" integrity="sha512-G74j2JVU7kYK7lEM17+WI0sgxWPGIob8SW93Z/YA+A0VNckeZDKHgyQbkT2uq59CBi/v/gE7bXbLdkpi5QZ9FQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {% endblock %}  
             {% block body %}
             {% endblock %}
+
     </body>
 </html>

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Photo;
-use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -12,31 +11,29 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FileController extends AbstractController
 {
-  
     #[Route('/file/{photo}', 'app_file')]
     public function getFile(Photo $photo, Session $session): Response
     {
-        $favoritePhoto = false; 
+        $favoritePhoto = false;
         if (empty($photo)) {
             throw $this->createNotFoundException('No photo found');
         }
 
-        if($photo->getAlbum() === null){
+        if (null === $photo->getAlbum()) {
             throw $this->createNotFoundException('The photo is not linked to an album');
         }
-        if(!empty($photo->getAlbum()->getFavoritePhoto()) && $photo->getAlbum()->getFavoritePhoto()->getId() === $photo->getId()){
-            $favoritePhoto = true; 
+        if (!empty($photo->getAlbum()->getFavoritePhoto()) && $photo->getAlbum()->getFavoritePhoto()->getId() === $photo->getId()) {
+            $favoritePhoto = true;
         }
 
-        if($favoritePhoto === false){
-            if(empty($this->getUser()) && empty($session->get('ROLE_ALBUM_ACCESS'))){
-    
+        if (false === $favoritePhoto) {
+            if (empty($this->getUser()) && empty($session->get('ROLE_ALBUM_ACCESS'))) {
                 throw new AccessDeniedHttpException('Accès refusé. Vous devez être connecté pour accéder à cette ressource.');
             }
-            if(empty($this->getUser()) && (!empty($session->get('ROLE_ALBUM_ACCESS')) && $session->get('ROLE_ALBUM_ACCESS') !== $photo->getAlbum()->getUniqId() . '-ACCESS')){
+            if (empty($this->getUser()) && (!empty($session->get('ROLE_ALBUM_ACCESS')) && $session->get('ROLE_ALBUM_ACCESS') !== $photo->getAlbum()->getUniqId().'-ACCESS')) {
                 throw new AccessDeniedHttpException('Accès refusé. Vous devez être connecté pour accéder à cette ressource.');
             }
-            if ((!empty($this->getUser()) && !in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
+            if (!empty($this->getUser()) && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
                 throw new AccessDeniedHttpException('Accès refusé. Vous devez être connecté pour accéder à cette ressource.');
             }
         }

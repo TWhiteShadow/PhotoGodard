@@ -3,6 +3,17 @@
 {% block title %}Category
 {% endblock %}
 
+{% block javascriptsBody %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+<script src="https://npmcdn.com/isotope-fit-columns@1/fit-columns.js"></script>
+{% endblock %}
+
 {% block main_content %}
 	<h1>Category</h1>
 
@@ -20,9 +31,9 @@
 	</table>
 	{% set categoryFolder = category.getUniqId()|upper %}
 
-	<div id="content" class="grid grid-cols-3 md:grid-cols-5 gap-4">
+	<div id="content" class="isotopeGrid isotopeGridStyle">
 		{% for photo in photos %}
-			<div class="relative group">
+			<div class="group grid-item isotopeGridItemStyle">
 				<img class="h-full max-w-full rounded-lg object-cover" src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}' alt="{{photo.title}}"/>
 				{% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : category.getId(), 'favorite_photo' : category.getFavoritePhoto() is null ? null : category.getFavoritePhoto().getId()} %}
 			</div>

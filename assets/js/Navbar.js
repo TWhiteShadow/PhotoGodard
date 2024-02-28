@@ -11,7 +11,7 @@ class Navbar{
             let currentScrollPos = window.scrollY;
 
             document.querySelector('.imagePreview').style.setProperty('transform', 'translateY(' + currentScrollPos/2 + 'px)');
-            if (this.prevScrollpos > currentScrollPos) {
+            if (this.prevScrollpos > currentScrollPos || currentScrollPos <= 0) {
                 isScrollingToTop = true;
                 document.getElementById("navbar").style.setProperty('top', '0px', 'important');
             } else {
@@ -27,7 +27,6 @@ class Navbar{
             threshold: 0.9 // seuil de visibilité
         };
         
-        console.log(isScrollingToTop);
         // Fonction de callback pour l'observer
         const callback = (entries, observer) => {
             entries.forEach(entry => {
