@@ -49,16 +49,15 @@ class MenuScrollTo  {
    
     handleResize(){
         const self = this;
-
-        const debounceScroll = debounce(function (e) {
+    
+        const debounceScroll = debounce((e) => {
             e.preventDefault();
-            const targetElementId = this.getAttribute("href");
+            const targetElementId = e.target.getAttribute("href");
             $("html, body").addClass("scroll-smooth")
             self.smoothScrollTo(targetElementId, 1000);
-        },150);
-
+        }, 800);
+    
         window.addEventListener("resize", (event) => {
-        
             const width = window.innerWidth;
             if (width < self.previousWidth && width < 768) {
                 self.previousWidth = width;
@@ -66,10 +65,10 @@ class MenuScrollTo  {
             if (width > self.previousWidth && width >= 768) {
                 const hash = window.location.hash
                 if (hash != '#home') {
-                    const defaultUrl = window.location.toString();
-                    const url = defaultUrl.split("/#")[0];
-                    window.localStorage.setItem('previousHash', hash);
-                    window.location = url;
+                    // const defaultUrl = window.location.toString();
+                    // const url = defaultUrl.split("/#")[0];
+                    // window.localStorage.setItem('previousHash', hash);
+                    // window.location = url;
                 }
                 self.previousWidth = width;
             }
@@ -84,8 +83,9 @@ class MenuScrollTo  {
                 document.getElementsByClassName("homeSectionMobile")[0].id = "";
             }
         });
-
+    
     }
+    
 
     handleDOMContentLoaded(){
         const self = this;

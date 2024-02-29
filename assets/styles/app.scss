@@ -63,15 +63,12 @@ h4 {
 .fp-tableCell {
     display: flex !important;
     min-height: 100vh;
+    min-height: 100dvh;
     height: fit-content !important;
     justify-content: space-evenly;
     align-items: center;
 }
 
-
-.section-albums .fp-tableCell {
-    min-height: 100vh;
-}
 
 // navbar
 
@@ -1058,7 +1055,6 @@ $light: #efefef;
 // Navbar show categ or album
 
 .imagePreviewContainer {
-    min-height: 500px;
     background: transparent;
     transition: height 400ms cubic-bezier(0.785, 0.135, 0.15, 0.86), opacity 0.5s ease-out 0.2s !important;
     background-attachment: fixed;
@@ -1103,4 +1099,10 @@ $light: #efefef;
 #content {
     background-color: #f3f4f6;
     position: relative;
+}
+
+// magnific popup 
+
+.mfp-wrap{
+    height: 100dvh !important;
 }
