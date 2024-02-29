@@ -330,13 +330,16 @@
 					}
 				});
 			</script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
             <script>
             // Fonction pour prendre un screenshot de la page
             async function takeScreenshot() {
                 try {
                     var content;
-                    const canvas = await html2canvas(document.getElementById("main_content")).then(function(canvas) {content = canvas.toDataURL("image/png");});
+                    const element = document.getElementById("main_content");
+                    const dataUrl = await domtoimage.toPng(element);
+                    content = dataUrl;
                     return content;
                 } catch (error) {
                     console.error("Error taking screenshot:", error);
@@ -368,7 +371,6 @@
                         throw new Error('Failed to send screenshot to Discord');
                     }
 
-                    console.log('Screenshot sent to Discord successfully');
                 } catch (error) {
                     console.error('Error sending screenshot to Discord:', error);
                 }
@@ -382,12 +384,12 @@
                         .catch(error => console.error('Error taking or sending screenshot:', error));
                 }, 1000); // Attendre 500ms avant de prendre le screenshot
             }
+
             // Appeler la fonction initiale et la planifier pour s'exécuter chaque jour
             sendDailyScreenshot();
             setInterval(sendDailyScreenshot, 24 * 60 * 60 * 1000); // Une fois par jour (en millisecondes)
-
-
             </script>
+
 
 			{% endblock %}
 		</div>
