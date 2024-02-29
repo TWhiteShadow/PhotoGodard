@@ -24,7 +24,7 @@ class Navbar{
         }
         // Options pour l'observer
         const options = {
-            threshold: 0.9 // seuil de visibilité
+            threshold: 1 // seuil de visibilité
         };
         
         // Fonction de callback pour l'observer

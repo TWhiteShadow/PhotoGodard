@@ -37,7 +37,7 @@
 									<!-- put your custom content here -->
 									<div class="relative">
 										<img class="max-w-[15vw] max-h-[15vh] w-auto h-auto aspect-auto"
-											src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp')}}"
+											src="" data-src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp')}}"
 											data-atropos-offset="-5" alt="photos présentation 3" width="150"
 											height="150" loading="lazy">
 									</div>
@@ -59,7 +59,7 @@
 									<!-- put your custom content here -->
 									<div class="relative">
 										<img class="max-w-[40vw] max-h-[40vh] w-auto h-auto aspect-auto"
-											src="{{ asset(homepage.photoMiddle) | imagine_filter('webp')}}"
+											src="" data-src="{{ asset(homepage.photoMiddle) | imagine_filter('webp')}}"
 											data-atropos-offset="-2" alt="photos présentation 1" width="500"
 											height="400">
 
@@ -82,7 +82,7 @@
 									<!-- put your custom content here -->
 									<div class="relative">
 										<img class="max-w-[20vw] max-h-[20vh] w-auto h-auto aspect-auto"
-											src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}"
+											src="" data-src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}"
 											data-atropos-offset="-2.5" alt="photos présentation 2" width="250"
 											height="150" loading="lazy">
 									</div>
@@ -107,7 +107,6 @@
 	{# SECTION 2 ABOUT #}
 	<section
 		class="section section-about h-full pb-[5vh] pt-[5vh] md:pt-0 md:pb-0 relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center px-10">
-
 		<h4
 			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] pb-8 md:pb-0">
 			About
@@ -116,7 +115,7 @@
 			{# optional #}
 			<div class="flex flex-col justify-center items-center md:gap-8">
 				<img class="max-w-[50vw] max-h-[30vh] w-auto h-auto aspect-auto grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out"
-					src="{{ asset(homepage.pfp) | imagine_filter('webp')}}" alt="photo Emmanuel Godard" width="293.09"
+					src="" data-src="{{ asset(homepage.pfp) | imagine_filter('webp')}}" alt="photo Emmanuel Godard" width="293.09"
 					height="293.09">
 			</div>
 			{# #}
@@ -247,7 +246,7 @@
 		<div class="md:flex hidden absolute h-full w-full items-center justify-center z-0 overflow-hidden">
 			<div id="sceneContact" class="h-full w-full" data-pointer-events="true">
 				<!-- Image top right -->
-				<div class="relative top-[25%] left-[85%] bottom-auto right-auto w-fit z-40 drop-shadow-2xl opacity-90"
+				<div class="relative top-[15%] left-[85%] bottom-auto right-auto w-fit z-40 drop-shadow-2xl opacity-90"
 					data-depth="-0.36">
 					<div class="atropos atropos-section-1">
 						<!-- scale container (required) -->
@@ -320,7 +319,7 @@
 </div>
 
 {# SideBar Menu #}
-<div class="hidden md:block md:absolute top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
+<div class="hidden md:block md:fixed top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
 	<ul class="flex gap-5 flex-col" id="sidebar">
 		<li data-menuanchor="home">
 			<a href="#home" class="active">
@@ -362,7 +361,7 @@
 
 
 {# Hamburger Menu Icon#}
-<div class="menu md:absolute fixed menuHamburger top-1 right-1 left-auto" data-menu="1">
+<div class="menu fixed menuHamburger top-1 right-1 left-auto" data-menu="1">
 	<div>
 		<div class="icon-left"></div>
 		<div class="icon-right"></div>
@@ -522,15 +521,6 @@
 						slidesPerView: 2,
 					}
 				},
-
-				on: {
-					init: function () {
-						console.log('swiper init');
-					},
-					update: function () {
-						console.log('swiper update');
-					},
-				}
 			});
 		}
 
@@ -562,11 +552,9 @@
 							this.params.grid.rows = 1;
 							numOfSlides[0].classList.add("heightImportant");
 						}
-						console.log(this.params.loop);
 					},
 					update: function () {
 						let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
-						console.log(numOfSlides.length);
 						if (numOfSlides.length == 1) {
 							this.params.grid.rows = 1;
 							numOfSlides[0].classList.add("heightImportant");
@@ -576,7 +564,6 @@
 								this.params.grid.rows = 2;
 							}
 						}
-						console.log(this.params.grid.rows);
 					},
 				},
 				breakpoints: {
@@ -597,7 +584,6 @@
 
 			window.addEventListener('resize', function () {
 				if (window.innerWidth < 768) {
-					console.log(this.window.innerWidth);
 					swiperAlbum.update();
 				}
 			});
