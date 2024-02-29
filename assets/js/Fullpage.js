@@ -1,4 +1,5 @@
-document.getElementById('fullpage') && $('#fullpage').fullpage({
+export default function fullpageInit(){
+	$('#fullpage').fullpage({
 	responsiveWidth: 768,
 	licenceKey: 'YWx2YXJvdHJpZ28uY29tX01mU2MyTnliMnhzU0c5eWFYcHZiblJoYkd4NVNRcg==',
 	menu: "#sidebar",
@@ -13,4 +14,8 @@ document.getElementById('fullpage') && $('#fullpage').fullpage({
 	bigSectionsDestination: "top",
 	animateAnchor: false,
 });
+
+}
+
+document.getElementById('fullpage') && fullpageInit();
 
