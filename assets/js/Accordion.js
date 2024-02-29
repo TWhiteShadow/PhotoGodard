@@ -117,7 +117,6 @@ class Accordion {
 
     updatePictureOnChange(el){
         $(window).load(function () {
-            console.log("OUI");
             el.querySelectorAll('.inputPhoto').forEach(function(e) {
                 e.addEventListener('change', function(x) { 
                     el.querySelector("."+x.target.dataset.img).src = URL.createObjectURL(e.files[0]);

@@ -8,6 +8,7 @@ document.querySelector('.img-gallery-magnific') && ( () => {
         $('.img-gallery-magnific').magnificPopup({
             delegate: 'a', // child items selector, by clicking on it popup will open
             type: 'image',
+            fixedContentPos: false,
             gallery: {
                 enabled: true,
                 preload: [0, 2]
