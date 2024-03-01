@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Connexion - {{ title }}{% endblock %}
-
 {% block body %}
+{% include "_navbar.html.twig" with {
+    "navbar_image_title": null,
+    "navbar_image_path": null,
+}%}
 
 	<div class="background absolute z-0 top-0 left-0 h-screen w-screen bg-black">
 		<img class="object-cover h-screen w-screen" src={{ favoritePhoto is not null ? path('app_file', {'photo': favoritePhoto.getId()}) : asset('assets/images/image-grid3.jpg') }} alt="background-image" width="1920" height="1080">

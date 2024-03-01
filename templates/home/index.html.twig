@@ -36,8 +36,8 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[15vw] max-h-[15vh] w-auto h-auto aspect-auto"
-											src="" data-src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp')}}"
+										<img class="max-w-[15vw] max-h-[15vh] w-auto h-auto aspect-auto" src=""
+											data-src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp')}}"
 											data-atropos-offset="-5" alt="photos présentation 3" width="150"
 											height="150" loading="lazy">
 									</div>
@@ -58,8 +58,8 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[40vw] max-h-[40vh] w-auto h-auto aspect-auto"
-											src="" data-src="{{ asset(homepage.photoMiddle) | imagine_filter('webp')}}"
+										<img class="max-w-[40vw] max-h-[40vh] w-auto h-auto aspect-auto" src=""
+											data-src="{{ asset(homepage.photoMiddle) | imagine_filter('webp')}}"
 											data-atropos-offset="-2" alt="photos présentation 1" width="500"
 											height="400">
 
@@ -81,8 +81,8 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[20vw] max-h-[20vh] w-auto h-auto aspect-auto"
-											src="" data-src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}"
+										<img class="max-w-[20vw] max-h-[20vh] w-auto h-auto aspect-auto" src=""
+											data-src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}"
 											data-atropos-offset="-2.5" alt="photos présentation 2" width="250"
 											height="150" loading="lazy">
 									</div>
@@ -115,8 +115,8 @@
 			{# optional #}
 			<div class="flex flex-col justify-center items-center md:gap-8">
 				<img class="max-w-[50vw] max-h-[30vh] w-auto h-auto aspect-auto grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out"
-					src="" data-src="{{ asset(homepage.pfp) | imagine_filter('webp')}}" alt="photo Emmanuel Godard" width="293.09"
-					height="293.09">
+					src="" data-src="{{ asset(homepage.pfp) | imagine_filter('webp')}}" alt="photo Emmanuel Godard"
+					width="293.09" height="293.09">
 			</div>
 			{# #}
 			<div class="flex flex-col justify-center items-center md:gap-8">
@@ -481,166 +481,108 @@
 	</div>
 </footer>
 {% include "_canvas.html.twig" %}
+<script>
+	
 
-<script type="text/javascript">
 
-	class SwipersInit {
+	var swiper = new Swiper(".mySwiper", {
 
-		swiperMobile() {
-			var swiper = new Swiper(".mySwiper", {
-
-				speed: 700,
-				pagination: {
-					el: ".swiper-pagination",
-					clickable: true,
-				},
-				edgeSwipeDetection: true,
-				loop: true,
-			});
-		}
-
-		swiperCategories() {
-			const swiper8888 = new Swiper('.swiper2', {
-				// Optional parameters
-				direction: 'horizontal',
-				loop: true,
-				slidesPerView: 1.4,
-				centeredSlides: true,
-				spaceBetween: 30,
-				grabCursor: true,
-				keyboard: true,
-				observer: true,
-				speed: 700,
-				touchReleaseOnEdges: true,
-				touchStartForcePreventDefault: true,
-				// Navigation arrows
-				navigation: {
-					nextEl: '.swiper-button-next',
-					prevEl: '.swiper-button-prev',
-				},
-				breakpoints: {
-					768: {
-						slidesPerView: 2,
-					}
-				},
-			});
-		}
-
-		swiperAlbums() {
-			const swiperAlbum = new Swiper('.swiper3', {
-				// Optional parameters
-				direction: 'horizontal',
-				loop: false,
-				slidesPerView: 1.35,
-				centeredSlides: true,
-				spaceBetween: 30,
-				grabCursor: true,
-				keyboard: true,
-				observer: true,
-				speed: 700,
-				slidesPerGroup: 1,
-				grid: {
-					rows: 1,
-				},
-				loopAddBlankSlides: true,
-				loopAdditionalSlides: 1,
-				on: {
-					beforeInit: function () {
-						let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
-						if (numOfSlides.length > 8) {
-							this.params.loop = true;
-						}
-						if (numOfSlides.length == 1) {
-							this.params.grid.rows = 1;
-							numOfSlides[0].classList.add("heightImportant");
-						}
-					},
-					update: function () {
-						let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
-						if (numOfSlides.length == 1) {
-							this.params.grid.rows = 1;
-							numOfSlides[0].classList.add("heightImportant");
-						} else {
-							numOfSlides.forEach((e) => e.classList.remove("heightImportant"));
-							if (window.innerWidth >= 768) {
-								this.params.grid.rows = 2;
-							}
-						}
-					},
-				},
-				breakpoints: {
-					768: {
-						// centeredSlides: false,
-						slidesPerView: 2.5,
-						grid: {
-							rows: 2,
-						},
-					}
-				},
-				// Navigation arrows
-				navigation: {
-					nextEl: '.swiper-button-next',
-					prevEl: '.swiper-button-prev',
-				},
-			});
-
-			window.addEventListener('resize', function () {
-				if (window.innerWidth < 768) {
-					swiperAlbum.update();
-				}
-			});
-			function filterAlbums() {
-				var input = document.getElementById("filterAlbumsInput");
-				var wrapper;
-				var filter = input.value.toUpperCase();
-				wrapper = document.getElementById("albumSwipperWrapper");
-
-				fetch("/findAlbumByName?value=" + filter.trim(), {})
-					.then(response => {
-						if (response.ok) {
-							document.querySelector(".sliderOverlay").style.opacity = 0;
-							document.querySelector(".sliderOverlay").style.zIndex = 0;
-							return response.text();
-						} else {
-							document.querySelector(".sliderOverlay").style.opacity = 1;
-							document.querySelector(".sliderOverlay").style.zIndex = 30;
-							return "";
-						}
-						return response.text(); // Parse response as text
-					})
-					.then(html => {
-						if (html != "") {
-							wrapper.innerHTML = html; // Set the HTML content to the wrapper
-							atroposInit();
-							swiperAlbum.update(); // Update swiper after setting HTML
-							swiperAlbum.update(); // IMPORTANT: removes height and fixes row
-						}
-					})
-					.catch(error => {
-						console.error('Error fetching albums:', error);
-					});
-			}
-
-			// A little delay
-			let typingTimer;
-			let typeInterval = 500; // 500 milliseconds
-			var input = document.getElementById("filterAlbumsInput");
-
-			input.addEventListener('input', () => {
-				clearTimeout(typingTimer);
-				typingTimer = setTimeout(filterAlbums, typeInterval); // Pass the function reference, not invocation
-			});
-		}
-
-		init() {
-			this.swiperMobile();
-			this.swiperCategories();
-			this.swiperAlbums();
-		}
-	}
-	// dom content load
-	window.addEventListener('DOMContentLoaded', () => {
-		(document.querySelector('.mySwiper') && document.querySelector('.swiper2') && document.querySelector('.swiper3')) && new SwipersInit().init();
+		speed: 700,
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+		},
+		edgeSwipeDetection: true,
+		loop: true,
 	});
+
+	const swiper8888 = new Swiper('.swiper2', {
+		// Optional parameters
+		direction: 'horizontal',
+		loop: true,
+		slidesPerView: 1.4,
+		centeredSlides: true,
+		spaceBetween: 30,
+		grabCursor: true,
+		keyboard: true,
+		observer: true,
+		speed: 700,
+		touchReleaseOnEdges: true,
+		touchStartForcePreventDefault: true,
+		// Navigation arrows
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+		breakpoints: {
+			768: {
+				slidesPerView: 2,
+			}
+		},
+	});
+
+	const swiperAlbum = new Swiper('.swiper3', {
+		// Optional parameters
+		direction: 'horizontal',
+		loop: false,
+		slidesPerView: 1.35,
+		centeredSlides: true,
+		spaceBetween: 30,
+		grabCursor: true,
+		keyboard: true,
+		observer: true,
+		speed: 700,
+		slidesPerGroup: 1,
+		grid: {
+			rows: 1,
+		},
+		loopAddBlankSlides: true,
+		loopAdditionalSlides: 1,
+		on: {
+			beforeInit: function () {
+				let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
+				if (numOfSlides.length > 8) {
+					this.params.loop = true;
+				}
+				if (numOfSlides.length == 1) {
+					this.params.grid.rows = 1;
+					numOfSlides[0].classList.add("heightImportant");
+				}
+			},
+			update: function () {
+				let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
+				if (numOfSlides.length == 1) {
+					this.params.grid.rows = 1;
+					numOfSlides[0].classList.add("heightImportant");
+				} else {
+					numOfSlides.forEach((e) => e.classList.remove("heightImportant"));
+					if (window.innerWidth >= 768) {
+						this.params.grid.rows = 2;
+					}
+				}
+			},
+		},
+		breakpoints: {
+			768: {
+				// centeredSlides: false,
+				slidesPerView: 2.5,
+				grid: {
+					rows: 2,
+				},
+			}
+		},
+		// Navigation arrows
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+	});
+
+	window.addEventListener('resize', function () {
+		if (window.innerWidth < 768) {
+			swiperAlbum.update();
+		}
+	});
+	
 </script>
 {% endblock %}

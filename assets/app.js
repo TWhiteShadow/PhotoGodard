@@ -16,3 +16,4 @@ import "./js/Navbar.js";
 import './js/Login.js';
 import './js/Isotope.js';
 import './js/MagnificPopup.js';
+import './js/FilterAlbum.js';
