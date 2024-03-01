@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FooterLinks index{% endblock %}
+
+{% block body %}
+    <h1>FooterLinks index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Link</th>
+                <th>Icon</th>
+                <th>Visible</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for footer_link in footer_links %}
+            <tr>
+                <td>{{ footer_link.id }}</td>
+                <td>{{ footer_link.name }}</td>
+                <td>{{ footer_link.link }}</td>
+                <td>{{ footer_link.icon }}</td>
+                <td>{{ footer_link.visible ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_footer_links_show', {'id': footer_link.id}) }}">show</a>
+                    <a href="{{ path('app_admin_footer_links_edit', {'id': footer_link.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_footer_links_new') }}">Create new</a>
+{% endblock %}
