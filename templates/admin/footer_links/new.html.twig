@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends '/admin/dashboard.html.twig' %}
 
-{% block title %}New FooterLinks{% endblock %}
+{% block title %}Ajouter un réseau social{% endblock %}
 
-{% block body %}
-    <h1>Create new FooterLinks</h1>
+{% block main_content %}
+    <h1 class="mb-6">Ajouter un réseau social</h1>
 
     {{ include('admin/footer_links/_form.html.twig') }}
 
-    <a href="{{ path('app_admin_footer_links_index') }}">back to list</a>
+    <a href="{{ path('app_admin_footer_links_index') }}" class="back-button">Revenir en arrière</a>
 {% endblock %}

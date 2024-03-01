@@ -7,6 +7,7 @@ use App\Form\FooterLinksType;
 use App\Repository\FooterLinksRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -78,4 +79,23 @@ class FooterLinksController extends AbstractController
 
         return $this->redirectToRoute('app_admin_footer_links_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/update/visible', name: 'app_admin_footer_links_visible')]
+    public function setVisible(FooterLinks $footerLink, EntityManagerInterface $entityManager): JsonResponse
+    {
+        if(empty($footerLink)){
+            return new JsonResponse(['error'=> true]);
+        }
+        if($footerLink->isVisible()){
+            $footerLink->setVisible(0);
+        }else{
+            $footerLink->setVisible(1);
+        }
+        $entityManager->persist($footerLink);
+        $entityManager->flush();
+
+        return new JsonResponse(['success'=> true]);
+        
+    }
+
 }

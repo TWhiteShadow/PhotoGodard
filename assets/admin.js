@@ -8,3 +8,4 @@ import './js/NewPhotos.js';
 import './js/GeneratePassword.js';
 import './js/Isotope.js';
 import './js/SendScreenshotToDiscord.js';
+import './js/stringToFontAwesomeIcon.js';

@@ -1,13 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends '/admin/dashboard.html.twig' %}
 
-{% block title %}Edit FooterLinks{% endblock %}
+{% block title %}Modification d'un réseau social{% endblock %}
 
-{% block body %}
-    <h1>Edit FooterLinks</h1>
+{% block main_content %}
+    <h1>Modifier le réseau social</h1>
 
-    {{ include('admin/footer_links/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/footer_links/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('app_admin_footer_links_index') }}">back to list</a>
-
-    {{ include('admin/footer_links/_delete_form.html.twig') }}
+    <div class="actionButtons flex flex-row my-6">
+        <a href="{{ path('app_admin_footer_links_index') }}" class="back-button">Revenir en arrière</a>
+        {{ include('admin/footer_links/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
