@@ -15,7 +15,7 @@
 </button>
 
 <aside id="default-sidebar"
-	class="fixed top-0 left-0 z-40 w-fit-content max-w-[12rem] h-screen transition-transform -translate-x-full md:translate-x-0 shadow-xl"
+	class="fixed top-0 left-0 z-40 w-fit-content w-[14rem] max-w-[14rem] h-screen transition-transform -translate-x-full md:translate-x-0 shadow-xl"
 	aria-label="Sidebar">
 	<div class="flex flex-col h-full justify-between px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
 		<div>
@@ -84,6 +84,14 @@
 							class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Albums</span>
 					</a>
 				</li>
+                <li>
+					<a href="{{ path('app_admin_footer_links_index') }}"
+						class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+						<i class="fa-solid fa-user-lock"></i>
+						<span
+							class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Réseau Sociaux</span>
+					</a>
+				</li>
 			</ul>
 
 		</div>
@@ -108,7 +116,7 @@
 </aside>
 
 {# Navbar #}
-<div class=" md:ml-[12rem] md:pt-0">
+<div class=" md:ml-[14rem] md:pt-0">
 	<nav class="bg-white border-gray-200 dark:bg-gray-900 top-0 right-0 absolute md:relative md:h-[90px]">
 		<div class="flex flex-wrap items-center justify-end h-full mx-auto px-4 mt-2 md:mt-0 ">
 			<div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
