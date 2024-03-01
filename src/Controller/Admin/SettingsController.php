@@ -16,11 +16,12 @@ class SettingsController extends AbstractController
     #[Route('/admin/show/{key}', name: 'app_admin_settings_show')]
     public function show(SettingsRepository $settingsRepository, string $key): JsonResponse
     {
-        $setting = $settingsRepository->findOneBy(['settings_key'=> $key]);
+        $setting = $settingsRepository->findOneBy(['settings_key' => $key]);
         if (empty($setting)) {
             throw $this->createNotFoundException('No settings found');
         }
         $jsonSettings = ['key' => $setting->getSettingsKey(), 'value' => $setting->getSettingsValue()];
+
         return new JsonResponse($jsonSettings);
     }
 
@@ -29,21 +30,21 @@ class SettingsController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
         // var_dump($data);die;
-        $setting = $settingsRepository->findOneBy(['settings_key'=> $key]);
+        $setting = $settingsRepository->findOneBy(['settings_key' => $key]);
         if (empty($setting)) {
             throw $this->createNotFoundException('No settings found');
         }
         $setting->setSettingsValue($data['lastScreenDate']);
         $entityManager->persist($setting);
         $entityManager->flush();
-        
-        return new Response("success", Response::HTTP_OK);
+
+        return new Response('success', Response::HTTP_OK);
     }
 
     #[Route('/admin/create/{setting}/{value}', name: 'app_admin_settings_create')]
     public function create(Settings $setting, SettingsRepository $settingsRepository, Request $request): Response
     {
-        $settingsRepository->create($setting,);
+        $settingsRepository->create($setting);
 
         // return $this->redirectToRoute('app_admin');
     }
