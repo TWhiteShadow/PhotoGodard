@@ -43,14 +43,6 @@ class FooterLinksController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_footer_links_show', methods: ['GET'])]
-    public function show(FooterLinks $footerLink): Response
-    {
-        return $this->render('admin/footer_links/show.html.twig', [
-            'footer_link' => $footerLink,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_admin_footer_links_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, FooterLinks $footerLink, EntityManagerInterface $entityManager): Response
     {

@@ -34,13 +34,12 @@
                     </label>
                 </td>
                 <td data-title="Actions" class="flex flex-wrap items-center py-2">
-                    <a href="{{ path('app_admin_footer_links_show', {'id': footer_link.id}) }}" class="mb-0 show-button">show</a>
-                    <a href="{{ path('app_admin_footer_links_edit', {'id': footer_link.id}) }}" class="mb-0 edit-button">edit</a>
+                    <a href="{{ path('app_admin_footer_links_edit', {'id': footer_link.id}) }}" class="mb-0 edit-button">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">aucun réseau social n'a été ajoutée</td>
             </tr>
         {% endfor %}
         </tbody>
