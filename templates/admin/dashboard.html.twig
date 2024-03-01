@@ -23,73 +23,64 @@
 			<a href="{{ path('app_admin') }}" class="flex items-center px-2 mb-5">
 				{# <img src="{{ asset('images/logo_st_vincent_propre.png') }}" class="h-6 me-3 sm:h-7"
 					alt="MathIndex Logo" /> #}
-				<div class="grid">
+				<div class="grid w-full">
 					<span
-						class="self-center text-xl font-semibold whitespace-nowrap text-cse dark:text-white">Dashboard</span>
+						class="self-center text-xl transition-all font-semibold whitespace-nowrap text-cse dark:text-white">Back-Office</span>
 					{# <span
 						class="self-center text-sm lightgray whitespace-nowrap text-slate-500 dark:text-white">Lycée
 						Saint-Vincent - Senlis</span> #}
 				</div>
 			</a>
 
+			<hr class="py-2" />
 			{# List of Pages #}
+			{% set route = app.request.get('_route') %}
 			<ul class="space-y-2 font-medium relative h-full max-h-fit">
 				<li>
 					<a href="{{ path('app_admin') }}"
-						class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-						<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white"
-							fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 512 512">
-							<path
-								d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z" />
-						</svg>
-						<span
-							class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Satistiques</span>
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin" ? "active" : "" }}">
+						<i class="fa-solid fa-chart-pie"></i>
+						<span class="flex-1 ms-3 whitespace-nowrap">Satistiques</span>
 					</a>
 				</li>
 				<li>
 					<a href="{{ path('app_admin_homepage_index') }}"
-						class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-						<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white"
-							fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="22" width="24"
-							viewbox="0 0 576 512">
-							<path
-								d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185V64c0-17.7-14.3-32-32-32H448c-17.7 0-32 14.3-32 32v36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1h32v69.7c-.1 .9-.1 1.8-.1 2.8V472c0 22.1 17.9 40 40 40h16c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2H160h24c22.1 0 40-17.9 40-40V448 384c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v64 24c0 22.1 17.9 40 40 40h24 32.5c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3 .1h16c22.1 0 40-17.9 40-40V455.8c.3-2.6 .5-5.3 .5-8.1l-.7-160.2h32z" />
-						</svg>
-						<span
-							class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Accueil</span>
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin_homepage_edit" ? "active" : "" }}">
+						<i class="fa-solid fa-house-chimney"></i>
+						<span class="flex-1 ms-3 whitespace-nowrap">Accueil</span>
 					</a>
 				</li>
 				{# <li>
 					<a href="{{ path('app_admin_photo_index') }}"
-						class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin_photo_index" ? "active" : "" }}">
 						<i class="fa-solid fa-image"></i>
 						<span
-							class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Photos</span>
+							class="flex-1 ms-3 whitespace-nowrap">Photos</span>
 					</a>
 				</li> #}
 				<li>
 					<a href="{{ path('app_admin_category_index') }}"
-						class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin_category_index" ? "active" : "" }}">
 
 						<i class="fa-solid fa-icons"></i>
 						<span
-							class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Categories</span>
+							class="flex-1 ms-3 whitespace-nowrap">Categories</span>
 					</a>
 				</li>
 				<li>
 					<a href="{{ path('app_admin_album_index') }}"
-						class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin_album_index" ? "active" : "" }}">
 						<i class="fa-solid fa-user-lock"></i>
 						<span
-							class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Albums</span>
+							class="flex-1 ms-3 whitespace-nowrap">Albums</span>
 					</a>
 				</li>
                 <li>
 					<a href="{{ path('app_admin_footer_links_index') }}"
-						class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-						<i class="fa-solid fa-user-lock"></i>
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+						<i class="fa-solid fa-hashtag"></i>
 						<span
-							class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Réseau Sociaux</span>
+							class="flex-1 ms-3 whitespace-nowrap">Réseaux Sociaux</span>
 					</a>
 				</li>
 			</ul>
@@ -99,15 +90,17 @@
 		{% if 'ROLE_ADMIN' in app.user.roles or 'ROLE_STUDENT' in app.user.roles or 'ROLE_TEACHER' in app.user.roles %}
 		{# Sign-Out Button #}
 		<div class="mt-2">
-			<a data-modal-target="default-modal" data-modal-toggle="default-modal"
-				class="flex cursor-pointer items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-				<svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white"
-					fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewbox="0 0 512 512">
-					<path
-						d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z" />
-				</svg>
+			<a href="{{ path('app_home') }}" class="flex cursor-pointer items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+				<i class="fa-solid fa-person-running"></i>
 				<span
-					class="flex-1 ms-3 whitespace-nowrap  group-hover:text-cse group-hover:transition-all group-hover:font-bold">Déconnexion</span>
+					class="flex-1 ms-3 whitespace-nowrap">Revenir au site</span>
+			</a>
+			<hr class="my-2" />
+			<a data-modal-target="default-modal" data-modal-toggle="default-modal"
+				class="flex cursor-pointer items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+				<i class="fa-solid fa-arrow-right-from-bracket"></i>
+				<span
+					class="flex-1 ms-3 whitespace-nowrap">Déconnexion</span>
 			</a>
 		</div>
 		{% endif %}
@@ -123,10 +116,10 @@
 				{% if app.user is defined and app.user is not null %}
 				{% if 'ROLE_ADMIN' in app.user.roles or 'ROLE_STUDENT' in app.user.roles or 'ROLE_TEACHER' in
 				app.user.roles %}
-				<button type="button" class="flex text-md items-center gap-2 hover:bg-gray-100 md:p-4 p-2 rounded-lg"
+				<button type="button" class="flex transition-all text-md items-center gap-2 hover:bg-gray-100 md:p-4 p-2 rounded-lg"
 					id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
 					data-dropdown-placement="bottom">
-					<span class="block text-md text-gray-900 dark:text-white">
+					<span class="block text-md text-gray-600 dark:text-white">
 						{% if app.user is defined and app.user is not null %}
 						{{ app.user.email }}
 						{% endif %}
@@ -144,25 +137,11 @@
 						</span>
 					</div>
 					<ul class="py-2" aria-labelledby="user-menu-button">
-						{% if 'ROLE_ADMIN' in app.user.roles %}
-						<li>
-							<a href="#"
-								class="flex items-center justify-between  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-								Administation
-								<svg class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white"
-									fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="16" width="20"
-									viewbox="0 0 640 512">
-									<path
-										d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H392.6c-5.4-9.4-8.6-20.3-8.6-32V352c0-2.1 .1-4.2 .3-6.3c-31-26-71-41.7-114.6-41.7H178.3zM528 240c17.7 0 32 14.3 32 32v48H496V272c0-17.7 14.3-32 32-32zm-80 32v48c-17.7 0-32 14.3-32 32V480c0 17.7 14.3 32 32 32H608c17.7 0 32-14.3 32-32V352c0-17.7-14.3-32-32-32V272c0-44.2-35.8-80-80-80s-80 35.8-80 80z" />
-								</svg>
-							</a>
-						</li>
-						{% endif %}
 						<li>
 							<a data-modal-target="default-modal" data-modal-toggle="default-modal"
 								class="flex cursor-pointer items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
 								Déconnexion
-								<svg class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse group-hover:transition-all dark:group-hover:text-white"
+								<svg class="flex-shrink-0 w-4 h-4 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-cse  dark:group-hover:text-white"
 									fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="16" width="16"
 									viewbox="0 0 512 512">
 									<path
@@ -187,7 +166,7 @@
 									Déconnexion
 								</h3>
 								<button type="button"
-									class="transition-all text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+									class="transition-all text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
 									data-modal-hide="default-modal">
 									<svg class="w-3 h-3 transition-all" aria-hidden="true"
 										xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 14">
@@ -224,7 +203,7 @@
 							stroke="#1B3168" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
 					</svg>
 					<div>
-						<span class="block text-md text-gray-900 dark:text-white">Connexion</span>
+						<span class="block text-md text-gray-600 dark:text-white">Connexion</span>
 					</div>
 				</a>
 				{% endif %}
@@ -343,17 +322,17 @@
 			{% endblock %}
 		</div>
 	</div>
-	{# <ul class="flex p-6 w-full h-fit-content md:justify-start flex-wrap justify-center list-disc gap-6">
+	<ul class="flex p-6 w-full h-fit-content md:justify-start flex-wrap justify-center list-disc gap-6">
 		<li class="list-none">
-			<a href="#">Mentions légales</a>
+			Besoin d'aide ?
 		</li>
-		<li>
-			<a href="#">Contact</a>
+		 <li>
+			<a href="mailto:raphael.t.hendrick@gmail.com" class="text-blue-600 hover:underline">Contacter nous !</a>
 		</li>
-		<li>
+		{# <li>
 			<a href="#">Lycée Saint-Vincent</a>
-		</li>
-	</ul> #}
+		</li> #}
+	</ul>
 </div>
 
 {% endblock %}
