@@ -23,15 +23,44 @@ class ScreenshotSender {
         const formData = new FormData();
         formData.append('file', file);
 
+        
         const now = new Date();
         const options = { timeZone: 'Europe/Paris' };
         const lastScreenDate = now.toLocaleString('en-US', options);
-        formData.append('content', `:white_check_mark: Screenshot taken on: ${lastScreenDate}`);
-
+        const payload = {
+            embeds: [
+                {
+                    title: `:white_check_mark: Screenshot taken on: ${lastScreenDate}`,
+                    color: 1127128,
+                    fields: [
+                        {
+                            name: ":desktop: Device",
+                            value: window.navigator.userAgent,
+                            inline: false
+                        },
+                        {
+                            name: ":globe_with_meridians: Website",
+                            value: "https://eg-photographie.fr/",
+                            inline: false
+                        },
+                    ]
+                }
+            ]
+        };
+        
         try {
+            // Convertir l'objet payload en chaîne JSON
+            const payloadString = JSON.stringify(payload);
+        
+            // Créer un nouvel objet FormData pour la requête
+            const formDataWithEmbed = new FormData();
+            formDataWithEmbed.append('file', file); // Ajoutez le fichier en premier
+            formDataWithEmbed.append('payload_json', payloadString); // Ensuite, ajoutez l'objet d'embed
+        
+            // Envoyer la requête à Discord avec le nouveau FormData
             const response = await fetch(webhookUrl, {
                 method: 'POST',
-                body: formData
+                body: formDataWithEmbed,
             });
 
             if (!response.ok) {
