@@ -92,7 +92,7 @@ h1{
     width:100%;
     margin:20px auto;
     position:relative;
-	table-layout: fixed;
+	table-layout: auto;
   }
   table * {
     position:relative
@@ -330,6 +330,7 @@ h1{
   transition: all .3s ease-in;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 1));
   &:has(input:checked){opacity: 1;}
+  &.favorite{opacity: 1;}
 	input {
 		-webkit-appearance: none;
 		-moz-appearance: none;
