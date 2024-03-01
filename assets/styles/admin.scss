@@ -89,10 +89,10 @@ a {
 		background-color: rgb(243 244 246);
 	}
 }
-span, button{
 
+.icon i{
+	font-size:x-large;
 }
-
 
 // TABLES
 
@@ -137,7 +137,11 @@ span, button{
   }
   table td,
   table th {
-    padding-left:8px
+    padding-left:8px;
+	text-align: center;
+	vertical-align: middle;
+	justify-content: center;
+	align-items: center;
   }
   table thead tr {
     height:60px;
@@ -149,10 +153,6 @@ span, button{
   }
   table tbody tr:last-child {
     border:0
-  }
-  table td,
-  table th {
-    text-align:left
   }
   table td.l,
   table th.l {
