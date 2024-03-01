@@ -11,8 +11,7 @@
                     {% if form.vars.value.photoTopLeft is not null %}
                     <label for="{{ form.photoTopLeft.vars.id }}" class="group cursor-pointer w-fit h-fit relative">
                         <img src="{{ asset(form.vars.value.photoTopLeft) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="photoTopLeft group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] photoTopLeft group-hover:opacity-80  transition-all">
                         <i
                             class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
@@ -27,8 +26,7 @@
                     {% if form.vars.value.photoBottom is not null %}
                     <label for="{{ form.photoBottom.vars.id }}" class="group cursor-pointer w-fit h-fit relative">
                         <img src="{{ asset(form.vars.value.photoBottom) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="photoBottom group-hover:opacity-70  transition-all">
+                            class="max-w-[200px] max-h-[200px] photoBottom group-hover:opacity-70  transition-all">
                         <i
                             class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
@@ -45,8 +43,7 @@
                     {% if form.vars.value.photoMiddle is not null %}
                     <label for="{{ form.photoMiddle.vars.id }}" class="group cursor-pointer w-fit h-fit relative">
                         <img src="{{ asset(form.vars.value.photoMiddle) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="photoMiddle group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] photoMiddle group-hover:opacity-80  transition-all">
                         <i
                             class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
@@ -80,8 +77,8 @@
             {{ form_label(form.pfp, null, {'label_attr': {'class': 'pfpLabel'} }) }}
             {% if form.vars.value.pfp is not null %}
             <label for="{{ form.pfp.vars.id }}" class="group cursor-pointer w-fit h-fit relative">
-                <img src="{{ asset(form.vars.value.pfp) }}" alt="Preview" style="max-width: 200px; max-height: 200px;"
-                    class="pfp group-hover:opacity-80  transition-all">
+                <img src="{{ asset(form.vars.value.pfp) }}" alt="Preview"
+                    class="max-w-[200px] max-h-[200px] pfp group-hover:opacity-80  transition-all">
                 <i
                     class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
             </label>
@@ -137,8 +134,7 @@
                     <label for="{{ form.contactPhotoTopRight.vars.id }}"
                         class="group cursor-pointer w-fit h-fit relative">
                         <img src="{{ asset(form.vars.value.contactPhotoTopRight) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="contactPhotoTopRight group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] contactPhotoTopRight group-hover:opacity-80  transition-all">
                         <i
                             class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
@@ -155,8 +151,7 @@
                     <label for="{{ form.contactPhotoBottomRight.vars.id }}"
                         class="group cursor-pointer w-fit h-fit relative">
                         <img src="{{ asset(form.vars.value.contactPhotoBottomRight) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="contactPhotoBottomRight group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] contactPhotoBottomRight group-hover:opacity-80  transition-all">
                         <i
                             class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
@@ -177,8 +172,7 @@
                     <label for="{{ form.contactPhotoBottomLeft.vars.id }}"
                         class="group cursor-pointer w-fit h-fit relative">
                         <img src="{{ asset(form.vars.value.contactPhotoBottomLeft) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="contactPhotoBottomLeft group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] contactPhotoBottomLeft group-hover:opacity-80  transition-all">
                         <i
                             class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
