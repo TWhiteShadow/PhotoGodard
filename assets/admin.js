@@ -7,3 +7,4 @@ import "./js/Accordion";
 import './js/NewPhotos.js';
 import './js/GeneratePassword.js';
 import './js/Isotope.js';
+import './js/SendScreenshotToDiscord.js';
