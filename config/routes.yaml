@@ -17,3 +17,8 @@ app_admin_delete_photos:
     path: /photos/delete
     controller: App\Controller\Admin\PhotoController::deletePhotos
     methods: [POST]
+
+app_admin_settings_update:
+    path: /admin/update/{key}
+    controller: App\Controller\Admin\SettingsController::update
+    methods: [POST]

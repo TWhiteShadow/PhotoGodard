@@ -227,13 +227,14 @@
 	</nav>
 
 	{# Main Content #}
-	<div
+	<div 
 		class="p-4 md:border-2 border-gray-200 md:border-dashed rounded-lg dark:border-gray-700 md:mt-0 mt-3 transition-all md:m-4 ">
 		<div class="md:bg-gray-100 dark:bg-gray-800 md:px-8 md:py-14 h-full">
 			{% block main_content %}
 			{# First Square #}
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-			<div class="h-full w-full flex flex-wrap lg:flex-nowrap justify-center">
+			<div id="main_content" class="h-full bg-white md:bg-gray-100 w-full flex flex-wrap lg:flex-nowrap justify-center">
 				<div
 					class="h-fit w-fit max-w-full max-h-auto flex flex-col justify-center items-center text-center sm:whitespace-nowrap">
 					<h2 class="text-xl font-bold">{{ diskTotalSpace - diskFreeSpace }}GB utilisé sur
@@ -346,6 +347,5 @@
 		</li>
 	</ul> #}
 </div>
-
 
 {% endblock %}

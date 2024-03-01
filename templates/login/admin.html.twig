@@ -4,9 +4,13 @@
 {% endblock %}
 
 {% block body %}
+{% include "_navbar.html.twig" with {
+    "navbar_image_title": null,
+    "navbar_image_path": null,
+}%}
 
-	<div class="background absolute z-0 top-0 left-0 h-[100svh] w-screen bg-black"><img class="object-cover h-[100svh] w-screen blur-sm" src="{{asset('assets/images/image-grid3.jpg')}}" alt="background-image" width="1920" height="1080"></div>
-	<div class="absolute form-admin z-10 flex justify-center items-center h-[100svh] w-screen ">
+	<div class="background absolute z-0 top-0 left-0 h-screen h-[100svh] w-screen bg-black"><img class="object-cover h-screen h-[100svh] w-screen blur-sm" src="{{asset('assets/images/image-grid3.jpg')}}" alt="background-image" width="1920" height="1080"></div>
+	<div class="absolute form-admin z-10 flex justify-center items-center h-screen h-[100svh] w-screen ">
 		{{ form_start(form, {'attr': {'class': 'form w-fit-content drop-shadow-2xl'}}) }}
 			<h3 id="heading">Connexion</h3>
 			<div class="field">

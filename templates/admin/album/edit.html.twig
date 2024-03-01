@@ -42,6 +42,7 @@
             checkedCheckboxes.forEach(function (otherCheckbox) {
             if (otherCheckbox !== checkbox) {
                 otherCheckbox.checked = false;
+                otherCheckbox.parentNode.classList.remove("favorite");
             }
             });
             // Determine the value to send in the AJAX request
@@ -54,6 +55,9 @@
             url: "/admin/album/" + parent_id + "/update/favorite", // Replace with your actual route
             type: "POST",
             data: dataToSend,
+            success: function(response){
+                checkbox.parentNode.classList.add("favorite");
+            },
             error: function (response) {
                 alert("Erreur! " + response.responseText);
             },
