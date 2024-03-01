@@ -3,6 +3,7 @@ import "./styles/app.scss";
 
 // Import Components
 import './js/Spinner.js';
+import './js/StrokeCanvas';
 import "./js/Parallax.js";
 import "./js/Atropos.js";
 import './js/Fullpage.js';
