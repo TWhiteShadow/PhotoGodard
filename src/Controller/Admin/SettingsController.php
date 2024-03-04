@@ -32,7 +32,7 @@ class SettingsController extends AbstractController
         // var_dump($data);die;
         $setting = $settingsRepository->findOneBy(['settings_key' => $key]);
         if (empty($setting)) {
-            throw $this->createNotFoundException('No settings found');
+            return new Response('success', Response::HTTP_NOT_FOUND);
         }
         $setting->setSettingsValue($data['lastScreenDate']);
         $entityManager->persist($setting);
@@ -41,11 +41,11 @@ class SettingsController extends AbstractController
         return new Response('success', Response::HTTP_OK);
     }
 
-    #[Route('/admin/create/{setting}/{value}', name: 'app_admin_settings_create')]
-    public function create(Settings $setting, SettingsRepository $settingsRepository, Request $request): Response
-    {
-        $settingsRepository->create($setting);
+    // #[Route('/admin/create/{setting}/{value}', name: 'app_admin_settings_create')]
+    // public function create(Settings $setting, SettingsRepository $settingsRepository, Request $request): Response
+    // {
+    //     $settingsRepository->create($setting);
 
-        // return $this->redirectToRoute('app_admin');
-    }
+    //     // return $this->redirectToRoute('app_admin');
+    // }
 }

@@ -64,7 +64,7 @@ class ScreenshotSender {
             });
 
             if (!response.ok) {
-                await this.sendFailureMessageToDiscord();
+                await this.sendFailureMessageToDiscord("Error while sending screenshot to Discord");
             }
 
             const updateResponse = await fetch("/admin/update/lastScreenDate", {
@@ -78,36 +78,42 @@ class ScreenshotSender {
             });
 
             if (!updateResponse.ok) {
-                await this.sendFailureMessageToDiscord();;
+                await this.sendFailureMessageToDiscord("Error while updating the settings in the database");
             }
 
             const data = await updateResponse;
 
         } catch (error) {
-            await this.sendFailureMessageToDiscord();
+            await this.sendFailureMessageToDiscord(error);
         }
     }
 
-    async sendFailureMessageToDiscord() {
+    async sendFailureMessageToDiscord(error = null) {
         const webhookUrl = 'https://discord.com/api/webhooks/1212736910397669416/Q5c-JIe2-V31CeBjV4HEUxuNWIiWmfzHyj-RLN4lABRMVunpprVzqBhPu9w2zwrlsfEs';
         const failureMessage = ':warning: Failed to take a screenshot ' + new Date().toLocaleString('en-US', { timeZone: 'Europe/Paris' });
-
+    
+        const embeds = [{
+            "title": failureMessage,
+            "description": error != null ? error : "Error",
+        }];
+    
         try {
             const response = await fetch(webhookUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ content: failureMessage })
+                body: JSON.stringify({ embeds: embeds }) // Vous devez envoyer directement le tableau d'embeds
             });
-
+    
             if (!response.ok) {
                 await this.sendFailureMessageToDiscord();
             }
         } catch (error) {
-            await this.sendFailureMessageToDiscord();
+            await this.sendFailureMessageToDiscord(error);
         }
     }
+    
 
     async fetchLastScreenshotDate() {
         try {
@@ -133,7 +139,7 @@ class ScreenshotSender {
                 }
             }
         } catch (error) {
-            await this.sendFailureMessageToDiscord();
+            await this.sendFailureMessageToDiscord(error);
         }
     }
 
