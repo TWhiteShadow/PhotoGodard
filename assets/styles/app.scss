@@ -38,13 +38,14 @@ h4 {
 }
 
 canvas{
-    height: 100%;
-    width: 100%;
+    // height: 100vh;
+    // width: 100vw;
     position: absolute !important;
     top: 0;
     left: 0;
     opacity: 0.3;
     pointer-events: none;
+    z-index: 999999;
 }
 
 // Sections (to override fullpage.js
@@ -100,12 +101,15 @@ footer {
     }
 
     svg,
-    svg path {
+    svg path,
+    i {
         transition: all 0.5s ease-in-out;
+        font-size:25px;
     }
 
     svg:hover,
-    svg:hover path {
+    svg:hover path,
+    i:hover {
         opacity: 0.7;
     }
 }
