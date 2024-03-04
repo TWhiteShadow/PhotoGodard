@@ -55,6 +55,44 @@ h1{
 	@apply w-[50%] md:w-[230px] p-2;
 }
 
+// Dashboard styles
+
+a > i, button >i {
+	@apply text-gray-500;
+	width: 25px;
+	transition: all 0.5s ease-in-out;
+}
+a {
+	transition: all 0.1s ease-in-out;
+	& > span{
+		transition: all 0.5s ease-in-out;
+	}
+	&:hover, &.active, &:focus{
+		span{
+		color: black;
+		letter-spacing: 0.5px;
+		text-shadow:
+		-0.2px -0.2px 0 black,
+		0.2px -0.2px 0 black,
+		-0.2px 0.2px 0 black,
+		0.2px 0.2px 0 black;
+		-webkit-transition: all .5s;
+		-moz-transition: all .5s;
+		-o-transition: all .5s;
+		transition: all .5s;
+		}
+		i{
+			color: black;
+		}
+	}
+	&.active{
+		background-color: rgb(243 244 246);
+	}
+}
+
+.icon i{
+	font-size:30px;
+}
 
 // TABLES
 
@@ -99,7 +137,11 @@ h1{
   }
   table td,
   table th {
-    padding-left:8px
+    padding-left:8px;
+	text-align: center;
+	vertical-align: middle;
+	justify-content: center;
+	align-items: center;
   }
   table thead tr {
     height:60px;
@@ -111,10 +153,6 @@ h1{
   }
   table tbody tr:last-child {
     border:0
-  }
-  table td,
-  table th {
-    text-align:left
   }
   table td.l,
   table th.l {

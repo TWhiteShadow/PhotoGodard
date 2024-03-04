@@ -36,8 +36,8 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[15vw] max-h-[15vh] w-auto h-auto aspect-auto" src=""
-											data-src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp')}}"
+										<img class="max-w-[15vw] max-h-[15vh] w-auto h-auto aspect-auto" 
+											src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp')}}"
 											data-atropos-offset="-5" alt="photos présentation 3" width="150"
 											height="150" loading="lazy">
 									</div>
@@ -58,8 +58,8 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[40vw] max-h-[40vh] w-auto h-auto aspect-auto" src=""
-											data-src="{{ asset(homepage.photoMiddle) | imagine_filter('webp')}}"
+										<img class="max-w-[40vw] max-h-[40vh] w-auto h-auto aspect-auto" 
+											src="{{ asset(homepage.photoMiddle) | imagine_filter('webp')}}"
 											data-atropos-offset="-2" alt="photos présentation 1" width="500"
 											height="400">
 
@@ -81,8 +81,8 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[20vw] max-h-[20vh] w-auto h-auto aspect-auto" src=""
-											data-src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}"
+										<img class="max-w-[20vw] max-h-[20vh] w-auto h-auto aspect-auto" 
+											src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}"
 											data-atropos-offset="-2.5" alt="photos présentation 2" width="250"
 											height="150" loading="lazy">
 									</div>
@@ -115,7 +115,7 @@
 			{# optional #}
 			<div class="flex flex-col justify-center items-center md:gap-8">
 				<img class="max-w-[50vw] max-h-[30vh] w-auto h-auto aspect-auto grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out"
-					src="" data-src="{{ asset(homepage.pfp) | imagine_filter('webp')}}" alt="photo Emmanuel Godard"
+					 src="{{ asset(homepage.pfp) | imagine_filter('webp')}}" alt="photo Emmanuel Godard"
 					width="293.09" height="293.09">
 			</div>
 			{# #}
@@ -410,69 +410,16 @@
 </div>
 
 {# FOOTER #}
-<footer class="fixed w-screen bottom-0 top-auto hide">
+<footer id="footer" class="fixed w-screen bottom-0 top-auto hide">
 	<div class="flex flex-col justify-evenly items-center h-full">
 		<ul class="flex gap-5 justify-center items-center">
-			<li>
-				<a href="https://www.facebook.com" target="_blank">
-					<p class="text-[1px] opacity-0">link to facebook</p>
-					<svg fill="#333" height="20px" width="20px" version="1.1" id="Layer_1"
-						xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-						viewbox="0 0 310 310" xml:space="preserve">
-						<g id="XMLID_834_">
-							<path id="XMLID_835_"
-								d="M81.703,165.106h33.981V305c0,2.762,2.238,5,5,5h57.616c2.762,0,5-2.238,5-5V165.765h39.064
-																																																																		c2.54,0,4.677-1.906,4.967-4.429l5.933-51.502c0.163-1.417-0.286-2.836-1.234-3.899c-0.949-1.064-2.307-1.673-3.732-1.673h-44.996
-																																																																		V71.978c0-9.732,5.24-14.667,15.576-14.667c1.473,0,29.42,0,29.42,0c2.762,0,5-2.239,5-5V5.037c0-2.762-2.238-5-5-5h-40.545
-																																																																		C187.467,0.023,186.832,0,185.896,0c-7.035,0-31.488,1.381-50.804,19.151c-21.402,19.692-18.427,43.27-17.716,47.358v37.752H81.703
-																																																																		c-2.762,0-5,2.238-5,5v50.844C76.703,162.867,78.941,165.106,81.703,165.106z" />
-						</g>
-					</svg>
+		{% for link in footer_links %}
+		<li>
+				<a href="{{link.link}}" target="_blank" class="footerIcon">
+					{{link.icon}}
 				</a>
 			</li>
-			<li>
-				<a href="https://www.facebook.com" target="_blank">
-					<p class="text-[1px] opacity-0">link to instagram</p>
-					<svg width="25px" height="25px" viewbox="0 0 48 48" version="1.1" id="Shopicons"
-						xmlns="http://www.w3.org/2000/svg" x="0" y="0" xml:space="preserve">
-						<style>
-							.st1 {
-								fill: #333
-							}
-
-							.st2,
-							.st3 {
-								fill: none;
-								stroke: #333;
-								stroke-width: 4;
-								stroke-miterlimit: 10
-							}
-
-							.st3 {
-								stroke-width: 6
-							}
-						</style>
-						<g id="instagram_00000127030415805702900630000013396224003006281109_">
-							<path d="M0-.019h48v48H0v-48z" fill="none" />
-							<path
-								d="M36.019 8A3.986 3.986 0 0 1 40 11.981v24.038A3.986 3.986 0 0 1 36.019 40H11.981A3.986 3.986 0 0 1 8 36.019V11.981A3.986 3.986 0 0 1 11.981 8h24.038m0-4H11.981A7.98 7.98 0 0 0 4 11.981v24.038A7.98 7.98 0 0 0 11.981 44h24.038A7.98 7.98 0 0 0 44 36.019V11.981A7.98 7.98 0 0 0 36.019 4z" />
-							<path
-								d="M24 34c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm0-16c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6z" />
-							<circle cx="35" cy="13" r="2" />
-						</g>
-					</svg>
-				</a>
-			</li>
-			<li>
-				<a href="https://www.facebook.com" target="_blank">
-					<p class="text-[1px] opacity-0">link to whatsapp</p>
-					<svg width="25px" height="25px" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" clip-rule="evenodd"
-							d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z"
-							fill="#333" />
-					</svg>
-				</a>
-			</li>
+		{% endfor %}
 		</ul>
 		<p>©
 			<span id="year"></span>

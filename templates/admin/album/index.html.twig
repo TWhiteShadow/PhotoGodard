@@ -3,8 +3,10 @@
 {% block title %}Liste des Albums{% endblock %}
 
 {% block main_content %}
-    <h1>Liste des Albums</h1>
-
+    <div class="flex justify-between items-center">
+        <h1>Liste des Albums</h1>
+        <a href="{{ path('app_admin_album_new') }}"  class="create-button">Ajouter</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -35,5 +37,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_album_new') }}"  class="create-button">Ajouter</a>
 {% endblock %}
