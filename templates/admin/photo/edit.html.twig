@@ -9,5 +9,8 @@
 
     <a href="{{ path('app_admin_photo_index') }}" class="back-button">Revenir en arrière</a>
 
-    {{ include('admin/photo/_delete_form.html.twig') }}
+    {% include('admin/_delete_form.html.twig') with {
+            'entity_delete_path' : 'app_admin_photo_delete',
+            'entity' : photo,
+        } %}
 {% endblock %}

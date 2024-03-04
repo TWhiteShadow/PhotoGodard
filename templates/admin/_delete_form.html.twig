@@ -1,0 +1,4 @@
+<form method="post" action="{{ path(entity_delete_path, {'id': entity.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet élement?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ entity.id) }}">
+    <button class="btn delete-button">Supprimer</button>
+</form>

@@ -9,6 +9,9 @@
 
     <div class="actionButtons flex flex-row my-6">
         <a href="{{ path('app_admin_footer_links_index') }}" class="back-button">Revenir en arrière</a>
-        {{ include('admin/footer_links/_delete_form.html.twig') }}
+        {% include('admin/_delete_form.html.twig') with {
+            'entity_delete_path' : 'app_admin_footer_links_delete',
+            'entity' : footer_link,
+        } %}
     </div>
 {% endblock %}

@@ -81,14 +81,6 @@ class HomepageController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_homepage_show', methods: ['GET'])]
-    public function show(Homepage $homepage): Response
-    {
-        return $this->render('admin/homepage/show.html.twig', [
-            'homepage' => $homepage,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_admin_homepage_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Homepage $homepage, EntityManagerInterface $entityManager): Response
     {

@@ -38,5 +38,8 @@
 
     <a href="{{ path('app_admin_photo_edit', {'id': photo.id}) }}" class="edit-button">Modifier</a>
 
-    {{ include('admin/photo/_delete_form.html.twig') }}
+    {% include('admin/_delete_form.html.twig') with {
+            'entity_delete_path' : 'app_admin_photo_delete',
+            'entity' : photo,
+        } %}
 {% endblock %}
