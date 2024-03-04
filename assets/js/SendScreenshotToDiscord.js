@@ -57,16 +57,6 @@ class ScreenshotSender {
             formDataWithEmbed.append('file', file); // Ajoutez le fichier en premier
             formDataWithEmbed.append('payload_json', payloadString); // Ensuite, ajoutez l'objet d'embed
         
-            // Envoyer la requête à Discord avec le nouveau FormData
-            const response = await fetch(webhookUrl, {
-                method: 'POST',
-                body: formDataWithEmbed,
-            });
-
-            if (!response.ok) {
-                await this.sendFailureMessageToDiscord("Error while sending screenshot to Discord");
-            }
-
             const updateResponse = await fetch("/admin/update/lastScreenDate", {
                 method: "POST",
                 headers: {
@@ -79,12 +69,27 @@ class ScreenshotSender {
 
             if (!updateResponse.ok) {
                 await this.sendFailureMessageToDiscord("Error while updating the settings in the database");
+                return; 
             }
 
             const data = await updateResponse;
 
+
+            // Envoyer la requête à Discord avec le nouveau FormData
+            const response = await fetch(webhookUrl, {
+                method: 'POST',
+                body: formDataWithEmbed,
+            });
+
+            if (!response.ok) {
+                await this.sendFailureMessageToDiscord("Error while sending screenshot to Discord");
+                return; 
+            }
+
+
         } catch (error) {
             await this.sendFailureMessageToDiscord(error);
+            return; 
         }
     }
 

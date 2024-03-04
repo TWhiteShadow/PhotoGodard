@@ -32,7 +32,7 @@ class SettingsController extends AbstractController
         // var_dump($data);die;
         $setting = $settingsRepository->findOneBy(['settings_key' => $key]);
         if (empty($setting)) {
-            return new Response('success', Response::HTTP_NOT_FOUND);
+            return new Response('error', Response::HTTP_NOT_FOUND);
         }
         $setting->setSettingsValue($data['lastScreenDate']);
         $entityManager->persist($setting);
