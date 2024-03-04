@@ -7,7 +7,7 @@
         <h1>Liste des réseaux sociaux</h1>
         <a href="{{ path('app_admin_footer_links_new') }}" class="create-button">Ajouter</a>
     </div>
-    <table class="table tableFooterLinks">
+    <table class="md:table tableFooterLinks">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,7 +23,7 @@
             <tr>
                 <td data-title="Id">{{ footer_link.id }}</td>
                 <td data-title="Nom">{{ footer_link.name }}</td>
-                <td data-title="Lien">{{ footer_link.link }}</td>
+                <td data-title="Lien" class="lg:overflow-hidden lg:text-ellipsis md:max-w-[300px]"><a target='_blank' href="{{ footer_link.link }}">{{ footer_link.link }}</a></td>
                 <td data-title="Icone" class="icon">{{ footer_link.icon }}</td>
                 <td data-title="Afficher" data-id={{ footer_link.id }} class="visibleOption">
                     

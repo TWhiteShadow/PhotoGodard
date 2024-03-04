@@ -92,7 +92,6 @@
             // Event delegation for click event on photo containers
             document.querySelector('.photoGallery').addEventListener('click', function (event) {
                 if (buttonClicked) {
-                    console.log("photo clicked");
                     const container = event.target.closest('.photoContainer');
                     if (!container)
                         return;
@@ -117,7 +116,6 @@
                         }
                     });
                     // Display the values (you can replace this with your desired action)
-                    console.log("Values of photoToDelete[]:", photoToDeleteValue);
                     deletePhotos(photoToDeleteValue)
                 } else {
                     console.log("Associated checkboxes not found");
@@ -140,7 +138,6 @@
                 }
                 return response.json();
             }).then(data => {
-                // console.log(data.message);
                 // Afficher le message de réussite de la suppression
                 // Actualiser ou recharger la page, ou effectuer d'autres actions après la suppression
                 window.location.reload(true);

@@ -114,8 +114,8 @@ class CanvasStroke {
     }
 
     setupCanvas() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.canvas.width = document.body.clientWidth;
+        this.canvas.height = document.body.clientHeight;
     }
 }
 
@@ -126,4 +126,7 @@ var isIOS = (function () {
     return isIOS || (isAppleDevice);
 })();
 
-(!isIOS && document.getElementById('strokeCanvas')) && new CanvasStroke();
+(document.addEventListener("DOMContentLoaded", (e) =>{
+    !isIOS && document.getElementById('strokeCanvas') && new CanvasStroke();
+}));
+
