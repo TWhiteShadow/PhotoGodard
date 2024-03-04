@@ -38,6 +38,7 @@ class Album
     public function __construct()
     {
         $this->photos = new ArrayCollection();
+        $this->setUniqId();
     }
 
     public function getId(): ?int
@@ -50,7 +51,7 @@ class Album
         return $this->uniqId;
     }
 
-    public function setUniqId(): static
+    private function setUniqId(): static
     {
         $this->uniqId = bin2hex(Uuid::uuid4()->getBytes());
 

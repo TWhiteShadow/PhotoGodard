@@ -31,10 +31,10 @@ class Photo
     private ?array $imageFileArray = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private \DateTimeImmutable $createdAt;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private \DateTimeImmutable $updatedAt;
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: true)]
@@ -43,6 +43,15 @@ class Photo
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: true)]
     private ?Album $album = null;
+
+    public function __construct(File $file = null)
+     {
+        if(!empty($file)){
+            $this->setImageFile($file); // certaines photos n'ont pas d'image
+        }
+        $this->setCreatedAt(new \DateTimeImmutable());
+        $this->setUpdatedAt(new \DateTimeImmutable());
+    }
 
     public function getId(): ?int
     {
@@ -106,19 +115,19 @@ class Photo
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    private function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
     }
