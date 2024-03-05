@@ -51,46 +51,4 @@
         {{ include('admin/album/_delete_form.html.twig') }}
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const checkboxes = document.querySelectorAll('.favorite-picture');
-
-            checkboxes.forEach(function(checkbox) {
-                checkbox.addEventListener('change', function() {
-                    const parent_id = checkbox.dataset.parentId;
-                    const photo_id = checkbox.dataset.photoId;
-
-                    checkedCheckboxes = Array.from(checkboxes).filter(function(cb) {
-                        return cb.checked;
-                    });
-                    checkedCheckboxes.forEach(function(otherCheckbox) {
-                        if (otherCheckbox !== checkbox) {
-                            otherCheckbox.checked = false;
-                            otherCheckbox.parentNode.classList.remove("favorite");
-                        }
-                    });
-
-                    // Determine the value to send in the AJAX request
-                    const dataToSend = {
-                        photoId: this.checked ? photo_id : null // Send photo_id if checked, otherwise send null
-                    };
-
-                    // Send an AJAX request to update favorite picture
-                    $.ajax({
-                        url: '/admin/album/' + parent_id + '/update/favorite', // Replace with your actual route
-                        type: 'POST',
-                        data: dataToSend,
-                        success: function(response){
-                            checkbox.parentNode.classList.add("favorite");
-                        },
-                        error: function( response){
-                            alert('Erreur! ' + response.responseText);
-                        }
-                    });
-                });
-            });
-        });
-
-    </script>
-
 {% endblock %}
