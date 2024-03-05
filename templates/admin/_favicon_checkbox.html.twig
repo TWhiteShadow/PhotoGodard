@@ -1,11 +1,6 @@
 <label class="ui-bookmark group-hover:opacity-100 drop-shadow-md {{ favorite_photo == photo_id ? "favorite" : ""}}">
     <input class="favorite-picture" type="checkbox" data-photo-id = {{ photo_id }} data-parent-id = {{ parent_id }} {{ favorite_photo == photo_id ? 'checked' : '' }}>
     <div class="bookmark">
-      <svg viewBox="0 0 32 32" width="40" height="22"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g>
-          <path d="M 27 0 v 31 a 1 1 0 0 1 -1.625 0.781 L 16 24.281 l -9.375 7.5 A 1 1 0 0 1 5 31 V 0 z"></path>
-        </g>
-      </svg>
       <i class="fa-solid fa-bookmark"></i>
     </div>
 </label>

@@ -1110,9 +1110,16 @@ $light: #efefef;
     }
 }
 
+#eyePassword{
+    max-width: 20px;
+    max-height: 20px;
+    margin-right: 5px;
+}
+
 #content {
     background-color: #f3f4f6;
     position: relative;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 10px;
 }
 
 // magnific popup 
