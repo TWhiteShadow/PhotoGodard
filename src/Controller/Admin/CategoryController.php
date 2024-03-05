@@ -5,13 +5,15 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Entity\Photo;
 use App\Form\CategoryType;
+use App\Message\CreateCategory;
+use App\Message\DeleteCategory;
+use App\Message\UpdateCategory;
+use App\Message\UpdateFavoritePhotoCategory;
 use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/category')]
@@ -26,7 +28,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_category_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, MessageBusInterface $bus): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -34,26 +36,7 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
-            $category->setUniqId();
-            $entityManager->persist($category);
-            foreach ($uploadedFiles as $uploadedFile) {
-                if (!empty($uploadedFile)) {
-                    $imageFileArray = $uploadedFile->getImageFileArray();
-                    foreach ($imageFileArray as $imageFile) {
-                        $photo = new Photo();
-
-                        $photo->setImageFile($imageFile);
-                        $photo->setCreatedAt(new \DateTimeImmutable());
-                        $photo->setUpdatedAt(new \DateTimeImmutable());
-
-                        // Ajouter la photo à l'album
-                        $category->addPhoto($photo);
-                        $entityManager->persist($photo);
-                    }
-                }
-            }
-
-            $entityManager->flush();
+            $bus->dispatch(new CreateCategory($category, $uploadedFiles));
 
             return $this->redirectToRoute('app_admin_category_show', ['id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -76,34 +59,18 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Category $category, MessageBusInterface $bus): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $uploadedFiles = $form->get('newPhotos')->getData(); // get the first element
-            foreach ($uploadedFiles as $uploadedFile) {
-                if (!empty($uploadedFile)) {
-                    $imageFileArray = $uploadedFile->getImageFileArray();
-                    foreach ($imageFileArray as $imageFile) {
-                        $photo = new Photo();
-
-                        $photo->setImageFile($imageFile);
-                        $photo->setCreatedAt(new \DateTimeImmutable());
-                        $photo->setUpdatedAt(new \DateTimeImmutable());
-
-                        // Ajouter la photo à l'album
-                        $category->addPhoto($photo);
-                        $entityManager->persist($photo);
-                    }
-                }
-            }
-
-            $entityManager->flush();
+            $bus->dispatch(new UpdateCategory($category, $uploadedFiles));
 
             return $this->redirectToRoute('app_admin_category_show', ['id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
+
         $photos = $category->getPhotos();
 
         return $this->render('admin/category/edit.html.twig', [
@@ -113,59 +80,27 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    private function removeDir(string $dir): void
-    {
-        $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
-        $files = new \RecursiveIteratorIterator(
-            $it,
-            \RecursiveIteratorIterator::CHILD_FIRST
-        );
-        foreach ($files as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getPathname());
-            } else {
-                unlink($file->getPathname());
-            }
-        }
-        rmdir($dir);
-    }
-
     #[Route('/{id}/delete', name: 'app_admin_category_delete', methods: ['POST'])]
-    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag, Filesystem $filesystem): Response
+    public function delete(Request $request, Category $category, MessageBusInterface $bus): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
-            if (count($category->getPhotos()) > 0) {
-                $filesystem->remove($parameterBag->get('kernel.project_dir').'/public/photos/public/'.strtoupper($category->getUniqId()));
-            }
-            $category->setFavoritePhoto(null);
-            $entityManager->remove($category);
-            $entityManager->flush();
+            $bus->dispatch(new DeleteCategory($category));
         }
 
         return $this->redirectToRoute('app_admin_category_index');
     }
 
     #[Route('/{id}/update/favorite', name: 'app_admin_category_update_favorite', methods: ['POST'])]
-    public function update_favorite_photo(Request $request, Category $category, EntityManagerInterface $entityManager)
+    public function update_favorite_photo(Request $request, Category $category, MessageBusInterface $bus)
     {
         $photoId = $request->request->get('photoId');
-        $photo = null;
-
-        // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
-        if (null !== $photoId) {
-            $photo = $entityManager->getRepository(Photo::class)->find($photoId);
-            if (null !== $photo) {
-                if ((null === $photo->getCategory()) || ($photo->getCategory()->getId() !== $category->getId())) {
-                    // Si la photo n'appartient pas à la catégorie, retourner une erreur
-                    return new Response('La photo spécifiée n\'appartient pas à cette catégorie', Response::HTTP_BAD_REQUEST);
-                }
-            }
+        if(empty($photoId)){ $photoId = null; }
+        $updateResult = $bus->dispatch(new UpdateFavoritePhotoCategory($category, $photoId));
+        if ($updateResult) {
+            // Retourner une réponse avec l'identifiant de la photo
+            return new Response($photoId, Response::HTTP_OK);
         }
 
-        $category->setFavoritePhoto($photo);
-        $entityManager->flush();
-
-        // Return a response with the photoId
-        return new Response($photoId);
+        return new Response('La photo spécifiée n\'appartient pas à cette catégorie', Response::HTTP_BAD_REQUEST);
     }
 }
