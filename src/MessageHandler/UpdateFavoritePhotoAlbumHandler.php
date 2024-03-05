@@ -1,21 +1,25 @@
 <?php
+
 namespace App\MessageHandler;
 
 use App\Entity\Album;
 use App\Entity\Photo;
-use App\Message\UpdateAlbum;
 use App\Message\UpdateFavoritePhotoAlbum;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class UpdateFavoritePhotoAlbumHandler {
+class UpdateFavoritePhotoAlbumHandler
+{
     private $entityManager;
     private $photoId;
     private $album;
-    public function __construct(EntityManagerInterface $entityManager) {
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
     }
+
     public function __invoke(UpdateFavoritePhotoAlbum $command): bool
     {
         $this->album = $command->getAlbum();
@@ -23,11 +27,10 @@ class UpdateFavoritePhotoAlbumHandler {
 
         $updateResult = $this->updateFavoritePhoto();
 
-        return $updateResult;       
-
+        return $updateResult;
     }
 
-    private function updateFavoritePhoto() : bool
+    private function updateFavoritePhoto(): bool
     {
         $photo = null;
 
@@ -44,12 +47,11 @@ class UpdateFavoritePhotoAlbumHandler {
             // Si la photo n'appartient pas à l'album
             return false;
         }
-    
 
         // Définir la photo favorite de l'album
         $this->album->setFavoritePhoto($photo);
         $this->entityManager->flush();
-        return true;
 
+        return true;
     }
 }

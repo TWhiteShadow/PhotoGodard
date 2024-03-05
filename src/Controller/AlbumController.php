@@ -46,10 +46,6 @@ class AlbumController extends AbstractController
             $password = $data['password'];
 
             if ($identifiant == $album->getId() && trim($password) == $album->getPassword()) {
-                // Album login success
-                // You can handle the login logic here
-                // For example, you can redirect to a different page
-                // return $this->redirectToRoute('app_album_dashboard');
                 $session->set('ROLE_ALBUM_ACCESS', $album->getUniqId().'-ACCESS');
 
                 $photos = $album->getPhotos();
@@ -63,13 +59,6 @@ class AlbumController extends AbstractController
                 ]);
             }
         }
-
-        // return $this->render('album/show.html.twig', [
-        //     'controller_name' => 'AlbumController',
-        //     'album' => $album,
-        //     'albumLoginForm' => $albumLoginForm->createView(),
-        //     'error' => $error,
-        // ]);
 
         $favoritePhoto = $album->getFavoritePhoto();
 

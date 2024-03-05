@@ -33,7 +33,7 @@ class Album
 
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade: ['remove'])]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    private ?Collection $photos;
+    private Collection $photos;
 
     public function __construct()
     {
@@ -110,7 +110,7 @@ class Album
     /**
      * @return Collection<int, Photo>
      */
-    public function getPhotos(): ?Collection
+    public function getPhotos(): Collection
     {
         return $this->photos;
     }

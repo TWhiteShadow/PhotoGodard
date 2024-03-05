@@ -4,12 +4,14 @@ namespace App\Controller\Admin;
 
 use App\Entity\FooterLinks;
 use App\Form\FooterLinksType;
+use App\Message\UpdateVisibilityFooterLink;
 use App\Repository\FooterLinksRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/footer/links')]
@@ -73,21 +75,13 @@ class FooterLinksController extends AbstractController
     }
 
     #[Route('/{id}/update/visible', name: 'app_admin_footer_links_visible')]
-    public function setVisible(FooterLinks $footerLink, EntityManagerInterface $entityManager): JsonResponse
+    public function setVisible(FooterLinks $footerLink, MessageBusInterface $bus): JsonResponse
     {
-        if(empty($footerLink)){
-            return new JsonResponse(['error'=> true]);
+        if (empty($footerLink)) {
+            return new JsonResponse(['error' => true]);
         }
-        if($footerLink->isVisible()){
-            $footerLink->setVisible(0);
-        }else{
-            $footerLink->setVisible(1);
-        }
-        $entityManager->persist($footerLink);
-        $entityManager->flush();
+        $bus->dispatch(new UpdateVisibilityFooterLink($footerLink));
 
-        return new JsonResponse(['success'=> true]);
-        
+        return new JsonResponse(['success' => true]);
     }
-
 }

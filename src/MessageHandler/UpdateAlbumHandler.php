@@ -1,4 +1,5 @@
 <?php
+
 namespace App\MessageHandler;
 
 use App\Entity\Album;
@@ -8,13 +9,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class UpdateAlbumHandler {
+class UpdateAlbumHandler
+{
     private $entityManager;
     private $uploadedFiles;
     private $album;
-    public function __construct(EntityManagerInterface $entityManager) {
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
     }
+
     public function __invoke(UpdateAlbum $command): void
     {
         $this->album = $command->getAlbum();
@@ -23,14 +28,12 @@ class UpdateAlbumHandler {
         $this->handleUploadedPhoto();
 
         $this->entityManager->flush();
-        
-
     }
 
-    private function handleUploadedPhoto() : void
+    private function handleUploadedPhoto(): void
     {
         foreach ($this->uploadedFiles as $uploadedFile) {
-            if(empty($uploadedFile)){
+            if (empty($uploadedFile)) {
                 continue;
             }
 
@@ -43,7 +46,6 @@ class UpdateAlbumHandler {
                 $this->album->addPhoto($photo);
                 $this->entityManager->persist($photo);
             }
-            
         }
     }
 }

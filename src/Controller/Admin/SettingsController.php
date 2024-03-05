@@ -29,7 +29,6 @@ class SettingsController extends AbstractController
     public function update(EntityManagerInterface $entityManager, SettingsRepository $settingsRepository, Request $request, string $key): Response
     {
         $data = json_decode($request->getContent(), true);
-        // var_dump($data);die;
         $setting = $settingsRepository->findOneBy(['settings_key' => $key]);
         if (empty($setting)) {
             return new Response('error', Response::HTTP_NOT_FOUND);

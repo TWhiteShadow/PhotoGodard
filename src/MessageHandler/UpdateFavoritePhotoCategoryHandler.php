@@ -1,4 +1,5 @@
 <?php
+
 namespace App\MessageHandler;
 
 use App\Entity\Category;
@@ -8,30 +9,35 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class UpdateFavoritePhotoCategoryHandler {
+class UpdateFavoritePhotoCategoryHandler
+{
     private $entityManager;
     private $photoId;
     private $category;
-    public function __construct(EntityManagerInterface $entityManager) {
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
     }
+
     public function __invoke(UpdateFavoritePhotoCategory $command): bool
     {
         $this->category = $command->getCategory();
         $this->photoId = $command->getPhotoId();
         $updateResult = $this->updateFavoritePhoto();
 
-        return $updateResult;       
-
+        return $updateResult;
     }
 
-    private function updateFavoritePhoto() : bool
+    private function updateFavoritePhoto(): bool
     {
         $photo = null;
 
         // Si l'identifiant de la photo n'est pas nul, cherchez la photo correspondante
         if (null === $this->photoId) {
-            return false;
+            $this->category->setFavoritePhoto(null);
+            $this->entityManager->flush();
+            return true;
         }
 
         $photo = $this->entityManager->getRepository(Photo::class)->find($this->photoId);
@@ -42,12 +48,11 @@ class UpdateFavoritePhotoCategoryHandler {
             // Si la photo n'appartient pas à l'category
             return false;
         }
-    
 
         // Définir la photo favorite de l'category
         $this->category->setFavoritePhoto($photo);
         $this->entityManager->flush();
-        return true;
 
+        return true;
     }
 }

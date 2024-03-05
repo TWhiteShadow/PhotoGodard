@@ -1,4 +1,5 @@
 <?php
+
 namespace App\MessageHandler;
 
 use App\Entity\Category;
@@ -8,13 +9,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class CreateCategoryHandler {
+class CreateCategoryHandler
+{
     private $entityManager;
     private $uploadedFiles;
     private $category;
-    public function __construct(EntityManagerInterface $entityManager) {
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
         $this->entityManager = $entityManager;
     }
+
     public function __invoke(CreateCategory $command): void
     {
         $this->category = $command->getCategory();
@@ -23,14 +28,12 @@ class CreateCategoryHandler {
         $this->handleUploadedPhoto();
 
         $this->entityManager->flush();
-        
-
     }
 
-    private function handleUploadedPhoto() : void
+    private function handleUploadedPhoto(): void
     {
         foreach ($this->uploadedFiles as $uploadedFile) {
-            if(empty($uploadedFile)){
+            if (empty($uploadedFile)) {
                 continue;
             }
 
@@ -42,7 +45,6 @@ class CreateCategoryHandler {
                 $this->category->addPhoto($photo);
                 $this->entityManager->persist($photo);
             }
-            
         }
     }
 }

@@ -15,12 +15,12 @@ use Twig\Environment;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(CategoryRepository $categoryRepository, FooterLinksRepository $footerLinksRepository , AlbumRepository $albumRepository, HomepageRepository $homepageRepository): Response
+    public function index(CategoryRepository $categoryRepository, FooterLinksRepository $footerLinksRepository, AlbumRepository $albumRepository, HomepageRepository $homepageRepository): Response
     {
         $categories = $categoryRepository->findAll();
         $albums = $albumRepository->findBy([], ['id' => 'DESC']);
         $homepage = $homepageRepository->findAll()[0];
-        $footer_links = $footerLinksRepository->findBy(['visible'=> 1]);
+        $footer_links = $footerLinksRepository->findBy(['visible' => 1]);
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',

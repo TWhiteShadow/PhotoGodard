@@ -10,10 +10,7 @@ use App\Message\DeleteAlbum;
 use App\Message\UpdateAlbum;
 use App\Message\UpdateFavoritePhotoAlbum;
 use App\Repository\AlbumRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -99,10 +96,11 @@ class AlbumController extends AbstractController
     {
         $photoId = $request->request->get('photoId');
         $updateResult = $bus->dispatch(new UpdateFavoritePhotoAlbum($album, $photoId));
-        if($updateResult){
+        if ($updateResult) {
             // Retourner une réponse avec l'identifiant de la photo
             return new Response($photoId, Response::HTTP_OK);
         }
+
         // Si la photo n'appartient pas à l'album, retourner une erreur
         return new Response('La photo spécifiée n\'appartient pas à cet album', Response::HTTP_BAD_REQUEST);
     }

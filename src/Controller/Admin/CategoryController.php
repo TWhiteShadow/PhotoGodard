@@ -10,10 +10,7 @@ use App\Message\DeleteCategory;
 use App\Message\UpdateCategory;
 use App\Message\UpdateFavoritePhotoCategory;
 use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -97,11 +94,13 @@ class CategoryController extends AbstractController
     public function update_favorite_photo(Request $request, Category $category, MessageBusInterface $bus)
     {
         $photoId = $request->request->get('photoId');
+        if(empty($photoId)){ $photoId = null; }
         $updateResult = $bus->dispatch(new UpdateFavoritePhotoCategory($category, $photoId));
-        if($updateResult){
+        if ($updateResult) {
             // Retourner une réponse avec l'identifiant de la photo
             return new Response($photoId, Response::HTTP_OK);
         }
-        return new Response('La photo spécifiée n\'appartient pas à cette catégorie', Response::HTTP_BAD_REQUEST);        
+
+        return new Response('La photo spécifiée n\'appartient pas à cette catégorie', Response::HTTP_BAD_REQUEST);
     }
 }

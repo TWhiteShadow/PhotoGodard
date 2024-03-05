@@ -44,9 +44,9 @@ class Photo
     #[ORM\JoinColumn(nullable: true)]
     private ?Album $album = null;
 
-    public function __construct(File $file = null)
-     {
-        if(!empty($file)){
+    public function __construct(?File $file = null)
+    {
+        if (!empty($file)) {
             $this->setImageFile($file); // certaines photos n'ont pas d'image
         }
         $this->setCreatedAt(new \DateTimeImmutable());

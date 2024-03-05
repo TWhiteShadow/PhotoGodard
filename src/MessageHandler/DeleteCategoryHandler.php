@@ -1,9 +1,7 @@
 <?php
+
 namespace App\MessageHandler;
 
-use App\Entity\Category;
-use App\Entity\Photo;
-use App\Message\CreateEntity;
 use App\Message\DeleteCategory;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -11,16 +9,20 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class DeleteCategoryHandler {
+class DeleteCategoryHandler
+{
     private $entityManager;
     private $parameterBag;
     private $filesystem;
     private $category;
-    public function __construct(EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag, Filesystem $filesystem) {
+
+    public function __construct(EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag, Filesystem $filesystem)
+    {
         $this->entityManager = $entityManager;
         $this->parameterBag = $parameterBag;
         $this->filesystem = $filesystem;
     }
+
     public function __invoke(DeleteCategory $command): void
     {
         $this->category = $command->getCategory();
@@ -33,7 +35,5 @@ class DeleteCategoryHandler {
         $this->category->setFavoritePhoto(null);
         $this->entityManager->remove($this->category);
         $this->entityManager->flush();
-
     }
-
 }
