@@ -45,14 +45,14 @@
 				</li>
 				<li>
 					<a href="{{ path('app_admin_homepage_index') }}"
-						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin_homepage_edit" ? "active" : "" }}">
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route starts with "app_admin_homepage" ? "active" : "" }}">
 						<i class="fa-solid fa-house-chimney"></i>
 						<span class="flex-1 ms-3 whitespace-nowrap">Accueil</span>
 					</a>
 				</li>
 				{# <li>
 					<a href="{{ path('app_admin_photo_index') }}"
-						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin_photo_index" ? "active" : "" }}">
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route starts with "app_admin_photo" ? "active" : "" }}">
 						<i class="fa-solid fa-image"></i>
 						<span
 							class="flex-1 ms-3 whitespace-nowrap">Photos</span>
@@ -60,7 +60,7 @@
 				</li> #}
 				<li>
 					<a href="{{ path('app_admin_category_index') }}"
-						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin_category_index" ? "active" : "" }}">
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route starts with "app_admin_category" ? "active" : "" }}">
 
 						<i class="fa-solid fa-icons"></i>
 						<span
@@ -69,7 +69,7 @@
 				</li>
 				<li>
 					<a href="{{ path('app_admin_album_index') }}"
-						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route == "app_admin_album_index" ? "active" : "" }}">
+						class="flex items-center p-2 text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 {{ route starts with "app_admin_album" ? "active" : "" }}">
 						<i class="fa-solid fa-user-lock"></i>
 						<span
 							class="flex-1 ms-3 whitespace-nowrap">Albums</span>
@@ -224,8 +224,8 @@
 			<div id="main_content" class="h-full bg-white md:bg-gray-100 w-full flex flex-wrap lg:flex-nowrap justify-center">
 				<div
 					class="h-fit w-fit max-w-full max-h-auto flex flex-col justify-center items-center text-center sm:whitespace-nowrap">
-					<h2 class="text-xl font-bold">{{ diskTotalSpace - diskFreeSpace }}GB utilisé sur
-						{{ diskTotalSpace }}GB</h2>
+					<h2 class="text-xl font-bold"><span id="usedDiskSpace">{{ diskTotalSpace - diskFreeSpace }}</span>GB utilisé sur
+						<span id="availableDiskSpace">{{ diskTotalSpace }}</span>GB</h2>
 					<canvas id="myChart"></canvas>
 				</div>
 				<div class="content w-full flex flex-wrap justify-evenly items-center gap-8">
@@ -278,47 +278,8 @@
 							</p>
 						</div>
 					</div>
-
 				</div>
 			</div>
-			<script>
-				const ctx = document.getElementById('myChart');
-				var usedDiskSpace = {{ usedDiskSpace }};
-				var availableDiskSpace = {{ availableDiskSpace }};
-				new Chart(ctx, {
-					type: 'pie',
-					data: {
-						labels: [
-							'Espace Disque utilisé', 'Espace Disque disponible',
-						],
-						datasets: [
-							{
-								label: 'utilisation : %',
-								data: [
-									usedDiskSpace, availableDiskSpace
-								],
-								borderWidth: 1,
-								backgroundColor: ["lightblue", "lightgray"]
-							}
-						]
-					},
-					options: {
-						plugins: {
-							legend: true,
-							tooltip: true
-						},
-						scales: {
-							x: {
-								display: false
-							},
-							y: {
-								display: false
-							}
-						}
-					}
-				});
-			</script>
-
 			{% endblock %}
 		</div>
 	</div>
