@@ -27,7 +27,7 @@ class AlbumRepository extends ServiceEntityRepository
     public function findByName(string $value): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.name LIKE :val')
+            ->andWhere('a.name LIKE :val OR a.id LIKE :val')
             ->setParameter('val', '%'.trim($value).'%')
             ->orderBy('a.id', 'DESC')
             ->getQuery()
