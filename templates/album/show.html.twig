@@ -43,5 +43,116 @@
         {% endif %}
     </div>
 </div>
+<div id="footer" class="h-[200px]"></div>
+
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+<script>
+    // Définir la variable de page à l'extérieur de l'Intersection Observer
+    let page = 2;
+    let shouldStop = false;
+    let maxPages = 10000;
+    let lastPageCalled = 1;
+
+    // Fonction pour charger plus de données lorsque l'observateur d'intersection détecte la fin de la page
+    const loadMoreData = (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !shouldStop && page <= maxPages && page !== lastPageCalled) {
+                insertData();
+                console.log(page);
+            }
+        });
+    };
+
+    // Observer d'intersection pour détecter le bas de la page
+    const observer = new IntersectionObserver(loadMoreData, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0 // Déclenche lorsque 10% de l'élément cible est visible
+    });
+
+    // Connecter l'observateur d'intersection à un élément cible (par exemple, le pied de page)
+    const footer = document.querySelector('#footer'); // Remplacez #footer par l'ID de votre pied de page
+    observer.observe(footer);
+
+    // Fonction pour insérer des données supplémentaires
+    const insertData = () => {
+        // Si shouldStop est true, ne pas continuer
+        if (shouldStop) {
+            return;
+        }
+        // Charger plus de photos via AJAX
+        const url = "/album/{{ album.getId() }}/pagination/" + page;
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    shouldStop = true;
+                    return;
+                }
+                return response.text();
+            })
+            .then(html => {
+                if (!shouldStop) {
+                    html = $(html); // Convertir en objet jQuery pour Isotope
+                    $('.isotopeGrid').append(html).isotope('appended', html);
+                    $('.isotopeGrid').imagesLoaded().progress(function () {
+                        $('.isotopeGrid').isotope('layout');
+                    });
+
+                    lastPageCalled = page; // Mettre à jour la dernière page appelée
+                    page++; // Incrémenter la page pour la prochaine requête
+                }
+            })
+            .catch(error => {
+                console.error('Error loading more photos:', error);
+                shouldStop = true;
+                maxPages = 0;
+                // Arrêter l'observateur d'intersection en cas d'erreur
+                observer.unobserve(footer);
+            });
+    };
+
+    let previousElementOffsetTop = 0;
+    $('.img-gallery-magnific').on('mfpOpen', function () {
+        document.getElementById('footer').style.display = 'none';
+        document.documentElement.requestFullscreen({ navigationUI: 'hide' });
+
+    });
+    $('.img-gallery-magnific').on('mfpClose', function () {
+        document.getElementById('footer').style.display = 'block';
+        document.documentElement.requestFullscreen({ navigationUI: 'auto' });
+    });
+
+    $('.img-gallery-magnific').on('mfpChange', function () {
+        if($.magnificPopup.instance.items.slice(-5)[0].src == $.magnificPopup.instance.currItem.src){
+            insertData()
+        }
+        var div = document.querySelector('.img-gallery-magnific');
+        $.magnificPopup.instance.items = [];
+        div.querySelectorAll('.magnific-img').forEach((e) => {
+            $.magnificPopup.instance.items.push(e)
+        })
+        $.magnificPopup.instance.updateItemsHTML
+        
+        const clientHeightThreshold = window.innerHeight / 10;
+
+        const offsetTopOfImagePreview = $.magnificPopup.instance.currItem.el[0].offsetParent.offsetParent.offsetTop;
+        const offsetTopOfCurrentElement = offsetTopOfImagePreview + $.magnificPopup.instance.currItem.el[0].offsetTop + ($.magnificPopup.instance.currItem.el[0].getBoundingClientRect().height / 2) - (window.innerHeight / 2);
+        if( previousElementOffsetTop === 0 || ((offsetTopOfCurrentElement - previousElementOffsetTop) > clientHeightThreshold || (offsetTopOfCurrentElement - previousElementOffsetTop) < -clientHeightThreshold )){
+            window.scrollTo({
+                // behavior: 'smooth',
+                top: offsetTopOfCurrentElement,
+            });
+    
+            addEventListener("scroll", (event) => {
+                // $.magnificPopup.instance.wrap[0].style.top = offsetTopOfImagePreview + $.magnificPopup.instance.currItem.el[0].offsetTop + ($.magnificPopup.instance.wrap[0].style.height / 2) + 'px';  
+                $.magnificPopup.instance.wrap[0].style.top = window.scrollY + 'px';
+                // console.log($.magnificPopup.instance.bgOverlay[0].style.height);          
+                $.magnificPopup.instance.bgOverlay[0].style.height = document.querySelector('body').offsetHeight + 'px'; 
+            });
+            previousElementOffsetTop = offsetTopOfCurrentElement;
+        }
+    });
+</script>
 
 {% endblock %}
