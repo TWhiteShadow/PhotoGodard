@@ -383,7 +383,7 @@ a {
 						-webkit-animation-delay: var(--icon-anmt-duration);
 						animation-delay: var(--icon-anmt-duration);
 					}
-					fill: var(--icon-primary-color);
+					color: var(--icon-primary-color);
 					-webkit-animation: bookmark var(--icon-anmt-duration) forwards;
 					animation: bookmark var(--icon-anmt-duration) forwards;
 					-webkit-transition-delay: 0.3s;
@@ -401,7 +401,8 @@ a {
 	.bookmark {
 		width: var(--icon-size);
 		height: auto;
-		fill: var(--icon-secondary-color);
+		font-size: var(--icon-size);
+		color: var(--icon-secondary-color);
 		cursor: pointer;
 		-webkit-transition: 0.2s;
 		transition: 0.2s;
@@ -421,7 +422,7 @@ a {
 	}
 	&:hover {
 		.bookmark {
-			fill: var(--icon-hover-color);
+			color: var(--icon-hover-color);
 		}
 	}
 }

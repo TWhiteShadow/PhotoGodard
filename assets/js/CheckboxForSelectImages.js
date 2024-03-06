@@ -15,8 +15,6 @@ document.querySelector(".favorite-picture") && document.addEventListener("DOMCon
         return;
     }
 
-
-
     const checkboxes = document.querySelectorAll(".favorite-picture");
 
     checkboxes.forEach(function (checkbox) {
@@ -44,7 +42,7 @@ document.querySelector(".favorite-picture") && document.addEventListener("DOMCon
                 type: "POST",
                 data: dataToSend,
                 success: function (response) {
-                    checkbox.parentNode.classList.add("favorite");
+                    checkbox.parentNode.classList.toggle("favorite");
                 },
                 error: function (response) {
                     alert("Erreur! " + response.responseText);
@@ -55,7 +53,7 @@ document.querySelector(".favorite-picture") && document.addEventListener("DOMCon
 });
 
 
-// Code to be executed if favorite picture is present
+// Code to be executed if photoToDelete picture is present
 document.querySelector(".photoToDelete") && document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('.photoToDelete').forEach((checkbox) => { checkbox.checked = false })
     const photoToDeleteCheckboxes = document.querySelectorAll(".photoToDelete");
