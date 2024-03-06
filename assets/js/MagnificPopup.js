@@ -13,6 +13,7 @@ document.querySelector('.img-gallery-magnific') && ( () => {
                 enabled: true,
                 preload: [0, 2]
             },
+            autoFocusLast:false,
 
             zoom: {
                 enabled: true,
