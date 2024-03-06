@@ -14,10 +14,11 @@ class CategoryController extends AbstractController
     public function show(Category $category, PhotoRepository $photoRepository): Response
     {
         $photos = $category->getPhotos();
+        $limit = 9;
         $photos = $photoRepository->findBy(
             ['category' => $category],
             ['id' => 'ASC'],
-            15,
+            $limit,
         );
         if (empty($photos)) {
             return $this->redirectToRoute('app_home');
@@ -27,13 +28,14 @@ class CategoryController extends AbstractController
             'controller_name' => 'CategoryController',
             'category' => $category,
             'photos' => $photos,
+            'limit' => $limit,
         ]);
     }
 
     #[Route('/category/{id}/pagination/{offset}', name: 'app_category_show_pagination')]
     public function pagination(Category $category, PhotoRepository $photoRepository, int $offset): Response
     {
-        $limit = 15;
+        $limit = 9;
         $offset -= 1;
         if($offset > 0) {
             $offset = $offset * $limit;
@@ -47,14 +49,17 @@ class CategoryController extends AbstractController
         if (empty($photos)) {
             return new Response('', Response::HTTP_NOT_FOUND);
         }
+        $href = `{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photo.getFilename()) | imagine_filter('my_watermark_filter')}}`;
+        $src = `{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photo.getFilename()) | imagine_filter('thumbnail_web_path')}}`;
 
         return $this->render('_pagination_show_photo.html.twig', [
-            'href' => `{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photo.getFilename()) | imagine_filter('my_watermark_filter')}}`,
-            'src' => `{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photo.getFilename()) | imagine_filter('thumbnail_web_path')}}`,
+            'href' => $href,
+            'src' => $src,
             'controller_name' => 'CategoryController',
             'entityName' => $category->getName(),
-            'category' => $category,
+            'entity' => $category,
             'photos' => $photos,
+            'isCateg' => true,
         ]);
     }
 }
