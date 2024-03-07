@@ -27,6 +27,9 @@
 }%}
 
 <div id="content" class="flex flex-col justify-center w-full pt-6">
+    <div class="flex justify-end items-center max-w-[95%] md:max-w-[1200px] w-full mt-0 mx-auto mb-4">
+        <button id="downloadAlbum" class="h-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Télécharger</button>
+    </div>
     <div class="isotopeGrid max-w-[95%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
         {% if photos is not empty %}
         {% set i = 0 %}
@@ -43,5 +46,49 @@
         {% endif %}
     </div>
 </div>
+<script>
+document.getElementById("downloadAlbum").addEventListener("click", ()=>{
+    document.getElementById("downloadAlbum").innerHTML = `<div class="loaderAlbumDownload">
+    <p class="text">
+    <span class="letter letter1">C</span>
+    <span class="letter letter2">h</span>
+    <span class="letter letter3">a</span>
+    <span class="letter letter4">r</span>
+    <span class="letter letter5">g</span>
+    <span class="letter letter6">e</span>
+    <span class="letter letter7">m</span>
+    <span class="letter letter8">e</span>
+    <span class="letter letter9">n</span>
+    <span class="letter letter10">t</span>
+    </p>
+    </div>`; 
+
+
+
+    const albumId = "{{ album.getId() }}"; 
+
+    const url = `/createzip/${albumId}`;
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Supposons que la réponse est en JSON contenant l'URL
+        })
+        .then(data => {
+            // Utilisez window.location ou window.open pour déclencher le téléchargement
+            window.location.href = data.url; // Assurez-vous que la clé est correcte
+            document.getElementById("downloadAlbum").innerHTML = "Terminé!";
+            setTimeout(() => { document.getElementById("downloadAlbum").innerHTML = "Télécharger";}, 5000);
+
+        })
+        .catch(error => {
+            console.error('Error downloading photos:', error);
+            setTimeout(() => { document.getElementById("downloadAlbum").innerHTML = "Télécharger";}, 5000);
+        });
+    
+});
+
+</script>
 
 {% endblock %}
