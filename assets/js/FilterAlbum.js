@@ -23,9 +23,10 @@ function filterAlbums() {
         .then(html => {
             if (html != "") {
                 wrapper.innerHTML = html; // Set the HTML content to the wrapper
-                wrapper.querySelectorAll('img').forEach(element => {
-                    element.src = element.dataset.src;
-                });
+                // FOR LAZY LOADING WITH DATA-SRC
+                // wrapper.querySelectorAll('img').forEach(element => {
+                //     element.src = element.src;
+                // });
                 atroposInit();
                 swiperAlbum.update(); // Update swiper after setting HTML
                 swiperAlbum.update(); // IMPORTANT: removes height and fixes row

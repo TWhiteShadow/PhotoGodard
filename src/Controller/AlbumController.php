@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Album;
 use App\Form\AlbumLoginType;
 use Cocur\Slugify\Slugify;
+use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -25,11 +26,16 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AlbumController extends AbstractController
 {
     #[Route('/album/{id}', name: 'app_album_show')]
-    public function show(Album $album, AuthenticationUtils $authenticationUtils, Request $request, UserPasswordHasherInterface $passwordEncoder): Response
+    public function show(Album $album, AuthenticationUtils $authenticationUtils, Request $request, PhotoRepository $photoRepository): Response
     {
         $session = $request->getSession();
         if ((!empty($session->get('ROLE_ALBUM_ACCESS')) && $session->get('ROLE_ALBUM_ACCESS') == $album->getUniqId().'-ACCESS') || !empty($this->getUser()) && in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
-            $photos = $album->getPhotos();
+            $limit = $this->getParameter('default_limit');
+            $photos = $photoRepository->findBy(
+                ['album' => $album],
+                ['id' => 'ASC'],
+                $limit,
+            );
             if (empty($photos)) {
                 return $this->redirectToRoute('app_home');
             }
@@ -59,10 +65,17 @@ class AlbumController extends AbstractController
             if ($identifiant == $album->getId() && trim($password) == $album->getPassword()) {
                 $session->set('ROLE_ALBUM_ACCESS', $album->getUniqId().'-ACCESS');
 
-                $photos = $album->getPhotos();
+                $limit = $this->getParameter('default_limit');
+                $photos = $photoRepository->findBy(
+                    ['album' => $album],
+                    ['id' => 'ASC'],
+                    $limit,
+                );
+                if (empty($photos)) {
+                    return $this->redirectToRoute('app_home');
+                }
 
                 return $this->render('album/show.html.twig', [
-                    'controller_name' => 'AlbumController',
                     'album' => $album,
                     'photos' => $photos,
                     'session' => $session,
@@ -80,7 +93,6 @@ class AlbumController extends AbstractController
             'title' => $album->getName(),
         ]);
     }
-
 
     #[Route('/album/{album}/createzip', name: 'app_folder_zip')]
     public function createZip(Album $album, Session $session, ParameterBagInterface $parameterBag, Filesystem $filesystem): JsonResponse

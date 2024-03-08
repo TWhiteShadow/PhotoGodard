@@ -13,7 +13,7 @@ document.querySelector('.img-gallery-magnific') && ( () => {
                 enabled: true,
                 preload: [0, 2]
             },
-
+            autoFocusLast:false,
             zoom: {
                 enabled: true,
 
@@ -50,7 +50,6 @@ document.querySelector('.img-gallery-magnific') && ( () => {
                     function handleTouchStart(event) {
                         startX = event.touches[0].clientX;
                     }
-
                     function handleTouchMove(event) {
                         if (!startX)
                             return;

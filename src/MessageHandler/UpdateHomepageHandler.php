@@ -78,7 +78,6 @@ class UpdateHomepageHandler
             // Delete previous image, if it exists
             // $getterMethod = 'get'.ucfirst($fieldName);
             $previousImagePath = $this->propertyAccessor->getValue($this->defaultHomepage, $fieldName);
-            // var_dump($this->getParameter('kernel.project_dir'). '/public'. $previousImagePath);die;
             if ($previousImagePath && file_exists($this->parameterBag->get('kernel.project_dir').'/public'.$previousImagePath)) {
                 unlink($this->parameterBag->get('kernel.project_dir').'/public'.$previousImagePath);
             }
