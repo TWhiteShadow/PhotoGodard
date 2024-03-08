@@ -40,3 +40,9 @@ storage/images/private/*
 ###< liip/imagine-bundle ###
 
 tmp-phpqa
+.php-cs-fixer.cache
+public/assets/images/homepage/*
+!public/assets/images/homepage/.
+
+public/temp_zip/*
+!public/temp_zip/.gitignore

@@ -1,0 +1,48 @@
+{% extends '/admin/dashboard.html.twig' %}
+
+{% block title %}Liste des réseaux sociaux{% endblock %}
+
+{% block main_content %}
+    <div class="flex justify-between items-center">
+        <h1>Liste des réseaux sociaux</h1>
+        <a href="{{ path('app_admin_footer_links_new') }}" class="create-button">Ajouter</a>
+    </div>
+    <table class="md:table tableFooterLinks">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Lien</th>
+                <th>Icone</th>
+                <th>Afficher</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for footer_link in footer_links %}
+            <tr>
+                <td data-title="Id">{{ footer_link.id }}</td>
+                <td data-title="Nom">{{ footer_link.name }}</td>
+                <td data-title="Lien" class="lg:overflow-hidden lg:text-ellipsis md:max-w-[300px]"><a target='_blank' href="{{ footer_link.link }}">{{ footer_link.link }}</a></td>
+                <td data-title="Icone" class="icon">{{ footer_link.icon }}</td>
+                <td data-title="Afficher" data-id={{ footer_link.id }} class="visibleOption">
+                    
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer"  {{ footer_link.visible ? 'checked' : '' }}>
+                        <div class="group peer ring-0 bg-red-500  rounded-full outline-none duration-300 after:duration-300 w-12 h-7  shadow-md peer-checked:bg-emerald-500  peer-focus:outline-none  after:content-[''] after:rounded-full after:absolute after:bg-gray-50 after:outline-none after:h-5 after:w-5 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-4 peer-hover:after:scale-95">
+                        </div>
+                    </label>
+                </td>
+                <td data-title="Actions" class="flex flex-wrap items-center py-2">
+                    <a href="{{ path('app_admin_footer_links_edit', {'id': footer_link.id}) }}" class="mb-0 edit-button">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">aucun réseau social n'a été ajoutée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

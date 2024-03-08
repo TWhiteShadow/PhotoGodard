@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+
+    {{ form_row(form.name) }}
+    {{ form_row(form.link) }}
+    <div class="mb-6">
+        <div class="items-center group flex gap-3 max-w-fit pr-5 py-1">
+            {{ form_label(form.icon) }}
+            <div class="relative ">
+                <i class="fa-solid fa-circle-info"></i>
+                <span class="invisible absolute w-auto bg-gray-800 text-white whitespace-nowrap text-center rounded-md py-2 px-2 -top-[20px] left-[110%] flex gap-1 group-hover:visible">
+                    <a class="text-blue-400 underline" href="https://fontawesome.com/search?o=r&m=free" target="_blank" >Cliquez ici</a> pour trouver les icones 
+                </span>
+            </div>
+        </div>
+        {{ form_widget(form.icon) }}
+    </div>
+    <div class="flex items-center gap-4 mb-6"> 
+        {{ form_label(form.visible) }}
+        <label class="relative inline-flex items-center cursor-pointer">
+            {{ form_widget(form.visible, {"attr": {"class": "sr-only peer"}}) }}
+            <div class="group peer ring-0 bg-red-500  rounded-full outline-none duration-300 after:duration-300 w-12 h-7  shadow-md peer-checked:bg-emerald-500  peer-focus:outline-none  after:content-[''] after:rounded-full after:absolute after:bg-gray-50 after:outline-none after:h-5 after:w-5 after:top-1 after:left-1 after:flex after:justify-center after:items-center peer-checked:after:translate-x-4 peer-hover:after:scale-95">
+            </div>
+        </label>
+    </div>
+
+
+    <button class="btn create-button">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}

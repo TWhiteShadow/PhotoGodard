@@ -4,13 +4,14 @@ namespace App\Controller\Admin;
 
 use App\Entity\Photo;
 use App\Form\PhotoType;
+use App\Message\DeleteMultiplePhotos;
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/photo')]
@@ -33,8 +34,6 @@ class PhotoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $photo->setCreatedAt(new \DateTimeImmutable());
-            $photo->setUpdatedAt(new \DateTimeImmutable());
             $entityManager->persist($photo);
             $entityManager->flush();
 
@@ -85,57 +84,13 @@ class PhotoController extends AbstractController
     }
 
     #[Route('/photos/delete', name: 'app_admin_delete_photos', methods: ['POST'])]
-    public function deletePhotos(Request $request, EntityManagerInterface $entityManager, ParameterBagInterface $parameterBag): JsonResponse
+    public function deletePhotos(Request $request, MessageBusInterface $bus): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
         // Récupérez les ID des photos à supprimer
         $photoIds = $data['photo_ids'] ?? [];
-
-        // Supprimez les photos correspondantes
-        foreach ($photoIds as $photoId) {
-            $photo = $entityManager->getRepository(Photo::class)->find($photoId);
-            if ($photo) {
-                // Si la photo est associée à un album
-                if ($album = $photo->getAlbum()) {
-                    // Supprimer la référence à la photo dans l'album
-                    if ($album->getFavoritePhoto() === $photo) {
-                        $album->setFavoritePhoto(null);
-                    }
-                    // Supprimer la référence à la photo dans l'album
-                    $album->removePhoto($photo);
-                    // Enregistrez les modifications dans l'entité de l'album
-                    $entityManager->persist($album);
-                    try {
-                        unlink($parameterBag->get('kernel.project_dir').'/storage/images/private/'.strtoupper($album->getUniqId()).'/'.$photo->getFilename());
-                    } catch (\Exception $e) {
-                        continue;
-                    }
-                }
-
-                // Si la photo est associée à une catégorie
-                if ($category = $photo->getCategory()) {
-                    // Supprimer la référence à la photo dans la catégorie
-                    if ($category->getFavoritePhoto() === $photo) {
-                        $category->setFavoritePhoto(null);
-                    }
-                    // Supprimer la référence à la photo dans la catégorie
-                    $category->removePhoto($photo);
-                    // Enregistrez les modifications dans l'entité de la catégorie
-                    $entityManager->persist($category);
-                    try {
-                        unlink($parameterBag->get('kernel.project_dir').'/public/photos/public/'.strtoupper($category->getUniqId()).'/'.$photo->getFilename());
-                    } catch (\Exception $e) {
-                        continue;
-                    }
-                }
-
-                // Supprimer la photo
-                $entityManager->remove($photo);
-            }
-        }
-        // Enregistrez toutes les modifications dans la base de données
-        $entityManager->flush();
+        $bus->dispatch(new DeleteMultiplePhotos($photoIds));
 
         // Réponse JSON pour indiquer le succès de l'opération
         return new JsonResponse(['message' => 'Photos deleted successfully']);

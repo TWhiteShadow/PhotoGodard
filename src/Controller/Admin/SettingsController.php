@@ -29,10 +29,9 @@ class SettingsController extends AbstractController
     public function update(EntityManagerInterface $entityManager, SettingsRepository $settingsRepository, Request $request, string $key): Response
     {
         $data = json_decode($request->getContent(), true);
-        // var_dump($data);die;
         $setting = $settingsRepository->findOneBy(['settings_key' => $key]);
         if (empty($setting)) {
-            return new Response('success', Response::HTTP_NOT_FOUND);
+            return new Response('error', Response::HTTP_NOT_FOUND);
         }
         $setting->setSettingsValue($data['lastScreenDate']);
         $entityManager->persist($setting);
@@ -41,11 +40,16 @@ class SettingsController extends AbstractController
         return new Response('success', Response::HTTP_OK);
     }
 
-    // #[Route('/admin/create/{setting}/{value}', name: 'app_admin_settings_create')]
-    // public function create(Settings $setting, SettingsRepository $settingsRepository, Request $request): Response
-    // {
-    //     $settingsRepository->create($setting);
+    #[Route('/admin/create/{key}/{value}', name: 'app_admin_settings_create', methods: ['POST'])]
+    public function create(EntityManagerInterface $entityManager, string $key, string $value): Response
+    {
+        $setting = new Settings();
+        $setting->setSettingsKey($key);
+        $setting->setSettingsValue(null);
 
-    //     // return $this->redirectToRoute('app_admin');
-    // }
+        $entityManager->persist($setting);
+        $entityManager->flush();
+
+        return new Response('Settings created successfully', Response::HTTP_CREATED);
+    }
 }

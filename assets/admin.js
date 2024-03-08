@@ -8,3 +8,8 @@ import './js/NewPhotos.js';
 import './js/GeneratePassword.js';
 import './js/Isotope.js';
 import './js/SendScreenshotToDiscord.js';
+import './js/stringToFontAwesomeIcon.js';
+import './js/CheckboxForSelectImages.js';
+import './js/ToggleFooterLinkVisibility.js';
+import './js/HomepageChartGraph.js';
+import './js/InfiniteScrollPhoto.js';

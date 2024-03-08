@@ -1,0 +1,25 @@
+{% if isAdmin %}
+
+    {% for photo in photos %}
+        <div class="group photoContainer grid-item isotopeGridItemStyle">
+            <img class="h-auto max-w-auto rounded-lg object-cover" src='{{ isCateg == true ? asset('photos/public/' ~ entity.getUniqId()|upper ~ '/' ~ photo.filename) : path("app_file", {"photo": photo.id } )}}' alt="{{photo.title}}"/>
+            {% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : entity.getId(), 'favorite_photo' : entity.getFavoritePhoto() is null ? null : entity.getFavoritePhoto().getId()} %}
+            {% include "admin/_photo_selected_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : entity.getId()} %}
+        </div>
+    {% endfor %}
+
+{# ELSE #}
+{% else %}
+    {% set i = 0 %}
+    {% for photo in photos %}
+        {% set photos = photos|reverse %}
+        {% set i = i + 1 %}
+        <a class="grid-item magnific-img w-1/2 md:w-1/3 min-w-[45%] md:min-w-[20%] p-2" 
+            href="{{ isCateg == true ? asset('photos/public/' ~ entity.getUniqId()|upper ~ '/' ~ photo.getFilename()) | imagine_filter('my_watermark_filter') : path("app_file", {"photo": photo.id}) }}">
+            <img class="h-auto w-auto rounded-lg object-cover" width="200" height="100"
+                src="{{ isCateg == true ? asset('photos/public/' ~ entity.getUniqId()|upper ~ '/' ~ photo.getFilename()) | imagine_filter('thumbnail_web_path') : path("app_file", {"photo": photo.id}) }}"
+                alt="{{ entityName ~ '-photo n°' ~ (i) }}">
+        </a>
+    {% endfor %}
+
+{% endif %}

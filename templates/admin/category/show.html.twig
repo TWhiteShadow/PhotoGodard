@@ -31,13 +31,16 @@
 	</table>
 	{% set categoryFolder = category.getUniqId()|upper %}
 
-	<div id="content" class="isotopeGrid isotopeGridStyle">
-		{% for photo in photos %}
-			<div class="group grid-item isotopeGridItemStyle">
-				<img class="h-auto max-w-auto rounded-lg object-cover" src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}' alt="{{photo.title}}"/>
-				{% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : category.getId(), 'favorite_photo' : category.getFavoritePhoto() is null ? null : category.getFavoritePhoto().getId()} %}
-			</div>
-		{% endfor %}
+	<div class="relative">
+		<div id="content" class="isotopeGrid isotopeGridStyle showGrid">
+			{% for photo in photos %}
+				<div class="group grid-item isotopeGridItemStyle">
+					<img class="h-auto max-w-auto rounded-lg object-cover" src='{{ asset('photos/public/' ~ categoryFolder ~ '/' ~ photo.filename) }}' alt="{{photo.title}}"/>
+					{% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : category.getId(), 'favorite_photo' : category.getFavoritePhoto() is null ? null : category.getFavoritePhoto().getId()} %}
+				</div>
+			{% endfor %}
+		</div>
+		{% include "/admin/_view_more_button.html.twig" %}
 	</div>
 
 	<div class="actionButtons flex flex-row my-6">
@@ -49,47 +52,5 @@
 		{{ include('admin/category/_delete_form.html.twig') }}
 
     </div>
-
-	<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const checkboxes = document.querySelectorAll('.favorite-picture');
-
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                parent_id = checkbox.dataset.parentId;
-                photo_id = checkbox.dataset.photoId;
-
-                checkedCheckboxes = Array.from(checkboxes).filter(function(cb) {
-                    return cb.checked;
-                });
-                checkedCheckboxes.forEach(function(otherCheckbox) {
-                    if (otherCheckbox !== checkbox) {
-                        otherCheckbox.checked = false;
-						otherCheckbox.parentNode.classList.remove("favorite");
-                    }
-                });
-                
-				// Determine the value to send in the AJAX request
-                const dataToSend = {
-                    photoId: this.checked ? photo_id : null // Send photo_id if checked, otherwise send null
-                };
-
-                // Send an AJAX request to update favorite picture
-                $.ajax({
-                    url: '/admin/category/' + parent_id + '/update/favorite', // Replace with your actual route
-                    type: 'POST',
-                    data: dataToSend,
-					success: function(response){
-						checkbox.parentNode.classList.add("favorite");
-					},
-					error: function( response){
-						alert('Erreur! ' + response.responseText);
-					}
-                });
-            });
-        });
-    });
-
-    </script>
 
 {% endblock %}
