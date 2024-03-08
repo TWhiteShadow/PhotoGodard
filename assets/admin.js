@@ -12,3 +12,4 @@ import './js/stringToFontAwesomeIcon.js';
 import './js/CheckboxForSelectImages.js';
 import './js/ToggleFooterLinkVisibility.js';
 import './js/HomepageChartGraph.js';
+import './js/InfiniteScrollPhoto.js';

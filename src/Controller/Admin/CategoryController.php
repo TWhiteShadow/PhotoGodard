@@ -10,6 +10,7 @@ use App\Message\DeleteCategory;
 use App\Message\UpdateCategory;
 use App\Message\UpdateFavoritePhotoCategory;
 use App\Repository\CategoryRepository;
+use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,9 +49,14 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_admin_category_show', methods: ['GET'])]
-    public function show(Category $category): Response
+    public function show(Category $category, PhotoRepository $photoRepository): Response
     {
-        $photos = $category->getPhotos();
+        $limit = $this->getParameter('default_limit');
+        $photos = $photoRepository->findBy(
+            ['category' => $category],
+            ['id' => 'ASC'],
+            $limit,
+        );
 
         return $this->render('admin/category/show.html.twig', [
             'category' => $category,
@@ -59,7 +65,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Category $category, MessageBusInterface $bus): Response
+    public function edit(Request $request, Category $category, PhotoRepository $photoRepository, MessageBusInterface $bus): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -71,7 +77,12 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('app_admin_category_show', ['id' => $category->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        $photos = $category->getPhotos();
+        $limit = $this->getParameter('default_limit');
+        $photos = $photoRepository->findBy(
+            ['category' => $category],
+            ['id' => 'ASC'],
+            $limit,
+        );
 
         return $this->render('admin/category/edit.html.twig', [
             'category' => $category,
@@ -94,7 +105,9 @@ class CategoryController extends AbstractController
     public function update_favorite_photo(Request $request, Category $category, MessageBusInterface $bus)
     {
         $photoId = $request->request->get('photoId');
-        if(empty($photoId)){ $photoId = null; }
+        if (empty($photoId)) {
+            $photoId = null;
+        }
         $updateResult = $bus->dispatch(new UpdateFavoritePhotoCategory($category, $photoId));
         if ($updateResult) {
             // Retourner une réponse avec l'identifiant de la photo

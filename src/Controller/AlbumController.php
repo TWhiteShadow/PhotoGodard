@@ -8,7 +8,6 @@ use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -19,8 +18,7 @@ class AlbumController extends AbstractController
     {
         $session = $request->getSession();
         if ((!empty($session->get('ROLE_ALBUM_ACCESS')) && $session->get('ROLE_ALBUM_ACCESS') == $album->getUniqId().'-ACCESS') || !empty($this->getUser()) && in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
-            
-            $limit = 9;
+            $limit = $this->getParameter('default_limit');
             $photos = $photoRepository->findBy(
                 ['album' => $album],
                 ['id' => 'ASC'],
@@ -55,7 +53,7 @@ class AlbumController extends AbstractController
             if ($identifiant == $album->getId() && trim($password) == $album->getPassword()) {
                 $session->set('ROLE_ALBUM_ACCESS', $album->getUniqId().'-ACCESS');
 
-                $limit = 9;
+                $limit = $this->getParameter('default_limit');
                 $photos = $photoRepository->findBy(
                     ['album' => $album],
                     ['id' => 'ASC'],
@@ -87,9 +85,9 @@ class AlbumController extends AbstractController
     #[Route('/album/{id}/pagination/{offset}', name: 'app_album_show_pagination')]
     public function pagination(Album $album, PhotoRepository $photoRepository, int $offset): Response
     {
-        $limit = 9;
-        $offset -= 1;
-        if($offset > 0) {
+        $limit = $this->getParameter('default_limit');
+        --$offset;
+        if ($offset > 0) {
             $offset = $offset * $limit;
         }
         $photos = $photoRepository->findBy(
@@ -101,7 +99,7 @@ class AlbumController extends AbstractController
         if (empty($photos)) {
             return new Response('', Response::HTTP_NOT_FOUND);
         }
-       
+
         return $this->render('_pagination_show_photo.html.twig', [
             'entityName' => $album->getName(),
             'entity' => $album,

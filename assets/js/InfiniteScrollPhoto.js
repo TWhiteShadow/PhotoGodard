@@ -1,19 +1,20 @@
 import './imagesloaded.pkgd.min';
-
-class InfiniteScrollPhoto {
+export class InfiniteScrollPhoto {
     constructor() {
-
-        // Get the current URL pathname
-        this.currentUrl = window.location.pathname;
-
         this.page = 2;
         this.shouldStop = false;
         this.maxPages = 10000;
         this.lastPageCalled = 1;
+        this.isAdmin = 0;
 
-
-
-        this.init();
+        this.currentUrl = window.location.pathname;
+        if(this.currentUrl.includes('/admin')){
+            this.isAdmin = 1;
+            this.currentUrl = this.currentUrl.replace('/admin','')
+        }if(this.currentUrl.includes('/edit')){
+            this.currentUrl = this.currentUrl.replace('/edit','')
+        }
+        this.init()
     }
 
     init() {
@@ -36,8 +37,7 @@ class InfiniteScrollPhoto {
             // Connecter l'observateur d'intersection à un élément cible (par exemple, le pied de page)
             const footer = document.querySelector('#footer'); // Remplacez #footer par l'ID de votre pied de page
             observer.observe(footer);
-        }
-
+        };
         $('.img-gallery-magnific') && this.magnificPopup();
     }
     // Fonction pour insérer des données supplémentaires
@@ -47,7 +47,7 @@ class InfiniteScrollPhoto {
             return;
         }
         // Charger plus de photos via AJAX
-        const url = this.currentUrl + "/pagination/" + this.page;
+        const url = "/" + this.isAdmin + this.currentUrl + "/pagination/" + this.page;
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -63,9 +63,13 @@ class InfiniteScrollPhoto {
                     $('.isotopeGrid').imagesLoaded().progress(function () {
                         $('.isotopeGrid').isotope('layout');
                     });
-
+                    
+                    $(document).trigger('initFavoritePicture');
+                    
                     this.lastPageCalled = this.page; // Mettre à jour la dernière page appelée
                     this.page++; // Incrémenter la page pour la prochaine requête
+                }else{
+                    document.getElementById('loadMorePictures') && (document.getElementById('loadMorePictures').classList.add('hideAway'));
                 }
             })
             .catch(error => {
@@ -128,9 +132,7 @@ class InfiniteScrollPhoto {
             });
 
             addEventListener("scroll", () => {
-                // $.magnificPopup.instance.wrap[0].style.top = offsetTopOfImagePreview + $.magnificPopup.instance.currItem.el[0].offsetTop + ($.magnificPopup.instance.wrap[0].style.height / 2) + 'px';  
                 $.magnificPopup.instance.wrap[0].style.top = window.scrollY + 'px';
-                // console.log($.magnificPopup.instance.bgOverlay[0].style.height);
                 $.magnificPopup.instance.bgOverlay[0].style.height = document.querySelector('body').offsetHeight * 2 + 'px';
             });
             previousElementOffsetTop = offsetTopOfCurrentElement;
@@ -140,6 +142,9 @@ class InfiniteScrollPhoto {
 }
 
 document.getElementById('content') && document.addEventListener("DOMContentLoaded", function () {
-    new InfiniteScrollPhoto();
+    const infiniteScrollPhoto = new InfiniteScrollPhoto();
 
+    document.getElementById('loadMorePictures') && document.getElementById('loadMorePictures').addEventListener("click", function () {
+        infiniteScrollPhoto.insertData();
+    });
 });

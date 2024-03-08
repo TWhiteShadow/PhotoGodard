@@ -13,8 +13,7 @@ class CategoryController extends AbstractController
     #[Route('/category/{id}', name: 'app_category_show')]
     public function show(Category $category, PhotoRepository $photoRepository): Response
     {
-        $photos = $category->getPhotos();
-        $limit = 9;
+        $limit = $this->getParameter('default_limit');
         $photos = $photoRepository->findBy(
             ['category' => $category],
             ['id' => 'ASC'],
@@ -35,9 +34,9 @@ class CategoryController extends AbstractController
     #[Route('/category/{id}/pagination/{offset}', name: 'app_category_show_pagination')]
     public function pagination(Category $category, PhotoRepository $photoRepository, int $offset): Response
     {
-        $limit = 9;
-        $offset -= 1;
-        if($offset > 0) {
+        $limit = $this->getParameter('default_limit');
+        --$offset;
+        if ($offset > 0) {
             $offset = $offset * $limit;
         }
         $photos = $photoRepository->findBy(
@@ -49,13 +48,8 @@ class CategoryController extends AbstractController
         if (empty($photos)) {
             return new Response('', Response::HTTP_NOT_FOUND);
         }
-        $href = `{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photo.getFilename()) | imagine_filter('my_watermark_filter')}}`;
-        $src = `{{ asset('photos/public/' ~ category.getUniqId()|upper ~ '/' ~ photo.getFilename()) | imagine_filter('thumbnail_web_path')}}`;
 
         return $this->render('_pagination_show_photo.html.twig', [
-            'href' => $href,
-            'src' => $src,
-            'controller_name' => 'CategoryController',
             'entityName' => $category->getName(),
             'entity' => $category,
             'photos' => $photos,
