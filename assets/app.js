@@ -13,6 +13,7 @@ import "./js/MenuBurger";
 import "./js/SidebarObserver";
 import "./js/Footer.js";
 import "./js/Navbar.js";
+import './js/InfiniteScrollPhoto.js';
 import './js/Login.js';
 import './js/Isotope.js';
 import './js/MagnificPopup.js';

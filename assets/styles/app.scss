@@ -14,9 +14,10 @@
 * {
     font-family: 'Mulish', sans-serif;
 }
-*:focus:not(.focus-visible) {
+
+.swiper-horizontal *:focus:not(.focus-visible) {
     outline: none;
-  }
+}
 
 body {
     background-color: #f3f4f6;
@@ -37,7 +38,7 @@ h4 {
     margin: 0 !important;
 }
 
-canvas{
+canvas {
     // height: 100vh;
     // width: 100vw;
     position: absolute !important;
@@ -51,6 +52,7 @@ canvas{
 // Sections (to override fullpage.js
 
 .swiper {
+
     h3,
     h4 {
         text-shadow: 1px 1px 20px black, 0 0 10em black, 0 0 0.92em black;
@@ -85,6 +87,7 @@ canvas{
 #navbar {
     background-color: rgba(0, 0, 0, 0.20) !important;
     -webkit-backdrop-filter: blur(8px);
+
 }
 
 // footer 
@@ -104,7 +107,7 @@ footer {
     svg path,
     i {
         transition: all 0.5s ease-in-out;
-        font-size:25px;
+        font-size: 25px;
     }
 
     svg:hover,
@@ -963,7 +966,7 @@ $light: #efefef;
         right: 0;
         top: 30px;
         color: black;
-        -webkit-transform: translate3d(0,0,0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
 
     .swiper-button-next {
@@ -1124,6 +1127,6 @@ $light: #efefef;
 
 // magnific popup 
 
-.mfp-wrap{
+.mfp-wrap {
     height: 100dvh !important;
 }

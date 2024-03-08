@@ -37,6 +37,7 @@ class UpdateFavoritePhotoCategoryHandler
         if (null === $this->photoId) {
             $this->category->setFavoritePhoto(null);
             $this->entityManager->flush();
+
             return true;
         }
 

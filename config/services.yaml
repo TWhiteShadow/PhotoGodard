@@ -6,6 +6,7 @@
 parameters:
     photos_dir: /public/photos
     photos_private_dir: storages/images/private
+    default_limit: '%env(DEFAULT_LIMIT)%'
 
 services:
     # default configuration for services in *this* file

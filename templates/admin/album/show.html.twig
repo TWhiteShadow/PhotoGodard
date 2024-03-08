@@ -32,18 +32,23 @@
             </tr>
         </tbody>
     </table>
-    {% set albumFolder = album.getUniqId()|upper %}
-	<div id="content" class="isotopeGrid isotopeGridStyle">
-    {% for photo in photos %}
-        {% if photo.title !=  "" %}
-            <div class="group grid-item isotopeGridItemStyle">
-                <img class="h-auto max-w-auto rounded-lg object-cover" src='{{path("app_file", {"photo": photo.id} )}}' alt="{{photo.title}}"/>
-                {% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : album.getId(), 'favorite_photo' : album.getFavoritePhoto() is null ? null : album.getFavoritePhoto().getId()} %}
-            </div>
-        {% endif %}
 
-    {% endfor %}
-    </div>
+	<div class="relative">
+        {% set albumFolder = album.getUniqId()|upper %}
+        <div id="content" class="isotopeGrid isotopeGridStyle showGrid">
+        {% for photo in photos %}
+            {% if photo.title !=  "" %}
+                <div class="group grid-item isotopeGridItemStyle">
+                    <img class="h-auto max-w-auto rounded-lg object-cover" src='{{path("app_file", {"photo": photo.id} )}}' alt="{{photo.title}}"/>
+                    {% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : album.getId(), 'favorite_photo' : album.getFavoritePhoto() is null ? null : album.getFavoritePhoto().getId()} %}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+        </div>
+		{% include "/admin/_view_more_button.html.twig" %}
+	</div>
+
 
 	<div class="actionButtons flex flex-row my-6">
         <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>

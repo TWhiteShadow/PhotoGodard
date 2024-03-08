@@ -10,6 +10,7 @@ use App\Message\DeleteAlbum;
 use App\Message\UpdateAlbum;
 use App\Message\UpdateFavoritePhotoAlbum;
 use App\Repository\AlbumRepository;
+use App\Repository\PhotoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,9 +50,14 @@ class AlbumController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_admin_album_show', methods: ['GET'])]
-    public function show(Album $album): Response
+    public function show(Album $album, PhotoRepository $photoRepository): Response
     {
-        $photos = $album->getPhotos();
+        $limit = $this->getParameter('default_limit');
+        $photos = $photoRepository->findBy(
+            ['album' => $album],
+            ['id' => 'ASC'],
+            $limit,
+        );
 
         return $this->render('admin/album/show.html.twig', [
             'album' => $album,
@@ -60,7 +66,7 @@ class AlbumController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_album_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Album $album, MessageBusInterface $bus): Response
+    public function edit(Request $request, Album $album, PhotoRepository $photoRepository, MessageBusInterface $bus): Response
     {
         $form = $this->createForm(AlbumType::class, $album);
         $form->handleRequest($request);
@@ -72,7 +78,12 @@ class AlbumController extends AbstractController
 
             return $this->redirectToRoute('app_admin_album_show', ['id' => $album->getId()], Response::HTTP_SEE_OTHER);
         }
-        $photos = $album->getPhotos();
+        $limit = $this->getParameter('default_limit');
+        $photos = $photoRepository->findBy(
+            ['album' => $album],
+            ['id' => 'ASC'],
+            $limit,
+        );
 
         return $this->render('admin/album/edit.html.twig', [
             'album' => $album,
