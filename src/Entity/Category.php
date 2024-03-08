@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Nonstandard\Uuid;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -26,11 +27,13 @@ class Category
     private ?Photo $favoritePhoto = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Photo::class, cascade: ['remove'])]
-    private Collection $photos;
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    private ?Collection $photos;
 
     public function __construct()
     {
         $this->photos = new ArrayCollection();
+        $this->setUniqId();
     }
 
     public function getId(): ?int
@@ -43,9 +46,9 @@ class Category
         return $this->uniqId;
     }
 
-    public function setUniqId(): static
+    private function setUniqId(): static
     {
-        $this->uniqId = uniqid();
+        $this->uniqId = bin2hex(Uuid::uuid4()->getBytes());
 
         return $this;
     }
@@ -77,7 +80,7 @@ class Category
     /**
      * @return Collection<int, Photo>
      */
-    public function getPhotos(): Collection
+    public function getPhotos(): ?Collection
     {
         return $this->photos;
     }

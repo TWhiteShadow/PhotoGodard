@@ -11,18 +11,21 @@
 	<div class="w-full flex justify-end">
 		<span class="deleteSelection delete-button" style="display:none">Supprimer la sélection</span>
 	</div>
-	<div class="photoGallery grid grid-cols-3 md:grid-cols-5 gap-4">
-		{% for photo in photos %}
-			{% set name = albumFolder ~ "/" ~ photo.filename %}
-			{% if photo.title !=  "" %}
-				<div class="relative group photoContainer">
-					<img class="h-full max-w-full rounded-lg object-cover" src='{{path("app_file", {"title": photo.title} )}}' alt="{{photo.title}}"/>
-					{% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : album.getId(), 'favorite_photo' : album.getFavoritePhoto() is null ? null : album.getFavoritePhoto().getId()} %}
-					{% include "admin/_photo_selected_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : album.getId()} %}
-				</div>
-			{% endif %}
+	<div class="relative">
+		<div id="content" class="photoGallery isotopeGrid isotopeGridStyle">
+			{% for photo in photos %}
+				{% set name = albumFolder ~ "/" ~ photo.filename %}
+				{% if photo.title !=  "" %}
+					<div class="group photoContainer grid-item isotopeGridItemStyle">
+						<img class="h-auto max-w-auto rounded-lg object-cover" src='{{path("app_file", {"photo": photo.id } )}}' alt="{{photo.title}}"/>
+						{% include "admin/_favicon_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : album.getId(), 'favorite_photo' : album.getFavoritePhoto() is null ? null : album.getFavoritePhoto().getId()} %}
+						{% include "admin/_photo_selected_checkbox.html.twig" with {'photo_id' : photo.id, 'parent_id' : album.getId()} %}
+					</div>
+				{% endif %}
 
-		{% endfor %}
+			{% endfor %}
+		</div>
+		{% include "/admin/_view_more_button.html.twig" %}
 	</div>
 {% endif %}
 

@@ -3,7 +3,10 @@
 {% block title %}Liste des Catégories{% endblock %}
 
 {% block main_content %}
-    <h1>Liste des Catégories</h1>
+    <div class="flex justify-between items-center">
+        <h1>Liste des Catégories</h1>
+        <a href="{{ path('app_admin_category_new') }}" class="create-button">Ajouter</a>
+    </div>
 
     <table class="table">
         <thead>
@@ -33,5 +36,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_category_new') }}" class="create-button">Ajouter</a>
 {% endblock %}

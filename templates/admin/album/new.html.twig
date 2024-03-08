@@ -1,51 +1,11 @@
 {% extends '/admin/dashboard.html.twig' %}
 
-{% block title %}New Album{% endblock %}
+{% block title %}Ajouter Album{% endblock %}
 
 {% block main_content %}
-    <h1>Ajouter Album</h1>
-    {# {{ form_start(form) }}
-    {{ form_errors(form.name) }}
-    {{ form_widget(form.name) }} #}
+    <h1 class="mb-6">Ajouter Album</h1>
+
     {{ include('admin/album/_form.html.twig') }}
-    {# {{ form_label(form.password) }}
-    {{ form_errors(form.password) }}
-    <div class="form-group flex">
-        {{ form_widget(form.password) }}
-        <button class="btn-generate-pass">Générer un mdp</button>
-    </div>
-    {{ form_label(form.newPhotos) }}
-    {{ form_widget(form.newPhotos) }}
-    <button class="btn create-button">{{ button_label|default('Sauvegarder') }}</button>
-    {{ form_end(form) }} #}
 
     <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>
-<script>
-	var newPhotosPrototype = document.querySelector('#album_newPhotos').dataset.prototype;
-    // Remplacer __name__ par un nom unique
-    var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
-    var newPhotosPrototypeModified = newPhotosPrototype.replace(/__name__/g, uniqueId);
-
-    var tempDiv = document.createElement('div');
-    tempDiv.innerHTML = newPhotosPrototypeModified;
-
-    var newPhotoPrototypeElement = tempDiv.firstChild;
-
-    document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
-
-    document.querySelector(".btn-generate-pass").addEventListener("click", function(){
-        var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                var passwordLength = 12;
-                var password = "";
-        for (var i = 0; i <= passwordLength; i++) {
-            var randomNumber = Math.floor(Math.random() * chars.length);
-            password += chars.substring(randomNumber, randomNumber +1);
-        }
-        document.getElementById("album_password").value = password;
-    });
-
-</script>
-
-
-
 {% endblock %}

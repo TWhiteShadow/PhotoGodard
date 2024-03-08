@@ -24,9 +24,18 @@ gp:
 
 
 dcu:
+	docker compose stop  && \
+	docker compose down && \
 	docker compose up --build --force-recreate -d
 
+fixer:
+	docker compose run phpqa php-cs-fixer fix --config=".php-cs-fixer.php"
+
+stan:
+	docker compose run phpqa phpstan analyse --level=max src
+
 install: 
+	sudo chmod -R 777 * && \
 	docker compose down && \
 	make dcu && \
 	docker compose exec php composer install && \

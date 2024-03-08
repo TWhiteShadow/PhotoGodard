@@ -32,7 +32,6 @@ class CategoryFixtures extends Fixture
         foreach (self::ALBUM_NAMES as $categoryName) {
             $category = new Category();
             $category->setName($categoryName);
-            $category->setUniqId();
 
             $manager->persist($category);
         }

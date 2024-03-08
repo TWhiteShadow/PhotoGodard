@@ -1,137 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Album - {{ title }}{% endblock %}
-  
+{% block title %}Album -
+{{ title }}
+{% endblock %}
+
 {% block javascripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
 <script src="https://npmcdn.com/isotope-fit-columns@1/fit-columns.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"
-  integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    integrity="sha512-C1zvdb9R55RAkl6xCLTPt+Wmcz6s+ccOvcr6G57lbm8M2fbgn2SUjUJbQ13fEyjuLViwe97uJvwa1EUf4F1Akw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
-  integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
+    integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
+{# Important for all cdns #}
 {% block javascriptsBody %}{% endblock %}
 
 {% block body %}
-<div class="flex flex-col justify-center w-full">
-  <div class="myGrid max-w-[90%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
-    {% set photos = photos|reverse %}
-    {% if photos is not empty %}
-    
-    {% for i in range(0 ,(photos|length)- 1 , 1) %}
-    <a class="grid-item magnific-img w-[100%] sm:w-[50%] md:w-1/3 lg:w-1/4 xl:w-1/5 min-w-[80%] sm:min-w-[40%] md:min-w-[20%] p-2"
-      href="{{ path("app_file", {"title": photos[i].title} )}}">
-      <img class="h-auto w-auto rounded-lg object-cover" width="200" height="100"
-        src="{{ path("app_file", {"title": photos[i].title} ) }}" alt="{{ album.getName() ~ '-photo n°' ~ (i + 1) }}">
-    </a>
-    {% endfor %}
-    {% endif %}
-  </div>
+
+{% include "_navbar.html.twig" with {
+    "navbar_image_title": album.getName(),
+    "navbar_image_path": path('app_file', {'photo' : album.getFavoritePhoto() ? album.getFavoritePhoto().getId() : album.getPhotos()|last .getId() } ),
+}%}
+
+<div id="content" class="flex flex-col justify-center w-full pt-6">
+    <div class="flex justify-end items-center max-w-[95%] md:max-w-[1200px] w-full mt-0 mx-auto mb-4">
+        <button id="downloadAlbum" class="h-fit text-white bg-blue-700 hover:opacity-80 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition-all">Télécharger</button>
+    </div>
+    <div class="isotopeGrid max-w-[95%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
+        {% if photos is not empty %}
+        {% set i = 0 %}
+        {% set photos = photos|reverse %}
+        {% for photo in photos %}
+            {% set i = i + 1 %}
+            <a class="grid-item magnific-img w-1/2 md:w-1/3 min-w-[45%] md:min-w-[20%] p-2"
+                href="{{ path("app_file", {"photo": photo.id} )}}">
+                <img class="h-auto w-auto rounded-lg object-cover" width="200" height="100" src="{{ path("app_file",
+                    {"photo": photo.id} ) }}" alt="{{ album.getName() ~ '-photo n°' ~ (i + 1) }}">
+
+            </a>
+        {% endfor %}
+        {% endif %}
+    </div>
 </div>
+<div id="footer" class="h-[200px]"></div>
 
-<script>
-    $(window).load(function(){
-        document.querySelector("html").classList.remove("md:overflow-hidden");
-        document.querySelector("html").classList.remove("overflow-scroll");
-        // init Isotope
-        var $grid = $('.myGrid').isotope({
-            itemSelector: '.grid-item',
-            masonry: {
-                columnWidth: 0,
-            },
-            getSortData: {
-            name: '.name',
-            symbol: '.symbol',
-            number: '.number parseInt',
-            album: '[data-album]',
-            weight: function (itemElem) {
-                var weight = $(itemElem).find('.weight').text();
-                return parseFloat(weight.replace(/[\(\)]/g, ''));
-            }
-            }
-        });
-
-        $('.img-gallery-magnific').magnificPopup({
-            delegate: 'a', // child items selector, by clicking on it popup will open
-            type: 'image',
-            gallery: {
-            enabled: true,
-            preload: [0, 2],
-            },
-
-            zoom: {
-            enabled: true,
-
-            duration: 300, // duration of the effect, in milliseconds
-            easing: 'ease-in-out', // CSS transition easing function
-            },
-            retina: {
-        ratio: 1,
-        // Increase this number to enable retina image support.
-        // Image in popup will be scaled down by this number.
-        // Option can also be a function which should return a number (in case you support multiple ratios). For example:
-        // ratio: function() { return window.devicePixelRatio === 1.5 ? 1.5 : 2  }
-
-
-        replaceSrc: function (item, ratio) {
-          return item.src.replace(/\.\w+$/, function (m) {
-            return '@2x' + m;
-          });
-        } // function that changes image source
-      },
-      callbacks: {
-        open: function () {
-          let startX;
-          const swipeArea = document.querySelector('.mfp-container');
-          swipeArea.addEventListener('touchstart', handleTouchStart, false);
-          swipeArea.addEventListener('touchmove', handleTouchMove, false);
-
-          function handleTouchStart(event) {
-            startX = event.touches[0].clientX;
-          }
-
-          function handleTouchMove(event) {
-            if (!startX) return;
-
-            const currentX = event.touches[0].clientX;
-            const deltaX = currentX - startX;
-
-            if (Math.abs(deltaX) > 50) { // Adjust the threshold as needed
-              if (deltaX > 0) { // Swipe right
-                document.querySelector('.mfp-arrow-left').click();
-              } else { // Swipe left
-                document.querySelector('.mfp-arrow-right').click();
-              }
-
-              // Reset startX to null after detecting the swipe
-              startX = null;
-
-              // Prevent default touchmove behavior (scrolling)
-              event.preventDefault();
-            }
-          }
-        }
-      }
-    });
-    $.extend(true, $.magnificPopup.defaults, {
-      tClose: 'Fermer (Esc)', // Alt text on close button
-      tLoading: 'Chargement...', // Text that is displayed during loading. Can contain %curr% and %total% keys
-      gallery: {
-        tPrev: 'Précédent (flèche gauche)', // Alt text on left arrow
-        tNext: 'Suivant (flèche droite)', // Alt text on right arrow
-        tCounter: '%curr% sur %total%' // Markup for "1 of 7" counter
-      },
-      image: {
-        tError: '<a href="%url%">L\'image</a> n\'a pas pu être chargée.', // Error message when image n\'a pas pu être chargée.'
-      },
-      ajax: {
-        tError: '<a href="%url%">Le contenu</a> n\'a pas pu être chargé.', // Error message when ajax request failed
-      }
-    });
-  });
-</script>
 {% endblock %}

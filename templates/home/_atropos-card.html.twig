@@ -11,10 +11,10 @@
 				<div
 					class="atropos-inner flex justify-center items-center">
 					<!-- put your custom content here -->
-					<img src="{{ card_img_path }}" data-atropos-offset="-5" loading="lazy" class="grayscale object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]" alt="image-couverture-{{card_name}}" width="700" height="400"/>
+					<img  src="{{ card_img_path }}" data-atropos-offset="-5" class="grayscale object-cover w-[110%] h-[110%] -left-[5%] -top-[5%]" alt="image-couverture-{{card_name}}" width="700" height="400"/>
 					<div class="absolute textContent atropos-text opacity-0 flex flex-col items-center">
 						{% if card_photo_count is empty %}
-						<svg data-atropos-offset="5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg>
+						<i class="fa-solid fa-lock" data-atropos-offset="5"></i>
 						{% endif %}
 						<h4 class="text-lg uppercase tracking-[0.5rem] text-white font-semibold drop-shadow-sm w-full text-center" data-atropos-offset="5">
 							{{ card_name}}

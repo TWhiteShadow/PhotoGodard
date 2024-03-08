@@ -45,34 +45,15 @@
         {% block stylesheets %}
         {% endblock %}
 
-        {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}
         {% endblock %}
     </head>
     <body class="bg-[#f3f4f6]">
-        {# SPINNER #}
-        <div class="spinner">
-            <svg viewBox="25 25 50 50">
-                <circle r="20" cy="50" cx="50"></circle>
-            </svg>
-        </div>
-
-        <script>
-            window.addEventListener('load', function() {
-                document.querySelectorAll("img").forEach(function(element) {
-                    element.removeAttribute("width");
-                    element.removeAttribute("height");
-                });
-                // close spinner0
-                document.querySelector('.spinner').classList.toggle('hideSpinner');
-                setTimeout(function() {
-                    document.querySelector('.spinner').remove();
-                }, 500);
-            });
-        </script>
-
+        {% include "_spinner.html.twig" %}
         {# <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" > #}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" >
+        <script src="https://kit.fontawesome.com/460200155f.js" crossorigin="anonymous"></script>
         {% block javascriptsBody %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.css" media="screen and (min-width: 768px)"  integrity="sha512-/AilQf/shuEGfh8c3DoIqcIqHZCKpiImSyt+fxIKJphHiNa6QMPb6AbDly6rkjmGr/5OZd35JtvVkbEKnCZO+A==" crossorigin="anonymous" referrerpolicy="no-referrer" >
         <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
@@ -81,7 +62,5 @@
         {% endblock %}
         {% block body %}
         {% endblock %}
-
-
     </body>
 </html>

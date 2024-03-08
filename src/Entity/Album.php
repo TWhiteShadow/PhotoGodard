@@ -6,6 +6,7 @@ use App\Repository\AlbumRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Nonstandard\Uuid;
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
 class Album
@@ -32,11 +33,12 @@ class Album
 
     #[ORM\OneToMany(targetEntity: Photo::class, mappedBy: 'album', cascade: ['remove'])]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    private ?Collection $photos;
+    private Collection $photos;
 
     public function __construct()
     {
         $this->photos = new ArrayCollection();
+        $this->setUniqId();
     }
 
     public function getId(): ?int
@@ -49,9 +51,9 @@ class Album
         return $this->uniqId;
     }
 
-    public function setUniqId(): static
+    private function setUniqId(): static
     {
-        $this->uniqId = uniqid();
+        $this->uniqId = bin2hex(Uuid::uuid4()->getBytes());
 
         return $this;
     }
@@ -108,7 +110,7 @@ class Album
     /**
      * @return Collection<int, Photo>
      */
-    public function getPhotos(): ?Collection
+    public function getPhotos(): Collection
     {
         return $this->photos;
     }

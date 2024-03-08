@@ -9,12 +9,11 @@
                 <div>
                     {{ form_label(form.photoTopLeft, null, {'label_attr': {'class': 'photoTopLeftLabel'} }) }}
                     {% if form.vars.value.photoTopLeft is not null %}
-                    <label for="{{ form.photoTopLeft.vars.id }}" class="group cursor-pointer w-fit h-fit relative">
+                    <label for="{{ form.photoTopLeft.vars.id }}" class="group cursor-pointer w-fit h-fit flex relative">
                         <img src="{{ asset(form.vars.value.photoTopLeft) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="photoTopLeft group-hover:opacity-80  transition-all">
+                            class="relative max-w-[200px] max-h-[200px] photoTopLeft group-hover:opacity-80  transition-all">
                         <i
-                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
+                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
                     {% endif %}
                     {{ form_widget(form.photoTopLeft, {required: false, value: form.vars.value.photoTopLeft, 'attr':
@@ -25,12 +24,11 @@
                 <div>
                     {{ form_label(form.photoBottom, null, {'label_attr': {'class': 'photoBottomLabel'} }) }}
                     {% if form.vars.value.photoBottom is not null %}
-                    <label for="{{ form.photoBottom.vars.id }}" class="group cursor-pointer w-fit h-fit relative">
+                    <label for="{{ form.photoBottom.vars.id }}" class="group cursor-pointer w-fit h-fit flex relative">
                         <img src="{{ asset(form.vars.value.photoBottom) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="photoBottom group-hover:opacity-70  transition-all">
+                            class="max-w-[200px] max-h-[200px] photoBottom group-hover:opacity-70  transition-all">
                         <i
-                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
+                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
                     {% endif %}
                     {{ form_widget(form.photoBottom, {required: false, value: form.vars.value.photoBottom, 'attr':
@@ -43,12 +41,11 @@
                 <div>
                     {{ form_label(form.photoMiddle, null, {'label_attr': {'class': 'photoMiddleLabel'} }) }}
                     {% if form.vars.value.photoMiddle is not null %}
-                    <label for="{{ form.photoMiddle.vars.id }}" class="group cursor-pointer w-fit h-fit relative">
+                    <label for="{{ form.photoMiddle.vars.id }}" class="group cursor-pointer w-fit h-fit flex relative">
                         <img src="{{ asset(form.vars.value.photoMiddle) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="photoMiddle group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] photoMiddle group-hover:opacity-80  transition-all">
                         <i
-                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
+                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
                     {% endif %}
                     {{ form_widget(form.photoMiddle, {required: false, value: form.vars.value.photoMiddle, 'attr':
@@ -79,11 +76,11 @@
         <div>
             {{ form_label(form.pfp, null, {'label_attr': {'class': 'pfpLabel'} }) }}
             {% if form.vars.value.pfp is not null %}
-            <label for="{{ form.pfp.vars.id }}" class="group cursor-pointer w-fit h-fit relative">
-                <img src="{{ asset(form.vars.value.pfp) }}" alt="Preview" style="max-width: 200px; max-height: 200px;"
-                    class="pfp group-hover:opacity-80  transition-all">
+            <label for="{{ form.pfp.vars.id }}" class="group cursor-pointer w-fit h-fit flex relative">
+                <img src="{{ asset(form.vars.value.pfp) }}" alt="Preview"
+                    class="max-w-[200px] max-h-[200px] pfp group-hover:opacity-80  transition-all">
                 <i
-                    class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
+                    class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  group-hover:opacity-100 opacity-0 transition-all"></i>
             </label>
             {% endif %}
             {{ form_widget(form.pfp, {required: false, value: form.vars.value.pfp, 'attr': {'class': 'inputPhoto
@@ -135,12 +132,11 @@
                     }) }}
                     {% if form.vars.value.contactPhotoTopRight is not null %}
                     <label for="{{ form.contactPhotoTopRight.vars.id }}"
-                        class="group cursor-pointer w-fit h-fit relative">
+                        class="group cursor-pointer w-fit h-fit flex relative">
                         <img src="{{ asset(form.vars.value.contactPhotoTopRight) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="contactPhotoTopRight group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] contactPhotoTopRight group-hover:opacity-80  transition-all">
                         <i
-                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
+                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
                     {% endif %}
                     {{ form_widget(form.contactPhotoTopRight, {required: false, value:
@@ -153,12 +149,11 @@
                     'contactPhotoBottomRightLabel'} }) }}
                     {% if form.vars.value.contactPhotoBottomRight is not null %}
                     <label for="{{ form.contactPhotoBottomRight.vars.id }}"
-                        class="group cursor-pointer w-fit h-fit relative">
+                        class="group cursor-pointer w-fit h-fit flex relative">
                         <img src="{{ asset(form.vars.value.contactPhotoBottomRight) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="contactPhotoBottomRight group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] contactPhotoBottomRight group-hover:opacity-80  transition-all">
                         <i
-                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
+                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
                     {% endif %}
                     {{ form_widget(form.contactPhotoBottomRight, {required: false, value:
@@ -175,12 +170,11 @@
                     }) }}
                     {% if form.vars.value.contactPhotoBottomLeft is not null %}
                     <label for="{{ form.contactPhotoBottomLeft.vars.id }}"
-                        class="group cursor-pointer w-fit h-fit relative">
+                        class="group cursor-pointer w-fit h-fit flex relative">
                         <img src="{{ asset(form.vars.value.contactPhotoBottomLeft) }}" alt="Preview"
-                            style="max-width: 200px; max-height: 200px;"
-                            class="contactPhotoBottomLeft group-hover:opacity-80  transition-all">
+                            class="max-w-[200px] max-h-[200px] contactPhotoBottomLeft group-hover:opacity-80  transition-all">
                         <i
-                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:opacity-100 opacity-0 transition-all"></i>
+                            class="fa-regular fa-pen-to-square text-gray-800 scale-150 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  group-hover:opacity-100 opacity-0 transition-all"></i>
                     </label>
                     {% endif %}
                     {{ form_widget(form.contactPhotoBottomLeft, {required: false, value:

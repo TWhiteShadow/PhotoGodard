@@ -3,8 +3,10 @@
 {% block title %}Homepage index{% endblock %}
 
 {% block main_content %}
-    <h1>Homepage index</h1>
-
+    <div class="flex justify-between items-center">
+        <h1>Homepage index</h1>
+        <a href="{{ path('app_admin_homepage_new') }}">Ajouter</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -59,5 +61,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_homepage_new') }}">Ajouter</a>
 {% endblock %}

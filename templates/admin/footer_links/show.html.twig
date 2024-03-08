@@ -1,0 +1,38 @@
+{% extends '/admin/dashboard.html.twig' %}
+
+{% block title %}Réseau social{% endblock %}
+
+{% block main_content %}
+    <h1>Réseau social</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ footer_link.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ footer_link.name }}</td>
+            </tr>
+            <tr>
+                <th>LIen</th>
+                <td>{{ footer_link.link }}</td>
+            </tr>
+            <tr>
+                <th>Icone</th>
+                <td>{{ footer_link.icon }}</td>
+            </tr>
+            <tr>
+                <th>Visible</th>
+                <td>{{ footer_link.visible ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="actionButtons flex flex-row my-6">
+        <a href="{{ path('app_admin_footer_links_index')}}" class="back-button">Revenir en arrière</a>
+        <a href="{{ path('app_admin_footer_links_edit', {'id': footer_link.id}) }}" class="edit-button">Modifier</a>
+        {{ include('admin/footer_links/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
