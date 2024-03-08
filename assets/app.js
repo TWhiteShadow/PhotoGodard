@@ -19,3 +19,4 @@ import './js/Isotope.js';
 import './js/MagnificPopup.js';
 import './js/FilterAlbum.js';
 import './js/stringToFontAwesomeIcon.js';
+import './js/ZipAlbum.js';

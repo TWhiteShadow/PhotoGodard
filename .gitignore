@@ -42,4 +42,7 @@ storage/images/private/*
 tmp-phpqa
 .php-cs-fixer.cache
 public/assets/images/homepage/*
-!public/assets/images/homepage/.gitignore
+!public/assets/images/homepage/.
+
+public/temp_zip/*
+!public/temp_zip/.gitignore

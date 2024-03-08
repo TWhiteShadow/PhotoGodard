@@ -27,6 +27,9 @@
 }%}
 
 <div id="content" class="flex flex-col justify-center w-full pt-6">
+    <div class="flex justify-end items-center max-w-[95%] md:max-w-[1200px] w-full mt-0 mx-auto mb-4">
+        <button id="downloadAlbum" class="h-fit text-white bg-blue-700 hover:opacity-80 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition-all">Télécharger</button>
+    </div>
     <div class="isotopeGrid max-w-[95%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
         {% if photos is not empty %}
         {% set i = 0 %}
