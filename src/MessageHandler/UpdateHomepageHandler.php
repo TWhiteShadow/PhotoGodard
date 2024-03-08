@@ -30,7 +30,7 @@ class UpdateHomepageHandler
     public function __invoke(UpdateHomepage $command): void
     {
         $this->homepage = $command->getHomepage();
-        
+
         $this->defaultHomepage = $command->getDefaultHomepage();
         $this->uploadedFiles = $command->getImageFiles();
         $this->entityManager->persist($this->homepage);
@@ -39,7 +39,7 @@ class UpdateHomepageHandler
             $this->replacePreviousPhoto();
         }
 
-        foreach($this->imageFilesName as $fileName){
+        foreach ($this->imageFilesName as $fileName) {
             $this->propertyAccessor->setValue($this->homepage, $fileName, $this->propertyAccessor->getValue($this->defaultHomepage, $fileName));
         }
 

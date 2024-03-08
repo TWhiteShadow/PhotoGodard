@@ -1187,3 +1187,11 @@ $light: #efefef;
         animation-delay: -0.1s;
     }
 }
+
+.finished{
+    background-color: rgb(43, 189, 43) !important;
+}
+
+.error{
+    background-color: rgb(189, 43, 43) !important;
+}

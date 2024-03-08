@@ -94,7 +94,9 @@ class CategoryController extends AbstractController
     public function update_favorite_photo(Request $request, Category $category, MessageBusInterface $bus)
     {
         $photoId = $request->request->get('photoId');
-        if(empty($photoId)){ $photoId = null; }
+        if (empty($photoId)) {
+            $photoId = null;
+        }
         $updateResult = $bus->dispatch(new UpdateFavoritePhotoCategory($category, $photoId));
         if ($updateResult) {
             // Retourner une réponse avec l'identifiant de la photo

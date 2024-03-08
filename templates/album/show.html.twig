@@ -28,7 +28,7 @@
 
 <div id="content" class="flex flex-col justify-center w-full pt-6">
     <div class="flex justify-end items-center max-w-[95%] md:max-w-[1200px] w-full mt-0 mx-auto mb-4">
-        <button id="downloadAlbum" class="h-fit text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Télécharger</button>
+        <button id="downloadAlbum" class="h-fit text-white bg-blue-700 hover:opacity-80 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 transition-all">Télécharger</button>
     </div>
     <div class="isotopeGrid max-w-[95%] md:max-w-[1200px] w-full my-0 mx-auto img-gallery-magnific">
         {% if photos is not empty %}
@@ -48,6 +48,7 @@
 </div>
 <script>
 document.getElementById("downloadAlbum").addEventListener("click", ()=>{
+    document.getElementById("downloadAlbum").classList.add("finished");
     document.getElementById("downloadAlbum").innerHTML = `<div class="loaderAlbumDownload">
     <p class="text">
     <span class="letter letter1">C</span>
@@ -79,12 +80,13 @@ document.getElementById("downloadAlbum").addEventListener("click", ()=>{
             // Utilisez window.location ou window.open pour déclencher le téléchargement
             window.location.href = data.url; // Assurez-vous que la clé est correcte
             document.getElementById("downloadAlbum").innerHTML = "Terminé!";
-            setTimeout(() => { document.getElementById("downloadAlbum").innerHTML = "Télécharger";}, 5000);
+            setTimeout(() => { document.getElementById("downloadAlbum").innerHTML = "Re-télécharger";document.getElementById("downloadAlbum").classList.remove("finished")}, 5000);
 
         })
         .catch(error => {
+            document.getElementById("downloadAlbum").classList.add("error");
             console.error('Error downloading photos:', error);
-            setTimeout(() => { document.getElementById("downloadAlbum").innerHTML = "Télécharger";}, 5000);
+            setTimeout(() => { document.getElementById("downloadAlbum").innerHTML = "Error Téléchargement";document.getElementById("downloadAlbum").classList.remove("error");}, 5000);
         });
     
 });
