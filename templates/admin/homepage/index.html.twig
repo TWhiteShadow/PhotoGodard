@@ -1,0 +1,64 @@
+{% extends '/admin/dashboard.html.twig' %}
+
+{% block title %}Homepage index{% endblock %}
+
+{% block main_content %}
+    <div class="flex justify-between items-center">
+        <h1>Homepage index</h1>
+        <a href="{{ path('app_admin_homepage_new') }}">Ajouter</a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>PhotoTopLeft</th>
+                <th>PhotoMiddle</th>
+                <th>PhotoBottom</th>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Pfp</th>
+                <th>DescriptionTitle</th>
+                <th>DescriptionText</th>
+                <th>ContactDescription</th>
+                <th>ContactNumber</th>
+                <th>ContactLocation</th>
+                <th>ContactEmail</th>
+                <th>ContactPhotoTopRight</th>
+                <th>ContactPhotoBottomRight</th>
+                <th>ContactPhotoBottomLeft</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for homepage in homepages %}
+            <tr>
+                <td>{{ homepage.id }}</td>
+                <td>{{ homepage.photoTopLeft }}</td>
+                <td>{{ homepage.photoMiddle }}</td>
+                <td>{{ homepage.photoBottom }}</td>
+                <td>{{ homepage.title }}</td>
+                <td>{{ homepage.subtitle }}</td>
+                <td>{{ homepage.pfp }}</td>
+                <td>{{ homepage.descriptionTitle }}</td>
+                <td>{{ homepage.descriptionText }}</td>
+                <td>{{ homepage.contactDescription }}</td>
+                <td>{{ homepage.contactNumber }}</td>
+                <td>{{ homepage.contactLocation }}</td>
+                <td>{{ homepage.contactEmail }}</td>
+                <td>{{ homepage.contactPhotoTopRight }}</td>
+                <td>{{ homepage.contactPhotoBottomRight }}</td>
+                <td>{{ homepage.contactPhotoBottomLeft }}</td>
+                <td>
+                    <a href="{{ path('app_admin_homepage_show', {'id': homepage.id}) }}">show</a>
+                    <a href="{{ path('app_admin_homepage_edit', {'id': homepage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

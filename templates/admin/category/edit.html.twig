@@ -1,10 +1,21 @@
 {% extends '/admin/dashboard.html.twig' %}
 
-{% block title %}Edit Category
+{% block title %}Modifier la Catégorie
+{% endblock %}
+
+{% block javascriptsBody %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+<script src="https://npmcdn.com/isotope-fit-columns@1/fit-columns.js"></script>
 {% endblock %}
 
 {% block main_content %}
-	<h1>Edit Category</h1>
+	<h1>Modifier la Catégorie</h1>
 
 	{{ include('admin/category/_form.html.twig') }}
 
@@ -17,19 +28,4 @@
 	</div>
 
 
-
-	<script>
-		var newPhotosPrototype = document.querySelector('#category_newPhotos').dataset.prototype;
-
-        // Remplacer __name__ par un nom unique
-        var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
-        var newPhotosPrototypeModified = newPhotosPrototype.replace(/__name__/g, uniqueId);
-
-        var tempDiv = document.createElement('div');
-        tempDiv.innerHTML = newPhotosPrototypeModified;
-
-        var newPhotoPrototypeElement = tempDiv.firstChild;
-
-        document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
-	</script>
 {% endblock %}

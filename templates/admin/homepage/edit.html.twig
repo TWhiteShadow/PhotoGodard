@@ -1,0 +1,14 @@
+{% extends '/admin/dashboard.html.twig' %}
+
+{% block title %}Modifications{% endblock %}
+
+{% block main_content %}
+    <h1>Modifications de la page</h1>
+
+    {{ include('admin/homepage/_form_edit.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+<div class="actionButtons flex flex-row my-6">
+    <a class="back-button" href="{{ path('app_admin_homepage_index') }}">Revenir en arrière</a>
+</div>
+
+{% endblock %}

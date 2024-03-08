@@ -1,0 +1,46 @@
+liip_imagine:
+
+    # cache: format_extension
+    resolvers :
+
+        # setup the default resolver
+        default :
+
+            # use the default web path
+            web_path : ~
+    filter_sets:
+        webp:
+            quality: 80
+            format : webp
+
+        # name our filter set "my_watermark_filter"
+        my_watermark_filter:
+            filters:
+
+                # use and setup the "watermark_image" filter
+                watermark_image:
+
+                    # path to the watermark file (prepended with "%kernel.project_dir%")
+                    image: "public/assets/images/watermark.png"
+
+                    # size of the water mark relative to the input image
+                    size: 0.3
+
+                    # set the position of the watermark
+                    position: bottomright
+        thumbnail_web_path:
+            format: webp
+            quality: 25
+            filters:
+
+                # use and setup the "watermark_image" filter
+                watermark_image:
+
+                    # path to the watermark file (prepended with "%kernel.project_dir%")
+                    image: "public/assets/images/watermark.png"
+
+                    # size of the water mark relative to the input image
+                    size: 0.3
+
+                    # set the position of the watermark
+                    position: bottomright

@@ -1,0 +1,82 @@
+{% extends '/admin/dashboard.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block main_content %}
+    <h1>Homepage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ homepage.id }}</td>
+            </tr>
+            <tr>
+                <th>PhotoTopLeft</th>
+                <td>{{ homepage.photoTopLeft }}</td>
+            </tr>
+            <tr>
+                <th>PhotoMiddle</th>
+                <td>{{ homepage.photoMiddle }}</td>
+            </tr>
+            <tr>
+                <th>PhotoBottom</th>
+                <td>{{ homepage.photoBottom }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ homepage.title }}</td>
+            </tr>
+            <tr>
+                <th>Subtitle</th>
+                <td>{{ homepage.subtitle }}</td>
+            </tr>
+            <tr>
+                <th>Pfp</th>
+                <td>{{ homepage.pfp }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionTitle</th>
+                <td>{{ homepage.descriptionTitle }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionText</th>
+                <td>{{ homepage.descriptionText }}</td>
+            </tr>
+            <tr>
+                <th>ContactDescription</th>
+                <td>{{ homepage.contactDescription }}</td>
+            </tr>
+            <tr>
+                <th>ContactNumber</th>
+                <td>{{ homepage.contactNumber }}</td>
+            </tr>
+            <tr>
+                <th>ContactLocation</th>
+                <td>{{ homepage.contactLocation }}</td>
+            </tr>
+            <tr>
+                <th>ContactEmail</th>
+                <td>{{ homepage.contactEmail }}</td>
+            </tr>
+            <tr>
+                <th>ContactPhotoTopRight</th>
+                <td>{{ homepage.contactPhotoTopRight }}</td>
+            </tr>
+            <tr>
+                <th>ContactPhotoBottomRight</th>
+                <td>{{ homepage.contactPhotoBottomRight }}</td>
+            </tr>
+            <tr>
+                <th>ContactPhotoBottomLeft</th>
+                <td>{{ homepage.contactPhotoBottomLeft }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_homepage_index') }}">Revenir en arrière</a>
+
+    <a href="{{ path('app_admin_homepage_edit', {'id': homepage.id}) }}">edit</a>
+
+    {{ include('admin/homepage/_delete_form.html.twig') }}
+{% endblock %}

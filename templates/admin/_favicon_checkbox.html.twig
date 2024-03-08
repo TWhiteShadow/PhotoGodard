@@ -1,0 +1,6 @@
+<label class="ui-bookmark group-hover:opacity-100 drop-shadow-md {{ favorite_photo == photo_id ? "favorite" : ""}}">
+    <input class="favorite-picture" type="checkbox" data-photo-id = {{ photo_id }} data-parent-id = {{ parent_id }} {{ favorite_photo == photo_id ? 'checked' : '' }}>
+    <div class="bookmark">
+      <i class="fa-solid fa-bookmark"></i>
+    </div>
+</label>

@@ -1,27 +1,22 @@
 {% extends 'base.html.twig' %}
-{% block title %}Emmanuel Godard - Photography
+{% block title %}Emmanuel Godard Photographie - Bienvenue dans mon monde.
 {% endblock %}
 {% block body %}
-<div class="scroll-smooth w-full overflow-y-scroll" id="fullpage">
+<div class="scroll-smooth w-full" id="fullpage">
 	{# SECTION 1 FIRST PAGE #}
-
 	<section class="md:hidden swiper mySwiper homeSectionMobile">
 		<div
 			class="flex items-center sm:items-start flex-col absolute top-[20%] translate-x-[-50%] left-[50%] gap-3 z-20 text-center text-white drop-shadow-xl">
-			<h1 class="text-3xl uppercase tracking-[0.5rem] font-light">
-				Emmanuel Godard
-			</h1>
-			<h4 class="text-md uppercase tracking-[0.5rem] font-light">
-				Creative photography
-			</h4>
+			<h1 class="text-3xl uppercase tracking-[0.5rem] font-light">{{homepage.title}}</h1>
+			<h4 class="text-md uppercase tracking-[0.5rem] font-light">{{homepage.subtitle}}</h4>
 		</div>
 		<div class="swiper-wrapper h-[100svh] w-screen object-cover">
-			<img src="{{ asset('assets/images/image2.jpeg') }}" class="swiper-slide h-screen w-screen object-cover"
-				alt="">
-			<img src="{{ asset('assets/images/image1.jpeg') }}" class="swiper-slide h-screen w-screen object-cover"
-				alt="">
-			<img src="{{ asset('assets/images/image3.jpeg') }}" class="swiper-slide h-screen w-screen object-cover"
-				alt="">
+			<img src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}"
+				class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-3" width="1080" height="1920">
+			<img src="{{ asset(homepage.photoMiddle) | imagine_filter('webp') }}"
+				class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-2" width="1080" height="1920">
+			<img src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp') }}"
+				class="swiper-slide h-screen w-screen object-cover" alt="photo-carousel-1" width="1080" height="1920">
 		</div>
 		<div class="swiper-pagination"></div>
 	</section>
@@ -30,7 +25,8 @@
 		<div class="flex h-full items-center justify-center w-[60%] z-0">
 			<div id="scene" class="h-full w-full" data-pointer-events="true">
 				<!-- Image top left -->
-				<div class="relative top-[10%] left-[15%] bottom-auto right-auto w-fit z-40" data-depth="-0.36">
+				<div class="relative top-[10%] left-[15%] bottom-auto right-auto w-fit z-40 drop-shadow-2xl"
+					data-depth="-0.36">
 					<div class="atropos atropos-section-1">
 						<!-- scale container (required) -->
 						<div class="atropos-scale">
@@ -40,9 +36,10 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[15vw] max-h-[15vh] shadow-2xl"
-											src="{{ asset('assets/images/image3.jpeg') }}" data-atropos-offset="-5"
-											alt="photos présentation 3">
+										<img class="max-w-[15vw] max-h-[15vh] w-auto h-auto aspect-auto" 
+											src="{{ asset(homepage.photoTopLeft) | imagine_filter('webp')}}"
+											data-atropos-offset="-5" alt="photos présentation 3" width="150"
+											height="150">
 									</div>
 								</div>
 							</div>
@@ -50,7 +47,7 @@
 					</div>
 				</div>
 				<!-- Image center -->
-				<div class="absolute top-1/4 left-1/4 bottom-auto right-auto w-auto" data-depth="0.2">
+				<div class="absolute top-1/4 left-1/4 bottom-auto right-auto w-auto drop-shadow-2xl" data-depth="0.2">
 					<!-- main Atropos container (required), add your custom class here -->
 					<div class="atropos atropos-section-1">
 						<!-- scale container (required) -->
@@ -61,9 +58,10 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[40vw] max-h-[40vh] shadow-2xl"
-											src="{{ asset('assets/images/image1.jpeg') }}" data-atropos-offset="-2"
-											alt="photos présentation 1">
+										<img class="max-w-[40vw] max-h-[40vh] w-auto h-auto aspect-auto" 
+											src="{{ asset(homepage.photoMiddle) | imagine_filter('webp')}}"
+											data-atropos-offset="-2" alt="photos présentation 1" width="500"
+											height="400">
 
 									</div>
 								</div>
@@ -72,7 +70,8 @@
 					</div>
 				</div>
 				<!-- Image bottom left -->
-				<div class=" absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10" data-depth=" -0.2">
+				<div class=" absolute top-[60%] left-[17%] bottom-auto right-auto w-auto z-10 drop-shadow-2xl"
+					data-depth=" -0.2">
 					<div class=" atropos atropos-section-1">
 						<!-- scale container (required) -->
 						<div class="atropos-scale">
@@ -82,9 +81,10 @@
 								<div class="atropos-inner">
 									<!-- put your custom content here -->
 									<div class="relative">
-										<img class="max-w-[20vw] max-h-[20vh] shadow-2xl"
-											src="{{ asset('assets/images/image2.jpeg') }}" data-atropos-offset="-2.5"
-											alt="photos présentation 2">
+										<img class="max-w-[20vw] max-h-[20vh] w-auto h-auto aspect-auto" 
+											src="{{ asset(homepage.photoBottom) | imagine_filter('webp') }}"
+											data-atropos-offset="-2.5" alt="photos présentation 2" width="250"
+											height="150">
 									</div>
 								</div>
 							</div>
@@ -96,12 +96,10 @@
 		<div class="flex h-full flex-col items-center sm:items-start justify-center md:w-[40%] gap-3 z-20">
 			<h3
 				class="text-3xl lg:text-2xl xl:text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-				Emmanuel Godard
-			</h3>
+				{{homepage.title}}</h3>
 			<h4
 				class="text-md md:text-[0.7rem] xl:text-base uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-				Creative photography
-			</h4>
+				{{homepage.subtitle}}</h4>
 		</div>
 	</section>
 
@@ -109,30 +107,23 @@
 	{# SECTION 2 ABOUT #}
 	<section
 		class="section section-about h-full pb-[5vh] pt-[5vh] md:pt-0 md:pb-0 relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center px-10">
-
 		<h4
-			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] pb-8 md:pb-0">
 			About
 		</h4>
-		<div class="flex flex-col md:flex-row justify-evenly items-center w-full gap-20 md:gap-0">
+		<div class="flex flex-col md:flex-row justify-evenly items-center w-full h-full gap-10 flex-wrap">
 			{# optional #}
-			<div class="flex flex-col justify-center items-center gap-8">
-				<img class="max-w-[30vw] max-h-[30vh] grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out"
-					src="{{ asset('assets/images/godard.jpg') }}" alt="photo Emmanuel Godard">
+			<div class="flex flex-col justify-center items-center md:gap-8">
+				<img class="max-w-[50vw] max-h-[30vh] w-auto h-auto aspect-auto grayscale-[100%] hover:grayscale-0 transition-all duration-1000 easy-in-out"
+					 src="{{ asset(homepage.pfp) | imagine_filter('webp')}}" alt="photo Emmanuel Godard"
+					width="293.09" height="293.09">
 			</div>
 			{# #}
-			<div class="flex flex-col justify-center items-center gap-8">
+			<div class="flex flex-col justify-center items-center md:gap-8">
 				<h3 class="text-clamp-xl text-center uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-					Emmanuel Godard
-				</h3>
-				<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line mx-8">
-					Emmanuel Godard, artiste français. Je suis né en 1975 à Dieppe en
-					Normandie. Je suis un passionné d’images et des émotions. Et j’ai
-					cette capacité à sublimer l’instant par ma sensibilité au monde qui
-					m’entoure. La simplicité et la pureté de mes photographies vous
-					plongera dans mon univers parfois irréel et poétique. Bienvenue
-					dans mon monde.
-				</p>
+					{{homepage.descriptionTitle}}</h3>
+				<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
+					{{homepage.descriptionText}}</p>
 			</div>
 		</div>
 	</section>
@@ -142,28 +133,37 @@
 	<section
 		class="section section-works md:h-screen h-auto min-height-screen pb-[5vh] md:pb-0 relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
-			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] pb-8">
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] md:pb-8">
 			Works
 		</h4>
+
 		{# <div
 			class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
 			#}
 			<!-- Slider main container -->
-			<div
-				class="swiper2 relative overflow-hidden h-[80%] md:h-[55%] py-20 w-screen md:w-[80%] gap-[3vw] items-stretch">
+			<div class="swiper2 relative overflow-hidden h-[80%] py-20 w-screen md:w-[80%] gap-[3vw] items-stretch">
 				<!-- Additional required wrapper -->
 				<div class="swiper-wrapper">
+					{% set validCategorie = false %}
 					{% if categories|length > 0 %}
-					{% for i in range(0, categories|length - 1) %}
-						{% set cardImgPath = categories[i].getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') :  asset( 'photos/public/' ~ categories[i].getUniqId()|upper ~ '/' ~ random(categories[i].getPhotos()).getFilename() ) %}
+					{% for categorie in categories %}
+					{% if categorie.getPhotos()|length > 0 %}
+					{% set validCategorie = true %}
+					{% set cardImgPath = ( categorie.getFavoritePhoto() is not null ? asset( 'photos/public/' ~
+					categorie.getUniqId()|upper ~ '/' ~ categorie.getFavoritePhoto().getFilename()) : asset(
+					'photos/public/' ~ categorie.getUniqId()|upper ~ '/' ~ (categorie.getPhotos()|last).getFilename()) )
+					%}
 					{% include "/home/_atropos-card.html.twig" with {
-						'card_id' : categories[i].getId(),
-						'card_img_path' : cardImgPath,
-						'card_name' : categories[i].getName(),
-						'card_photo_count' : categories[i].getPhotos()|length
+					'card_controller' : "category",
+					'card_id' : categorie.getId(),
+					'card_img_path' : cardImgPath | imagine_filter('webp'),
+					'card_name' : categorie.getName(),
+					'card_photo_count' : categorie.getPhotos()|length|trans ~ " photos"
 					} %}
+					{% endif %}
 					{% endfor %}
-					{% else %}
+					{% endif %}
+					{% if validCategorie == false %}
 					<div class="swiper-slide h-[400px] md:h-auto text-center flex justify-center items-center">
 						<p>Aucune categorie n'a encore été ajoutée</p>
 					</div>
@@ -179,88 +179,175 @@
 
 	{# SECTION 4 albums #}
 	<section
-		class="section section-albums h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center pb-[5vh] md:pb-0">
+		class="section section-works md:h-screen h-auto min-height-screen pb-[5vh] md:pb-0 relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center">
 		<h4
-			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
-			albums
+			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%] pb-8">
+			Albums
 		</h4>
-		<div class="flex flex-col justify-center items-center gap-8">
-			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-				Emmanuel Godard
-			</h3>
-			<p class="max-w-[60ch] text-justify text-lg font-light leading-[1.75] whitespace-pre-line">
-				I specialize in lifestyle and travel photography. I not only shoot in
-				and around the streets of the city, but also in apartments, shops, parks
-				– anywhere and everywhere my clients FEEL happy. Finding places that
-				make people feel happy, as well as creating memories while we shoot. And
-				that is what makes great photos! My work in photography is a natural
-				extension of my desire to tell stories. I’ve always been a nostalgic and
-				romantic person, and I love that my work allows me to express those
-				traits in such a meaningful way.
-			</p>
+		<div class="group z-20 md:absolute top-[10%] md:pb-8">
+			<i class="fa-solid fa-magnifying-glass icon" ></i>
+			<input id="filterAlbumsInput" class="input" type="search" placeholder="Cherchez" />
 		</div>
+		{# <div
+			class="flex flex-col md:flex-row justify-evenly min-h-fit h-[80%] md:h-[40%] w-[80%] gap-[3vw] items-stretch">
+			#}
+			<!-- Slider main container -->
+			<div class="h-[70vh] md:h-[80%] md:w-[80%] z-10 relative overflow-hidden w-screen ">
+				<div class="absolute sliderOverlay w-full h-[calc(100%-6rem)] mt-12 flex justify-center items-center">
+					<h4
+						class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center">
+						Aucun album trouvé</h4>
+				</div>
+				<div class="swiper3 z-10 relative overflow-hidden h-full py-20 w-full gap-[3vw] items-stretch">
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper h-full w-full" id="albumSwipperWrapper">
+						{% include "home/_atropos-cards.html.twig" %}
+					</div>
+					<!-- If we need navigation buttons -->
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+				</div>
+			</div>
+
 	</section>
 
 	{# SECTION 5 Contacts #}
 	<section
-		class="section section-contacts h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center"
+		class="section section-contacts mb-40 md:mb-0 h-full md:h-screen relative bg-gray-100 w-full snap-center justify-evenly flex flex-col gap-5 items-center"
 		data-fp-styles="null">
 		<h4
 			class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm w-full text-center md:absolute top-[6%]">
 			Contacts
 		</h4>
-		<div class="flex flex-col justify-center items-center gap-8 px-5">
+		<div class="flex flex-col justify-center items-center gap-8 px-5 z-10 drop-shadow-2xl">
 			<p class="text-clamp max-w-[60ch] text-center font-light leading-[1.75] whitespace-pre-line">
-				Tell me about your story, your passion, your love. And I'll be happy to
-				get back to you and talk about our common project. Let's connect here.
-			</p>
-			<a href="tel:+330645485815" class="text-center">
+				{{homepage.contactDescription}}</p>
+			<a href="tel:{{homepage.contactNumber}}" class="text-center">
 				<h3 class="text-clamp-xl uppercase tracking-[0.25rem] sm:tracking-[0.5rem] font-light drop-shadow-sm">
-					+33 6 45 48 58 15
-				</h3>
+					{{homepage.contactNumber}}</h3>
 			</a>
-			<a href="https://www.google.com/maps/search/4401+Waldeck+Street+Grapevine,+Nashville,+TX+76051" target="_blank"
+			<a href="https://www.google.com/maps/search/{{homepage.contactLocation}}" target="_blank"
 				class="text-center">
 				<p
 					class="text-clamp max-w-[60ch] text-center text-[#333] font-light leading-[1.75] whitespace-pre-line">
-					4401 Waldeck Street Grapevine, Nashville, TX 76051
-				</p>
+					{{homepage.contactLocation}}</p>
 			</a>
-			<a href="mailto:emmanuel.godard83@orange.fr">
-				<h3 class=" tracking-[0] text-[#333] font-light drop-shadow-sm text-clamp-xl">
-					emmanuel.godard83@orange.fr
+			<a href="mailto:{{homepage.contactEmail}}">
+				<h3 class=" tracking-[0] text-[#333] font-light drop-shadow-sm text-clamp-xl">{{homepage.contactEmail}}
 				</h3>
 			</a>
+		</div>
+		<div class="md:flex hidden absolute h-full w-full items-center justify-center z-0 overflow-hidden">
+			<div id="sceneContact" class="h-full w-full" data-pointer-events="true">
+				<!-- Image top right -->
+				<div class="relative top-[15%] left-[85%] bottom-auto right-auto w-fit z-40 drop-shadow-2xl opacity-90"
+					data-depth="-0.36">
+					<div class="atropos atropos-section-1">
+						<!-- scale container (required) -->
+						<div class="atropos-scale">
+							<!-- rotate container (required) -->
+							<div class="atropos-rotate">
+								<!-- inner container (required) -->
+								<div class="atropos-inner">
+									<!-- put your custom content here -->
+									<div class="relative">
+										<img class="max-w-[20vw] max-h-[20vh] w-auto h-auto aspect-auto"
+											src="{{ asset(homepage.contactPhotoTopRight) | imagine_filter('webp')}}"
+											data-atropos-offset="-5" alt="photos présentation 3" width="150"
+											height="150">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Image bottom right -->
+				<div class="absolute top-[65%] right-auto bottom-auto left-[75%] w-auto drop-shadow-2xl opacity-50"
+					data-depth="0.2">
+					<!-- main Atropos container (required), add your custom class here -->
+					<div class="atropos atropos-section-1">
+						<!-- scale container (required) -->
+						<div class="atropos-scale">
+							<!-- rotate container (required) -->
+							<div class="atropos-rotate">
+								<!-- inner container (required) -->
+								<div class="atropos-inner">
+									<!-- put your custom content here -->
+									<div class="relative">
+										<img class="max-w-[30vw] max-h-[30vh] w-auto h-auto aspect-auto"
+											src="{{ asset(homepage.contactPhotoBottomRight) | imagine_filter('webp')}}"
+											data-atropos-offset="-2" alt="photos présentation 1" width="500"
+											height="400">
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Image bottom left -->
+				<div class=" absolute top-[70%] right-[80%] bottom-auto left-auto w-auto z-10 drop-shadow-2xl opacity-90"
+					data-depth=" -0.2">
+					<div class=" atropos atropos-section-1">
+						<!-- scale container (required) -->
+						<div class="atropos-scale">
+							<!-- rotate container (required) -->
+							<div class="atropos-rotate">
+								<!-- inner container (required) -->
+								<div class="atropos-inner">
+									<!-- put your custom content here -->
+									<div class="relative">
+										<img class="max-w-[20vw] max-h-[20vh] w-auto h-auto aspect-auto"
+											src="{{ asset(homepage.contactPhotoBottomLeft) | imagine_filter('webp') }}"
+											data-atropos-offset="-2.5" alt="photos présentation 2" width="250"
+											height="150">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 </div>
 
 {# SideBar Menu #}
-<div class="hidden md:block md:absolute top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
+<div class="hidden md:block md:fixed top-[50%] left-[97%] translate-y-[-50%] translate-x-[-50%] z-50 sidebar">
 	<ul class="flex gap-5 flex-col" id="sidebar">
 		<li data-menuanchor="home">
 			<a href="#home" class="active">
-				<span></span>
+				<span>
+					<p>Home</p>
+				</span>
 			</a>
 		</li>
 		<li data-menuanchor="about">
 			<a href="#about">
-				<span></span>
+				<span>
+					<p>About</p>
+				</span>
 			</a>
 		</li>
 		<li data-menuanchor="works">
 			<a href="#works">
-				<span></span>
+				<span>
+					<p>Works</p>
+				</span>
 			</a>
 		</li>
 		<li data-menuanchor="albums">
 			<a href="#albums">
-				<span></span>
+				<span>
+					<p>Album</p>
+				</span>
 			</a>
 		</li>
 		<li data-menuanchor="contacts">
 			<a href="#contacts">
-				<span></span>
+				<span>
+					<p>Contacts</p>
+				</span>
 			</a>
 		</li>
 	</ul>
@@ -268,7 +355,7 @@
 
 
 {# Hamburger Menu Icon#}
-<div class="menu md:absolute fixed menuHamburger top-1 right-1 left-auto" data-menu="1">
+<div class="menu fixed menuHamburger top-1 right-1 left-auto" data-menu="1">
 	<div>
 		<div class="icon-left"></div>
 		<div class="icon-right"></div>
@@ -279,10 +366,10 @@
 	<div class="flex relative flex-col h-full w-full justify-center items-center menuPage">
 		<div class="w-full text-center absolute top-[9%]">
 			<h3 class="text-3xl uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-				Emmanuel Godard
+				{{homepage.title}}
 			</h3>
 			<h4 class="text-md uppercase tracking-[0.5rem] text-[#333] font-light drop-shadow-sm">
-				Creative photography
+				{{homepage.subtitle}}
 			</h4>
 		</div>
 		<ul class="flex gap-5 flex-col">
@@ -317,66 +404,16 @@
 </div>
 
 {# FOOTER #}
-<footer class="fixed w-screen bottom-0 top-auto hide">
+<footer id="footer" class="fixed w-screen bottom-0 top-auto hide">
 	<div class="flex flex-col justify-evenly items-center h-full">
 		<ul class="flex gap-5 justify-center items-center">
-			<li>
-				<a href="https://www.facebook.com" target="_blank">
-					<svg fill="#333" height="20px" width="20px" version="1.1" id="Layer_1"
-						xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-						viewbox="0 0 310 310" xml:space="preserve">
-						<g id="XMLID_834_">
-							<path id="XMLID_835_"
-								d="M81.703,165.106h33.981V305c0,2.762,2.238,5,5,5h57.616c2.762,0,5-2.238,5-5V165.765h39.064
-																																																										c2.54,0,4.677-1.906,4.967-4.429l5.933-51.502c0.163-1.417-0.286-2.836-1.234-3.899c-0.949-1.064-2.307-1.673-3.732-1.673h-44.996
-																																																										V71.978c0-9.732,5.24-14.667,15.576-14.667c1.473,0,29.42,0,29.42,0c2.762,0,5-2.239,5-5V5.037c0-2.762-2.238-5-5-5h-40.545
-																																																										C187.467,0.023,186.832,0,185.896,0c-7.035,0-31.488,1.381-50.804,19.151c-21.402,19.692-18.427,43.27-17.716,47.358v37.752H81.703
-																																																										c-2.762,0-5,2.238-5,5v50.844C76.703,162.867,78.941,165.106,81.703,165.106z" />
-						</g>
-					</svg>
+		{% for link in footer_links %}
+		<li>
+				<a href="{{link.link}}" target="_blank" class="footerIcon">
+					{{link.icon}}
 				</a>
 			</li>
-			<li>
-				<a href="https://www.facebook.com" target="_blank">
-					<svg width="25px" height="25px" viewbox="0 0 48 48" version="1.1" id="Shopicons"
-						xmlns="http://www.w3.org/2000/svg" x="0" y="0" xml:space="preserve">
-						<style>
-							.st1 {
-								fill: #333
-							}
-
-							.st2,
-							.st3 {
-								fill: none;
-								stroke: #333;
-								stroke-width: 4;
-								stroke-miterlimit: 10
-							}
-
-							.st3 {
-								stroke-width: 6
-							}
-						</style>
-						<g id="instagram_00000127030415805702900630000013396224003006281109_">
-							<path d="M0-.019h48v48H0v-48z" fill="none" />
-							<path
-								d="M36.019 8A3.986 3.986 0 0 1 40 11.981v24.038A3.986 3.986 0 0 1 36.019 40H11.981A3.986 3.986 0 0 1 8 36.019V11.981A3.986 3.986 0 0 1 11.981 8h24.038m0-4H11.981A7.98 7.98 0 0 0 4 11.981v24.038A7.98 7.98 0 0 0 11.981 44h24.038A7.98 7.98 0 0 0 44 36.019V11.981A7.98 7.98 0 0 0 36.019 4z" />
-							<path
-								d="M24 34c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm0-16c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6z" />
-							<circle cx="35" cy="13" r="2" />
-						</g>
-					</svg>
-				</a>
-			</li>
-			<li>
-				<a href="https://www.facebook.com" target="_blank">
-					<svg width="25px" height="25px" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd" clip-rule="evenodd"
-							d="M3.50002 12C3.50002 7.30558 7.3056 3.5 12 3.5C16.6944 3.5 20.5 7.30558 20.5 12C20.5 16.6944 16.6944 20.5 12 20.5C10.3278 20.5 8.77127 20.0182 7.45798 19.1861C7.21357 19.0313 6.91408 18.9899 6.63684 19.0726L3.75769 19.9319L4.84173 17.3953C4.96986 17.0955 4.94379 16.7521 4.77187 16.4751C3.9657 15.176 3.50002 13.6439 3.50002 12ZM12 1.5C6.20103 1.5 1.50002 6.20101 1.50002 12C1.50002 13.8381 1.97316 15.5683 2.80465 17.0727L1.08047 21.107C0.928048 21.4637 0.99561 21.8763 1.25382 22.1657C1.51203 22.4552 1.91432 22.5692 2.28599 22.4582L6.78541 21.1155C8.32245 21.9965 10.1037 22.5 12 22.5C17.799 22.5 22.5 17.799 22.5 12C22.5 6.20101 17.799 1.5 12 1.5ZM14.2925 14.1824L12.9783 15.1081C12.3628 14.7575 11.6823 14.2681 10.9997 13.5855C10.2901 12.8759 9.76402 12.1433 9.37612 11.4713L10.2113 10.7624C10.5697 10.4582 10.6678 9.94533 10.447 9.53028L9.38284 7.53028C9.23954 7.26097 8.98116 7.0718 8.68115 7.01654C8.38113 6.96129 8.07231 7.046 7.84247 7.24659L7.52696 7.52195C6.76823 8.18414 6.3195 9.2723 6.69141 10.3741C7.07698 11.5163 7.89983 13.314 9.58552 14.9997C11.3991 16.8133 13.2413 17.5275 14.3186 17.8049C15.1866 18.0283 16.008 17.7288 16.5868 17.2572L17.1783 16.7752C17.4313 16.5691 17.5678 16.2524 17.544 15.9269C17.5201 15.6014 17.3389 15.308 17.0585 15.1409L15.3802 14.1409C15.0412 13.939 14.6152 13.9552 14.2925 14.1824Z"
-							fill="#333" />
-					</svg>
-				</a>
-			</li>
+		{% endfor %}
 		</ul>
 		<p>©
 			<span id="year"></span>
@@ -384,9 +421,107 @@
 		</p>
 	</div>
 </footer>
+{% include "_canvas.html.twig" %}
+<script>
+	// CANNOT EXTERNALISE THIS JS (at least i can't figure out how) 
+	var swiper = new Swiper(".mySwiper", {
 
+		speed: 700,
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+		},
+		edgeSwipeDetection: true,
+		loop: true,
+	});
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
-<script src="{{ asset('js/index.js') }}"></script>
-<script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	const swiper8888 = new Swiper('.swiper2', {
+		// Optional parameters
+		direction: 'horizontal',
+		loop: true,
+		slidesPerView: 1.4,
+		centeredSlides: true,
+		spaceBetween: 30,
+		grabCursor: true,
+		keyboard: true,
+		observer: true,
+		speed: 700,
+		touchReleaseOnEdges: true,
+		touchStartForcePreventDefault: true,
+		// Navigation arrows
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+		breakpoints: {
+			768: {
+				slidesPerView: 2,
+			}
+		},
+	});
+
+	const swiperAlbum = new Swiper('.swiper3', {
+		// Optional parameters
+		direction: 'horizontal',
+		loop: false,
+		slidesPerView: 1.35,
+		centeredSlides: true,
+		spaceBetween: 30,
+		grabCursor: true,
+		keyboard: true,
+		observer: true,
+		speed: 700,
+		slidesPerGroup: 1,
+		grid: {
+			rows: 1,
+		},
+		loopAddBlankSlides: true,
+		loopAdditionalSlides: 1,
+		on: {
+			beforeInit: function () {
+				let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
+				if (numOfSlides.length > 8) {
+					this.params.loop = true;
+				}
+				if (numOfSlides.length == 1) {
+					this.params.grid.rows = 1;
+					numOfSlides[0].classList.add("heightImportant");
+				}
+			},
+			update: function () {
+				let numOfSlides = this.wrapperEl.querySelectorAll(".swiper-slide");
+				if (numOfSlides.length == 1) {
+					this.params.grid.rows = 1;
+					numOfSlides[0].classList.add("heightImportant");
+				} else {
+					numOfSlides.forEach((e) => e.classList.remove("heightImportant"));
+					if (window.innerWidth >= 768) {
+						this.params.grid.rows = 2;
+					}
+				}
+			},
+		},
+		breakpoints: {
+			768: {
+				// centeredSlides: false,
+				slidesPerView: 2.5,
+				grid: {
+					rows: 2,
+				},
+			}
+		},
+		// Navigation arrows
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+	});
+
+	window.addEventListener('resize', function () {
+		if (window.innerWidth < 768) {
+			swiperAlbum.update();
+		}
+	});
+	
+</script>
 {% endblock %}

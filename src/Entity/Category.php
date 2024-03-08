@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ramsey\Uuid\Nonstandard\Uuid;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -15,19 +16,24 @@ class Category
     #[ORM\Column]
     private ?int $id = null;
 
-
     #[ORM\Column(length: 125)]
     private ?string $uniqId = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Photo::class, cascade:['remove'])]
-    private Collection $photos;
+    #[ORM\ManyToOne(targetEntity: Photo::class, cascade: ['remove'])]
+    #[ORM\JoinColumn(name: 'favorite_photo_id', referencedColumnName: 'id', onDelete: 'SET NULL', nullable: true)]
+    private ?Photo $favoritePhoto = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Photo::class, cascade: ['remove'])]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    private ?Collection $photos;
 
     public function __construct()
     {
         $this->photos = new ArrayCollection();
+        $this->setUniqId();
     }
 
     public function getId(): ?int
@@ -40,9 +46,10 @@ class Category
         return $this->uniqId;
     }
 
-    public function setUniqId(): static
+    private function setUniqId(): static
     {
-        $this->uniqId = uniqid();
+        $this->uniqId = bin2hex(Uuid::uuid4()->getBytes());
+
         return $this;
     }
 
@@ -58,10 +65,22 @@ class Category
         return $this;
     }
 
+    public function getFavoritePhoto(): ?Photo
+    {
+        return $this->favoritePhoto;
+    }
+
+    public function setFavoritePhoto(?Photo $favoritePhoto): static
+    {
+        $this->favoritePhoto = $favoritePhoto;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Photo>
      */
-    public function getPhotos(): Collection
+    public function getPhotos(): ?Collection
     {
         return $this->photos;
     }

@@ -1,0 +1,11 @@
+{% extends '/admin/dashboard.html.twig' %}
+
+{% block title %}New Homepage{% endblock %}
+
+{% block main_content %}
+    <h1>Ajouter Homepage</h1>
+
+    {{ include('admin/homepage/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_homepage_index') }}">Revenir en arrière</a>
+{% endblock %}

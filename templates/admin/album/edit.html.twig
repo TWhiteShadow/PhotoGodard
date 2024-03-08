@@ -1,35 +1,28 @@
-{% extends '/admin/dashboard.html.twig' %}
+{% extends '/admin/dashboard.html.twig' %} {% block title %}Modifier l'Album {% endblock %}
 
-{% block title %}Edit Album{% endblock %}
+{% block javascriptsBody %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://npmcdn.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+<script src="https://npmcdn.com/isotope-fit-columns@1/fit-columns.js"></script>
+{% endblock %}
 
 {% block main_content %}
-    <h1>Edit Album</h1>
+<h1>Modifier l'Album</h1>
 
-        {% set albumFolder = album.getUniqId()|upper %}
-    
+{% set albumFolder = album.getUniqId()|upper %}
 
+{{ include("admin/album/_form.html.twig", { button_label: "Mettre à jour" }) }}
 
-    {{ include('admin/album/_form.html.twig', {'button_label': 'Update'}) }}
+<div class="actionButtons flex flex-row my-6">
+  <a href="{{ path('app_admin_album_index') }}" class="back-button"
+    >Revenir en arrière</a
+  >
+  {{ include("admin/album/_delete_form.html.twig") }}
+</div>
 
-
-
-	<div class="actionButtons flex flex-row my-6">
-        <a href="{{ path('app_admin_album_index') }}" class="back-button">Revenir en arrière</a>
-        {{ include('admin/album/_delete_form.html.twig') }}
-    </div>
-
-    <script>
-	var newPhotosPrototype = document.querySelector('#album_newPhotos').dataset.prototype;
-
-    // Remplacer __name__ par un nom unique
-    var uniqueId = new Date().getTime(); // Utiliser un timestamp comme identifiant unique
-    var newPhotosPrototypeModified = newPhotosPrototype.replace(/__name__/g, uniqueId);
-
-    var tempDiv = document.createElement('div');
-    tempDiv.innerHTML = newPhotosPrototypeModified;
-
-    var newPhotoPrototypeElement = tempDiv.firstChild;
-
-    document.querySelector(".newPhotosContainer").appendChild(newPhotoPrototypeElement);
-</script>
 {% endblock %}

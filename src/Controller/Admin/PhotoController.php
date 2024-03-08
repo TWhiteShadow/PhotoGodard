@@ -4,11 +4,14 @@ namespace App\Controller\Admin;
 
 use App\Entity\Photo;
 use App\Form\PhotoType;
+use App\Message\DeleteMultiplePhotos;
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/photo')]
@@ -31,8 +34,6 @@ class PhotoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $photo->setCreatedAt(new \DateTimeImmutable);
-            $photo->setUpdatedAt(new \DateTimeImmutable);
             $entityManager->persist($photo);
             $entityManager->flush();
 
@@ -80,5 +81,18 @@ class PhotoController extends AbstractController
         }
 
         return $this->redirectToRoute('app_admin_photo_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/photos/delete', name: 'app_admin_delete_photos', methods: ['POST'])]
+    public function deletePhotos(Request $request, MessageBusInterface $bus): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        // Récupérez les ID des photos à supprimer
+        $photoIds = $data['photo_ids'] ?? [];
+        $bus->dispatch(new DeleteMultiplePhotos($photoIds));
+
+        // Réponse JSON pour indiquer le succès de l'opération
+        return new JsonResponse(['message' => 'Photos deleted successfully']);
     }
 }

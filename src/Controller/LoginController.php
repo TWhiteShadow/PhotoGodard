@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
@@ -19,6 +18,7 @@ class LoginController extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function index(AuthenticationUtils $authenticationUtils, Request $request, UserPasswordHasherInterface $passwordEncoder): Response
     {
+        $title = 'Connexion - Login';
         // Get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -37,11 +37,13 @@ class LoginController extends AbstractController
 
             // Example:
             $user = $this->getUser();
+
             return $this->redirectToRoute('app_admin');
         }
 
-        return $this->render('login/index.html.twig', [
+        return $this->render('login/admin.html.twig', [
             'controller_name' => 'LoginController',
+            'title' => $title,
             'form' => $form->createView(),
             'last_username' => $lastUsername,
             'error' => $error,

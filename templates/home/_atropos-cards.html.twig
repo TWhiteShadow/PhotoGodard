@@ -1,0 +1,27 @@
+{% set albumWithPhoto = 0 %}
+{% if albums|length > 0 %}
+	{% for album in albums %}
+		{% if album.getPhotos() is not empty %}
+			{% set albumWithPhoto = 1 %}
+			{% set cardImgPath = album.getPhotos()|length == 0 ? asset( 'assets/images/missing-image.png') : ( album.getFavoritePhoto() is not null ? path("app_file", {"photo": album.getFavoritePhoto().getId()} ) : asset( 'assets/images/missing-image.png') ) %}
+			{% include "/home/_atropos-card.html.twig" with {
+				'card_controller' : "album",
+				'card_id' : album.getId(),
+				'card_img_path' : cardImgPath,
+				'card_name' : album.getName(),
+				'card_photo_count' : "",
+				} %}
+			{% else %}
+			{# Rien Afficher #}
+		{% endif %}
+	{% endfor %}
+	{% if albumWithPhoto < 1 %}
+		<div class="h-full md:h-full md:w-full text-center flex justify-center items-center">
+			<p>Aucun album n'a encore été ajouté</p>
+		</div>
+	{% endif %}
+{% else %}
+	<div class="h-[400px] md:h-full md:w-full text-center flex justify-center items-center">
+		<p>Aucun album n'a encore été ajouté</p>
+	</div>
+{% endif %}

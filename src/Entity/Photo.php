@@ -3,15 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\PhotoRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: PhotoRepository::class)]
 #[Vich\Uploadable]
-
 class Photo
 {
     #[ORM\Id]
@@ -34,10 +31,10 @@ class Photo
     private ?array $imageFileArray = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private \DateTimeImmutable $createdAt;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $updatedAt = null;
+    private \DateTimeImmutable $updatedAt;
 
     #[ORM\ManyToOne(inversedBy: 'photos')]
     #[ORM\JoinColumn(nullable: true)]
@@ -47,6 +44,14 @@ class Photo
     #[ORM\JoinColumn(nullable: true)]
     private ?Album $album = null;
 
+    public function __construct(?File $file = null)
+    {
+        if (!empty($file)) {
+            $this->setImageFile($file); // certaines photos n'ont pas d'image
+        }
+        $this->setCreatedAt(new \DateTimeImmutable());
+        $this->setUpdatedAt(new \DateTimeImmutable());
+    }
 
     public function getId(): ?int
     {
@@ -80,7 +85,7 @@ class Photo
         $this->imageFileArray = $imagefilearray;
     }
 
-    public function getImageFileArray(): ?Array
+    public function getImageFileArray(): ?array
     {
         return $this->imageFileArray;
     }
@@ -94,6 +99,7 @@ class Photo
     {
         $this->filename = $filename;
         $this->title = pathinfo($filename, PATHINFO_FILENAME);
+
         return $this;
     }
 
@@ -109,19 +115,19 @@ class Photo
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    private function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUpdatedAt(): \DateTimeImmutable
     {
         return $this->updatedAt;
     }
@@ -145,9 +151,6 @@ class Photo
         return $this;
     }
 
-    /**
-     * @return Album
-     */
     public function getAlbum(): ?Album
     {
         return $this->album;
