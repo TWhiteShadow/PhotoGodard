@@ -205,16 +205,17 @@ footer {
         gap: 0;
     }
 
-    svg,
+    i,
     .access {
         transition: all 1s ease-in-out;
         filter: drop-shadow(0rem 0rem 0.55rem rgba(0, 0, 30, 0.5));
-        fill: rgba(255, 255, 255, 0);
+        color: rgba(255, 255, 255, 0);
         width: 15px;
         opacity: 0;
+        font-size: 17px;
     }
 
-    svg {
+    i {
         transform: translate(-0.25rem, 1rem);
     }
 
@@ -228,9 +229,9 @@ footer {
             filter: blur(1px) brightness(0.5) !important;
         }
 
-        svg,
+        i,
         .access {
-            fill: white;
+            color: white;
             opacity: 1;
             transform: translate(-0.25rem, 0rem);
         }
@@ -1055,7 +1056,7 @@ $light: #efefef;
 .icon {
     position: absolute;
     left: 1rem;
-    fill: #9e9ea7;
+    color: #9e9ea7;
     width: 1rem;
     height: 1rem;
 }
@@ -1112,9 +1113,16 @@ $light: #efefef;
     }
 }
 
+#eyePassword{
+    max-width: 20px;
+    max-height: 20px;
+    margin-right: 5px;
+}
+
 #content {
     background-color: #f3f4f6;
     position: relative;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 10px;
 }
 
 // magnific popup 

@@ -59,7 +59,7 @@ document.querySelector(".favorite-picture") && document.addEventListener("DOMCon
 });
 
 
-// Code to be executed if favorite picture is present
+// Code to be executed if photoToDelete picture is present
 document.querySelector(".photoToDelete") && document.addEventListener("DOMContentLoaded", function () {
     function initPhotoToDelete() {
 

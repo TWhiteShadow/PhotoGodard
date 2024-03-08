@@ -68,6 +68,13 @@ class ScreenshotSender {
             });
 
             if (!updateResponse.ok) {
+                // If update failed, create the setting in the database
+                await fetch("/admin/create/lastScreenDate/" + null, {
+                    method: "POST",
+                });
+
+                console.log("Error while updating the settings in the database", lastScreenDate);
+    
                 await this.sendFailureMessageToDiscord("Error while updating the settings in the database");
                 return; 
             }

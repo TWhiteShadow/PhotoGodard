@@ -40,11 +40,16 @@ class SettingsController extends AbstractController
         return new Response('success', Response::HTTP_OK);
     }
 
-    // #[Route('/admin/create/{setting}/{value}', name: 'app_admin_settings_create')]
-    // public function create(Settings $setting, SettingsRepository $settingsRepository, Request $request): Response
-    // {
-    //     $settingsRepository->create($setting);
+    #[Route('/admin/create/{key}/{value}', name: 'app_admin_settings_create', methods: ['POST'])]
+    public function create(EntityManagerInterface $entityManager, string $key, string $value): Response
+    {
+        $setting = new Settings();
+        $setting->setSettingsKey($key);
+        $setting->setSettingsValue(null);
 
-    //     // return $this->redirectToRoute('app_admin');
-    // }
+        $entityManager->persist($setting);
+        $entityManager->flush();
+
+        return new Response('Settings created successfully', Response::HTTP_CREATED);
+    }
 }

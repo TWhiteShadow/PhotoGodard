@@ -42,7 +42,6 @@ class AlbumFixtures extends Fixture
         foreach (self::ALBUM_NAMES as $albumName) {
             $album = new Album();
             $album->setName($albumName.' '.$this->getRandomName());
-            $album->setUniqId();
             $album->setPassword('your_password_here'); // Set your desired password
 
             $manager->persist($album);
