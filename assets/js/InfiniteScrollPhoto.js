@@ -85,14 +85,19 @@ export class InfiniteScrollPhoto {
         let previousElementOffsetTop = 0;
     $('.img-gallery-magnific').on('mfpOpen', function () {
         document.getElementById('footer').style.display = 'none';
+        document.getElementById('content').style.paddingBottom = '200px';
+        document.getElementById('content').style.boxShadow = 'none';
         setTimeout(function () {
             document.documentElement.requestFullscreen({ navigationUI: 'hide' });
         }, 100);
         document.getElementById('navbar').style.display = 'none';
+        $.magnificPopup.instance.bgOverlay[0].style.height = document.querySelector('body').offsetHeight * 2 + 'px';
     });
 
     $('.img-gallery-magnific').on('mfpClose', function () {
         document.getElementById('footer').style.display = 'block';
+        document.getElementById('content').style.paddingBottom = '0px';
+        document.getElementById('content').style.boxShadow = '';
         document.getElementById('navbar').style.setProperty('top', '-100px', '!important');
     });
 
